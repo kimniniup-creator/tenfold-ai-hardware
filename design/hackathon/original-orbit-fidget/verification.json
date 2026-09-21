@@ -14,7 +14,7 @@
     "01_base": {
       "watertight": true,
       "components": 1,
-      "volume_mm3": 28837.727629279678,
+      "volume_mm3": 28790.71491021152,
       "bounds_mm": [
         [
           -32.485454049213864,
@@ -28,33 +28,35 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -0.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
       "quantity": 1
     },
     "02_rotor": {
       "watertight": true,
       "components": 1,
-      "volume_mm3": 8462.213498780637,
+      "volume_mm3": 8439.564747205843,
       "bounds_mm": [
         [
-          -37.427499999999995,
-          -37.485304842781616,
-          3.4
+          -37.427500000000016,
+          -37.48530484278162,
+          3.3999999999999986
         ],
         [
-          37.427499999999995,
+          37.427500000000016,
           37.48530484278162,
-          9.4
+          9.400000000000002
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -3.4,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 3.3999999999999986,
       "quantity": 1
     },
     "03_capture_ring": {
       "watertight": true,
       "components": 1,
-      "volume_mm3": 3802.673431176085,
+      "volume_mm3": 3793.5125469982145,
       "bounds_mm": [
         [
           -32.485454049213864,
@@ -68,7 +70,8 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -9.8,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 9.8,
       "quantity": 1
     },
     "04_m5_cradle": {
@@ -88,27 +91,29 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -10.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 10.0,
       "quantity": 1
     },
     "05_face_frame": {
       "watertight": true,
       "components": 1,
-      "volume_mm3": 1025.6007361835673,
+      "volume_mm3": 1188.4473673345133,
       "bounds_mm": [
         [
-          -19.7,
+          -20.69977049763217,
           -26.0,
           27.5
         ],
         [
-          19.7,
+          20.69977049763217,
           26.0,
           30.0
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -27.5,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 27.5,
       "quantity": 1
     },
     "calibration_base": {
@@ -128,7 +133,8 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -0.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
       "quantity": 1
     },
     "calibration_ring_020": {
@@ -148,7 +154,8 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -0.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
       "quantity": 1
     },
     "calibration_ring_035": {
@@ -168,7 +175,8 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -0.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
       "quantity": 1
     },
     "calibration_ring_050": {
@@ -188,7 +196,8 @@
         ]
       ],
       "step_roundtrip_valid": true,
-      "print_translation_z": -0.0,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
       "quantity": 1
     }
   },
@@ -203,6 +212,49 @@
     "03_capture_ring / 04_m5_cradle": 0.0,
     "03_capture_ring / 05_face_frame": 0.0,
     "04_m5_cradle / 05_face_frame": 0.0
+  },
+  "edge_finishes": {
+    "base_outer_bottom": {
+      "chamfer_mm": 0.35,
+      "edges": 1,
+      "planes_z": [
+        0
+      ]
+    },
+    "rotor_outer_edges": {
+      "chamfer_mm": 0.3,
+      "edges": 40,
+      "planes_z": [
+        3.4,
+        9.4
+      ]
+    },
+    "capture_outer_top": {
+      "chamfer_mm": 0.3,
+      "edges": 1,
+      "planes_z": [
+        12
+      ]
+    },
+    "frame_boss_outer_top": {
+      "fillet_mm": 0.2,
+      "bosses": 4,
+      "remaining_top_lip_mm": 0.8
+    }
+  },
+  "thread_check": {
+    "nut_z": [
+      0.6,
+      3.0
+    ],
+    "screw_nominal_tip_z": 0,
+    "permitted_screw_length_mm": [
+      29.7,
+      30.0
+    ],
+    "max_incomplete_tip_thread_mm": 0.5,
+    "worst_effective_engagement_mm": 2.2,
+    "strength_tested": false
   },
   "m5_box_interference_mm3": {
     "01_base": 0.0,

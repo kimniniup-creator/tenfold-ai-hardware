@@ -39,7 +39,7 @@ def footprint(z,h,clearance=0):
 
 # Base journal remains continuous over the rotor bearing height, except the detent bore.
 base=fuse(cylinder(32.5,3),cylinder(30,6.8,z=3),footprint(9.8,.2))
-base=difference(base,*holes(),*[hexagon(5.9,2.6,x,y,-.01) for x,y in POSTS],
+base=difference(base,*holes(),*[hexagon(5.9,3.01,x,y,-.01) for x,y in POSTS],
                 cylinder(1.65,8.3,22,0,6.4,d=(1,0,0)))
 
 # Free plain-bearing rotary joint, chamfered lower entry; ten scallops and optional pockets.
@@ -56,10 +56,33 @@ cradle=fuse(footprint(10,2),*[cylinder(3.2,17.5,x,y,10) for x,y in POSTS],
     *[box(1.2,46,2.5,x=x,z=12) for x in [-13,13]],
     *[box(4,6,1.5,x=sx*20,y=sy*20,z=12) for sx in [-1,1] for sy in [-1,1]])
 cradle=difference(cradle,*holes())
+def rounded_lid_boss(x,y):
+    b=cylinder(4.2,2.5,x,y,27.5)
+    top=[e for e in b.Edges() if e.geomType()=='CIRCLE' and abs(e.Center().z-30)<1e-5]
+    return b.fillet(.2,top)
 lid=fuse(*[box(2.8,52,2.5,x=x,z=27.5) for x in [-12.9,12.9]],
     *[box(28.6,1.4,2.5,y=y,z=27.5) for y in [-25.3,25.3]],
-    *[cylinder(3.2,2.5,x,y,27.5) for x,y in POSTS])
+    *[rounded_lid_boss(x,y) for x,y in POSTS])
 lid=difference(lid,*holes(),*[cq.Solid.makeCone(1.7,3.2,1.5,cq.Vector(x,y,28.5)) for x,y in POSTS])
+
+# Deliberate small chamfers on exposed contact rims; bearing/capture surfaces stay intact.
+edge_finishes={}
+def rim_chamfer(name,s,zs,min_radius,amount):
+    es=[]
+    for e in s.Edges():
+        bb=e.BoundingBox(); c=e.Center()
+        if bb.zlen<1e-5 and any(abs(bb.zmin-z)<1e-5 for z in zs):
+            # Radius filter via edge vertices/centre; full circles have centre on axis.
+            r=max([math.hypot(v.Center().x,v.Center().y) for v in e.Vertices()]+[math.hypot(c.x,c.y)])
+            if r>min_radius: es.append(e)
+    result=s.chamfer(amount,None,es).clean()
+    assert result.isValid(),name
+    edge_finishes[name]={'chamfer_mm':amount,'edges':len(es),'planes_z':zs}
+    return result
+base=rim_chamfer('base_outer_bottom',base,[0],31,.35)
+rotor=rim_chamfer('rotor_outer_edges',rotor,[3.4,9.4],34,.3)
+capture=rim_chamfer('capture_outer_top',capture,[12],32,.3)
+edge_finishes['frame_boss_outer_top']={'fillet_mm':.2,'bosses':4,'remaining_top_lip_mm':.8}
 
 # Calibration before the full print: three radial fits and the actual 3.3 mm detent bore.
 gauge=fuse(box(22,44,2),cylinder(6,6,y=-11,z=2),box(18,16,6,y=11,z=2))
@@ -77,20 +100,30 @@ report={'units':'mm','physical_print_tested':False,'radial_gap_per_side':GAP,
         'axial_gap_each':.4,'capture_overlap_radial':2.5-GAP,'rotor_degrees':[0,360],
         'screw':'4 x M3x30 countersunk + 4 x M3 nut AF5.5 H2.4',
         'optional_detent':'1 x ball D3 + spring OD2.5 wire0.3 L8, solid height <=3',
-        'parts':{},'pair_interference_mm3':{}}
+        'parts':{},'pair_interference_mm3':{},'edge_finishes':edge_finishes,
+        'thread_check':{'nut_z':[.6,3.0],'screw_nominal_tip_z':0,
+          'permitted_screw_length_mm':[29.7,30.0],'max_incomplete_tip_thread_mm':.5,
+          'worst_effective_engagement_mm':2.2,'strength_tested':False}}
 meshes={}
+def export_step(s,path):
+    cq.exporters.export(s,str(path))
+    data=path.read_text(encoding='utf-8')
+    assert data.startswith('ISO-10303-21;')
+    path.write_text('\n'.join(line.rstrip() for line in data.splitlines())+'\n',encoding='utf-8')
 for name,s in parts.items():
     print('Export/check',name,flush=True)
     assert s.isValid() and len(s.Solids())==1,name
-    cq.exporters.export(s,str(OUT/(name+'.step')))
+    export_step(s,OUT/(name+'.step'))
     m=mesh(s); assert m.is_watertight and m.is_volume and len(m.split())==1,name
-    m.export(OUT/(name+'.stl')); meshes[name]=m
+    printable=m.copy(); printable.apply_translation([0,0,-float(m.bounds[0,2])])
+    printable.export(OUT/(name+'.stl')); meshes[name]=m
     # Analytic STEP roundtrip in OCCT, not just file creation.
     reimport=cq.importers.importStep(str(OUT/(name+'.step'))).val()
     assert reimport.isValid() and abs(reimport.Volume()-s.Volume())<.01,name
     report['parts'][name]={'watertight':bool(m.is_watertight),'components':len(m.split()),
       'volume_mm3':s.Volume(),'bounds_mm':m.bounds.tolist(),'step_roundtrip_valid':True,
-      'print_translation_z':-float(m.bounds[0,2]),'quantity':1}
+      'stl_print_ready_z_min':float(printable.bounds[0,2]),
+      'stl_to_assembly_translation_z':float(m.bounds[0,2]),'quantity':1}
 main=list(parts)[:5]
 def iv(a,b):
     s=a.intersect(b); return sum(x.Volume() for x in s.Solids()) if s.Solids() else 0.
@@ -114,7 +147,7 @@ assert max(report['access_interference_mm3'].values())<.01,report['access_interf
 hardware=[]
 for x,y in POSTS:
     hardware.extend([fuse(cylinder(1.5,28.3,x,y,0),cq.Solid.makeCone(1.5,3,1.7,cq.Vector(x,y,28.3))),
-      difference(hexagon(5.5,2.4,x,y,.1),cylinder(1.6,3,x,y,0))])
+      difference(hexagon(5.5,2.4,x,y,.6),cylinder(1.6,4,x,y,0))])
 report['hardware_interference_max_mm3']=max(iv(h,parts[n]) for h in hardware for n in main)
 report['hardware_pair_interference_max_mm3']=max(iv(a,b) for i,a in enumerate(hardware) for b in hardware[i+1:])
 assert report['hardware_interference_max_mm3']<.01,report['hardware_interference_max_mm3']
@@ -164,7 +197,7 @@ if ref.exists():
 else: m5=mesh(device); report['official_m5_reference']='NOT PROVIDED: envelope-only run'
 
 (OUT/'verification.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
-cq.exporters.export(cq.Compound.makeCompound([parts[n] for n in main]),str(OUT/'assembly.step'))
+export_step(cq.Compound.makeCompound([parts[n] for n in main]),OUT/'assembly.step')
 
 def render(exploded=False):
     import matplotlib
@@ -190,5 +223,7 @@ def render(exploded=False):
     ax.set_title('ORBIT-10 | '+('EXPLODED ASSEMBLY' if exploded else 'CAPTIVE ROTARY EDC')+'\n75 mm diameter / 30 mm body | ten optional ball detents',fontsize=14)
     fig.text(.05,.02,'Original analytic CAD. M5 official local-only reference shown orange. Not physically printed.\nExploded parts translate in +Z; hardware +44 X. Assembly order: base > rotor > capture > cradle > M5 > frame.',fontsize=10)
     fig.savefig(OUT/('exploded.png' if exploded else 'assembly.png'),dpi=160);plt.close(fig)
-render();render(True)
+import subprocess, sys
+subprocess.run([sys.executable,str(pathlib.Path(__file__).with_name('render.py')),
+               '--directory',str(OUT),'--reference',str(ref)],check=True)
 print(json.dumps({k:v for k,v in report.items() if k!='rotation_samples'},indent=2))
