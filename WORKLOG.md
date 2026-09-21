@@ -74,3 +74,10 @@
 - R05 增量把完成事实按日独立持久化，同日 revision、封存和重启均不能再次完成；跨日才重新允许。板端 P0 明确限定单周期，不自动接受新 cycle，以免静默丢弃离线事件。
 - 最终固件发布包 `firmware/release/tenfold-firmware-p0-final.zip` SHA-256 为 `629A330BA42C19D713EAB3F454DF322A5099144627589B28FF294F12D2F9187A`；二进制按发布资产处理，不纳入 Git，包内附精确版本清单与实际许可证原文。
 - 真实 M5StickS3、Android OTG 和云 LLM 未测试，保持明确 `NOT_TESTED`，不可由编译/模拟证据替代。
+
+### 最终验收与交付
+
+- 独测最终 c6f044b、产品最终 a8cd787、验收最终 f78d5da 已合并。三款 O1 数字制造 PASS；APK B960 的 O2 本地模拟运行 PASS_SCOPED；O3 实板与 O4 实打仍 NOT_TESTED。
+- 固件 0e7b044 修正按日完成事实保护，698e344 补齐真实依赖许可文本；最终固件 ZIP 629A330B…D2F9187A，app 二进制 FB0EB0D7…236EC09 不变。
+- 最终五项附件通过 scripts/package_delivery.py 从固定 Git 版本和精确哈希生成，公开校验清单保存在 docs/hackathon/release-manifest.json。
+- APK 已通过 offerlai 实际发送给 Kim，消息回读确认附件名称及 bot 身份；待同批 Release 发布和首打 ZIP/说明发送后记录最后回执。

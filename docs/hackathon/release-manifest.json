@@ -1,0 +1,30 @@
+{
+  "source_commit": "ddad65c0d326c3cb49688760e9c79e418abda63d",
+  "artifacts": [
+    {
+      "file": "Tenfold-Orbit-10-Print-First.zip",
+      "sha256": "4ee214a525c1690b7dc6d03d4fc31ed8ff6b0e52b6958bb19f7d8a48692e5738",
+      "bytes": 2404686
+    },
+    {
+      "file": "Tenfold-Ten-Pebble-Palm.zip",
+      "sha256": "3304b24929d062ee74a2b04341f0a41c50e02ffeaf314b784d2560909622ddb7",
+      "bytes": 2994713
+    },
+    {
+      "file": "Tenfold-Press-Spin.zip",
+      "sha256": "b8c84557a582762b9bcccfa019cc982b7de2ab7d44852de5efccddc4f3d27b53",
+      "bytes": 1770717
+    },
+    {
+      "file": "Tenfold-0.1.0-demo.apk",
+      "sha256": "b9604d2572cad083f2a72d1d95628985efbdb565e93fa4b9a3bbfb19c76259a8",
+      "bytes": 37336
+    },
+    {
+      "file": "Tenfold-M5StickS3-Firmware.zip",
+      "sha256": "629a330ba42c19d713eab3f454df322a5099144627589b28ff294f12d2f9187a",
+      "bytes": 981316
+    }
+  ]
+}

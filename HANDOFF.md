@@ -1,5 +1,14 @@
 # Tenfold P0 handoff
 
+## Final delivery entry
+
+- Authoritative workspace: `D:\十日环`, branch `main`, repository `kimniniup-creator/tenfold-ai-hardware`.
+- User guide: `docs/hackathon/DELIVERY.md`; release assets: `v0.1.0-hackathon`; frozen hashes: `docs/hackathon/release-manifest.json`.
+- Three original printable EDCs are integrated. First print is Orbit-10 PLA smooth ring, calibration pieces before the five functional parts. Pin and press/spin are documented alternatives.
+- Independent manufacturing verdict: `docs/hackathon/testing/original/MECHANICAL_VERDICT.md`. Final APK runtime verdict: `docs/hackathon/testing/original/APK_FINAL.md`. Independent acceptance: `docs/hackathon/acceptance/ORIGINAL_REVIEW.md`.
+- O1 digital manufacturing passes; O2 local simulated Android paths pass. O3 real hardware and O4 physical printing remain untested. Source-state regression passed all 22 cases.
+- Final APK B960 was sent to Kim by the offerlai bot and read back as the expected file attachment. Delivery receipts stay local; private chat identifiers are not published.
+
 ## Frozen Android candidate
 
 - Source: `6e2bf0e`
