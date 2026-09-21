@@ -137,3 +137,9 @@ Java状态/ACK/R17数据层范围PASS；O2整体仍待同APK稳定签名覆盖�
 协调要求补验已确认ACTIVE未封存跨日、实体完成/封存日事实和末日ACTIVE。StateProbeV5对a5b99b00f94bf81b7e922cdc0c0b76b224c386da运行真实CycleState，`result-a5b99b0-r17.txt`共22条：原15条仍NOT_REPRODUCED；新增7条中6条REPRODUCED（演示/真实跨日丢ACTIVE快照、当前设备complete/seal不写日槽、末日ACTIVE进入review/archive丢失）。未确认RESUME漏日不造记录反例NOT_REPRODUCED，作为修复防回归。
 
 PM244c415产品限定通过只覆盖已封存/完成日与一个旧档，不能外推这些边界。O2保持NO-GO等待最小增量修复；34BB不发布。要求仅对已确认ACTIVE/DONE/SEALED快照，RESUME/NEXT空槽不补造；设备事件seq/事实同事务；review/归档包含末日已确认动作。不扩任意多周期历史。已直接通知软件、协调与独测。
+
+### 6e2bf0e R17增量回归通过
+
+固定`6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`，原StateProbeV5反例未改，22条全部NOT_REPRODUCED，见result-6e2bf0e.txt。源码差异确认快照只记录ACTIVE/DONE/SEALED，漏过RESUME/NEXT不造记录；current设备事实与游标同事务；末日review及archive保留已确认动作。R17六项在Java故障/状态模型范围关闭。
+
+独立Get-FileHash核验新APK SHA256 `B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，替代34BB作为候选。O2待独测同签名覆盖及R17专项运行与PM增量回执后最终判定。作者报告固件编译成功，尚待实际日志引用；无实板通信证据，O3仍NOT_TESTED。
