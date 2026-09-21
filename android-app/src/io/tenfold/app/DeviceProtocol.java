@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import org.json.JSONObject;
 
 final class DeviceProtocol {
+  static JSONObject helloRequest(){JSONObject value=new JSONObject();put(value,"type","hello_request");put(value,"protocol",1);return value;}
   static JSONObject offer(SharedPreferences p) {
     JSONObject value=new JSONObject();
     put(value,"type","offer"); put(value,"protocol",1); put(value,"command_id",p.getString("command_id",""));

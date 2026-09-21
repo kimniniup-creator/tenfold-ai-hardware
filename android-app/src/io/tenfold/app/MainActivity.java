@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -38,9 +39,10 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
 
   private void page(String title,String meta){
     ScrollView scroll=new ScrollView(this); body=new LinearLayout(this); body.setOrientation(LinearLayout.VERTICAL);
-    body.setPadding(28,30,28,30); body.setBackgroundColor(ink); scroll.addView(body); setContentView(scroll);
+    body.setPadding(28,30,28,30); body.setBackgroundColor(ink); scroll.setBackgroundColor(ink); scroll.setFillViewport(true); scroll.addView(body); setContentView(scroll);
+    scroll.setOnApplyWindowInsetsListener((view,insets)->{view.setPadding(0,insets.getSystemWindowInsetTop(),0,insets.getSystemWindowInsetBottom());return insets;});
     label("TENFOLD / FIELD SYSTEM",11,lime); label(title,28,Color.WHITE);
-    liveStatus=label(meta,13,Color.LTGRAY); liveStatus.setBackgroundColor(panel);
+    liveStatus=label(meta,12,Color.LTGRAY); liveStatus.setBackgroundColor(panel); liveStatus.setTypeface(Typeface.MONOSPACE);
   }
 
   private TextView label(String text,int size,int color){
@@ -54,8 +56,18 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
   }
 
   private void button(String title,View.OnClickListener listener){
-    Button button=new Button(this); button.setText(title); button.setAllCaps(false); button.setTextColor(Color.BLACK);
-    button.setBackgroundColor(lime); button.setOnClickListener(listener); body.addView(button);
+    addButton(title,listener,false);
+  }
+
+  private void primaryButton(String title,View.OnClickListener listener){
+    addButton(title,listener,true);
+  }
+
+  private void addButton(String title,View.OnClickListener listener,boolean primary){
+    Button button=new Button(this); button.setText(title); button.setAllCaps(false); button.setTextColor(primary?Color.BLACK:Color.WHITE);
+    button.setBackgroundColor(primary?lime:panel); button.setOnClickListener(listener);
+    LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+    params.setMargins(0,10,0,4); body.addView(button,params);
   }
 
   private String truthLine(){
@@ -70,12 +82,13 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     if(CycleState.PHASE_NEXT.equals(cycle.phase())){showNewAction();return;}
     if(CycleState.PHASE_REVIEW.equals(cycle.phase())){showReview();return;}
     page("今天到这里，明天接得上。",truthLine()+"\n"+(cycle.isSimulated()?"DEMO TIME · DAY "+cycle.day()+" / 10":"REAL CYCLE · "+cycle.text("cycle_start_date")+" · "+cycle.text("tz")));
-    label("TODAY\n"+cycle.text("action"),21,Color.WHITE);
+    TextView today=label("今天只做这一件\n\n"+cycle.text("action"),21,Color.WHITE);today.setBackgroundColor(panel);
     label("DONE WHEN\n"+cycle.text("done"),14,Color.LTGRAY);
+    label(progressLine(),17,lime);
     if(cycle.completed())label("PHONE FACT · 今日已完成并保存",14,lime);
     if(CycleState.PHASE_SEALED.equals(cycle.phase()))label("SEALED · "+cycle.recoveryCard(),14,lime);
     if(cycle.canComplete())button("确认：今天完成",v->completeToday());
-    button("今天到这里",v->showSeal());
+    primaryButton("今天到这里",v->showSeal());
     if(cycle.isSimulated())button("DEMO TIME：进入下一天",v->{if(!cycle.advanceDemoDay()){toast("演示日期保存失败");return;}showHome();});
     button(cycle.isSimulated()?"退出演示并新建真实 USB 周期":"重发同一张卡 / 查询 ACK",v->connectOrRetry());
     button("Agent 与隐私设置",v->showSettings());
@@ -93,7 +106,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
       if(agent.configured())requestProposal(goal.getText().toString(),stuck.getText().toString(),budget,action,done,null);
       else {action.setText("用 "+budget+" 分钟验证："+stuck.getText().toString());done.setText("留下一个可复现结果和明天入口");liveStatus.setText("OFFLINE RULES · 没有发起 LLM 请求");}
     });
-    button("确认并保存这张今日卡",v->{
+    primaryButton("确认并保存这张今日卡",v->{
       if(goal.length()==0||action.length()==0||done.length()==0){toast("十日结果、今日动作和完成条件必须确认");return;}
       if(!cycle.createCycle(goal.getText().toString(),stuck.getText().toString(),action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 草稿仍在页面，没有激活周期");return;}
       showHome();
@@ -112,7 +125,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     EditText note=field("停在哪（可选一句）",cycle.text("stop_note").isEmpty()?cycle.text("stuck"):cycle.text("stop_note"));
     EditText recovery=field("明天第一步",cycle.recoveryCard());
     if(agent.configured())button("先保存停点，再让 Agent 提议",v->{if(!cycle.seal(note.getText().toString(),recovery.getText().toString())){liveStatus.setText("SAVE FAILED · 未发起 LLM 请求");return;}liveStatus.setText("PHONE SAVED · 正在请求真实 LLM 候选");requestProposal(cycle.text("goal"),note.getText().toString(),12,null,null,recovery);});
-    button("确认并封存",v->{
+    primaryButton("确认并封存",v->{
       if(!cycle.seal(note.getText().toString(),recovery.getText().toString())){liveStatus.setText("SAVE FAILED · 封存事实没有落盘");return;}
       if(!cycle.isSimulated()){outbox.enqueue("seal");sendOutboxHead();}
       toast("封存已保存；网络或硬件失败不会丢失这句话");showHome();
@@ -124,7 +137,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("昨天停在这里。",truthLine()+" · DEMO DAY "+cycle.day());
     label("STOP NOTE\n"+cycle.stopNote(),17,Color.WHITE);
     label("FIRST STEP\n"+cycle.recoveryCard(),19,lime);
-    button("确认接回这一步",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}showHome();});
+    primaryButton("确认接回这一步",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}showHome();});
     button("编辑恢复动作",v->showNewAction());
   }
 
@@ -132,7 +145,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("今天需要一张新卡。",truthLine());
     label("昨天已完成；同一动作不会自动再算一天。",16,Color.WHITE);
     EditText action=field("今天最小一步",""); EditText done=field("新的完成条件","");
-    button("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}if(!cycle.confirmNewAction(action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 新动作没有激活");return;}showHome();});
+    primaryButton("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}if(!cycle.confirmNewAction(action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 新动作没有激活");return;}showHome();});
   }
 
   private void showReview(){
@@ -164,6 +177,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
 
   @Override public void onUsbState(String state){
     if("USB_CONNECTED_WAITING_HELLO".equals(state)||"USB_DETACHED".equals(state)||"USB_DISCONNECTED".equals(state)){sessionValidated=false;sessionDeviceId="";}
+    if("USB_CONNECTED_WAITING_HELLO".equals(state))usb.send(DeviceProtocol.helloRequest());
     if(liveStatus!=null)liveStatus.setText(state+"\n"+truthLine());
   }
   @Override public void onUsbError(String code){if(liveStatus!=null)liveStatus.setText("USB ERROR · "+code+"\n手机事实仍保留");}
@@ -190,5 +204,6 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
   }
   private void sendOutboxHead(){if(!sessionValidated||!cycle.deviceSaved())return;JSONObject pending=outbox.peek();if(pending!=null)usb.send(pending);}
   private int clampMinutes(String raw){try{return Math.max(5,Math.min(45,Integer.parseInt(raw)));}catch(Exception ignored){return 12;}}
+  private String progressLine(){StringBuilder line=new StringBuilder("十日进度  ");for(int i=1;i<=10;i++)line.append(i==cycle.day()?"● ":"○ ");return line.toString();}
   private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
 }

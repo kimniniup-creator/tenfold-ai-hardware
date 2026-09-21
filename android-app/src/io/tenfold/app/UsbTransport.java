@@ -26,7 +26,7 @@ final class UsbTransport {
   private static final String ACTION_PERMISSION="io.tenfold.app.USB_PERMISSION";
   private final Activity activity; private final UsbManager manager; private final Listener listener;
   private final Handler main=new Handler(Looper.getMainLooper()); private final ExecutorService writes=Executors.newSingleThreadExecutor();
-  private UsbDeviceConnection connection; private UsbEndpoint input; private UsbEndpoint output; private volatile boolean reading; private volatile int generation;
+  private UsbDeviceConnection connection; private UsbEndpoint input; private UsbEndpoint output; private volatile boolean reading; private volatile int generation; private volatile boolean connecting;
   UsbTransport(Activity activity,Listener listener){
     this.activity=activity;this.listener=listener;manager=(UsbManager)activity.getSystemService(Context.USB_SERVICE);
     IntentFilter filter=new IntentFilter(ACTION_PERMISSION);filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
@@ -34,11 +34,13 @@ final class UsbTransport {
   }
   UsbDevice findDevice(){for(UsbDevice device:manager.getDeviceList().values())if(hasCdcInterface(device))return device;return null;}
   void requestOrConnect(){
+    if(connection!=null){postState("USB_CONNECTED_WAITING_HELLO");return;}
     UsbDevice device=findDevice();if(device==null){postState("NO_SUPPORTED_USB_DEVICE");return;}
     if(!manager.hasPermission(device)){PendingIntent p=PendingIntent.getBroadcast(activity,0,new Intent(ACTION_PERMISSION).setPackage(activity.getPackageName()),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);manager.requestPermission(device,p);postState("USB_PERMISSION_REQUIRED");return;}
-    new Thread(()->connect(device),"tenfold-usb-connect").start();
+    startConnect(device);
   }
   private boolean hasCdcInterface(UsbDevice device){for(int i=0;i<device.getInterfaceCount();i++){int cls=device.getInterface(i).getInterfaceClass();if(cls==UsbConstants.USB_CLASS_COMM||cls==UsbConstants.USB_CLASS_CDC_DATA)return true;}return false;}
+  private synchronized void startConnect(UsbDevice device){if(connecting)return;connecting=true;new Thread(()->{try{connect(device);}finally{connecting=false;}},"tenfold-usb-connect").start();}
   private void connect(UsbDevice device){
     closeConnection();connection=manager.openDevice(device);if(connection==null){postError("OPEN_FAILED");return;}
     int controlIndex=-1;UsbInterface controlFace=null,dataFace=null;UsbEndpoint selectedIn=null,selectedOut=null;
@@ -56,7 +58,7 @@ final class UsbTransport {
   }
   private void readLoop(int session,UsbDeviceConnection localConnection,UsbEndpoint localInput){ByteArrayOutputStream line=new ByteArrayOutputStream();byte[] buffer=new byte[512];boolean discarding=false;while(reading&&session==generation){int count=localConnection.bulkTransfer(localInput,buffer,buffer.length,500);if(count<0)continue;if(session!=generation)break;for(int i=0;i<count;i++){int value=buffer[i]&0xFF;if(value=='\n'){if(!discarding&&line.size()>0)decode(line.toByteArray(),session);line.reset();discarding=false;}else if(value!='\r'&&!discarding){if(line.size()>=4096){line.reset();discarding=true;postError("FRAME_TOO_LARGE");}else line.write(value);}}}if(session==generation)postState("USB_DISCONNECTED");}
   private void decode(byte[] bytes,int session){try{JSONObject frame=new JSONObject(new String(bytes,StandardCharsets.UTF_8));main.post(()->{if(session==generation)listener.onFrame(frame);});}catch(Exception error){postError("INVALID_JSON_FRAME");}}
-  private final BroadcastReceiver permissionReceiver=new BroadcastReceiver(){@Override public void onReceive(Context context,Intent intent){if(UsbManager.ACTION_USB_DEVICE_DETACHED.equals(intent.getAction())){closeConnection();postState("USB_DETACHED");return;}if(!ACTION_PERMISSION.equals(intent.getAction()))return;UsbDevice device=intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);boolean granted=intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED,false);if(granted&&device!=null)new Thread(()->connect(device),"tenfold-usb-connect").start();else postError("USB_PERMISSION_DENIED");}};
+  private final BroadcastReceiver permissionReceiver=new BroadcastReceiver(){@Override public void onReceive(Context context,Intent intent){if(UsbManager.ACTION_USB_DEVICE_DETACHED.equals(intent.getAction())){closeConnection();postState("USB_DETACHED");return;}if(!ACTION_PERMISSION.equals(intent.getAction()))return;UsbDevice device=intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);boolean granted=intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED,false);if(granted&&device!=null)startConnect(device);else postError("USB_PERMISSION_DENIED");}};
   private void postState(String state){main.post(()->listener.onUsbState(state));} private void postError(String code){main.post(()->listener.onUsbError(code));}
   void close(){try{activity.unregisterReceiver(permissionReceiver);}catch(Exception ignored){}writes.shutdownNow();closeConnection();}
   private synchronized void closeConnection(){reading=false;generation++;if(connection!=null)connection.close();connection=null;input=null;output=null;}
