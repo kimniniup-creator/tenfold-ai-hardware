@@ -1,0 +1,13 @@
+{
+  "sha": "a356a870456fc85082aeabbc974698314f6ee273",
+  "scope": "Rigid sampled positive-stop checks only. Does not validate clip elasticity, loads, fatigue or all escape paths.",
+  "physical_tested": false,
+  "intersection_mm3": {
+    "wheel_up_0p7_vs_pin": 7.834346679889951,
+    "rotor_pin_up_0p5_vs_clip": 1.0359033387598828,
+    "drawer_out_1_vs_key": 17.93276892572782,
+    "press_pin_up_0p5_vs_body": 0.3369202824860892,
+    "m5_up_0p7_vs_body": 6.400000000000089,
+    "m5_down_0p7_vs_tray": 33.06336293856416
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-22",
+  "emulator": {
+    "version": "37.1.11",
+    "build": "15917651",
+    "source": "https://dl.google.com/android/repository/emulator-windows_x64-15917651.zip",
+    "sha1": "54fa750822ff462d57e04fc8e98e60f08df2bb61",
+    "checksum_verified": true
+  },
+  "system_image": {
+    "api": 35,
+    "android_release": "15",
+    "abi": "x86_64",
+    "tag": "default",
+    "revision": 2,
+    "source": "https://dl.google.com/android/repository/sys-img/android/x86_64-35_r02.zip",
+    "sha1": "2d857d170c0d1b827149565da34b3383e5306f7f",
+    "checksum_verified": true
+  },
+  "avd": "tenfold_test_api35",
+  "device_profile": "pixel_5",
+  "serial": "emulator-5554",
+  "resolution": [
+    1080,
+    2340
+  ],
+  "density_dpi": 440,
+  "font_scale": 1.0,
+  "hardware_acceleration": "WHPX operational",
+  "gpu": "swiftshader",
+  "ram_mb": 2048,
+  "cores": 2,
+  "headless": true,
+  "physical_phone_tested": false,
+  "usb_board_tested": false,
+  "setup_note": "Official archives installed after sdkmanager network stalls; emulator local package metadata added, avdmanager created AVD. No low-target bypass used."
+}

@@ -1,0 +1,74 @@
+{
+  "sha": "5ef401391cb6ae7f22d43eb84c3066f7294dbc92",
+  "path": "design/hackathon/original-press-spin",
+  "slicer": "PrusaSlicer 2.9.6",
+  "profile": "docs/hackathon/testing/original/generic-pla.ini",
+  "profile_sha256": "bc3dfa464d0c8f325b3fb307355df7614027d04e392654c135dc0cac19ada8be",
+  "fill_density_override": null,
+  "brim_width_override": 6.0,
+  "supports_enabled": true,
+  "physical_print_tested": false,
+  "parts": {
+    "stl/body.stl": {
+      "file_sha256": "23fdc880e7d5a44968f2fc5c61d6b07ba3a42fa7f6f86402313ccc5e337acc84",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 12568.906567420841,
+      "bounds_mm": [
+        [
+          -14.8,
+          -20.0,
+          0.0
+        ],
+        [
+          14.8,
+          20.0,
+          64.0
+        ]
+      ],
+      "extents_mm": [
+        29.6,
+        40.0,
+        64.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 2412,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 0.9189644622561403,
+        "p05_mm": 1.8000001907348633,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 467,
+        "layers_with_extrusion": 467,
+        "empty_declared_layers": [],
+        "extrusion_segments": 43175,
+        "support_segments": 9379,
+        "roles": [
+          "Bridge infill",
+          "External perimeter",
+          "Internal infill",
+          "Overhang perimeter",
+          "Perimeter",
+          "Skirt/Brim",
+          "Solid infill",
+          "Support material",
+          "Support material interface",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "6266.61",
+          "filament used [cm3]": "15.07",
+          "filament used [g]": "18.69",
+          "estimated printing time (normal mode)": "2h 11m 40s"
+        }
+      }
+    }
+  }
+}

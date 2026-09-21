@@ -1,0 +1,67 @@
+{
+  "sha": "a356a870456fc85082aeabbc974698314f6ee273",
+  "path": "design/hackathon/original-press-spin",
+  "slicer": "PrusaSlicer 2.9.6",
+  "profile": "docs/hackathon/testing/original/generic-pla.ini",
+  "profile_sha256": "bc3dfa464d0c8f325b3fb307355df7614027d04e392654c135dc0cac19ada8be",
+  "fill_density_override": null,
+  "brim_width_override": 6.0,
+  "supports_enabled": false,
+  "physical_print_tested": false,
+  "parts": {
+    "stl/metal_rotor_sleeve.stl": {
+      "file_sha256": "b1f154a1073d9f98799a2c8861f5f55725806bfba665037c85d1f8caaa8e21b0",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 189.26531647536999,
+      "bounds_mm": [
+        [
+          -3.2,
+          -3.19901,
+          0.0
+        ],
+        [
+          3.2,
+          3.19901,
+          8.2
+        ]
+      ],
+      "extents_mm": [
+        6.4,
+        6.39801,
+        8.2
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 1.499533637698084,
+        "p05_mm": 1.4995336608074405,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 41,
+        "layers_with_extrusion": 41,
+        "empty_declared_layers": [],
+        "extrusion_segments": 5781,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter",
+          "Skirt/Brim"
+        ],
+        "summary": {
+          "filament used [mm]": "93.79",
+          "filament used [cm3]": "0.23",
+          "filament used [g]": "0.28",
+          "estimated printing time (normal mode)": "4m 3s"
+        }
+      }
+    }
+  }
+}
