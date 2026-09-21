@@ -11,3 +11,5 @@ Build: Python3.13 + requirements.txt; python build.py. STL print transforms alre
 Manufacturing candidates only. No physical print, gravity-return, friction, durability, electronics actuation or thermal performance tested. Do not call them proven. Source interfaces from old project do not block this original design. Independent testing should use default M5 params first; alternate board params need their own checks.
 
 Initial checks caught sled/frame corner overlap and unrelieved long front screw shafts in spacer; fixed with0.3mm corner relief and four shaft holes. Continue on published commits only; do not edit another task worktree.
+
+Default geometry frozen at fff72958bb91eae20329228ae780f97f60e82f3b. Independent tester confirms corrected sled/pin100% rectilinear slicing exit0/no empty layers, sled sampled min1.2mm and no sample<.8,9 STL rebuilds consistent,11 STEP valid,official3-shell/32-solid intersections0. O-PIN-01 digitally closed. Added three print plates,PRINT_FIRST and Chinese assembly card without part changes. Physical actuation/gravity-return/feel remain untested.
