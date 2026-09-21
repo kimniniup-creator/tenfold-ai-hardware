@@ -1,0 +1,116 @@
+{
+  "old_sha": "a356a870456fc85082aeabbc974698314f6ee273",
+  "new_sha": "5ef401391cb6ae7f22d43eb84c3066f7294dbc92",
+  "stl": {
+    "design/hackathon/original-press-spin/stl/bearing_sleeve.stl": {
+      "old_sha256": "99fac02d60259a8cf741b2ab63bc4cdbb35672f3fe577c9b12db684cf0ef3be4",
+      "new_sha256": "99fac02d60259a8cf741b2ab63bc4cdbb35672f3fe577c9b12db684cf0ef3be4",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/body.stl": {
+      "old_sha256": "6ebe5248c86034c0039b4ddc21b116cb635c6271314757bb1952e8fd50298e45",
+      "new_sha256": "23fdc880e7d5a44968f2fc5c61d6b07ba3a42fa7f6f86402313ccc5e337acc84",
+      "unchanged": false
+    },
+    "design/hackathon/original-press-spin/stl/cal_axis_holes.stl": {
+      "old_sha256": "abcabbb87259dfc9edb4cbe687d3f40d7821ae4f03536c7161b4bbeb56f58b25",
+      "new_sha256": "abcabbb87259dfc9edb4cbe687d3f40d7821ae4f03536c7161b4bbeb56f58b25",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/cal_axis_plug.stl": {
+      "old_sha256": "5d72fea71547e6f2d59afd64426b4faa7483b1c06d0cabc6da6ac28fcd100f8e",
+      "new_sha256": "5d72fea71547e6f2d59afd64426b4faa7483b1c06d0cabc6da6ac28fcd100f8e",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/cal_clip_open.stl": {
+      "old_sha256": "a81c3c8787c5c43ec9030b86cf87530527e95ad51eb8c2e7fe2945cafc1b0080",
+      "new_sha256": "a81c3c8787c5c43ec9030b86cf87530527e95ad51eb8c2e7fe2945cafc1b0080",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/cal_m5_frame.stl": {
+      "old_sha256": "3dd474f4a1dfdae91b4b23b85d4b20e3cda7b29b40ec4a1389caa3c80d5033da",
+      "new_sha256": "3dd474f4a1dfdae91b4b23b85d4b20e3cda7b29b40ec4a1389caa3c80d5033da",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/cal_snap_pin.stl": {
+      "old_sha256": "f336fc2361e220d6f39b8d84edd8dc03a421cfc22e3e38cad7f4d94a8a45aae5",
+      "new_sha256": "f336fc2361e220d6f39b8d84edd8dc03a421cfc22e3e38cad7f4d94a8a45aae5",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/cal_snap_sockets.stl": {
+      "old_sha256": "7dab1df2104a7f47a36cb8f7e1b89eef331154c7045e8440a83d63eb25dddd1b",
+      "new_sha256": "927a8d456112d26ba8622be2f3015dd75f3be9c2f6bcf073f3dfc68e52b26727",
+      "unchanged": false
+    },
+    "design/hackathon/original-press-spin/stl/drawer_key.stl": {
+      "old_sha256": "05f7ef38ca489ed6b5751d20da973bf274ee29fe1882f8624b7dd2422e522bd4",
+      "new_sha256": "5bf47c292ede6e0e695943a42eb3dac9b5b6162d574fcec1b347989eba49a658",
+      "unchanged": false
+    },
+    "design/hackathon/original-press-spin/stl/m5_tray.stl": {
+      "old_sha256": "0a6fc69f18c5ebb38f1ca4690c08c4bbd795d7a61e3562e3b4a98cb547098cbe",
+      "new_sha256": "0a6fc69f18c5ebb38f1ca4690c08c4bbd795d7a61e3562e3b4a98cb547098cbe",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/metal_rotor_cap.stl": {
+      "old_sha256": "6d4b44c4b276f55f2ab7baa2e8e09ddf8625e2a88f1d5df4c070800597d39114",
+      "new_sha256": "6d4b44c4b276f55f2ab7baa2e8e09ddf8625e2a88f1d5df4c070800597d39114",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/metal_rotor_lower_washer.stl": {
+      "old_sha256": "6921bbe5a8545477671c1b6c1fb06c013c578203c6a1e894e7e586f398fbea3a",
+      "new_sha256": "6921bbe5a8545477671c1b6c1fb06c013c578203c6a1e894e7e586f398fbea3a",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/metal_rotor_sleeve.stl": {
+      "old_sha256": "b1f154a1073d9f98799a2c8861f5f55725806bfba665037c85d1f8caaa8e21b0",
+      "new_sha256": "b1f154a1073d9f98799a2c8861f5f55725806bfba665037c85d1f8caaa8e21b0",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/press_leaf.stl": {
+      "old_sha256": "db6ffb70a79d0ec5d7deb2520e2e781edfbd5309ed9f3d17abfaf9a17267f5c4",
+      "new_sha256": "db6ffb70a79d0ec5d7deb2520e2e781edfbd5309ed9f3d17abfaf9a17267f5c4",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/press_leaf_soft.stl": {
+      "old_sha256": "2500c09849a8c10b86c1d8454587d56b559c74040be1dea585d9f98dc78bee30",
+      "new_sha256": "2500c09849a8c10b86c1d8454587d56b559c74040be1dea585d9f98dc78bee30",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/press_pin_a.stl": {
+      "old_sha256": "f336fc2361e220d6f39b8d84edd8dc03a421cfc22e3e38cad7f4d94a8a45aae5",
+      "new_sha256": "f336fc2361e220d6f39b8d84edd8dc03a421cfc22e3e38cad7f4d94a8a45aae5",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/press_pin_b.stl": {
+      "old_sha256": "6c9d6b36a23c28d0302762970da5d3a2d07728c8a3351a8725d5f2ad68685331",
+      "new_sha256": "6c9d6b36a23c28d0302762970da5d3a2d07728c8a3351a8725d5f2ad68685331",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/rotor_clip.stl": {
+      "old_sha256": "9c49be89e9a48590d1eed2e4b6877496e29a86dafbdb6d2c8fb61e665e33ce5b",
+      "new_sha256": "9c49be89e9a48590d1eed2e4b6877496e29a86dafbdb6d2c8fb61e665e33ce5b",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/rotor_pin.stl": {
+      "old_sha256": "f11588f223ad7e0680e8d1c1e434d7281393c4cc3802854d2a28f0341e6e4bd6",
+      "new_sha256": "f11588f223ad7e0680e8d1c1e434d7281393c4cc3802854d2a28f0341e6e4bd6",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/thrust_ring.stl": {
+      "old_sha256": "a06706ddc60bc24104aca86dc3708680d0e76fa9af5708175eec57d2fac439e1",
+      "new_sha256": "a06706ddc60bc24104aca86dc3708680d0e76fa9af5708175eec57d2fac439e1",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/wheel.stl": {
+      "old_sha256": "be628bd7687efb1d08dcf5c6bdb0c8a0653054f00ecaf12ffd6dab2ab1cd3bd3",
+      "new_sha256": "be628bd7687efb1d08dcf5c6bdb0c8a0653054f00ecaf12ffd6dab2ab1cd3bd3",
+      "unchanged": true
+    },
+    "design/hackathon/original-press-spin/stl/wheel_loose.stl": {
+      "old_sha256": "42def78448b9d31d09a88160c1e302a15e5188d03c0487fa787dd3ac7cdd6014",
+      "new_sha256": "42def78448b9d31d09a88160c1e302a15e5188d03c0487fa787dd3ac7cdd6014",
+      "unchanged": true
+    }
+  }
+}

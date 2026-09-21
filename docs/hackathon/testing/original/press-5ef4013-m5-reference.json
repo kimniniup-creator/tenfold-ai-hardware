@@ -1,0 +1,78 @@
+{
+  "sha": "5ef401391cb6ae7f22d43eb84c3066f7294dbc92",
+  "reference_sha256": "cadfa88716cb74a85d0d76dc866d83dbd627d6f5c310b528d43e588dab37ecec",
+  "reference_components": [
+    0,
+    3,
+    4
+  ],
+  "raw_to_assembly": [
+    [
+      0.0,
+      1.0,
+      0.0,
+      -24.059725
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      -12.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      5.722636
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "bounds_mm": [
+    [
+      -24.000934498792887,
+      -12.000000000000222,
+      4.799999729476928
+    ],
+    [
+      24.00093631591797,
+      12.000938415527344,
+      19.79999996789551
+    ]
+  ],
+  "physical_tested": false,
+  "intersection_mm3": {
+    "body": 0.0,
+    "m5_tray": 0.0,
+    "wheel": 0.0,
+    "bearing_sleeve": 0.0,
+    "thrust_ring": 0.0,
+    "rotor_pin": 0.0,
+    "rotor_clip": 0.0,
+    "press_leaf": 0.0,
+    "press_pin_a": 0.0,
+    "press_pin_b": 0.0,
+    "drawer_key": 0.0,
+    "metal_rotor_cap": 0.0,
+    "metal_rotor_sleeve": 0.0,
+    "metal_rotor_lower_washer": 0.0,
+    "hardware_rotor_M3x16": 0.0,
+    "hardware_rotor_nut": 0.0,
+    "hardware_rotor_steel_washer": 0.0,
+    "hardware_drawer_M3x45": 0.0,
+    "hardware_drawer_washer_left": 0.0,
+    "hardware_drawer_washer_right": 0.0,
+    "hardware_drawer_nut": 0.0,
+    "hardware_press_M3x14_14": 0.0,
+    "hardware_press_washer_14": 0.0,
+    "hardware_press_nut_14": 0.0,
+    "hardware_press_M3x14_22": 0.0,
+    "hardware_press_washer_22": 0.0,
+    "hardware_press_nut_22": 0.0
+  },
+  "max_intersection_mm3": 0.0
+}

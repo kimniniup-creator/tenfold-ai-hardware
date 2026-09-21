@@ -57,7 +57,9 @@ for relative_path in a.parts:
     stem=f.stem;gcode=out/(stem+'.gcode')
     cmd=[str(root/a.slicer),'--datadir',str(root/'.local/slicer/profile'),'--load',str(cfg),'--export-gcode','--output',str(gcode),'--center','110,110']
     if a.support:cmd+=['--support-material']
-    if a.fill_density:cmd+=['--fill-density',a.fill_density]
+    if a.fill_density:
+        cmd+=['--fill-density',a.fill_density]
+        if a.fill_density in ['100','100%']:cmd+=['--fill-pattern','rectilinear']
     if a.brim_width is not None:cmd+=['--brim-width',str(a.brim_width)]
     cmd+=[str(f)]
     run=subprocess.run(cmd,capture_output=True,text=True,encoding='utf8',errors='replace',timeout=600)

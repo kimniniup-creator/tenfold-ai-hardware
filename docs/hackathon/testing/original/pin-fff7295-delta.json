@@ -1,0 +1,51 @@
+{
+  "old_sha": "81c0682bb11d53718cc01d15f39467f1a6f6a813",
+  "new_sha": "fff72958bb91eae20329228ae780f97f60e82f3b",
+  "stl": {
+    "design/hackathon/original-pin-fidget/exports/01_guide_plate.stl": {
+      "old_sha256": "a1ea54a15b353e097a0de5452f61ca1945d3e050c72cd57f2c0bb35b7865eef3",
+      "new_sha256": "a1ea54a15b353e097a0de5452f61ca1945d3e050c72cd57f2c0bb35b7865eef3",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/02_pin_spacer.stl": {
+      "old_sha256": "faa5c7ee76bd8ee9431f1fccc1a8a40aafd9c3739e24262ee7e967e14f9c3fde",
+      "new_sha256": "faa5c7ee76bd8ee9431f1fccc1a8a40aafd9c3739e24262ee7e967e14f9c3fde",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/03_structural_frame.stl": {
+      "old_sha256": "c8546a265f48c40c15339e07ce6119ecac1a0bb3edc6cc794a8bdaa7b1cdba12",
+      "new_sha256": "c8546a265f48c40c15339e07ce6119ecac1a0bb3edc6cc794a8bdaa7b1cdba12",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/04_m5_sled.stl": {
+      "old_sha256": "ccb2fd4e444d8ce7ea3b5772bddf7cb6386d5d0304562be104dc3173dd5813f4",
+      "new_sha256": "be68471b84b3cbf80df236ebb4f39bad536c03a41b3c7c50758c97f89f2dc2d1",
+      "unchanged": false
+    },
+    "design/hackathon/original-pin-fidget/exports/05_retaining_rail.stl": {
+      "old_sha256": "19a3f89f2f9e46bfbc0187fab9993b0f96b043dc07237fe3fe17dadd01ba9cf8",
+      "new_sha256": "19a3f89f2f9e46bfbc0187fab9993b0f96b043dc07237fe3fe17dadd01ba9cf8",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/06_pin.stl": {
+      "old_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67",
+      "new_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/calibration_chamber.stl": {
+      "old_sha256": "33179987c17006652459a5d8f5e9a303c2c74196a5e40ec574bde19bd62e348b",
+      "new_sha256": "33179987c17006652459a5d8f5e9a303c2c74196a5e40ec574bde19bd62e348b",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/calibration_guide.stl": {
+      "old_sha256": "656c30fd9133d7d5d626a155e2def51bddcb72fcea2e73fa22ee475a77a2be70",
+      "new_sha256": "656c30fd9133d7d5d626a155e2def51bddcb72fcea2e73fa22ee475a77a2be70",
+      "unchanged": true
+    },
+    "design/hackathon/original-pin-fidget/exports/calibration_roof.stl": {
+      "old_sha256": "aa06be555560384ed4a1d84f66be65950043520e8c16fee59771182733f4a69d",
+      "new_sha256": "aa06be555560384ed4a1d84f66be65950043520e8c16fee59771182733f4a69d",
+      "unchanged": true
+    }
+  }
+}

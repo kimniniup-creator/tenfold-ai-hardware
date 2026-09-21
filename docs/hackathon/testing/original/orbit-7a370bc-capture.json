@@ -1,0 +1,288 @@
+{
+  "sha": "7a370bc0a7f229ff0cf9a87dcb91861b34325723",
+  "physical_tested": false,
+  "scope": "Sampled rigid translations/tilts only; does not certify all escape paths or elastic deformation. Positive intersection identifies a blocked pose.",
+  "nominal": {
+    "01_base": 0,
+    "03_capture_ring": 0,
+    "04_m5_cradle": 0,
+    "05_face_frame": 0
+  },
+  "tilts": [
+    {
+      "axis_xy": [
+        1,
+        0
+      ],
+      "degrees": 0.25,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        0
+      ],
+      "degrees": 0.5,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        0
+      ],
+      "degrees": 1,
+      "intersection_mm3": {
+        "01_base": 6.624559,
+        "03_capture_ring": 9.696635,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        0
+      ],
+      "degrees": 2,
+      "intersection_mm3": {
+        "01_base": 55.03495,
+        "03_capture_ring": 72.063638,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        0
+      ],
+      "degrees": 5,
+      "intersection_mm3": {
+        "01_base": 275.45716,
+        "03_capture_ring": 294.579829,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        0,
+        1
+      ],
+      "degrees": 0.25,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        0,
+        1
+      ],
+      "degrees": 0.5,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        0,
+        1
+      ],
+      "degrees": 1,
+      "intersection_mm3": {
+        "01_base": 6.624559,
+        "03_capture_ring": 9.696635,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        0,
+        1
+      ],
+      "degrees": 2,
+      "intersection_mm3": {
+        "01_base": 55.03495,
+        "03_capture_ring": 72.063638,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        0,
+        1
+      ],
+      "degrees": 5,
+      "intersection_mm3": {
+        "01_base": 275.564201,
+        "03_capture_ring": 294.686929,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        1
+      ],
+      "degrees": 0.25,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        1
+      ],
+      "degrees": 0.5,
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        1
+      ],
+      "degrees": 1,
+      "intersection_mm3": {
+        "01_base": 6.624559,
+        "03_capture_ring": 9.696635,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        1
+      ],
+      "degrees": 2,
+      "intersection_mm3": {
+        "01_base": 55.03495,
+        "03_capture_ring": 72.063638,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "axis_xy": [
+        1,
+        1
+      ],
+      "degrees": 5,
+      "intersection_mm3": {
+        "01_base": 275.524172,
+        "03_capture_ring": 294.64704,
+        "04_m5_cradle": 0.281036,
+        "05_face_frame": 0
+      }
+    }
+  ],
+  "translations": [
+    {
+      "offset_mm": [
+        0,
+        0,
+        0.5
+      ],
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 39.584067,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "offset_mm": [
+        0,
+        0,
+        -0.5
+      ],
+      "intersection_mm3": {
+        "01_base": 25.034305,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "offset_mm": [
+        0.5,
+        0,
+        0
+      ],
+      "intersection_mm3": {
+        "01_base": 0,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "offset_mm": [
+        1,
+        0,
+        0
+      ],
+      "intersection_mm3": {
+        "01_base": 103.307192,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "offset_mm": [
+        0,
+        1,
+        0
+      ],
+      "intersection_mm3": {
+        "01_base": 103.743313,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    },
+    {
+      "offset_mm": [
+        2,
+        0,
+        0
+      ],
+      "intersection_mm3": {
+        "01_base": 423.434513,
+        "03_capture_ring": 0,
+        "04_m5_cradle": 0,
+        "05_face_frame": 0
+      }
+    }
+  ]
+}

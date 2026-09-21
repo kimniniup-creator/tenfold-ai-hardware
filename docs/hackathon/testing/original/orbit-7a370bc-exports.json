@@ -1,0 +1,131 @@
+{
+  "sha": "7a370bc0a7f229ff0cf9a87dcb91861b34325723",
+  "path": "design/hackathon/original-orbit-fidget",
+  "stl": {
+    "01_base.stl": {
+      "committed_volume_mm3": 28773.826563700783,
+      "regenerated_volume_mm3": 28773.826563700783,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "02_rotor.stl": {
+      "committed_volume_mm3": 8439.597366166354,
+      "regenerated_volume_mm3": 8439.597366166354,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "03_capture_ring.stl": {
+      "committed_volume_mm3": 3789.256269012972,
+      "regenerated_volume_mm3": 3789.256269012972,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "04_m5_cradle.stl": {
+      "committed_volume_mm3": 4794.267025343871,
+      "regenerated_volume_mm3": 4794.267025343871,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "05_face_frame.stl": {
+      "committed_volume_mm3": 1188.4639414895848,
+      "regenerated_volume_mm3": 1188.4639414895848,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "calibration_base.stl": {
+      "committed_volume_mm3": 3931.629569147595,
+      "regenerated_volume_mm3": 3931.629569147595,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "calibration_ring_020.stl": {
+      "committed_volume_mm3": 668.1320210045545,
+      "regenerated_volume_mm3": 668.1320210045545,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "calibration_ring_035.stl": {
+      "committed_volume_mm3": 638.5794093935252,
+      "regenerated_volume_mm3": 638.5794093935252,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "calibration_ring_050.stl": {
+      "committed_volume_mm3": 608.3203854025045,
+      "regenerated_volume_mm3": 608.3203854025045,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    }
+  },
+  "step": {
+    "01_base.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "02_rotor.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "03_capture_ring.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "04_m5_cradle.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "05_face_frame.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "assembly.step": {
+      "solids": 5,
+      "valid": true,
+      "positive_volume": true
+    },
+    "calibration_base.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "calibration_ring_020.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "calibration_ring_035.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "calibration_ring_050.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    }
+  },
+  "all_stl_match": true
+}
