@@ -1,0 +1,26 @@
+{
+  "source_commit": "a5b99b00f94bf81b7e922cdc0c0b76b224c386da",
+  "apk_sha256": "34bb815e483bba25d60deef145f5050b8219f912558edf4898e1158f8fa7513d",
+  "certificate_sha256": "eb55b62c374f6a58766625f52b83ba34b17e8a6b8c0d2cb95257781884cb153a",
+  "signature_v2_verified": true,
+  "signature_v3_verified": true,
+  "package": "io.tenfold.app",
+  "version_code": 1,
+  "version_name": "0.1.0-p0",
+  "min_sdk": 26,
+  "target_sdk": 35,
+  "permissions": [
+    "android.permission.INTERNET"
+  ],
+  "install_without_bypass": true,
+  "same_signature_update_succeeded": true,
+  "cold_launch": "Status ok",
+  "crash_buffer_empty": true,
+  "environment": "android-environment.json",
+  "physical_device_tested": false,
+  "usb_hardware_tested": false,
+  "llm_success_tested": false,
+  "screenshots": "apk-34bb815e-ui",
+  "uat_status": "SCOPED_PASS_WITH_R17_BLOCKER",
+  "scope": "T19 sealed A/B archive and new-cycle cold restart pass; confirmed unsealed ACTIVE day is omitted from review (R17). Not release acceptance."
+}
