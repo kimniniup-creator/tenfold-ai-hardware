@@ -2,7 +2,9 @@
 
 明日优先试打 **Orbit-10 环轨式光滑版**。这是可独立把玩的捕获旋环，中央装入完整 M5StickS3；断电仍能转动。电子确认使用 M5 原有按键，旋环没有传感器，转动不会自动记作任务完成。
 
-本页正在收口最终验收，最终 APK、打印 ZIP 与校验值以 GitHub Release 中同一批文件为准。源码中旧版适配附件与早期愿景不属于本次打印包。
+最终 APK、三款打印 ZIP、固件包和校验值统一从 [v0.1.0-hackathon Release](https://github.com/kimniniup-creator/tenfold-ai-hardware/releases/tag/v0.1.0-hackathon) 下载。源码中旧版适配附件与早期愿景不属于本次打印包。
+
+**已完成：** 三款数字制造试打包独立验收；Android 模拟器安装、覆盖升级、封存/恢复/十日回顾/旧档冷启动运行验收；22 项状态回归；M5 固件真实编译。**尚未完成：** 实物打印、真实手机 OTG 与 M5 联调、真实云 LLM 请求。
 
 ## 先选形态
 
@@ -30,6 +32,19 @@
 
 - [PRD](product/HACKATHON_PRD.md)、[市场依据与产品裁决](product/PRODUCT_DECISION.md)、[用户旅程](product/USER_JOURNEY.md)。
 - [Android、Agent 与硬件连接说明](../android-demo.md)。APK 默认可离线演示；真实 AI 服务需要配置自己的端点、模型与凭证。
-- [独立制造及软件测试](testing/original/)、[独立验收结论](acceptance/ORIGINAL_REVIEW.md)。
+- [独立制造测试](testing/original/MECHANICAL_VERDICT.md)、[最终 APK 运行测试](testing/original/APK_FINAL.md)、[独立验收结论](acceptance/ORIGINAL_REVIEW.md)。
 
 最终交付区分 Android 模拟器验证、固件编译、真实设备联调和实物打印，不把前两项当作后两项的通过证据。
+
+## 安装与明日验收顺序
+
+1. 在 Android 8.0 或以上手机下载 `Tenfold-0.1.0-demo.apk`，允许本次下载来源安装应用后打开 TENFOLD。先用明确标记的模拟设备和离线规则走一遍完整体验；无需账号或云密钥。
+2. 输入十日承诺和今天可观察的完成条件；可未完成直接点“今天到这里”，留下停点与下一步。演示跨日后检查恢复卡，确认后再继续。十日回顾只读实际保存的事实。
+3. 同时按上面的顺序试打环轨校准件与整机。不要把机械把玩动作误认为电子事件；电子确认采用 M5 原有双键解锁及长按确认，细节在连接说明中。
+4. 需要联调时解压固件 ZIP，按包内 README 与 `flash.ps1` 操作。首次用 Provision，已有同布局 Tenfold 用默认 Update；Factory 会删除板端记录，必须先完成同步，不能用于普通升级。
+
+**板端 P0 目前只支持一个周期。** 手机归档不会自动关闭板上周期，新周期绑定需要先同步旧事件并显式重置板端；这与可在手机中归档和新建周期的模拟体验不同。首轮实机需核对 offer/ACK、拔线后按键、重连同步，不能只看“USB 已发送”。
+
+APK 源码锁定 `6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`，SHA-256：
+
+`B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`
