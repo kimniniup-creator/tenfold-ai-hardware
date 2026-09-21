@@ -10,3 +10,5 @@ First geometry iteration: corrected four sled skirt/post overlaps (1.19mm³ each
 O-PIN-01 fixed: locating ears now reach Y=3 and39, around unchanged Y6/36, R1.75 holes. Outer lip1.25mm, full build passes again. Official source containment/guard test added, independent b4ba300 direct three-shell/32-solid check cited without claiming physical actuation. Business mappings now defer to USER_JOURNEY and firmware task.
 
 fff7295 independent regression: O-PIN-01 closed, sled512 samples min1.2mm; new sled/pin100% rectilinear slice exit0/no empty layers; all9 singlepart meshes reproduce,11 STEP valid,official3shells/32solids intersections0. Packing original oriented meshes into3 <=180mm print plates and Chinese assembly card; no part geometry modifications.
+
+2026-09-22 independent test confirms5526578 three arranged plates actually sliced by Prusa: calibration/details100% rectilinear,structure25%; all exit0,no empty extrusion layers. Default geometry remainsfff7295. No physical print or feel/return/button pass claimed.
