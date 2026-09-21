@@ -1,0 +1,398 @@
+{
+  "body": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -14.800000190734863,
+        -20.0,
+        0.0
+      ],
+      [
+        14.800000190734863,
+        20.0,
+        64.0
+      ]
+    ],
+    "volume_mm3": 12568.906567420845
+  },
+  "m5_tray": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -27.0,
+        -15.600000381469727,
+        0.0
+      ],
+      [
+        27.0,
+        15.600000381469727,
+        5.0
+      ]
+    ],
+    "volume_mm3": 1463.4398077629285
+  },
+  "wheel": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -14.984106063842773,
+        -14.984106063842773,
+        0.0
+      ],
+      [
+        14.984106063842773,
+        14.984106063842773,
+        5.0
+      ]
+    ],
+    "volume_mm3": 2857.878727266891
+  },
+  "bearing_sleeve": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -6.0,
+        -5.998135089874268,
+        0.0
+      ],
+      [
+        6.0,
+        5.998135089874268,
+        6.0
+      ]
+    ],
+    "volume_mm3": 460.49224011722146
+  },
+  "thrust_ring": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -8.0,
+        -7.997513294219971,
+        0.0
+      ],
+      [
+        8.0,
+        7.997513294219971,
+        0.4000000059604645
+      ]
+    ],
+    "volume_mm3": 32.10633309178061
+  },
+  "rotor_pin": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -8.0,
+        -7.997513294219971,
+        -9.794129737235964e-16
+      ],
+      [
+        8.0,
+        7.997513294219971,
+        14.0
+      ]
+    ],
+    "volume_mm3": 759.6991412975718
+  },
+  "rotor_clip": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -6.5,
+        -4.0,
+        0.0
+      ],
+      [
+        6.5,
+        4.0,
+        1.5
+      ]
+    ],
+    "volume_mm3": 72.00000250339508
+  },
+  "press_leaf": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -8.0,
+        -15.25,
+        0.0
+      ],
+      [
+        8.0,
+        15.25,
+        2.4000000953674316
+      ]
+    ],
+    "volume_mm3": 650.2631483466027
+  },
+  "press_pin_a": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -3.5,
+        -3.4989120960235596,
+        -4.284931627691836e-16
+      ],
+      [
+        3.5,
+        3.4989120960235596,
+        12.800000190734863
+      ]
+    ],
+    "volume_mm3": 167.12250010415204
+  },
+  "press_pin_b": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -3.5,
+        -3.4989120960235596,
+        -4.284931627691836e-16
+      ],
+      [
+        3.5,
+        3.4989120960235596,
+        12.800000190734863
+      ]
+    ],
+    "volume_mm3": 167.12250010522578
+  },
+  "drawer_key": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -2.5,
+        -23.0,
+        0.0
+      ],
+      [
+        2.5,
+        23.0,
+        4.0
+      ]
+    ],
+    "volume_mm3": 327.07898616713305
+  },
+  "wheel_loose": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -14.984106063842773,
+        -14.984106063842773,
+        0.0
+      ],
+      [
+        14.984106063842773,
+        14.984106063842773,
+        5.0
+      ]
+    ],
+    "volume_mm3": 2838.094906029303
+  },
+  "press_leaf_soft": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -8.0,
+        -15.25,
+        0.0
+      ],
+      [
+        8.0,
+        15.25,
+        2.4000000953674316
+      ]
+    ],
+    "volume_mm3": 619.2631409556268
+  },
+  "metal_rotor_cap": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -8.0,
+        -7.997513294219971,
+        0.0
+      ],
+      [
+        8.0,
+        7.997513294219971,
+        1.2000000476837158
+      ]
+    ],
+    "volume_mm3": 230.28381239620762
+  },
+  "metal_rotor_sleeve": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -3.200000047683716,
+        -3.199005365371704,
+        0.0
+      ],
+      [
+        3.200000047683716,
+        3.199005365371704,
+        8.199999809265137
+      ]
+    ],
+    "volume_mm3": 189.26531647536999
+  },
+  "metal_rotor_lower_washer": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -6.0,
+        -5.998135089874268,
+        0.0
+      ],
+      [
+        6.0,
+        5.998135089874268,
+        0.800000011920929
+      ]
+    ],
+    "volume_mm3": 83.18002373263882
+  },
+  "cal_axis_holes": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -27.0,
+        -9.0,
+        0.0
+      ],
+      [
+        27.0,
+        9.0,
+        5.0
+      ]
+    ],
+    "volume_mm3": 3019.671814926469
+  },
+  "cal_axis_plug": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -6.0,
+        -5.998135089874268,
+        0.0
+      ],
+      [
+        6.0,
+        5.998135089874268,
+        6.0
+      ]
+    ],
+    "volume_mm3": 678.3028115591918
+  },
+  "cal_snap_sockets": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -19.0,
+        -8.0,
+        0.0
+      ],
+      [
+        19.0,
+        8.0,
+        3.0
+      ]
+    ],
+    "volume_mm3": 1699.1734384247384
+  },
+  "cal_snap_pin": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -3.5,
+        -3.4989120960235596,
+        -4.284931627691836e-16
+      ],
+      [
+        3.5,
+        3.4989120960235596,
+        12.800000190734863
+      ]
+    ],
+    "volume_mm3": 167.12250010415204
+  },
+  "cal_m5_frame": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -26.399999618530273,
+        -14.399999618530273,
+        0.0
+      ],
+      [
+        26.399999618530273,
+        14.399999618530273,
+        3.0
+      ]
+    ],
+    "volume_mm3": 931.1999816894531
+  },
+  "cal_clip_open": {
+    "watertight": true,
+    "consistent_winding": true,
+    "solid_count": 1,
+    "bounds_print_mm": [
+      [
+        -6.5,
+        -4.0,
+        0.0
+      ],
+      [
+        6.5,
+        4.0,
+        1.5
+      ]
+    ],
+    "volume_mm3": 71.55000293254852
+  }
+}
