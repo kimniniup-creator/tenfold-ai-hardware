@@ -18,4 +18,6 @@
 
 上述差异已发送软件任务和协调。该表是工程动作清单而非声称对方已承诺或完成；以软件最终SHA/实测报告关闭各项。
 
+软件任务直接回执：已读取PRODUCT_DECISION/SOFTWARE_ALIGNMENT，明确采纳五项P0改动，在MainActivity.java及新的State/Agent/Transport类实现；94bbefc仅构建基线，不满足本表。接下来重构后build并做emulator安装验证。真实LLM endpoint/key及M5实机仍缺；将提供安全本地配置/HTTP适配器，但无凭据不声称真实推理验证，无板卡不声称真实ACK验证。以上是对齐承诺，尚不是实现结果。
+
 演示时间策略：正常模式使用用户确认的固定时区日期与cycle_start_date。演示模式独立数据，常驻DEMO TIME；“演示下一天”将demo_date加一天并触发同一跨日转换，既不改手机系统时间，也不修改真实周期历史。昨天done=false时恢复已有卡；done=true时等待确认新动作。不可只改日期文字而绕过状态逻辑。
