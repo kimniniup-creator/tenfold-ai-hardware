@@ -67,8 +67,8 @@ for y in [6,36]:frame=frame.union(cyl(35,y,10,1.5,2.2))
 # Sled replacement is the supported way to change boards. Frame accepts limited envelope.
 sled=box(DX-1,DY-1,10,BL+2,BW+2,SLED)
 # Locating ears always at standard peg positions, join the base with overlaps.
-sled=sled.union(box(31,4,10,8,DY-3.5,SLED))
-sled=sled.union(box(31,DY+BW-.5,10,8,38-(DY+BW-.5),SLED))
+sled=sled.union(box(31,3,10,8,DY-2.5,SLED))
+sled=sled.union(box(31,DY+BW-.5,10,8,39-(DY+BW-.5),SLED))
 for y in [6,36]:sled=sled.cut(cyl(35,y,9.9,1.75,SLED+.2))
 # Four open corner guides; no narrow guessed USB aperture.
 for x in [DX-2,DX+BL+.4]:

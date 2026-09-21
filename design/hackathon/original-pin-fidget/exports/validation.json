@@ -78,10 +78,10 @@
       "components": 1,
       "bounds_mm": [
         52.0,
-        34.0,
+        36.0,
         8.2
       ],
-      "volume_mm3": 1865.371,
+      "volume_mm3": 1884.571,
       "print_zmin": 0.0
     },
     "05_retaining_rail": {

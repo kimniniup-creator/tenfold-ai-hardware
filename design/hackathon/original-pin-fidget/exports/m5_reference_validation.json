@@ -1,0 +1,95 @@
+{
+  "source_sha256": "cadfa88716cb74a85d0d76dc866d83dbd627d6f5c310b528d43e588dab37ecec",
+  "source_url": "https://github.com/m5stack/M5_Hardware/tree/master/Products/K150_StickS3/Structures",
+  "source_connected_shells": 6,
+  "assembled_shells_used": 3,
+  "selection": "source Xmax<25; excludes displaced duplicates",
+  "right_handed_transform": [
+    [
+      0.0,
+      1.0,
+      0.0,
+      10.941209498792887
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0,
+      33.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      25.777363967895507
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "transformed_bounds": [
+    [
+      11.0,
+      8.999061584472656,
+      11.7
+    ],
+    [
+      59.001870814710855,
+      33.00000000000022,
+      26.70000023841858
+    ]
+  ],
+  "guard_bounds": [
+    [
+      10.99,
+      8.99,
+      11.69
+    ],
+    [
+      59.01,
+      33.01,
+      26.71
+    ]
+  ],
+  "guard_margin_nominal_mm": 0.01,
+  "hardware_assembly_solids": 32,
+  "guard_intersection_volumes_mm3": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "method": "All official assembled vertices inside axis-aligned convex guard, hence all triangles inside guard. Guard CSG intersections empty against every printed/hardware solid. Conservative containment proof, not direct mesh boolean.",
+  "not_validated": "button actuation, cable electrical connection, thermal/RF, physical print or friction"
+}
