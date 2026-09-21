@@ -6,12 +6,13 @@ Tenfold 是一枚把长期项目压缩成十日承诺的 AI EDC。AI 负责收�
 
 ## 黑客松实施入口（2026-09-22）
 
+- [明日打印与安装入口](docs/hackathon/DELIVERY.md)：三版原创整机、首打顺序、采购件和验证边界。
 - [当前 PRD](docs/hackathon/product/HACKATHON_PRD.md)：硬件价值、替代方案、实现范围及验证方法。
 - [产品裁决与市场依据](docs/hackathon/product/PRODUCT_DECISION.md)：日常主路径是“今天到这里，明天接得上”，以封存与恢复承接十日承诺。
 - [当前实施约束](RULES.md)：原创完整 EDC、打印装配包、可安装 APK 与真实验证边界。
 - [用户链路与交互协议](docs/hackathon/product/USER_JOURNEY.md)：输入、状态、确认、反馈、离线及恢复规则。
 - [演示与评委问答](docs/hackathon/product/DEMO_AND_QA.md)、[需求验收矩阵](docs/hackathon/product/ACCEPTANCE_MATRIX.md)。
-- [独立验收结论](docs/hackathon/acceptance/REVIEW.md)、[未决项](docs/hackathon/acceptance/BLOCKERS.md)。
+- [原创整机独立验收](docs/hackathon/acceptance/ORIGINAL_REVIEW.md)、[独立测试证据](docs/hackathon/testing/original/)。
 
 **本轮黑客松实现以 `docs/hackathon/product/` 为交互权威。** 首次通过产品门的版本为 `e948b2c`。模型目录中的早期按键、双击、24 小时恢复等映射仅为未实现建议；冲突时不用于固件实现。几何检查通过不代表整机或 Demo 通过。
 
@@ -40,7 +41,7 @@ Tenfold 是一枚把长期项目压缩成十日承诺的 AI EDC。AI 负责收�
 
 ## 已锁定与待验证
 
-### 已锁定
+### 原产品愿景（本轮样机不以此为交付规格）
 
 - 十边形金属机身、中央黑色旋压轴、十枚环形日珠。
 - 石墨灰主体与酸性荧光绿状态色。
