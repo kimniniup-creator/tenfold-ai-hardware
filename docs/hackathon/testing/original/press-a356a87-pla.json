@@ -1,0 +1,618 @@
+{
+  "sha": "a356a870456fc85082aeabbc974698314f6ee273",
+  "path": "design/hackathon/original-press-spin",
+  "slicer": "PrusaSlicer 2.9.6",
+  "profile": "docs/hackathon/testing/original/generic-pla.ini",
+  "profile_sha256": "bc3dfa464d0c8f325b3fb307355df7614027d04e392654c135dc0cac19ada8be",
+  "fill_density_override": null,
+  "brim_width_override": null,
+  "supports_enabled": false,
+  "physical_print_tested": false,
+  "parts": {
+    "stl/m5_tray.stl": {
+      "file_sha256": "0a6fc69f18c5ebb38f1ca4690c08c4bbd795d7a61e3562e3b4a98cb547098cbe",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 1463.4398077629285,
+      "bounds_mm": [
+        [
+          -27.0,
+          -15.6,
+          0.0
+        ],
+        [
+          27.0,
+          15.6,
+          5.0
+        ]
+      ],
+      "extents_mm": [
+        54.0,
+        31.2,
+        5.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1288,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 0.5999999046325684,
+        "p05_mm": 2.0,
+        "below_0p8mm": 2,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 25,
+        "layers_with_extrusion": 25,
+        "empty_declared_layers": [],
+        "extrusion_segments": 5303,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Internal infill",
+          "Overhang perimeter",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "623.75",
+          "filament used [cm3]": "1.50",
+          "filament used [g]": "1.86",
+          "estimated printing time (normal mode)": "12m 15s"
+        }
+      }
+    },
+    "stl/wheel.stl": {
+      "file_sha256": "be628bd7687efb1d08dcf5c6bdb0c8a0653054f00ecaf12ffd6dab2ab1cd3bd3",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 2857.878727266891,
+      "bounds_mm": [
+        [
+          -14.98411,
+          -14.98411,
+          0.0
+        ],
+        [
+          14.98411,
+          14.98411,
+          5.0
+        ]
+      ],
+      "extents_mm": [
+        29.96821,
+        29.96821,
+        5.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 5464,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 3.3374122828056096,
+        "p05_mm": 5.0,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 25,
+        "layers_with_extrusion": 25,
+        "empty_declared_layers": [],
+        "extrusion_segments": 34584,
+        "support_segments": 0,
+        "roles": [
+          "Bridge infill",
+          "External perimeter",
+          "Internal infill",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "914.01",
+          "filament used [cm3]": "2.20",
+          "filament used [g]": "2.73",
+          "estimated printing time (normal mode)": "17m 12s"
+        }
+      }
+    },
+    "stl/bearing_sleeve.stl": {
+      "file_sha256": "99fac02d60259a8cf741b2ab63bc4cdbb35672f3fe577c9b12db684cf0ef3be4",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 460.49224011722146,
+      "bounds_mm": [
+        [
+          -6.0,
+          -5.99814,
+          0.0
+        ],
+        [
+          6.0,
+          5.99814,
+          6.0
+        ]
+      ],
+      "extents_mm": [
+        12.0,
+        11.99627,
+        6.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 2.599191598186681,
+        "p05_mm": 2.5991917059581753,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 30,
+        "layers_with_extrusion": 30,
+        "empty_declared_layers": [],
+        "extrusion_segments": 9109,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter"
+        ],
+        "summary": {
+          "filament used [mm]": "188.34",
+          "filament used [cm3]": "0.45",
+          "filament used [g]": "0.56",
+          "estimated printing time (normal mode)": "6m 15s"
+        }
+      }
+    },
+    "stl/thrust_ring.stl": {
+      "file_sha256": "a06706ddc60bc24104aca86dc3708680d0e76fa9af5708175eec57d2fac439e1",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 32.10633309178061,
+      "bounds_mm": [
+        [
+          -8.0,
+          -7.99751,
+          0.0
+        ],
+        [
+          8.0,
+          7.99751,
+          0.4
+        ]
+      ],
+      "extents_mm": [
+        16.0,
+        15.99503,
+        0.4
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 0.4000000059604645,
+        "p05_mm": 0.4000000059604645,
+        "below_0p8mm": 432,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 2,
+        "layers_with_extrusion": 2,
+        "empty_declared_layers": [],
+        "extrusion_segments": 563,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter"
+        ],
+        "summary": {
+          "filament used [mm]": "13.02",
+          "filament used [cm3]": "0.03",
+          "filament used [g]": "0.04",
+          "estimated printing time (normal mode)": "20s"
+        }
+      }
+    },
+    "stl/metal_rotor_cap.stl": {
+      "file_sha256": "6d4b44c4b276f55f2ab7baa2e8e09ddf8625e2a88f1d5df4c070800597d39114",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 230.28381239620762,
+      "bounds_mm": [
+        [
+          -8.0,
+          -7.99751,
+          0.0
+        ],
+        [
+          8.0,
+          7.99751,
+          1.2
+        ]
+      ],
+      "extents_mm": [
+        16.0,
+        15.99503,
+        1.2
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 1.2000000476837156,
+        "p05_mm": 1.2000000476837156,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 6,
+        "layers_with_extrusion": 6,
+        "empty_declared_layers": [],
+        "extrusion_segments": 3451,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "97.96",
+          "filament used [cm3]": "0.24",
+          "filament used [g]": "0.29",
+          "estimated printing time (normal mode)": "2m 24s"
+        }
+      }
+    },
+    "stl/metal_rotor_sleeve.stl": {
+      "file_sha256": "b1f154a1073d9f98799a2c8861f5f55725806bfba665037c85d1f8caaa8e21b0",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 189.26531647536999,
+      "bounds_mm": [
+        [
+          -3.2,
+          -3.19901,
+          0.0
+        ],
+        [
+          3.2,
+          3.19901,
+          8.2
+        ]
+      ],
+      "extents_mm": [
+        6.4,
+        6.39801,
+        8.2
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 1.499533637698084,
+        "p05_mm": 1.4995336608074405,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [
+        "print warning: Detected print stability issues:"
+      ],
+      "toolpath": {
+        "declared_layers": 41,
+        "layers_with_extrusion": 41,
+        "empty_declared_layers": [],
+        "extrusion_segments": 5249,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter"
+        ],
+        "summary": {
+          "filament used [mm]": "75.77",
+          "filament used [cm3]": "0.18",
+          "filament used [g]": "0.23",
+          "estimated printing time (normal mode)": "3m 44s"
+        }
+      }
+    },
+    "stl/metal_rotor_lower_washer.stl": {
+      "file_sha256": "6921bbe5a8545477671c1b6c1fb06c013c578203c6a1e894e7e586f398fbea3a",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 83.18002373263882,
+      "bounds_mm": [
+        [
+          -6.0,
+          -5.99814,
+          0.0
+        ],
+        [
+          6.0,
+          5.99814,
+          0.8
+        ]
+      ],
+      "extents_mm": [
+        12.0,
+        11.99627,
+        0.8
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1008,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 0.800000011920929,
+        "p05_mm": 0.800000011920929,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 4,
+        "layers_with_extrusion": 4,
+        "empty_declared_layers": [],
+        "extrusion_segments": 1846,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "35.90",
+          "filament used [cm3]": "0.09",
+          "filament used [g]": "0.11",
+          "estimated printing time (normal mode)": "1m 11s"
+        }
+      }
+    },
+    "stl/cal_axis_holes.stl": {
+      "file_sha256": "abcabbb87259dfc9edb4cbe687d3f40d7821ae4f03536c7161b4bbeb56f58b25",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 3019.671814926469,
+      "bounds_mm": [
+        [
+          -27.0,
+          -9.0,
+          0.0
+        ],
+        [
+          27.0,
+          9.0,
+          5.0
+        ]
+      ],
+      "extents_mm": [
+        54.0,
+        18.0,
+        5.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 1536,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 2.6519737243652344,
+        "p05_mm": 2.886703594407393,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 25,
+        "layers_with_extrusion": 25,
+        "empty_declared_layers": [],
+        "extrusion_segments": 31301,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "1292.22",
+          "filament used [cm3]": "3.11",
+          "filament used [g]": "3.85",
+          "estimated printing time (normal mode)": "25m 21s"
+        }
+      }
+    },
+    "stl/cal_axis_plug.stl": {
+      "file_sha256": "5d72fea71547e6f2d59afd64426b4faa7483b1c06d0cabc6da6ac28fcd100f8e",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 678.3028115591918,
+      "bounds_mm": [
+        [
+          -6.0,
+          -5.99814,
+          0.0
+        ],
+        [
+          6.0,
+          5.99814,
+          6.0
+        ]
+      ],
+      "extents_mm": [
+        12.0,
+        11.99627,
+        6.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 500,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 5.999999999999999,
+        "p05_mm": 6.0,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 30,
+        "layers_with_extrusion": 30,
+        "empty_declared_layers": [],
+        "extrusion_segments": 8069,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "285.68",
+          "filament used [cm3]": "0.69",
+          "filament used [g]": "0.85",
+          "estimated printing time (normal mode)": "8m 33s"
+        }
+      }
+    },
+    "stl/cal_m5_frame.stl": {
+      "file_sha256": "3dd474f4a1dfdae91b4b23b85d4b20e3cda7b29b40ec4a1389caa3c80d5033da",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 931.1999816894531,
+      "bounds_mm": [
+        [
+          -26.4,
+          -14.4,
+          0.0
+        ],
+        [
+          26.4,
+          14.4,
+          3.0
+        ]
+      ],
+      "extents_mm": [
+        52.8,
+        28.8,
+        3.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 32,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 2.0,
+        "p05_mm": 2.0,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 15,
+        "layers_with_extrusion": 15,
+        "empty_declared_layers": [],
+        "extrusion_segments": 927,
+        "support_segments": 0,
+        "roles": [
+          "External perimeter",
+          "Perimeter"
+        ],
+        "summary": {
+          "filament used [mm]": "380.26",
+          "filament used [cm3]": "0.91",
+          "filament used [g]": "1.13",
+          "estimated printing time (normal mode)": "6m 54s"
+        }
+      }
+    },
+    "stl/wheel_loose.stl": {
+      "file_sha256": "42def78448b9d31d09a88160c1e302a15e5188d03c0487fa787dd3ac7cdd6014",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 2838.094906029303,
+      "bounds_mm": [
+        [
+          -14.98411,
+          -14.98411,
+          0.0
+        ],
+        [
+          14.98411,
+          14.98411,
+          5.0
+        ]
+      ],
+      "extents_mm": [
+        29.96821,
+        29.96821,
+        5.0
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 5464,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 3.336769182587618,
+        "p05_mm": 5.0,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 25,
+        "layers_with_extrusion": 25,
+        "empty_declared_layers": [],
+        "extrusion_segments": 34616,
+        "support_segments": 0,
+        "roles": [
+          "Bridge infill",
+          "External perimeter",
+          "Internal infill",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "910.58",
+          "filament used [cm3]": "2.19",
+          "filament used [g]": "2.72",
+          "estimated printing time (normal mode)": "16m 32s"
+        }
+      }
+    }
+  }
+}

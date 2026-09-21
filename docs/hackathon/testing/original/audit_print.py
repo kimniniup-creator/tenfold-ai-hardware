@@ -16,7 +16,7 @@ p.add_argument('--ref',required=True);p.add_argument('--path',required=True)
 p.add_argument('--parts',nargs='+',required=True);p.add_argument('--output',required=True)
 p.add_argument('--support',action='store_true')
 p.add_argument('--profile',default='docs/hackathon/testing/original/generic-pla.ini')
-p.add_argument('--fill-density')
+p.add_argument('--fill-density');p.add_argument('--brim-width',type=float)
 p.add_argument('--slicer',default='.local/slicer/prusa296/PrusaSlicer-2.9.6/prusa-slicer-console.exe')
 a=p.parse_args(); root=pathlib.Path.cwd()
 sha=subprocess.check_output(['git','rev-parse',a.ref],text=True).strip()
@@ -24,7 +24,7 @@ dest=root/'.local/original-audit'/sha;dest.mkdir(parents=True,exist_ok=True)
 zipfile.ZipFile(io.BytesIO(subprocess.check_output(['git','archive','--format=zip',sha,a.path]))).extractall(dest)
 folder=dest/a.path;out=dest/('slice-support' if a.support else 'slice-no-support');out.mkdir(exist_ok=True)
 cfg=root/a.profile
-report={'sha':sha,'path':a.path,'slicer':'PrusaSlicer 2.9.6','profile':a.profile,'profile_sha256':hashlib.sha256(cfg.read_bytes()).hexdigest(),'fill_density_override':a.fill_density,'supports_enabled':a.support,'physical_print_tested':False,'parts':{}}
+report={'sha':sha,'path':a.path,'slicer':'PrusaSlicer 2.9.6','profile':a.profile,'profile_sha256':hashlib.sha256(cfg.read_bytes()).hexdigest(),'fill_density_override':a.fill_density,'brim_width_override':a.brim_width,'supports_enabled':a.support,'physical_print_tested':False,'parts':{}}
 def parse_gcode(f):
     x=y=z=e=0.;relative=False;layer=-1;role='';segments=[];layers={};stats={};width=.45
     for line in f.read_text(encoding='utf8',errors='replace').splitlines():
@@ -58,6 +58,7 @@ for relative_path in a.parts:
     cmd=[str(root/a.slicer),'--datadir',str(root/'.local/slicer/profile'),'--load',str(cfg),'--export-gcode','--output',str(gcode),'--center','110,110']
     if a.support:cmd+=['--support-material']
     if a.fill_density:cmd+=['--fill-density',a.fill_density]
+    if a.brim_width is not None:cmd+=['--brim-width',str(a.brim_width)]
     cmd+=[str(f)]
     run=subprocess.run(cmd,capture_output=True,text=True,encoding='utf8',errors='replace',timeout=600)
     log=run.stdout+'\n'+run.stderr;(out/(stem+'.log')).write_text(log,encoding='utf8')

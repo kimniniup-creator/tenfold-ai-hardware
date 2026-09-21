@@ -1,0 +1,22 @@
+{
+  "source_commit": "0daf340988157b66cca29403c9e7492975b4533f",
+  "sha256": "882d4c97dad8bb4106c67ea87f61b601ccc1b642de8ce3e74d59cf6e07b4809b",
+  "package": "io.tenfold.app",
+  "version_code": 1,
+  "version_name": "0.1.0-p0",
+  "min_sdk": 26,
+  "target_sdk": 35,
+  "root_classes_dex": true,
+  "declared_permissions": [
+    "android.permission.INTERNET"
+  ],
+  "signature_v2_verified": true,
+  "signature_v3_verified": true,
+  "installed": true,
+  "ui_tested": true,
+  "hardware_tested": false,
+  "note": "Independent aapt and apksigner verification. Frozen APK hash matches software author delivery. Installation/UI still pending emulator setup.",
+  "installation": "adb install -r: Success; no target-SDK bypass",
+  "launch": "COLD: Status ok",
+  "ui_report": "APK_BASELINE.md"
+}

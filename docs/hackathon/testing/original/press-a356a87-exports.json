@@ -1,0 +1,300 @@
+{
+  "sha": "a356a870456fc85082aeabbc974698314f6ee273",
+  "path": "design/hackathon/original-press-spin",
+  "stl": {
+    "stl/bearing_sleeve.stl": {
+      "committed_volume_mm3": 460.49224011722146,
+      "regenerated_volume_mm3": 460.49224011722146,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/body.stl": {
+      "committed_volume_mm3": 12568.906567420845,
+      "regenerated_volume_mm3": 12568.906567420845,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_axis_holes.stl": {
+      "committed_volume_mm3": 3019.671814926469,
+      "regenerated_volume_mm3": 3019.671814926469,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_axis_plug.stl": {
+      "committed_volume_mm3": 678.3028115591918,
+      "regenerated_volume_mm3": 678.3028115591918,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_clip_open.stl": {
+      "committed_volume_mm3": 71.55000293254852,
+      "regenerated_volume_mm3": 71.55000293254852,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_m5_frame.stl": {
+      "committed_volume_mm3": 931.1999816894531,
+      "regenerated_volume_mm3": 931.1999816894531,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_snap_pin.stl": {
+      "committed_volume_mm3": 167.12250010415204,
+      "regenerated_volume_mm3": 167.12250010415204,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/cal_snap_sockets.stl": {
+      "committed_volume_mm3": 1699.1734384247384,
+      "regenerated_volume_mm3": 1699.1734384247384,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/drawer_key.stl": {
+      "committed_volume_mm3": 327.07898616713305,
+      "regenerated_volume_mm3": 327.07898616713305,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/m5_tray.stl": {
+      "committed_volume_mm3": 1463.4398077629285,
+      "regenerated_volume_mm3": 1463.4398077629285,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/metal_rotor_cap.stl": {
+      "committed_volume_mm3": 230.28381239620762,
+      "regenerated_volume_mm3": 230.28381239620762,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/metal_rotor_lower_washer.stl": {
+      "committed_volume_mm3": 83.18002373263882,
+      "regenerated_volume_mm3": 83.18002373263882,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/metal_rotor_sleeve.stl": {
+      "committed_volume_mm3": 189.26531647536999,
+      "regenerated_volume_mm3": 189.26531647536999,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/press_leaf.stl": {
+      "committed_volume_mm3": 650.2631483466027,
+      "regenerated_volume_mm3": 650.2631483466027,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/press_leaf_soft.stl": {
+      "committed_volume_mm3": 619.2631409556268,
+      "regenerated_volume_mm3": 619.2631409556268,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/press_pin_a.stl": {
+      "committed_volume_mm3": 167.12250010415204,
+      "regenerated_volume_mm3": 167.12250010415204,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/press_pin_b.stl": {
+      "committed_volume_mm3": 167.12250010522578,
+      "regenerated_volume_mm3": 167.12250010522578,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/rotor_clip.stl": {
+      "committed_volume_mm3": 72.00000250339508,
+      "regenerated_volume_mm3": 72.00000250339508,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/rotor_pin.stl": {
+      "committed_volume_mm3": 759.6991412975718,
+      "regenerated_volume_mm3": 759.6991412975718,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/thrust_ring.stl": {
+      "committed_volume_mm3": 32.10633309178061,
+      "regenerated_volume_mm3": 32.10633309178061,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/wheel.stl": {
+      "committed_volume_mm3": 2857.878727266891,
+      "regenerated_volume_mm3": 2857.878727266891,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "stl/wheel_loose.stl": {
+      "committed_volume_mm3": 2838.094906029303,
+      "regenerated_volume_mm3": 2838.094906029303,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    }
+  },
+  "step": {
+    "step/assembly.step": {
+      "solids": 11,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/bearing_sleeve.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/body.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_axis_holes.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_axis_plug.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_clip_open.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_m5_frame.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_snap_pin.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/cal_snap_sockets.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/drawer_key.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/m5_tray.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/metal_rotor_cap.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/metal_rotor_lower_washer.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/metal_rotor_sleeve.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/press_leaf.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/press_leaf_soft.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/press_pin_a.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/press_pin_b.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/rotor_clip.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/rotor_pin.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/thrust_ring.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/wheel.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "step/wheel_loose.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    }
+  },
+  "all_stl_match": true
+}
