@@ -1,5 +1,7 @@
 # 产品工作记录
 
+- 最终事实同步：直接读取测试报告ad0c363bdaeb95702185c0f9bc3ce14204ad161e，选型主表更新针板58072e0dbfa61e7f32510851f2d33c43b6c4b284、按压2aaf60b72875c992623210256f05deeea44ea261、球8ba49f0d8c56d5c531611860dcf0996722f94a82及各附件尺寸/排除项，链接测试报告。旧版球假设整体98.2×60.4×63不再作为当前尺寸；旧SHA仅用于以下历史追踪。此修订不改交互、价值假设或G1判定，不将几何通过提升为整机通过。
+
 - 2026-09-22：读取旧PRD/IMPLEMENTATION/INDUSTRIAL_DESIGN及三模型README（471703 9617a85、2710405 5671da9、2673323 9591aa5）。独占分支codex/hackathon-product，worktree D:/tenfold-worktrees/hackathon-product；origin为指定仓库，gh核实PUBLIC，未更改可见性。
 - 产品判断：三套附件均不足以支持完整EDC；2710405只条件优先。保留真实机械体验，删除无传感器联动/主动震动/系统阻断等不成立承诺。
 - 交付候选：HACKATHON_PRD、USER_JOURNEY、DEMO_AND_QA、ACCEPTANCE_MATRIX。所有实现、实物、用户实验标待执行；未将文档当作实机测试。

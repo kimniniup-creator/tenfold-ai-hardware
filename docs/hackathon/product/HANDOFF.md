@@ -2,6 +2,8 @@
 
 权威目录：docs/hackathon/product/；分支：codex/hackathon-product。仅本目录由产品任务写入；未改主checkout及其他任务文件。
 
+选型主表已同步最终测试报告ad0c363bdaeb95702185c0f9bc3ce14204ad161e；main整合时需同时包含docs/hackathon/testing/REPORT.md以保持相对链接可用。产品交互规格保持已验收版本，更新仅涉及机械事实与引用。
+
 总控：01a0c3c3-e4c7-7b71-be7e-110ef965a333。测试：01a0c5b4-aff1-7102-85c2-bb1a66b8368f。验收：01a0c5b4-bd94-7110-94a8-5b2c9e190508。
 
 合并时以本轮HACKATHON_PRD为黑客松基线，旧文档保留为长期方向；三模型README中的旧动作映射仅概念，不与本状态协议混用。产品未给2710405整机背书，更未给另两款替代放行。
