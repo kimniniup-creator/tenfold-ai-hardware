@@ -1,0 +1,246 @@
+{
+  "parameters_mm": {
+    "device_l": 48.0,
+    "device_w": 24.0,
+    "device_h": 15.0,
+    "clearance": 0.6,
+    "device_x": 0.0,
+    "mount_x": 0.0,
+    "static_grip_width": 22.0,
+    "pad": 1.0,
+    "hypothetical_rotor_radius": 28.0,
+    "hypothetical_rotor_bottom": 41.0
+  },
+  "source_fit_verified": false,
+  "physical_print_tested": false,
+  "parts": {
+    "spine": {
+      "watertight": true,
+      "volume_mm3": 11412.029874255948,
+      "bounds_mm": [
+        [
+          -27.0,
+          -24.0,
+          0.0
+        ],
+        [
+          27.0,
+          24.0,
+          29.0
+        ]
+      ],
+      "solid_count": 1,
+      "cad_valid": true
+    },
+    "jaw_front": {
+      "watertight": true,
+      "volume_mm3": 1336.210296474632,
+      "bounds_mm": [
+        [
+          -13.0,
+          12.0,
+          0.0
+        ],
+        [
+          13.0,
+          19.0,
+          9.0
+        ]
+      ],
+      "solid_count": 1,
+      "cad_valid": true
+    },
+    "jaw_back": {
+      "watertight": true,
+      "volume_mm3": 1336.210296474632,
+      "bounds_mm": [
+        [
+          -13.0,
+          -19.0,
+          0.0
+        ],
+        [
+          13.0,
+          -12.0,
+          9.0
+        ]
+      ],
+      "solid_count": 1,
+      "cad_valid": true
+    },
+    "retainer_left": {
+      "watertight": true,
+      "volume_mm3": 275.70485781743264,
+      "bounds_mm": [
+        [
+          -26.700000762939453,
+          -20.0,
+          0.0
+        ],
+        [
+          -20.700000762939453,
+          20.0,
+          2.0
+        ]
+      ],
+      "solid_count": 1,
+      "cad_valid": true
+    },
+    "retainer_right": {
+      "watertight": true,
+      "volume_mm3": 275.7048571009618,
+      "bounds_mm": [
+        [
+          20.700000762939453,
+          -20.0,
+          0.0
+        ],
+        [
+          26.700000762939453,
+          20.0,
+          2.0
+        ]
+      ],
+      "solid_count": 1,
+      "cad_valid": true
+    }
+  },
+  "m5_intersection_mm3": {
+    "spine": 0.0,
+    "jaw_front": 0.0,
+    "jaw_back": 0.0,
+    "retainer_left": 0.0,
+    "retainer_right": 0.0
+  },
+  "hardware_m5_intersection_mm3": {
+    "jaw_bolt_-9_-1": 0.0,
+    "jaw_nut_-9_-1": 0.0,
+    "jaw_washer_-9_-1": 0.0,
+    "jaw_bolt_-9_1": 0.0,
+    "jaw_nut_-9_1": 0.0,
+    "jaw_washer_-9_1": 0.0,
+    "jaw_bolt_9_-1": 0.0,
+    "jaw_nut_9_-1": 0.0,
+    "jaw_washer_9_-1": 0.0,
+    "jaw_bolt_9_1": 0.0,
+    "jaw_nut_9_1": 0.0,
+    "jaw_washer_9_1": 0.0,
+    "corner_bolt_-23.7_-16.5": 0.0,
+    "corner_bolt_-23.7_16.5": 0.0,
+    "corner_bolt_23.7_-16.5": 0.0,
+    "corner_bolt_23.7_16.5": 0.0
+  },
+  "part_pair_intersection_mm3": {
+    "spine / jaw_front": 0.0,
+    "spine / jaw_back": 0.0,
+    "spine / retainer_left": 0.0,
+    "spine / retainer_right": 0.0,
+    "jaw_front / jaw_back": 0.0,
+    "jaw_front / retainer_left": 0.0,
+    "jaw_front / retainer_right": 0.0,
+    "jaw_back / retainer_left": 0.0,
+    "jaw_back / retainer_right": 0.0,
+    "retainer_left / retainer_right": 0.0
+  },
+  "hypothetical_rotor_intersection_mm3": {
+    "spine": 0.0,
+    "jaw_front": 0.0,
+    "jaw_back": 0.0,
+    "retainer_left": 0.0,
+    "retainer_right": 0.0,
+    "m5_envelope": 0.0
+  },
+  "conditional_grip_range_mm": [
+    10,
+    30
+  ],
+  "jaw_range_check": [
+    {
+      "grip_mm": 10,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 9.5
+    },
+    {
+      "grip_mm": 15,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 12.0
+    },
+    {
+      "grip_mm": 20,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 14.5
+    },
+    {
+      "grip_mm": 22,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 15.5
+    },
+    {
+      "grip_mm": 25,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 17.0
+    },
+    {
+      "grip_mm": 30,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 19.5
+    }
+  ],
+  "nominal_device_side_clearance_mm": 0.6,
+  "jaw_screw_tip_to_m5_mm": 1.3999999999999986,
+  "printed_assembly_bounds_mm": [
+    [
+      -27,
+      -24,
+      0
+    ],
+    [
+      27,
+      24,
+      36
+    ]
+  ],
+  "accessory_with_hardware_bounds_mm": [
+    [
+      -27,
+      -24,
+      -3
+    ],
+    [
+      27,
+      24,
+      36
+    ]
+  ],
+  "hypothetical_system_bounds_mm": [
+    [
+      -28,
+      -28,
+      -3
+    ],
+    [
+      28,
+      28,
+      76
+    ]
+  ],
+  "source_motion_status": "UNKNOWN: assumed R28, bottom Z41, height35 is not a measured source model."
+}

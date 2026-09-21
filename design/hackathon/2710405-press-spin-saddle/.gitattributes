@@ -1,0 +1,4 @@
+# Generated CAD exports: preserve bytes and avoid meaningless line diffs.
+*.step -text -diff
+*.stl binary
+*.png binary
