@@ -5,16 +5,21 @@ import java.time.*;
 public class StateProbeV2 {
   static class Memory implements SharedPreferences {
     Map<String,Object> ram=new HashMap<>(),disk=new HashMap<>(); boolean fail;
+    public Map<String,?> getAll(){return new HashMap<>(ram);}
     public String getString(String k,String d){return (String)ram.getOrDefault(k,d);}
     public int getInt(String k,int d){return (Integer)ram.getOrDefault(k,d);}
     public boolean getBoolean(String k,boolean d){return (Boolean)ram.getOrDefault(k,d);}
     public Editor edit(){return new Editor(){
       Map<String,Object> pending=new HashMap<>();Set<String> removed=new HashSet<>();
+      boolean cleared;
+      public Editor clear(){cleared=true;return this;}
+      public Editor putLong(String k,long v){pending.put(k,v);return this;}
+      public Editor putFloat(String k,float v){pending.put(k,v);return this;}
       public Editor remove(String k){removed.add(k);return this;}
       public Editor putString(String k,String v){pending.put(k,v);return this;}
       public Editor putInt(String k,int v){pending.put(k,v);return this;}
       public Editor putBoolean(String k,boolean v){pending.put(k,v);return this;}
-      public boolean commit(){removed.forEach(ram::remove);ram.putAll(pending);if(fail)return false;removed.forEach(disk::remove);disk.putAll(pending);return true;}
+      public boolean commit(){if(cleared)ram.clear();removed.forEach(ram::remove);ram.putAll(pending);if(fail)return false;if(cleared)disk.clear();removed.forEach(disk::remove);disk.putAll(pending);return true;}
     };}
     void restart(){ram=new HashMap<>(disk);}
   }

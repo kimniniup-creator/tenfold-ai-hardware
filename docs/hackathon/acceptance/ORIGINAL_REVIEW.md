@@ -95,3 +95,11 @@
 协议源码改进确认：snapshotVersion只在active提交成功后推进，固件超长帧丢弃至换行，关联offer ACK后发送队首，Android读帧与写操作增加generation。未关闭：connect本身仍并发使用共享成员；固件hello仅setup发送，重连握手缺明确定义；实体pending仅单字符串，离线complete(seq1)再seal(seq2)覆盖前者，重连仅seq2而手机last0严格+1拒绝，需FIFO或明确阻止未确认时继续产生事件。
 
 以上已发作者和协调；属于修复回归，不声称APK安装、固件编译、板卡通信通过。
+
+### 8186130修复回归
+
+固定`818613041039f52cc4035bcb4379a95462d6c628`，stub补getAll/clear/Long/Float以匹配生产事务回滚。`result-8186130.txt`八条反例全部NOT_REPRODUCED，原CS04B及CS07关闭（在本故障注入模型范围内）。不改变历史结果。运行命令：`state-probe/run.ps1 -Revision 818613041039f52cc4035bcb4379a95462d6c628 -Probe StateProbeV2`。
+
+源码确认hello_request请求/响应接通，connecting限制重复连接启动，实体事件改为最多8条持久FIFO，同一卡离线complete→seal不再只保留最后事件。FIFO的每项目前仅seq/type，仍有跨卡P1：旧卡未ACK时接收新offer，重放使用当前command/cycle/revision/day重新组包，旧事件可被标记为新卡事实。需要保存完整不可变事件信封并定义跨卡同步，或有pending时拒绝换卡且提供可恢复的同步路径。
+
+另一重连P1：restore把timeTrusted设false，query或重复offer只返回状态/ACK，手机未发送set_time，同卡重启后实体complete持续time_untrusted。需要明确时间恢复握手并验证。两项已发作者与协调。测试结论只覆盖Java状态反例；固件仍是源码复核，不声称编译/板卡验证通过。
