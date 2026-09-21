@@ -37,7 +37,7 @@ def body():
     # Rear-shell clearance stops capture M5 after drawer insertion; no flexing
     # board cradle required, so the tray itself may be printed in PLA.
     for sx in [-1,1]:
-        for sy in [-1,1]: b=b.union(box(4,4,3.6,sx*21.5,sy*9.5,20.4))
+        for sy in [-1,1]: b=b.union(box(4,4,3.6,sx*21.5,sy*8,20.4))
     b=b.cut(box(3.2,50,3.2,-29,0,1.6))
     b=b.cut(cyl(3.4,20,RX,0,18))
     b=b.union(box(16,6,2.6,PRESS_X,14,27))
@@ -109,14 +109,14 @@ def press_pin(x):
 
 def drawer_key():
     # Shaft along Y, both head and split barb outside the body walls.
-    p=box(2.6,44,2.6,-29,1,1.9).union(box(5,2,4,-29,-22,1.2))
+    p=box(2.6,44,2.6,-29,1,1.9).union(box(5,2,2.6,-29,-22,1.9))
     for s in [-1,1]:
         pts=[(-29+s*1.3,20.3),(-29+s*1.75,20.3),(-29+s*1.3,23)]
         p=p.union(cq.Workplane('XY').polyline(pts).close().extrude(2.6).translate((0,0,1.9)))
     p=p.cut(box(.8,7,5,-29,20,1))
     return p
 
-def metal_reference():
+def metal_reference(with_press=False):
     # Optional PLA rotation build: printed sleeve/cap + M3 low-head bolt.
     h={
       'rotor_M3x16':cyl(1.5,16,RX,0,23.2).union(cyl(2.85,2,RX,0,21.2)),
@@ -129,6 +129,11 @@ def metal_reference():
     h['drawer_M3x45']=shaft.union(head)
     for name,start,r,ht in [('drawer_washer_left',-20.5,3.5,.5),('drawer_washer_right',20,3.5,.5),('drawer_nut',20.5,3.2,3)]:
         h[name]=ring(r,1.7 if 'washer' in name else 1.5,ht).rotate((0,0,0),(1,0,0),-90).translate((-29,start,3.2))
+    if with_press:
+        for x in [14,22]:
+            h[f'press_M3x14_{x}']=cyl(1.5,14,x,14,18).union(cyl(3,3,x,14,32))
+            h[f'press_washer_{x}']=ring(3.5,1.7,.5,x,14,23.5)
+            h[f'press_nut_{x}']=ring(3.2,1.5,3,x,14,20.5)
     return h
 
 def parts():
@@ -147,8 +152,8 @@ def alternatives():
 def calibration():
     block=box(54,18,5)
     for i,d in enumerate([12.3,12.5,12.7]): block=block.cut(cyl(d/2,7,(i-1)*17,0,-1))
-    sockets=box(38,16,3)
-    for x,d in [(-12,4.0),(0,4.2),(12,4.4)]: sockets=sockets.cut(cyl(d/2,5,x,0,-1))
+    sockets=box(38,16,8)
+    for x,d in [(-12,4.0),(0,4.2),(12,4.4)]: sockets=sockets.cut(cyl(d/2,10,x,0,-1))
     # Mini M5 fit corner gauge (official ideal envelope; 0.4 mm XY clearance).
     gauge=box(52.8,28.8,3).cut(box(48.8,24.8,5,z=-1))
     return {'cal_axis_holes':block,'cal_axis_plug':cyl(6,6),
@@ -163,7 +168,7 @@ def print_shape(name,shape):
     if name in ['rotor_pin','press_pin_a','press_pin_b','cal_snap_pin']:
         shape=shape.rotate((0,0,0),(1,0,0),180)
     if name=='m5_tray':
-        # Printed upright; short inward tabs bridge 2 mm at top.
+        # Printed upright; rigid shell support ledges face upward.
         pass
     if name=='drawer_key':
         # Flat on its broad XY face.
@@ -186,6 +191,11 @@ def export_all():
     a=cq.Assembly()
     for name,p in parts().items(): a.add(p,name=name)
     a.export(str(OUT/'step'/'assembly.step'))
+    metal={k:v for k,v in parts().items() if k not in ['rotor_pin','rotor_clip','press_pin_a','press_pin_b','drawer_key']}
+    metal.update({k:v for k,v in alternatives().items() if k.startswith('metal')}); metal.update(metal_reference(True))
+    a=cq.Assembly()
+    for i,(name,p) in enumerate(metal.items()): a.add(p,name='part_'+str(i))
+    a.export(str(OUT/'step'/'hybrid_assembly.step'))
     (OUT/'mesh_checks.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     return all_parts
 

@@ -49,6 +49,8 @@ def main():
     metal.update({k:v for k,v in cad.alternatives().items() if k.startswith('metal')})
     metal.update(cad.metal_reference())
     report['PLA_metal_rotation_collisions']=collisions({**metal,'m5':m5})
+    hybrid={**metal,'press_leaf':p['press_leaf'],**cad.metal_reference(True)}
+    report['hybrid_full_action_collisions']=collisions({**hybrid,'m5':m5})
     report['minimums_mm']={'wheel_radial_clearance':.25,'wheel_axial_up_clearance':.6,
       'pin_to_m5_clearance':1.2,'clip_to_m5_clearance':2.4,'drawer_rail_side':.4,
       'tray_to_device_X':.4,'leaf_thickness':1.2,'soft_leaf_thickness':1.,
@@ -59,7 +61,7 @@ def main():
       'rotor_C_clip_mouth_expansion_total_mm':.4,'material':'PETG for full flex build; PLA rotation mode uses metal retention',
       'warning':'Elastic assembly stages are NOT collision-free rigid insertion; calibration must pass before full build.'}
     errors=[]
-    for label in ['neutral_collisions','PLA_metal_rotation_collisions']:
+    for label in ['neutral_collisions','PLA_metal_rotation_collisions','hybrid_full_action_collisions']:
         if report[label]: errors.append(label)
     for label in ['rotation','press','drawer_path']:
         if any(row['failures'] for row in report[label]): errors.append(label)

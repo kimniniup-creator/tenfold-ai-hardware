@@ -355,6 +355,7 @@
     }
   },
   "PLA_metal_rotation_collisions": [],
+  "hybrid_full_action_collisions": [],
   "minimums_mm": {
     "wheel_radial_clearance": 0.25,
     "wheel_axial_up_clearance": 0.6,

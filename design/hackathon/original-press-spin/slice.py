@@ -4,17 +4,19 @@ python slice.py --slicer PATH_TO_PRUSA_SLICER_CONSOLE
 import argparse,subprocess,json,re,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-a=argparse.ArgumentParser(); a.add_argument('--slicer',required=True); args=a.parse_args()
+a=argparse.ArgumentParser(); a.add_argument('--slicer',required=True); a.add_argument('--only',nargs='*'); args=a.parse_args()
 out=ROOT/'_checks'; out.mkdir(exist_ok=True)
 petg=(ROOT/'slice_screen_pla.ini').read_text().replace('filament_type = PLA','filament_type = PETG').replace('temperature = 210','temperature = 240').replace('bed_temperature = 60','bed_temperature = 80')
 (out/'petg.ini').write_text(petg)
-report={'profile_status':'generic 220x220, not machine-qualified; G-code excluded from delivery','parts':{}}
+report=json.loads((ROOT/'slicing_report.json').read_text()) if args.only and (ROOT/'slicing_report.json').exists() else {'profile_status':'generic 220x220, not machine-qualified; G-code excluded from delivery','parts':{}}
 for file in sorted((ROOT/'stl').glob('*.stl')):
-    name=file.stem; flex=any(x in name for x in ['press_','clip','snap_','drawer_key'])
+    name=file.stem; flex=name.startswith('press_') or name in ['rotor_clip','cal_clip_open','cal_snap_pin','drawer_key']
+    if args.only and name not in args.only: continue
     profile=out/'petg.ini' if flex else ROOT/'slice_screen_pla.ini'
     gcode=out/(name+'.gcode')
     cmd=[args.slicer,'--datadir',str(out/'prusa-profile'),'--load',str(profile),'--export-gcode','--output',str(gcode),'--center','110,110']
     if name=='body': cmd+=['--support-material','--brim-width','6']
+    if name=='metal_rotor_sleeve': cmd+=['--brim-width','3']
     cmd.append(str(file)); start=time.time()
     r=subprocess.run(cmd,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=180)
     (out/(name+'.log')).write_text(r.stdout+'\n'+r.stderr,encoding='utf-8')
