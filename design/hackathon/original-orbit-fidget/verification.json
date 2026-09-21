@@ -1,0 +1,628 @@
+{
+  "units": "mm",
+  "physical_print_tested": false,
+  "radial_gap_per_side": 0.5,
+  "axial_gap_each": 0.4,
+  "capture_overlap_radial": 2.0,
+  "rotor_degrees": [
+    0,
+    360
+  ],
+  "screw": "4 x M3x30 countersunk + 4 x M3 nut AF5.5 H2.4",
+  "optional_detent": "1 x ball D3 + spring OD2.5 wire0.3 L8, solid height <=3",
+  "parts": {
+    "01_base": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 28790.71491021152,
+      "bounds_mm": [
+        [
+          -32.485454049213864,
+          -32.496363308833885,
+          0.0
+        ],
+        [
+          32.5,
+          32.496363308833885,
+          10.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
+      "quantity": 1
+    },
+    "02_rotor": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 8439.564747205843,
+      "bounds_mm": [
+        [
+          -37.427500000000016,
+          -37.48530484278162,
+          3.3999999999999986
+        ],
+        [
+          37.427500000000016,
+          37.48530484278162,
+          9.400000000000002
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 3.3999999999999986,
+      "quantity": 1
+    },
+    "03_capture_ring": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 3793.5125469982145,
+      "bounds_mm": [
+        [
+          -32.485454049213864,
+          -32.496363308833885,
+          9.8
+        ],
+        [
+          32.5,
+          32.496363308833885,
+          12.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 9.8,
+      "quantity": 1
+    },
+    "04_m5_cradle": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 4794.871081479801,
+      "bounds_mm": [
+        [
+          -22.0,
+          -25.6,
+          10.0
+        ],
+        [
+          22.0,
+          25.6,
+          27.5
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 10.0,
+      "quantity": 1
+    },
+    "05_face_frame": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 1188.4473673345133,
+      "bounds_mm": [
+        [
+          -20.69977049763217,
+          -26.0,
+          27.5
+        ],
+        [
+          20.69977049763217,
+          26.0,
+          30.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 27.5,
+      "quantity": 1
+    },
+    "calibration_base": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 3931.7893577919936,
+      "bounds_mm": [
+        [
+          -11.0,
+          -22.0,
+          0.0
+        ],
+        [
+          11.0,
+          22.0,
+          8.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
+      "quantity": 1
+    },
+    "calibration_ring_020": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 668.530916683908,
+      "bounds_mm": [
+        [
+          -8.99597189055153,
+          -8.998992916292462,
+          0.0
+        ],
+        [
+          9.0,
+          8.998992916292462,
+          5.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
+      "quantity": 1
+    },
+    "calibration_ring_035": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 638.9606758319941,
+      "bounds_mm": [
+        [
+          -8.99597189055153,
+          -8.998992916292462,
+          0.0
+        ],
+        [
+          9.0,
+          8.998992916292462,
+          5.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
+      "quantity": 1
+    },
+    "calibration_ring_050": {
+      "watertight": true,
+      "components": 1,
+      "volume_mm3": 608.6835766330223,
+      "bounds_mm": [
+        [
+          -8.99597189055153,
+          -8.998992916292462,
+          0.0
+        ],
+        [
+          9.0,
+          8.998992916292462,
+          5.0
+        ]
+      ],
+      "step_roundtrip_valid": true,
+      "stl_print_ready_z_min": 0.0,
+      "stl_to_assembly_translation_z": 0.0,
+      "quantity": 1
+    }
+  },
+  "pair_interference_mm3": {
+    "01_base / 02_rotor": 0.0,
+    "01_base / 03_capture_ring": 0.0,
+    "01_base / 04_m5_cradle": 0.0,
+    "01_base / 05_face_frame": 0.0,
+    "02_rotor / 03_capture_ring": 0.0,
+    "02_rotor / 04_m5_cradle": 0.0,
+    "02_rotor / 05_face_frame": 0.0,
+    "03_capture_ring / 04_m5_cradle": 0.0,
+    "03_capture_ring / 05_face_frame": 0.0,
+    "04_m5_cradle / 05_face_frame": 0.0
+  },
+  "edge_finishes": {
+    "base_outer_bottom": {
+      "chamfer_mm": 0.35,
+      "edges": 1,
+      "planes_z": [
+        0
+      ]
+    },
+    "rotor_outer_edges": {
+      "chamfer_mm": 0.3,
+      "edges": 40,
+      "planes_z": [
+        3.4,
+        9.4
+      ]
+    },
+    "capture_outer_top": {
+      "chamfer_mm": 0.3,
+      "edges": 1,
+      "planes_z": [
+        12
+      ]
+    },
+    "frame_boss_outer_top": {
+      "fillet_mm": 0.2,
+      "bosses": 4,
+      "remaining_top_lip_mm": 0.8
+    }
+  },
+  "thread_check": {
+    "nut_z": [
+      0.6,
+      3.0
+    ],
+    "screw_nominal_tip_z": 0,
+    "permitted_screw_length_mm": [
+      29.7,
+      30.0
+    ],
+    "max_incomplete_tip_thread_mm": 0.5,
+    "worst_effective_engagement_mm": 2.2,
+    "strength_tested": false
+  },
+  "m5_box_interference_mm3": {
+    "01_base": 0.0,
+    "02_rotor": 0.0,
+    "03_capture_ring": 0.0,
+    "04_m5_cradle": 0.0,
+    "05_face_frame": 0.0
+  },
+  "access_interference_mm3": {
+    "usb_grove_combined": 0.0,
+    "hat_end": 0.0,
+    "side_button_left": 0.0,
+    "side_button_right": 0.0,
+    "reset_tool_left": 0.0,
+    "reset_tool_right": 0.0
+  },
+  "hardware_interference_max_mm3": 0.0,
+  "hardware_pair_interference_max_mm3": 0.0,
+  "tool_top_interference_mm3": 0.0,
+  "capture_stops_mm3": {
+    "rotor_up_0.5": 39.584067435231276,
+    "rotor_down_0.5": 25.03430465890458,
+    "capture_ring_up_0.1": 5.991154910616606
+  },
+  "rotation_samples": [
+    {
+      "degrees": 0,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 5,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 10,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 15,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 20,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 25,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 30,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 35,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 40,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 45,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 50,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 55,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 60,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 65,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 70,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 75,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 80,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 85,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 90,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 95,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 100,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 105,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 110,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 115,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 120,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 125,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 130,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 135,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 140,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 145,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 150,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 155,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 160,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 165,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 170,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 175,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 180,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 185,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 190,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 195,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 200,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 205,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 210,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 215,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 220,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 225,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 230,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 235,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 240,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 245,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 250,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 255,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 260,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 265,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 270,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 275,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 280,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 285,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 290,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 295,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 300,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 305,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 310,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 315,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 320,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 325,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 330,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 335,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 340,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 345,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 350,
+      "max_interference_mm3": 0.0
+    },
+    {
+      "degrees": 355,
+      "max_interference_mm3": 0.0
+    }
+  ],
+  "detent_seating": [
+    {
+      "degrees": 0,
+      "ball_center_x": 30.101562499999996,
+      "spring_length": 6.6015624999999964,
+      "spring_compression": 1.3984375000000036
+    },
+    {
+      "degrees": 9,
+      "ball_center_x": 29.00439453125,
+      "spring_length": 5.50439453125,
+      "spring_compression": 2.49560546875
+    },
+    {
+      "degrees": 18,
+      "ball_center_x": 29.00439453125,
+      "spring_length": 5.50439453125,
+      "spring_compression": 2.49560546875
+    },
+    {
+      "degrees": 27,
+      "ball_center_x": 29.00439453125,
+      "spring_length": 5.50439453125,
+      "spring_compression": 2.49560546875
+    },
+    {
+      "degrees": 36,
+      "ball_center_x": 30.101562499999996,
+      "spring_length": 6.6015624999999964,
+      "spring_compression": 1.3984375000000036
+    }
+  ],
+  "official_m5_reference": {
+    "source": "https://github.com/m5stack/M5_Hardware/tree/master/Products/K150_StickS3/Structures",
+    "assembled_components": 3,
+    "normalized_bounds_mm": [
+      [
+        -12.000000000000222,
+        -24.000934498792887,
+        12.000000032104492
+      ],
+      [
+        12.000938415527344,
+        24.00093631591797,
+        27.00000027052307
+      ]
+    ],
+    "redistributed": false,
+    "part_interference_mm3": {
+      "01_base": 0.0,
+      "02_rotor": 0.0,
+      "03_capture_ring": 0.0,
+      "04_m5_cradle": 0.0,
+      "05_face_frame": 0.0
+    }
+  }
+}
