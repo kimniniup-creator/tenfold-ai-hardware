@@ -54,7 +54,7 @@ python -m platformio run -d firmware -t upload --upload-port COMx
 
 Enter StickS3 download mode using the official procedure (hold the reset/power control for about two seconds until its green LED indicates download mode), replace `COMx` with the enumerated port, and run the upload command. PlatformIO writes the board-defined bootloader/partition/app offsets; it does not issue a full-chip erase. Do not use `erase_flash` because that would remove NVS state.
 
-The locked build completed successfully with PlatformIO Espressif32 6.12.0, M5Unified 0.2.22, M5GFX 0.2.29 and ArduinoJson 7.4.3. It used 22,676 bytes RAM (6.9%) and 715,645 bytes program space (21.4%). The release ZIP contains reusable, checksummed binaries; its manifest and flashing helper live under `firmware/release/p0/`.
+The locked build completed successfully with PlatformIO Espressif32 6.12.0, M5Unified 0.2.22, M5GFX 0.2.29 and ArduinoJson 7.4.3. It used 22,684 bytes RAM (6.9%) and 716,517 bytes program space (21.4%). The release ZIP contains reusable, checksummed binaries; its manifest and flashing helper live under `firmware/release/p0/`.
 
 The exact offsets emitted by the successful PlatformIO upload dry run are:
 
@@ -70,6 +70,8 @@ powershell -File .\firmware\release\p0\flash.ps1 -Port COMx
 ```
 
 Use `-Mode Provision` for the four exact PlatformIO segments on a new board. `-Mode Factory` writes `tenfold-p0-factory.bin` at address zero and fills the intervening address space; it is for an empty board only because it **overwrites the NVS gap and erases saved Tenfold state**. Never flash the standalone app binary at address zero.
+
+The P0 board implementation is deliberately single-cycle. Phone-side archive does not close the board cycle; a different `cycle_id` is rejected as `cycle_conflict`. To bind another cycle, first reconnect and verify that no device events remain pending/unconfirmed, then explicitly use `-Mode Factory` and reprovision. This limitation avoids silently discarding an offline hardware event queue; automatic multi-cycle board rollover has not been real-hardware tested.
 
 ## Protocol v1
 

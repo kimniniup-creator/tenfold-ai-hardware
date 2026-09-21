@@ -41,7 +41,8 @@
 
 - Android 冻结候选源码 `6e2bf0e`，APK SHA-256 `B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，稳定签名证书 SHA-256 `EB55B62C374F6A58766625F52B83BA34B17E8A6B8C0D2CB95257781884CB153A`。
 - 独立状态反例探针共 22 项全部关闭；模拟器覆盖安装、冷启动、十日回顾和恢复路径由独立测试任务复核。
-- 固件以 PlatformIO Espressif32 6.12.0、M5Unified 0.2.22、M5GFX 0.2.29、ArduinoJson 7.4.3 编译并链接成功：RAM 22,676 B（6.9%），Flash 715,645 B（21.4%）。
+- 固件以 PlatformIO Espressif32 6.12.0、M5Unified 0.2.22、M5GFX 0.2.29、ArduinoJson 7.4.3 编译并链接成功：RAM 22,684 B（6.9%），Flash 716,517 B（21.4%）。
 - PlatformIO 无设备上传 dry run 给出精确烧录偏移：bootloader `0x0000`、partitions `0x8000`、boot_app0 `0xe000`、app `0x10000`。
-- 本地固件发布包 `firmware/release/tenfold-firmware-p0.zip` SHA-256 为 `B94F3C282D7B28B3E1650514505714A106FAE1E0C7D7D9BB32AA32C6F4E195C3`；二进制按发布资产处理，不纳入 Git。
+- R05 增量把完成事实按日独立持久化，同日 revision、封存和重启均不能再次完成；跨日才重新允许。板端 P0 明确限定单周期，不自动接受新 cycle，以免静默丢弃离线事件。
+- 最终固件发布包 `firmware/release/tenfold-firmware-p0-r05.zip` SHA-256 为 `39437628A42939591FCA3B794F3BCD8B2243678929CF1856823326C061748CDB`；二进制按发布资产处理，不纳入 Git。
 - 真实 M5StickS3、Android OTG 和云 LLM 未测试，保持明确 `NOT_TESTED`，不可由编译/模拟证据替代。

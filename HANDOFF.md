@@ -13,10 +13,12 @@ The APK remains offline-capable and truthfully labels simulation, USB, offline r
 
 `python -m platformio run -d firmware` completes successfully with the exact locks in `firmware/platformio.ini`. The release ZIP is produced locally from `firmware/release/p0/`; binaries are release assets and intentionally ignored by Git. Use `flash.ps1` in its default update mode to preserve NVS. Factory mode is only for an empty board and overwrites NVS.
 
-- Local release ZIP: `D:\tenfold-worktrees\android\firmware\release\tenfold-firmware-p0.zip`
-- ZIP SHA-256: `B94F3C282D7B28B3E1650514505714A106FAE1E0C7D7D9BB32AA32C6F4E195C3`
-- App image SHA-256: `C6089DDC3EF2F082D9E3E0A44B45B86472E9FDE68245AD6702E03A67BF00B6B3`
-- Empty-board factory image SHA-256: `496149201D350A8A21982267FFCC91441801C5F319A4F238B6AD7B786DCC1CCB`
+- Final release ZIP: `D:\tenfold-worktrees\android\firmware\release\tenfold-firmware-p0-r05.zip`
+- ZIP SHA-256: `39437628A42939591FCA3B794F3BCD8B2243678929CF1856823326C061748CDB`
+- App image SHA-256: `FB0EB0D71AF40097542D4DFC2E7E33245928E1E5FC80E89567F1DE132236EC09`
+- Empty-board factory image SHA-256: `D89B76676EE6DB86D0BC433CC4F70C540C4651D5EE566A7507A4AE9938387789`
+
+The hardware P0 is intentionally single-cycle. Phone archive does not close the board cycle. A different cycle ID is rejected until the owner has reconnected, confirmed every queued event is synchronized, and explicitly factory-reprovisioned the device. This prevents an automatic rollover from silently deleting offline facts.
 
 ## Remaining physical acceptance
 
