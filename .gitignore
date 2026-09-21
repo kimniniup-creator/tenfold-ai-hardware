@@ -12,3 +12,4 @@ android-app/out-*/
 *.apk
 *.jks
 firmware/.pio/
+.signing/

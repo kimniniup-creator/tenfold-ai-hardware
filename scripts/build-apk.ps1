@@ -1,7 +1,11 @@
 $ErrorActionPreference = 'Stop'
+$repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+Push-Location $repoRoot
 $sdk = if ($env:ANDROID_HOME) { $env:ANDROID_HOME } else { 'E:\Android\Sdk' }
 $bt = Join-Path $sdk 'build-tools\35.0.0'; $platform = Join-Path $sdk 'platforms\android-35\android.jar'
-$out = 'android-app\out-release'
+$out = [System.IO.Path]::GetFullPath((Join-Path $repoRoot 'android-app\out-release'))
+$expectedOut = [System.IO.Path]::GetFullPath((Join-Path $repoRoot 'android-app\out-release'))
+if ($out -ne $expectedOut -or -not $out.StartsWith($repoRoot + [System.IO.Path]::DirectorySeparatorChar)) { throw 'Unsafe output path' }
 if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Recurse -Force }
 New-Item -ItemType Directory -Force $out,"$out\classes","$out\dex" | Out-Null
 & "$bt\aapt2.exe" compile --dir android-app\res -o "$out\res.zip"
@@ -18,10 +22,12 @@ Push-Location "$out\dex"; & "$bt\aapt.exe" add "..\unaligned.apk" classes.dex; P
 if ($LASTEXITCODE -ne 0) { throw 'aapt add dex failed' }
 & "$bt\zipalign.exe" -f 4 "$out\unaligned.apk" "$out\tenfold-p0-unsigned.apk"
 if ($LASTEXITCODE -ne 0) { throw 'zipalign failed' }
-$key = "$out\debug-keystore.jks"; if (!(Test-Path $key)) { & keytool -genkeypair -keystore $key -storepass android -keypass android -alias tenfold -keyalg RSA -keysize 2048 -validity 3650 -dname 'CN=Tenfold P0, OU=Demo, O=Tenfold, C=CN' -noprompt }
+$signingDir = Join-Path $repoRoot '.signing'; New-Item -ItemType Directory -Force $signingDir | Out-Null
+$key = "$signingDir\tenfold-demo.jks"; if (!(Test-Path $key)) { & keytool -genkeypair -keystore $key -storepass android -keypass android -alias tenfold -keyalg RSA -keysize 2048 -validity 3650 -dname 'CN=Tenfold P0, OU=Demo, O=Tenfold, C=CN' -noprompt }
 & "$bt\apksigner.bat" sign --ks $key --ks-pass pass:android --key-pass pass:android --ks-key-alias tenfold --out "$out\tenfold-p0.apk" "$out\tenfold-p0-unsigned.apk"
 if ($LASTEXITCODE -ne 0) { throw 'apksigner sign failed' }
 & "$bt\apksigner.bat" verify --verbose "$out\tenfold-p0.apk"
 if ($LASTEXITCODE -ne 0) { throw 'apksigner verify failed' }
 if (-not ((& "$bt\aapt.exe" list "$out\tenfold-p0.apk") -contains 'classes.dex')) { throw 'APK is missing root classes.dex' }
 Get-FileHash "$out\tenfold-p0.apk" -Algorithm SHA256
+Pop-Location

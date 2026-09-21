@@ -1,22 +1,77 @@
-# Android P0 demo
+# Tenfold Android + M5StickS3 P0
 
-Package: `io.tenfold.app`. The APK is intentionally dependency-free (Android framework Java) so it can be built with the installed SDK build tools.
+Package `io.tenfold.app`, version `0.1.0-p0` (`versionCode 1`), minSdk 26, targetSdk 35. The app is an offline-first ten-day commitment tool centered on “今天到这里，明天接得上”, not a general task manager.
 
-## Truthful modes
+## Truthful operating modes
 
-- **USB DEVICE**: Android USB Host opens a discovered bulk OUT endpoint, requests Android's system USB permission, and sends newline JSON. A transmission is not an ACK; M5 firmware responds only after its local `Preferences` write.
-- **SIMULATED DEVICE**: no device is discovered. It is a local UI demonstration only and is labelled on every main state; it cannot claim hardware delivery.
-- **OFFLINE RULES**: the proposal screen says no LLM call was made. It compresses the user's lines into 1 goal / up to 3 outcomes / 1 action and preserves remaining lines in Parking Lot. No task text is sent to a cloud service.
+- **模拟设备**: a complete local demo for first commitment, today card, complete/seal, stop note, recovery card, demo day advance and day-10 review. The UI always says it is simulated; it never claims a hardware ACK.
+- **真实 USB**: Android USB Host opens a CDC-ACM data interface, performs line-coding/DTR initialization, then validates `protocol=1` and an `m5sticks3-*` device ID before sending business frames. “手机已保存” and “设备已确认” are separate facts.
+- **离线规则**: fills a candidate card without a network request and labels itself `OFFLINE RULES`.
+- **真实 Agent**: optional OpenAI-compatible HTTPS request with a strict JSON schema. Endpoint/model stay in app preferences; the API key is AES-GCM encrypted by Android Keystore. A response is a candidate and must still be confirmed. No credential was available during engineering, so a live cloud request remains unverified.
 
-## Wire protocol v1
+## Build and install
 
-One UTF-8 JSON object per line; maximum 4096 bytes. App `offer` includes `command_id`, `cycle_id`, `revision`, `day_index`, `action_short`, `done_when_short`, and `stop_at`. Firmware replies `ack` only after persistence. `event` has `seq`, `cycle_id`, and `event_type`; firmware persists it before replying. Reject unknown types and oversize messages. This P0 USB dev route is not production authentication or BLE.
+From any working directory:
+
+```powershell
+& 'D:\tenfold-worktrees\android\scripts\build-apk.ps1'
+E:\Android\Sdk\platform-tools\adb.exe install -r 'D:\tenfold-worktrees\android\android-app\out-release\tenfold-p0.apk'
+```
+
+The script resolves its repository root from `PSScriptRoot`, only deletes the exact ignored `android-app/out-release` directory, asserts a root `classes.dex`, and signs with `.signing/tenfold-demo.jks`. The signing directory is ignored and the key is generated only once. Stable demo certificate SHA-256:
+
+`EB55B62C374F6A58766625F52B83BA34B17E8A6B8C0D2CB95257781884CB153A`
+
+The private key is local-only and must never be committed. A device holding an older APK signed by a different development key requires one explicit uninstall; subsequent builds from this signing directory support `adb install -r` and preserve app data.
+
+## Connect the hardware
+
+1. Flash the firmware below, then power the M5StickS3 normally.
+2. Use a USB OTG-capable Android phone/tablet as host and a USB **data** cable. A charge-only cable cannot work.
+3. In the app, create and confirm a card, open `设置与设备`, then choose `退出演示并连接 USB 设备`.
+4. Allow Android's USB permission dialog. The app requests a fresh `hello`, queries persisted state, and either reconciles the matching command or sends the same pending offer.
+5. Do not interpret “USB sent” as success. Only a matching `device_id/cycle_id/command_id/revision` response with `persisted:true` changes the UI to device-confirmed.
+6. After delivery, the cable can be removed. The device keeps the card, state, event FIFO and two alternating checksummed snapshots in NVS.
+
+Without a cable, the device can display the existing card, complete or seal after the explicit key sequence, and queue up to eight full event envelopes. On reconnect, envelopes replay in sequence and retain their original cycle/command/revision/day identity.
+
+## Physical controls
+
+- Hold **KEY1 + KEY2 together for 1 second**, then release both: open a 15-second operation window. The release is consumed and cannot become a business event.
+- **KEY1 short click**: toggle between `完成` and `封存`.
+- **KEY2 hold for 1.5 seconds**: persist the selected event, then show success/state. A normal short press and mechanical play do not write business events.
+- After cold boot the clock is untrusted. View and seal remain available; complete is refused until a connected, validated phone sends a matching `set_time` frame.
+
+The screen uses M5GFX `efontCN_12`, fits UTF-8 text by measured pixel width without splitting multibyte characters, and shows the actual confirmed action plus day/state. KEY1/KEY2 and USB must remain accessible in the mechanical enclosure.
+
+## Build and flash firmware
+
+```powershell
+python -m pip install --user platformio
+python -m platformio run -d D:\tenfold-worktrees\android\firmware
+python -m platformio run -d D:\tenfold-worktrees\android\firmware -t upload --upload-port COMx
+```
+
+Enter StickS3 download mode using the official procedure (hold the reset/power control for about two seconds until its green LED indicates download mode), replace `COMx` with the enumerated port, and run the upload command. PlatformIO writes the board-defined bootloader/partition/app offsets; it does not issue a full-chip erase. Do not use `erase_flash` because that would remove NVS state.
+
+After a successful build, reusable artifacts are under `firmware/.pio/build/m5stack-sticks3/`. The exact manual offsets must be taken from the successful PlatformIO upload command for this locked board configuration; do not guess offsets or flash a single app binary at address zero. A merged binary and verified offsets are recorded only after the first successful compile.
+
+## Protocol v1
+
+UTF-8 newline JSON, maximum 4096 bytes. Oversize frames are discarded through the next newline on both sides.
+
+- Host: `hello_request`, `query`, `offer`, `set_time`, `event`, `event_ack`.
+- Device: `hello`, `status`, `ack`, `time_ack`, `event`, `event_ack`, `error`.
+- `offer` includes protocol, command/cycle/revision/day, cycle dates/time zone, confirmed short action, completion condition, stop time and recovery step.
+- Duplicate offers replay ACK only for an already committed snapshot. Host events are strictly sequential and idempotent. Device events use a persistent FIFO of complete envelopes.
+- Firmware mutates candidate RAM, verifies the inactive NVS slot and checksum, commits the active marker, and only then advances the in-memory version or returns `persisted:true`.
 
 ## Sources and licenses
 
-- [Android USB host API](https://developer.android.com/develop/connectivity/usb/host) — Android SDK documentation; Android USB access design.
-- [M5StickS3 official docs](https://docs.m5stack.com/en/core/StickS3) — M5Stack docs; PlatformIO flags and board capability reference.
-- [M5Unified](https://github.com/m5stack/M5Unified) — MIT License, used by the firmware build definition.
-- [ArduinoJson](https://arduinojson.org/) is deliberately **not** included: P0 parser has only fixed demo messages; production must add a strict JSON parser with its license tracked.
+- [Android USB Host API](https://developer.android.com/develop/connectivity/usb/host) — official Android documentation used for permission, interface claiming and worker-thread transfers.
+- [M5StickS3 official documentation](https://docs.m5stack.com/en/core/StickS3) and [button API](https://docs.m5stack.com/en/arduino/m5sticks3/button) — board/build/button behavior.
+- [M5Unified](https://github.com/m5stack/M5Unified) — MIT License; firmware display/button framework.
+- [ArduinoJson](https://github.com/bblanchon/ArduinoJson) — MIT License; pinned through PlatformIO to `^7.3.1` for strict parsing.
+- [usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android) — MIT License; reviewed as the fallback if the current single-board CDC implementation fails real OTG testing. It is not bundled in this dependency-free APK.
 
-No M5 board was connected during this implementation. Firmware source is provided but not flashed or hardware-tested.
+No M5StickS3 was connected during implementation. Source and binary compilation evidence do not replace the required real-phone OTG + real-board offer/ACK/offline-key/reconnect test.
