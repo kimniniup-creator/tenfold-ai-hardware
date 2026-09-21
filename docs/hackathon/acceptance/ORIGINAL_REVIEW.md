@@ -1,13 +1,13 @@
 # 原创轮独立验收
 
-更新：2026-09-22。**O1三款数字试打包PASS；唯一首打推荐Orbit-10普通PLA光滑版。O2最终候选B960的22条状态回归已过，等待同包独立运行与PM最终回执。O3真实板与O4实打体验未通过验证。** 历史版本与缺陷记录保留在后半部，不代表当前状态。
+更新：2026-09-22。**O1三款数字试打包PASS；唯一首打推荐Orbit-10普通PLA光滑版。O2最终B960手机本地模拟范围PASS_SCOPED，独测c6f044b与22条状态回归支持。O3真实板与O4实打体验未通过验证。** 历史版本与缺陷记录保留在后半部，不代表当前状态。
 
 | 门 | 当前判定 | 锁定对象与证据边界 |
 |---|---|---|
 | G1 产品需求 | PASS | 独立PM d33b74d，后续R17/T19按产品0cadb808补齐；今日卡→封存→恢复，Agent仅提议 |
 | O1 数字制造试打包 | PASS（各方案材料/校准条件内） | 独测00d5e76；环轨7a370bc、针板e76eb52（几何fff7295/三板5526578）、旋压5ef4013；40单件+3排版STL实切与最终CAD重建通过 |
-| O2 手机软件闭环 | 待最终运行回执；Java限定回归PASS | 源码6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831；APK B960…59A8已独立核哈希，22条反例全未复现；独测覆盖安装保留状态已回报，R17界面/PM最终回执待锁 |
-| O3 实机数据闭环 | NOT_TESTED，真实周期有明确源码限制 | 无M5/OTG实机；固件59b7645编译成功为作者构建证据，烧录包独立核对；仅单周期，尚无板端close/new-cycle；R05完成日持久保护修订待最终diff/编译 |
+| O2 手机软件闭环 | PASS_SCOPED（手机本地模拟） | 源码6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831；APK B960…59A8已独立核哈希，22条反例全未复现；独测c6f044b最终APK_FINAL运行PASS；本验收亲看B960图07/08/15；PM a8cd787最终限定产品通过 |
+| O3 实机数据闭环 | NOT_TESTED，真实周期有明确源码限制 | 无M5/OTG实机；固件0e7b044作者实际重编成功，最终包独立核对；completed_day持久保护源码已审；仅单周期，无自动close/new-cycle |
 | O4 实打体验 | NOT_TESTED | 三款均未实物打印；装配、手感、保持、弹性、实际KEY/USB插头待试打 |
 
 O1完整排序及BOM条件见[ORIGINAL_MODEL_MATRIX.md](ORIGINAL_MODEL_MATRIX.md)：第一环轨光滑版（5功能件/4螺钉，不依赖球簧/弹性卡扣）；第二针板完整重力玩法；第三PETG完整旋压，PLA单旋明确为降级。此排序依据制造与装配风险，不声称实测手感。
@@ -15,16 +15,30 @@ O1完整排序及BOM条件见[ORIGINAL_MODEL_MATRIX.md](ORIGINAL_MODEL_MATRIX.md
 ## 当前软件候选与验收边界
 
 - 源码：`6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`。
-- APK SHA256：`B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，独立Get-FileHash一致；稳定证书由作者/独测核验，待最终测试报告统一引用。
+- APK SHA256：`B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，独立Get-FileHash一致；稳定证书EB55B62C374F6A58766625F52B83BA34B17E8A6B8C0D2CB95257781884CB153A由独测c6f044b独立验证；同签覆盖成功。
 - `state-probe/result-6e2bf0e.txt`：原样StateProbeV5运行真实CycleState，22条状态、ACK、持久化失败、R17快照/归档反例全部NOT_REPRODUCED。它是Java模型测试，不是USB或实板测试。
-- 34BB属于已被替代的有限运行基线，不作为最终发布包。PM244c415对34BB已封存/完成日范围通过，不外推到B960尚未冻结的运行证据。
+- 34BB属于已被替代的有限运行基线，不作为最终发布包。PM244c415对34BB已封存/完成日范围通过；最终B960增量运行见c6f044b，按实际改动继承34BB既定路径证据，未混用截图版本。
 - 手机模拟交付不等于真实LLM成功、真实USB ACK、M5整机完整十日周期。只覆盖一个旧周期归档，不宣称任意多周期历史。
 
 ## 当前固件与发布资产检查
 
-已只读核对59b7645源码、版本锁、flash.ps1和ZIP内容。作者实际构建回执/WORKLOG记录编译成功；未由验收者再次构建或上板。ZIP SHA256 `B94F3C282D7B28B3E1650514505714A106FAE1E0C7D7D9BB32AA32C6F4E195C3`、app `C6089DDC3EF2F082D9E3E0A44B45B86472E9FDE68245AD6702E03A67BF00B6B3`、factory `496149201D350A8A21982267FFCC91441801C5F319A4F238B6AD7B786DCC1CCB`均独立核验匹配。默认Update仅写0x10000，Provision分段，Factory明确覆盖NVS。若R05修订后重打包，此组哈希仅保留为旧包证据，须更新最终值。
+最终固件源码`0e7b04485c09e7d4f987af0036a5fa5175a86326`，Android源码及B960不变。已直接审R05 diff：completed_day进入snapshot/restore，手机与实体完成检查本日已完成，封存不清此事实，失败回滚completedDay；新offer不直接设置timeTrusted，须时间握手。该完成日保护源码复核通过；未做C++状态故障注入或实板测试。
 
-真实板源码限制已确认并直发作者/协调：complete→seal→complete不能依赖state==DONE保护同日事实；不同cycle受CYCLE_CLOSED门控但没有close流程。最终报告需明确修复情况和单周期限制，不以编译成功称完整真实周期通过。
+作者实际PlatformIO重编成功，WORKLOG记录RAM22684B/Flash716517B；版本锁未变。本验收独立核对最终资产：
+
+| 资产 | SHA256 |
+|---|---|
+| tenfold-firmware-p0-r05.zip | 39437628A42939591FCA3B794F3BCD8B2243678929CF1856823326C061748CDB |
+| firmware.bin | FB0EB0D71AF40097542D4DFC2E7E33245928E1E5FC80E89567F1DE132236EC09 |
+| tenfold-p0-factory.bin | D89B76676EE6DB86D0BC433CC4F70C540C4651D5EE566A7507A4AE9938387789 |
+
+默认Update仅写0x10000，Provision分段；Factory覆盖NVS，不能当普通更新。板端仅绑定一个cycle ID，手机归档不会关闭板端周期，新cycle返回cycle_conflict；需先完成旧数据同步，再由用户明确执行Factory重新配置。该重置流程未实机验证，本轮不执行，也不称自动连续真实周期已通。
+
+## 最终交付结论与残余项
+
+今晚可交付：三款数字试打包（唯一首推环轨PLA光滑版）、B960手机模拟APK、已编译的单周期实验固件。O1 PASS、O2 PASS_SCOPED、O3/O4 NOT_TESTED。独测最终证据c6f044b（APK）及00d5e76（机械），PM244c415作为前序限定视觉/产品证据，最终R17增量产品回执a8cd78785396b6f0a5eeecaa520e49bc41564895已直接审首节并纳入。
+
+已完成的证据包括同签升级保留、ACTIVE跨日及第10天全字段、回顾冷启、新周期、演示转真实模式清理与无USB待确认。真实LLM成功、物理Android/OTG/M5、离线实板重连、十个真实日及实物打印未测。P2保留○图例措辞与首次表单分组，不阻断此限定交付；不宣称任意数量旧周期历史。执行边界已清楚，后续不以未做的真实板/实打测试倒推今晚数字与模拟成果失败。
 
 ## 历史审查与证据追踪（下列旧状态仅对应当时版本）
 
@@ -154,4 +168,3 @@ PM244c415产品限定通过只覆盖已封存/完成日与一个旧档，不能�
 固定`6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`，原StateProbeV5反例未改，22条全部NOT_REPRODUCED，见result-6e2bf0e.txt。源码差异确认快照只记录ACTIVE/DONE/SEALED，漏过RESUME/NEXT不造记录；current设备事实与游标同事务；末日review及archive保留已确认动作。R17六项在Java故障/状态模型范围关闭。
 
 独立Get-FileHash核验新APK SHA256 `B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，替代34BB作为候选。O2待独测同签名覆盖及R17专项运行与PM增量回执后最终判定。作者报告固件编译成功，尚待实际日志引用；无实板通信证据，O3仍NOT_TESTED。
-
