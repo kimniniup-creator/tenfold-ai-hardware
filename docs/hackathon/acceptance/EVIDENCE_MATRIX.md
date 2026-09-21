@@ -15,3 +15,13 @@
 | 证据真实性 | 文件主动标注假设、无实物、许可边界 | 当前所读文字边界PASS；不等于独立法律审核 | 各owner |
 
 待实测记录禁止填假人数/成功率。填入数据需同时记录原始观察与不支持价值的负例。
+
+产品最终候选：e948b2c5edc28ca34301903b3066f07119a379ee。
+
+| 需求 | 指定版本直接证据 | 独立结论 |
+|---|---|---|
+| V1/V2/V4 | HACKATHON_PRD产品判断、五组试验、48次分母、停止标准 | G1论证与实验可执行PASS；用户价值NOT_TESTED |
+| S1 | R01–R04，旅程Draft/Proposed/Confirmed，T01–04 | 入口/数据/确认/兜底明确，文档PASS；运行NOT_TESTED |
+| S2/S4 | query、周期锚点、状态菜单、time_untrusted、Done次日待新动作，T03/10/11 | P-01..04修复PASS；实现/掉电/同步NOT_TESTED |
+| S3/M1 | R06/07/09，音码与静音，USB路线与P0 BOM | 能力与输出责任边界PASS；实机可用性NOT_TESTED |
+| D1 | DEMO_AND_QA时间表与真假标签、T14 | 脚本可执行性PASS；90秒节奏/实机闭环NOT_TESTED |
