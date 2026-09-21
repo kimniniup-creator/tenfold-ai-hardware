@@ -1,21 +1,32 @@
 # 原创轮独立验收
 
-日期：2026-09-22。状态：门禁已建立，等待原创模型/软件冻结版本。
+更新：2026-09-22。**O1三款数字试打包PASS；唯一首打推荐Orbit-10普通PLA光滑版。O2最终候选B960的22条状态回归已过，等待同包独立运行与PM最终回执。O3真实板与O4实打体验未通过验证。** 历史版本与缺陷记录保留在后半部，不代表当前状态。
 
-产品需求门G1：**PASS**，锁定`d33b74dba94b57000d1fa4714b13c33308f868f4`。已直接审PRODUCT_DECISION、HACKATHON_PRD、USER_JOURNEY、SOFTWARE_ALIGNMENT、T16–18及演示脚本，98d2d1c至d33b74d增量仅软件对齐回执。默认今日卡→封存→恢复，首次/卡住才Agent；封存先保存用户原句和原卡，失败不阻止停止；独立DEMO TIME不污染真历史。替代方案与竞品机制事实/产品推断有区分，吸引力有具体使用结果，仍未用户实测。此门不代替O1–O4。
-
-当前不沿用旧版NO-GO：旧版本是第三方玩具附件，新版本按自身原创机构与试打工艺验收。未打印是O4 NOT_TESTED，不是O1自动失败。具体要求见ORIGINAL_CRITERIA.md。
-
-| 门 | 当前结论 | 待收证据 |
+| 门 | 当前判定 | 锁定对象与证据边界 |
 |---|---|---|
-| O1 数字制造试打包 | 待审 | 三原创SHA、完整机械件/校准/BOM/装配/运动/切片 |
-| O2 软件安装闭环 | 待审 | 源码SHA、签名APK哈希、构建及安装运行、全流程/截图/错误测试 |
-| O3 实机数据闭环 | NOT_TESTED | 板卡、固件、真实数据口与事件证据 |
-| O4 实打体验 | NOT_TESTED | 明日样件装配、手感与保持/接口测试 |
+| G1 产品需求 | PASS | 独立PM d33b74d，后续R17/T19按产品0cadb808补齐；今日卡→封存→恢复，Agent仅提议 |
+| O1 数字制造试打包 | PASS（各方案材料/校准条件内） | 独测00d5e76；环轨7a370bc、针板e76eb52（几何fff7295/三板5526578）、旋压5ef4013；40单件+3排版STL实切与最终CAD重建通过 |
+| O2 手机软件闭环 | 待最终运行回执；Java限定回归PASS | 源码6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831；APK B960…59A8已独立核哈希，22条反例全未复现；独测覆盖安装保留状态已回报，R17界面/PM最终回执待锁 |
+| O3 实机数据闭环 | NOT_TESTED，真实周期有明确源码限制 | 无M5/OTG实机；固件59b7645编译成功为作者构建证据，烧录包独立核对；仅单周期，尚无板端close/new-cycle；R05完成日持久保护修订待最终diff/编译 |
+| O4 实打体验 | NOT_TESTED | 三款均未实物打印；装配、手感、保持、弹性、实际KEY/USB插头待试打 |
 
-模型分支：codex/original-pin-fidget、codex/original-press-spin、codex/original-orbit-fidget。软件：codex/android-demo。测试：codex/original-independent-testing。验收：codex/original-acceptance。分支名是追踪入口，不是验收SHA。
+O1完整排序及BOM条件见[ORIGINAL_MODEL_MATRIX.md](ORIGINAL_MODEL_MATRIX.md)：第一环轨光滑版（5功能件/4螺钉，不依赖球簧/弹性卡扣）；第二针板完整重力玩法；第三PETG完整旋压，PLA单旋明确为降级。此排序依据制造与装配风险，不声称实测手感。
 
-## 问题与证据追踪
+## 当前软件候选与验收边界
+
+- 源码：`6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`。
+- APK SHA256：`B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，独立Get-FileHash一致；稳定证书由作者/独测核验，待最终测试报告统一引用。
+- `state-probe/result-6e2bf0e.txt`：原样StateProbeV5运行真实CycleState，22条状态、ACK、持久化失败、R17快照/归档反例全部NOT_REPRODUCED。它是Java模型测试，不是USB或实板测试。
+- 34BB属于已被替代的有限运行基线，不作为最终发布包。PM244c415对34BB已封存/完成日范围通过，不外推到B960尚未冻结的运行证据。
+- 手机模拟交付不等于真实LLM成功、真实USB ACK、M5整机完整十日周期。只覆盖一个旧周期归档，不宣称任意多周期历史。
+
+## 当前固件与发布资产检查
+
+已只读核对59b7645源码、版本锁、flash.ps1和ZIP内容。作者实际构建回执/WORKLOG记录编译成功；未由验收者再次构建或上板。ZIP SHA256 `B94F3C282D7B28B3E1650514505714A106FAE1E0C7D7D9BB32AA32C6F4E195C3`、app `C6089DDC3EF2F082D9E3E0A44B45B86472E9FDE68245AD6702E03A67BF00B6B3`、factory `496149201D350A8A21982267FFCC91441801C5F319A4F238B6AD7B786DCC1CCB`均独立核验匹配。默认Update仅写0x10000，Provision分段，Factory明确覆盖NVS。若R05修订后重打包，此组哈希仅保留为旧包证据，须更新最终值。
+
+真实板源码限制已确认并直发作者/协调：complete→seal→complete不能依赖state==DONE保护同日事实；不同cycle受CYCLE_CLOSED门控但没有close流程。最终报告需明确修复情况和单周期限制，不以编译成功称完整真实周期通过。
+
+## 历史审查与证据追踪（下列旧状态仅对应当时版本）
 
 尚无冻结版本，不能预写通过结论。每个发现记录ID/owner/优先级/版本/观察/解除条件；新版必须直接复审，不自动继承旧附件的通过或失败。
 
@@ -143,3 +154,4 @@ PM244c415产品限定通过只覆盖已封存/完成日与一个旧档，不能�
 固定`6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831`，原StateProbeV5反例未改，22条全部NOT_REPRODUCED，见result-6e2bf0e.txt。源码差异确认快照只记录ACTIVE/DONE/SEALED，漏过RESUME/NEXT不造记录；current设备事实与游标同事务；末日review及archive保留已确认动作。R17六项在Java故障/状态模型范围关闭。
 
 独立Get-FileHash核验新APK SHA256 `B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8`，替代34BB作为候选。O2待独测同签名覆盖及R17专项运行与PM增量回执后最终判定。作者报告固件编译成功，尚待实际日志引用；无实板通信证据，O3仍NOT_TESTED。
+
