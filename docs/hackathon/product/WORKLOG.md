@@ -1,5 +1,7 @@
 # 产品工作记录
 
+- 补用户原始“GitHub找可行方案”待办：核查mik3y USB、M5Unified、ArduinoJson、OpenAI Agents Python主仓库/MIT与示例，形成GITHUB_OPTIONS。推荐复用现有M5/JSON，USB成熟库作为实机失败优先替代，今晚不增Python后台；已提醒软件纠正ArduinoJson未包含等过时说明。
+
 - 运行产品审查：亲看0daf340/API35七张同版截图，确认已有卡与未完成封存/恢复线索可见，记录PV01–PV07；视觉NO-GO、行为PARTIAL。已直接发软件单主按钮/全高暗底/中文卡片/封存状态与insets规格；测试继续行为，不抢模拟器。新增APK_PRODUCT_REVIEW，不改软件文件。
 
 - 原创轮软件合流已获直接回执：软件负责人读98d2d1c裁决，逐项采纳首页/封存线索/demo跨日/独立mode/ACK分离五P0；明确94bbefc仅基线，继续重构与模拟器安装。LLM凭据和实机缺口单列。记录对齐不冒充实现验收。
