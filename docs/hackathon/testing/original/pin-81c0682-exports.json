@@ -1,0 +1,136 @@
+{
+  "sha": "81c0682bb11d53718cc01d15f39467f1a6f6a813",
+  "path": "design/hackathon/original-pin-fidget",
+  "stl": {
+    "exports/01_guide_plate.stl": {
+      "committed_volume_mm3": 6053.233684383347,
+      "regenerated_volume_mm3": 6053.233684383347,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/02_pin_spacer.stl": {
+      "committed_volume_mm3": 11155.289046112122,
+      "regenerated_volume_mm3": 11155.289046112122,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/03_structural_frame.stl": {
+      "committed_volume_mm3": 11448.357029940116,
+      "regenerated_volume_mm3": 11448.357029940116,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/04_m5_sled.stl": {
+      "committed_volume_mm3": 1865.3710816956557,
+      "regenerated_volume_mm3": 1865.3710816956557,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/05_retaining_rail.stl": {
+      "committed_volume_mm3": 1347.9705304358852,
+      "regenerated_volume_mm3": 1347.9705304358852,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/06_pin.stl": {
+      "committed_volume_mm3": 277.5802560962304,
+      "regenerated_volume_mm3": 277.5802560962304,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/calibration_chamber.stl": {
+      "committed_volume_mm3": 944.9408192763834,
+      "regenerated_volume_mm3": 944.9408192763834,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/calibration_guide.stl": {
+      "committed_volume_mm3": 2172.6084577968536,
+      "regenerated_volume_mm3": 2172.6084577968536,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    },
+    "exports/calibration_roof.stl": {
+      "committed_volume_mm3": 614.4000244140625,
+      "regenerated_volume_mm3": 614.4000244140625,
+      "volume_equal_1e_4": true,
+      "bounds_equal_1e_4": true,
+      "watertight": true,
+      "components": 1
+    }
+  },
+  "step": {
+    "exports/01_guide_plate.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/02_pin_spacer.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/03_structural_frame.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/04_m5_sled.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/05_retaining_rail.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/06_pin.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/assembly_hardware.step": {
+      "solids": 32,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/assembly_printed.step": {
+      "solids": 16,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/calibration_chamber.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/calibration_guide.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    },
+    "exports/calibration_roof.step": {
+      "solids": 1,
+      "valid": true,
+      "positive_volume": true
+    }
+  },
+  "all_stl_match": true
+}

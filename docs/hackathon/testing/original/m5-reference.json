@@ -1,0 +1,155 @@
+{
+  "source": "https://raw.githubusercontent.com/m5stack/M5_Hardware/master/Products/K150_StickS3/Structures/StickS3.stl",
+  "sha256": "cadfa88716cb74a85d0d76dc866d83dbd627d6f5c310b528d43e588dab37ecec",
+  "components": [
+    {
+      "index": 0,
+      "bounds_mm": [
+        [
+          0.0,
+          0.05972,
+          -10.07736
+        ],
+        [
+          24.00094,
+          48.06066,
+          -0.07736
+        ]
+      ],
+      "extents_mm": [
+        24.00094,
+        48.00094,
+        10.0
+      ],
+      "watertight": true
+    },
+    {
+      "index": 1,
+      "bounds_mm": [
+        [
+          114.52834,
+          0.05972,
+          -10.07736
+        ],
+        [
+          138.52928,
+          48.06066,
+          -0.07736
+        ]
+      ],
+      "extents_mm": [
+        24.00094,
+        48.00094,
+        10.0
+      ],
+      "watertight": true
+    },
+    {
+      "index": 2,
+      "bounds_mm": [
+        [
+          83.64732,
+          7.81064,
+          -5.32736
+        ],
+        [
+          103.90144,
+          21.00772,
+          0.92264
+        ]
+      ],
+      "extents_mm": [
+        20.25411,
+        13.19708,
+        6.25
+      ],
+      "watertight": true
+    },
+    {
+      "index": 3,
+      "bounds_mm": [
+        [
+          1.87294,
+          7.81064,
+          -5.32736
+        ],
+        [
+          22.12706,
+          21.00772,
+          0.92264
+        ]
+      ],
+      "extents_mm": [
+        20.25411,
+        13.19708,
+        6.25
+      ],
+      "watertight": true
+    },
+    {
+      "index": 4,
+      "bounds_mm": [
+        [
+          -0.0,
+          0.05879,
+          -14.07736
+        ],
+        [
+          24.0,
+          48.06066,
+          -3.49538
+        ]
+      ],
+      "extents_mm": [
+        24.0,
+        48.00187,
+        10.58198
+      ],
+      "watertight": true
+    },
+    {
+      "index": 5,
+      "bounds_mm": [
+        [
+          41.19012,
+          0.05879,
+          -14.07736
+        ],
+        [
+          65.19012,
+          48.06066,
+          -3.49538
+        ]
+      ],
+      "extents_mm": [
+        24.0,
+        48.00187,
+        10.58198
+      ],
+      "watertight": true
+    }
+  ],
+  "proposed_assembly_indices": [
+    0,
+    3,
+    4
+  ],
+  "translation_mm": [
+    -12,
+    -24.05973,
+    14.07736
+  ],
+  "normalized_bounds_mm": [
+    [
+      -12.0,
+      -24.00094,
+      -0.0
+    ],
+    [
+      12.00094,
+      24.00093,
+      15.0
+    ]
+  ],
+  "qualification": "Component selection supplied by orbit author, bounds independently measured; physical interface operation not tested."
+}
