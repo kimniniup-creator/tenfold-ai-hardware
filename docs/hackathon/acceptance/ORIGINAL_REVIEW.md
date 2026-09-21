@@ -129,3 +129,5 @@ R17/T19/U10检查：D1未完成与D2完成分开保留、归档后新建并重�
 固定`a5b99b00f94bf81b7e922cdc0c0b76b224c386da`；独立Get-FileHash核对APK SHA256 `34BB815E483BBA25D60DEEF145F5050B8219F912558EDF4898E1158F8FA7513D`。StateProbeV4适配显式恢复完成条件及中文状态，15条反例全部NOT_REPRODUCED，见result-a5b99b0.txt。归档保留全day字段、摘要含日期/条件/下一步、真实周期清演示槽、新周期首页保留旧档入口，均直接读源码确认。旧FF1994ED不作本候选证据。
 
 Java状态/ACK/R17数据层范围PASS；O2整体仍待同APK稳定签名覆盖安装、T19实际操作和PM视觉关闭。O3编译/板卡另判。本轮未继续扩展非交付范围。
+
+最终机械门O1：三款均在各自README材料/校准/装配条件下PASS（数字试打包）。独立测试提交00d5e76已直接读取MECHANICAL_VERDICT：40种单件STL+3针板排版实际切片证据齐，最终CAD重建/STEP回读一致，O-PIN-01/O-ORB-01/O-PRESS-02全部关闭。唯一首推环轨PLA光滑版；完整矩阵见ORIGINAL_MODEL_MATRIX.md。O4全款NOT_TESTED，不把制造证据写成手感/强度/USB实测。

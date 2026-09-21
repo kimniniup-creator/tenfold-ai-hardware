@@ -58,4 +58,3 @@ public class StateProbeV4 {
     report("U10_DEMO_HISTORY_IN_REAL",!c.dayStatus(1).isEmpty(),"startReal resets identity but retains demo day records");
   }
 }
-

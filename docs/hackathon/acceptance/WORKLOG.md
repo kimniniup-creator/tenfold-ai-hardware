@@ -15,3 +15,5 @@
 原创轮启动：用户改为今晚从零完成可制造试打EDC与APK，不依赖原玩具尺寸。独占worktree切至codex/original-acceptance，基于main 833ee4bd6b49c657e8fa07144695dba3fa074672。新增ORIGINAL_CRITERIA/ORIGINAL_REVIEW区分O1数字制造、O2安装软件、O3真实硬件链路、O4实打体验。已通知产品/测试/软件/三模型任务具体证据要求，保留旧报告历史。
 
 2026-09-22：冻结0daf340协议复审完成；JDK21运行真实CycleState的6条独立stub反例，4项P1可达、2项P2内部防御，均复现。已同步软件owner与主协调；源码修复不等同固件编译/实机通过。脚本及结果位于state-probe，可对修复SHA重跑。
+
+2026-09-22最终机械：独测00d5e76已审，三原创O1数字试打包PASS。唯一首推环轨PLA光滑；针板重力完整备选；旋压PETG完整/PLA单旋降级。软件a5b99b0/34BB哈希独立核验，15条Java回归通过；同包UI T19与PM视觉待终结，固件编译与O3实板分开。
