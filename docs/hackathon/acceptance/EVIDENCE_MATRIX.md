@@ -25,3 +25,15 @@
 | S2/S4 | query、周期锚点、状态菜单、time_untrusted、Done次日待新动作，T03/10/11 | P-01..04修复PASS；实现/掉电/同步NOT_TESTED |
 | S3/M1 | R06/07/09，音码与静音，USB路线与P0 BOM | 能力与输出责任边界PASS；实机可用性NOT_TESTED |
 | D1 | DEMO_AND_QA时间表与真假标签、T14 | 脚本可执行性PASS；90秒节奏/实机闭环NOT_TESTED |
+
+模型最终证据提交：ad0c363bdaeb95702185c0f9bc3ce14204ad161e。
+
+| 需求/模型SHA | 证据文件（testing目录） | 最终结论 |
+|---|---|---|
+| M2/471703 58072e0dbfa61e7f32510851f2d33c43b6c4b284 | pin-retest.json、REPORT修复节 | 默认T8/LAND6指定M3几何PASS；全参数/M2.5/源接口不扩展 |
+| M2/2710405 2aaf60b72875c992623210256f05deeea44ea261 | press-retest.json、press-check-summary.json | 指定五金/顺序下几何PASS；静止原底座BLOCKED |
+| M2/2673323 8ba49f0d8c56d5c531611860dcf0996722f94a82 | ball-retest.json、ball-range-retest.json、ball_fastener_probe.json | 指定3参数点/工具五金几何PASS；任意翻转保持FAIL |
+| V3/M1/三修复SHA | REPORT分项总表与修复节 | 真人握持、实际屏键USB、材料/打印NOT_TESTED或BLOCKED；无升级整机 |
+| 证据版本隔离 | probes.py/probes.json、reproduce.py | 跨SHA覆盖已修，基线反例与修复分开PASS |
+
+最终产品68dbb10bd414d80be85657f497de9e390434d8c3已做增量复审：三模型事实与上述测试证据一致，状态/交互/价值协议未变，G1 PASS适用于该SHA。其相对e948b2c的变化不产生软件运行通过证据。
