@@ -10,7 +10,7 @@
 |---|---|---|
 | [Orbit-10 环轨式](../../design/hackathon/original-orbit-fidget/README.md) | 外围捕获旋环，约 75×75×30 mm；5 个功能塑件，4 枚 M3×30 沉头螺钉、4 枚 M3 螺母；首打省略可选钢珠弹簧 | 首选，零件少，无打印弹性件依赖 |
 | [十粒掌盘](../../design/hackathon/original-pin-fidget/PRINT_FIRST.md) | 十根独立滑销，翻转重力复位；16 个装配塑件，8 枚螺钉、8 枚螺母与 EVA；已有三块排版板 | 完整重力玩法备选，滑动副更多 |
-| [旋压双舱](../../design/hackathon/original-press-spin/README.md) | 旋转与按压双玩法，抽屉电子仓；完整按压版需要 PETG 弹性件，PLA 替代路线仅保留旋转 | 第三顺位，材料和支撑要求更多 |
+| [旋压双舱](../../design/hackathon/original-press-spin/README.md) | 旋转与按压双玩法，抽屉电子仓；完整按压版需要 PETG 弹性件，PLA 替代路线仅保留旋转 | 第三顺位，材料和支撑要求更多；侧键可能需要抽出内托操作 |
 
 三版为原创参数化结构，不需要购买或下载原玩具。默认适配 M5StickS3 **完整原壳 48×24×15 mm**，已核对官方结构参考。其他开发板需要重新设计内托并复核接口，不能直接宣称任意开发板通用。
 
