@@ -8,6 +8,8 @@
 - 状态测试证据：独立验收固定同一源码、未改StateProbeV5反例重跑22项全部NOT_REPRODUCED，结果docs/hackathon/acceptance/state-probe/result-6e2bf0e.txt。六个原R17失败已关闭，包括真实/演示跨日ACTIVE、设备complete/seal入日事实、末日review/archive。漏过未确认RESUME日期不造记录由此测试覆盖，未冒称UI实跑跳日；设备事件测试不等于真实USB/M5联调。
 - 最终产品判定：PRODUCT_PASS_SCOPED（手机本地模拟交付与R17软件逻辑）。此前遗漏的ACTIVE快照和设备事件已纳入修复、复验，不再通过缩小R17范围豁免。真实LLM、真实板与连续十日使用仍未验证；图例○未记录及PV07维持非阻断P2。
 
+独测最终回执：c6f044b006fdec311e86ef1786475d76bcd1a9ad（前置959e68b），入口docs/hackathon/testing/original/APK_FINAL.md，判定PASS_SCOPED。独测另确认退出演示后重置D1、清除演示完成标记、无USB明确待确认且冷启不回流；15组PNG/XML与空崩溃缓冲留存。手机O2产品复验至此收口，板端O3另判。
+
 ## R17补验历史：34BB不作为最终发布通过
 
 总控指出既定R17的两项遗漏：ACTIVE未封存动作跨日未保存当日快照、currentDeviceEvent完成事件未写每日事实。这是原需求缺口，不能用限定范围排除。34BB以下通过仅保留已测行为证据，撤回其作为最终交付依据的表述；R17仍待修复及新冻结APK增量复验。复验包含ACTIVE跨日、跳过日期不伪造事实、设备完成写每日记录、末日回顾和冷启动；不扩展多周期档案或重做P2视觉。
