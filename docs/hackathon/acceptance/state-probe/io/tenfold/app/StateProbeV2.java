@@ -41,5 +41,13 @@ public class StateProbeV2 {
     report("CS06_REAL_DATE_UNUSED",c.day()!=2||!c.phase().equals(CycleState.PHASE_RESUME),"next real day resumes unfinished card");
     c.resumeExisting();m.fail=true;boolean marked=c.completePhone();m.fail=false;boolean retry=c.completePhone();m.restart();
     report("CS07_COMPLETE_RETRY_LOST",!marked&&!retry&&!c.completed(),"failed commit sets RAM DONE so retry guard refuses; restart loses completion");
+    m=new Memory();c=create(m);c.startRealFromConfirmedCard();m.fail=true;
+    boolean persisted=c.acceptDeviceEvent("m5sticks3-p0",c.commandId(),c.text("cycle_id"),1,1,"complete");
+    boolean sameCycle=true; // Exact accdbcb MainActivity fallback condition, not part of CycleState.
+    report("ACK01_FAILED_EVENT_FALLBACK",!persisted&&(persisted||sameCycle),"accdbcb MainActivity current||sameCycle ACKs failed production acceptDeviceEvent");
+    m=new Memory();c=create(m);c.startRealFromConfirmedCard();String firstCommand=c.commandId();String cycleId=c.text("cycle_id");c.confirmNewAction("new action","new done");
+    boolean oldAccepted=c.acceptDeviceEvent("m5sticks3-p0",firstCommand,cycleId,1,1,"complete");
+    boolean newAccepted=c.acceptDeviceEvent("m5sticks3-p0",c.commandId(),cycleId,2,2,"complete");
+    report("ACK02_OLD_REV_CURSOR_GAP",!oldAccepted&&!newAccepted&&m.getInt("device_seq",0)==0,"accdbcb ACKs old seq1 without cursor then rejects and ACKs new seq2");
   }
 }

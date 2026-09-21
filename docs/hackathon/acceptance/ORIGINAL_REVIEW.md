@@ -103,3 +103,15 @@
 源码确认hello_request请求/响应接通，connecting限制重复连接启动，实体事件改为最多8条持久FIFO，同一卡离线complete→seal不再只保留最后事件。FIFO的每项目前仅seq/type，仍有跨卡P1：旧卡未ACK时接收新offer，重放使用当前command/cycle/revision/day重新组包，旧事件可被标记为新卡事实。需要保存完整不可变事件信封并定义跨卡同步，或有pending时拒绝换卡且提供可恢复的同步路径。
 
 另一重连P1：restore把timeTrusted设false，query或重复offer只返回状态/ACK，手机未发送set_time，同卡重启后实体complete持续time_untrusted。需要明确时间恢复握手并验证。两项已发作者与协调。测试结论只覆盖Java状态反例；固件仍是源码复核，不声称编译/板卡验证通过。
+
+独测补充回执（待最终测试提交引用）：0daf340在API35无bypass安装启动，U01手填/U02强杀留卡/U03未完成封存及重启/U07完成后次日新卡通过有限UI路径；U06恢复首页丢第一步、U09状态栏重叠已派修。8186130覆盖安装因签名变化失败，稳定签名修复中。测试的DEX/SDK局部编号与本报告S-A05/06曾重名，不能跨命名空间自动关闭缺陷。PM3d85241视觉审查NO-GO待新截图。
+
+Press a356a870456fc85082aeabbc974698314f6ee273：独测回执22STL按PLA/PETG全部实际切片成功，cad/check退出0且重建一致、23STEP有效，官方M5与21塑件/五金相交0，6个刚性保持姿态碰止挡。此为独测回执，后续以其冻结报告为证；不把PLA单旋降级视为PETG完整按压玩法，也不推断弹性装配可靠。
+
+### accdbcb协议复审
+
+固定`accdbcbad2d3d69efba178e38a08b64f5a110885`：冷启动hello_request→query→匹配status→set_time请求存在，固件校验cycle/command/epoch后恢复timeTrusted，原冷启动死锁在源码层关闭。FIFO项持久完整信封，重放与队首ACK保持原卡身份，原重标新卡问题关闭。未宣称编译/实机通过。
+
+剩余P1：MainActivity的`current || sameCycle` ACK兜底会在acceptDeviceEvent因保存失败/序号缺口而返回false时仍发送persisted:true，固件删除未接收成功的事件。旧revision事件仅ACK、不推进device_seq；oldrev seq1被移除后currentrev seq2无法满足last+1，仍被错误ACK，形成数据丢失。
+
+`result-accdbcb.txt`运行真实CycleState，原8项仍NOT_REPRODUCED，新增ACK01保存失败返回false与ACK02旧revision未推进游标均REPRODUCED。测试中的MainActivity布尔ACK表达式明确为手工复写源码条件，不冒称整个Activity或USB运行。修复要求：旧卡事件先保存接收游标/历史且不修改当前卡；身份匹配、序号合法、持久成功才ACK，不能用sameCycle替代成功。
