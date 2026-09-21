@@ -2,6 +2,8 @@
 
 日期：2026-09-22。状态：门禁已建立，等待原创模型/软件冻结版本。
 
+产品需求门G1：**PASS**，锁定`d33b74dba94b57000d1fa4714b13c33308f868f4`。已直接审PRODUCT_DECISION、HACKATHON_PRD、USER_JOURNEY、SOFTWARE_ALIGNMENT、T16–18及演示脚本，98d2d1c至d33b74d增量仅软件对齐回执。默认今日卡→封存→恢复，首次/卡住才Agent；封存先保存用户原句和原卡，失败不阻止停止；独立DEMO TIME不污染真历史。替代方案与竞品机制事实/产品推断有区分，吸引力有具体使用结果，仍未用户实测。此门不代替O1–O4。
+
 当前不沿用旧版NO-GO：旧版本是第三方玩具附件，新版本按自身原创机构与试打工艺验收。未打印是O4 NOT_TESTED，不是O1自动失败。具体要求见ORIGINAL_CRITERIA.md。
 
 | 门 | 当前结论 | 待收证据 |
@@ -31,3 +33,5 @@
 | S-A06 / P1 | 软件/测试 | 仅规则与构建证据，尚无安装/运行截图；真实LLM路径待实现 | 按产品范围交付明确模式，APK实际安装运行全流程；无key测试规则可通过O2相应模式，LLM不得假称 |
 
 来源核对：已访问[M5官方规格](https://docs.m5stack.com/en/core/StickS3)与[尺寸图](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1207/K150-sticks3.pdf)，确认K150整机名义尺寸；下载模式需侧Reset可操作。接口可达检查应覆盖烧录维护，不只USB开口。
+
+软件版本复审：`f042ce8b13354101e0ba3493e08722626d09f562`只增加构建脚本及CycleState/AgentClient骨架，MainActivity未接入新类，UsbTransport/firmware仍是上述草稿实现。S-A01..06未关闭，O2 NO-GO（只有构建基线），O3 NOT_TESTED且实现缺项。此事实已报协调继续推进；新增类/签名不代替用户入口结果。
