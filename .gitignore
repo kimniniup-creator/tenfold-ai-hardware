@@ -8,3 +8,10 @@ dist/
 .env.*
 .delivery/
 __pycache__/
+android-app/build/
+android-app/out/
+android-app/out-*/
+*.apk
+*.jks
+firmware/.pio/
+.signing/
