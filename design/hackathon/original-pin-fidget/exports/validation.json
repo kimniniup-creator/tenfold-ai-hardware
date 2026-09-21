@@ -1,0 +1,256 @@
+{
+  "status": "DIGITAL_PRINT_TRIAL_ONLY_NOT_PHYSICALLY_TESTED",
+  "units": "mm",
+  "original_geometry": true,
+  "parameters": {
+    "shaft_gap": 0.3,
+    "board_length": 48,
+    "board_width": 24,
+    "board_height": 15,
+    "out": "exports"
+  },
+  "dimensions": {
+    "body": [
+      70.0,
+      42.0,
+      29.2
+    ],
+    "maximum_extended_thickness": 32.4,
+    "pin_travel": 3.2,
+    "pin_diameter": 6.0,
+    "shaft_radial_gap": 0.3,
+    "flange_radial_gap": 0.34999999999999964,
+    "minimum_deck_thickness": 2.4,
+    "minimum_hex_post_flat_wall": 1.0
+  },
+  "m5_stack": {
+    "frame_top": 10,
+    "sled_top": 11.2,
+    "eva_top": 11.7,
+    "m5_top": 26.7,
+    "rail_underside": 27.0,
+    "front_clearance": 0.3
+  },
+  "parts": {
+    "01_guide_plate": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        70.0,
+        42.0,
+        2.4
+      ],
+      "volume_mm3": 6053.234,
+      "print_zmin": 0.0
+    },
+    "02_pin_spacer": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        70.0,
+        42.0,
+        5.2
+      ],
+      "volume_mm3": 11155.289,
+      "print_zmin": 0.0
+    },
+    "03_structural_frame": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        70.0,
+        42.0,
+        19.4
+      ],
+      "volume_mm3": 11448.357,
+      "print_zmin": 0.0
+    },
+    "04_m5_sled": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        52.0,
+        34.0,
+        8.2
+      ],
+      "volume_mm3": 1865.371,
+      "print_zmin": 0.0
+    },
+    "05_retaining_rail": {
+      "quantity": 2,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        70.0,
+        11.3,
+        2.2
+      ],
+      "volume_mm3": 1347.971,
+      "print_zmin": -0.0
+    },
+    "06_pin": {
+      "quantity": 10,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        8.798,
+        8.799,
+        7.6
+      ],
+      "volume_mm3": 277.58,
+      "print_zmin": 0.0
+    },
+    "calibration_guide": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        66.0,
+        16.0,
+        2.4
+      ],
+      "volume_mm3": 2172.608,
+      "print_zmin": 0.0
+    },
+    "calibration_chamber": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        16.0,
+        16.0,
+        5.2
+      ],
+      "volume_mm3": 944.941,
+      "print_zmin": 0.0
+    },
+    "calibration_roof": {
+      "quantity": 1,
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        16.0,
+        16.0,
+        2.4
+      ],
+      "volume_mm3": 614.4,
+      "print_zmin": 0.0
+    }
+  },
+  "fixed_pair_checks": 136,
+  "motion_pair_checks": 1190,
+  "pin_capture": {
+    "shaft_hole_diameter": 6.6,
+    "flange_diameter": 8.8,
+    "flange_overlap_per_side": 1.1000000000000005,
+    "guide_engagement_at_pressed": 2.4,
+    "upper_hard_stop_z": 7.6
+  },
+  "pin_neighbor_sweep": "disjoint cylinders, minimum centre distance 12 > chamber diameter 9.5",
+  "capture_logic": "8.8 flange cannot cross 6.6 guide hole; solid roof at7.6; plates locked by four M3 fasteners. Reverse assembly requires screw removal.",
+  "hardware": {
+    "M3_countersunk_top_length": 25,
+    "M3_countersunk_back_length": 16,
+    "head_max_diameter": 6,
+    "head_height": 1.5,
+    "nut_af": 5.5,
+    "nut_height": 2.4,
+    "nut_pocket_af": 5.8,
+    "pairs": 120,
+    "to_printed_and_M5": 272,
+    "tool_approach_checks": 264
+  },
+  "ports": {
+    "usb_grove_swept_envelope": [
+      40,
+      16,
+      16
+    ],
+    "hat_swept_envelope": [
+      30,
+      16,
+      16
+    ],
+    "checked_against": "all printed parts and fasteners; excludes intentional device connector engagement",
+    "intersections": {
+      "USB_Grove/guide": 0,
+      "USB_Grove/spacer": 0,
+      "USB_Grove/frame": 0,
+      "USB_Grove/sled": 0,
+      "USB_Grove/rail_a": 0,
+      "USB_Grove/rail_b": 0,
+      "USB_Grove/pin_01": 0,
+      "USB_Grove/pin_02": 0,
+      "USB_Grove/pin_03": 0,
+      "USB_Grove/pin_04": 0,
+      "USB_Grove/pin_05": 0,
+      "USB_Grove/pin_06": 0,
+      "USB_Grove/pin_07": 0,
+      "USB_Grove/pin_08": 0,
+      "USB_Grove/pin_09": 0,
+      "USB_Grove/pin_10": 0,
+      "USB_Grove/top_bolt_0": 0,
+      "USB_Grove/top_nut_0": 0,
+      "USB_Grove/top_bolt_1": 0,
+      "USB_Grove/top_nut_1": 0,
+      "USB_Grove/top_bolt_2": 0,
+      "USB_Grove/top_nut_2": 0,
+      "USB_Grove/top_bolt_3": 0,
+      "USB_Grove/top_nut_3": 0,
+      "USB_Grove/back_bolt_0": 0,
+      "USB_Grove/back_nut_0": 0,
+      "USB_Grove/back_bolt_1": 0,
+      "USB_Grove/back_nut_1": 0,
+      "USB_Grove/back_bolt_2": 0,
+      "USB_Grove/back_nut_2": 0,
+      "USB_Grove/back_bolt_3": 0,
+      "USB_Grove/back_nut_3": 0,
+      "HAT/guide": 0,
+      "HAT/spacer": 0,
+      "HAT/frame": 0,
+      "HAT/sled": 0,
+      "HAT/rail_a": 0,
+      "HAT/rail_b": 0,
+      "HAT/pin_01": 0,
+      "HAT/pin_02": 0,
+      "HAT/pin_03": 0,
+      "HAT/pin_04": 0,
+      "HAT/pin_05": 0,
+      "HAT/pin_06": 0,
+      "HAT/pin_07": 0,
+      "HAT/pin_08": 0,
+      "HAT/pin_09": 0,
+      "HAT/pin_10": 0,
+      "HAT/top_bolt_0": 0,
+      "HAT/top_nut_0": 0,
+      "HAT/top_bolt_1": 0,
+      "HAT/top_nut_1": 0,
+      "HAT/top_bolt_2": 0,
+      "HAT/top_nut_2": 0,
+      "HAT/top_bolt_3": 0,
+      "HAT/top_nut_3": 0,
+      "HAT/back_bolt_0": 0,
+      "HAT/back_nut_0": 0,
+      "HAT/back_bolt_1": 0,
+      "HAT/back_nut_1": 0,
+      "HAT/back_bolt_2": 0,
+      "HAT/back_nut_2": 0,
+      "HAT/back_bolt_3": 0,
+      "HAT/back_nut_3": 0
+    }
+  },
+  "assembly": "pins through guide from inside; spacer; frame; four M3x16 from rear; drop sled and M5; two rails with four top bolts"
+}
