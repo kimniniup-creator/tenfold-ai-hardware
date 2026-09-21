@@ -23,3 +23,5 @@
 - 原创轮更新：从origin/main 833ee4b快进；原件依赖与旧附件排名废止。复核原research并查Goblin/Brick/TIMEFLIP/Antsy官方机制，裁决封存恢复为主路径，协调认可实施而非需求已验证；新增PRODUCT_DECISION与SOFTWARE_ALIGNMENT，已向软件发最小差异。目标今晚原创试打包+APK、明天试打，市场实验不阻塞。此前“未决原件/工期未知”仅历史记录，不再适用本轮。
 
 - 2026-09-22 最终限定复验：锁定源码a5b99b00f94bf81b7e922cdc0c0b76b224c386da及APK 34BB815E483BBA25D60DEEF145F5050B8219F912558EDF4898E1158F8FA7513D，独立计算哈希，亲看最终运行图01/02/03/06/07/14/16/17/18/20/21/22。恢复完成条件、PV05核心完成事实、T19 A/B回顾及新周期冷启旧档访问PRODUCT_PASS_SCOPED。保留○未记录图例P2与表单分组P2；真实LLM、USB/M5整机不在通过范围。详细证据见APK_PRODUCT_REVIEW。
+
+- R17纠正与补验：34BB遗漏ACTIVE跨日/设备事件/末日快照，0a63a68明确重新打开；最终6e2bf0e / B9604D2572CAD083F2A72D1D95628985EFBDB565E93FA4B9A3BBFB19C76259A8已修。独验原22项全过，PM亲看B960图01–04/07–09：升级保留旧停点旧档、ACTIVE逐日快照与末日未完成未封存、冷启回顾成立。最终PRODUCT_PASS_SCOPED覆盖R17软件逻辑与手机模拟，不包含真实设备或LLM。
