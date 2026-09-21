@@ -73,7 +73,98 @@ def hardware():
     for x in [-23.7,23.7]:
         for y in [-16.5,16.5]:
             result[f'corner_bolt_{x}_{y}']=hole(x,y,0,1.5,32).union(hole(x,y,-3,3,3))
+            result[f'corner_washer_{x}_{y}']=hole(x,y,27,3,.5).cut(hole(x,y,26,1.7,3))
+            result[f'corner_nut_{x}_{y}']=hole(x,y,27.5,3.2,3).cut(hole(x,y,27,1.5,5))
     return result
+
+def overlap_volume(a,b):
+    # Broad-phase only skips disjoint/tangent bounding boxes, never penetration.
+    aa=a.val().BoundingBox(); bb=b.val().BoundingBox()
+    if any(min(getattr(aa,k+'max'),getattr(bb,k+'max'))-
+           max(getattr(aa,k+'min'),getattr(bb,k+'min'))<=1e-8 for k in 'xyz'):
+        return 0.
+    hit=a.intersect(b)
+    return float(hit.val().Volume()) if hit.vals() else 0.
+
+def validate_hardware(parts,env):
+    hw=hardware(); groups={
+        'hardware_printed':[(a,b,x,y) for a,x in hw.items() for b,y in parts.items()],
+        'hardware_pairs':[(a,b,hw[a],hw[b]) for i,a in enumerate(hw) for b in list(hw)[i+1:]],
+        'hardware_m5':[(a,'m5',x,env) for a,x in hw.items()]}
+    out={}
+    for group,pairs in groups.items():
+        failures=[]; maximum=0.
+        for a,b,x,y in pairs:
+            volume=overlap_volume(x,y); maximum=max(maximum,volume)
+            if volume>1e-6: failures.append({'a':a,'b':b,'volume_mm3':volume})
+        out[group]={'tested_pairs':len(pairs),'max_intersection_mm3':maximum,'failures':failures}
+        assert not failures,(P['static_grip_width'],group,failures)
+    return out
+
+def tool_paths(parts,env):
+    """Straight insertion envelopes, source absent; nut sockets are <=8 mm OD.
+    Jaw socket stage excludes M5 and retainers (install them afterwards).
+    Target fastener contact is intentional; all other hardware is checked.
+    """
+    hw=hardware(); results=[]
+    for key,target in list(hw.items()):
+        if '_washer_' in key: continue
+        b=target.val().BoundingBox(); x=(b.xmin+b.xmax)/2; y=(b.ymin+b.ymax)/2
+        family,kind,_=key.split('_',2)
+        suffix=key.split('_',2)[2]
+        if kind=='bolt':
+            tool=hole(x,y,36 if family=='jaw' else -23,1.3,20)
+            stage={**parts,'m5':env}
+        elif family=='jaw':
+            tool=hole(x,y,-3,4,26.5)
+            stage={'spine':parts['spine'],'jaw_front':parts['jaw_front'],'jaw_back':parts['jaw_back']}
+        else:
+            tool=hole(x,y,27.5,4,25)
+            stage={**parts,'m5':env}
+        for name,shape in hw.items():
+            # Socket/driver must engage own fastener; bolt inside nut socket allowed.
+            if name in {family+'_bolt_'+suffix,family+'_nut_'+suffix}: continue
+            stage[name]=shape
+        failures=[{'obstacle':name,'volume_mm3':overlap_volume(tool,shape)}
+                  for name,shape in stage.items() if overlap_volume(tool,shape)>1e-6]
+        results.append({'target':key,'tool':'driver_radius1.3' if kind=='bolt' else 'socket_OD8',
+                        'stage':'before M5/retainers' if family=='jaw' and kind=='nut' else 'source absent',
+                        'failures':failures})
+        assert not failures,(P['static_grip_width'],key,failures)
+    return results
+
+def continuous_sweeps(parts,env):
+    # Filled outer envelopes conservatively include every point of moving hardware
+    # over width10..30. Holes are deliberately filled, so this cannot miss collision
+    # with static spine/retainers/M5 or another independently moving fastener group.
+    sweeps={}
+    for x in [-9,9]:
+        for s in [-1,1]:
+            shape=None
+            for r,z,h in [(1.5,19,14),(3,33,3),(3.2,20.5,3),(4.5,23.5,.5)]:
+                component=slot(x,s*14.5,10+2*r,2*r,z,h)
+                shape=component if shape is None else shape.union(component)
+            sweeps[f'{x}_{s}']=shape
+    static={'spine':parts['spine'],'retainer_left':parts['retainer_left'],
+            'retainer_right':parts['retainer_right'],'m5':env,
+            **{k:v for k,v in hardware().items() if k.startswith('corner')}}
+    checks=[]
+    for name,shape in sweeps.items():
+        for obstacle,other in static.items(): checks.append((name,obstacle,overlap_volume(shape,other)))
+    for i,name in enumerate(sweeps):
+        for other in list(sweeps)[i+1:]: checks.append((name,other,overlap_volume(sweeps[name],sweeps[other])))
+    for side in [-1,1]:
+        jaw_sweep=box(26,17,9,0,side*14.5,27)
+        for name,shape in hardware().items():
+            if name.startswith('corner'):
+                checks.append(('jaw_sweep_'+str(side),name,overlap_volume(jaw_sweep,shape)))
+        for name,shape in sweeps.items():
+            if int(name.rsplit('_',1)[1])!=side:
+                checks.append(('jaw_sweep_'+str(side),name,overlap_volume(jaw_sweep,shape)))
+    failures=[{'a':a,'b':b,'volume_mm3':v} for a,b,v in checks if v>1e-6]
+    assert not failures,failures
+    return {'grip_range_mm':[10,30],'method':'continuous conservative capsule sweeps of 4 moving fastener groups',
+            'tested_pairs':len(checks),'max_intersection_mm3':max(v for _,_,v in checks),'failures':failures}
 
 def render(parts, exploded=False):
     fig=plt.figure(figsize=(12,8),facecolor='#f4f3ef'); ax=fig.add_subplot(111,projection='3d')
@@ -93,7 +184,7 @@ def render(parts, exploded=False):
     if not exploded:
         for shape in hardware().values():
             add_mesh(mesh(shape),'#a7a8a6')
-    # Abstract M5 envelope, not a vendor model. Top surface represents display side.
+    # Abstract M5 envelope, not a vendor model. Display faces downward.
     env=mesh(box(48,24,15,0,0,2.6+(-6 if exploded else 0)))
     add_mesh(env,'#e49c58')
     ax.add_collection3d(Poly3DCollection(polygons,facecolors=facecolors,edgecolor='none',zsort='average'))
@@ -168,7 +259,8 @@ def main():
     report['conditional_grip_range_mm']=[10,30]
     report['jaw_range_check']=[]
     nominal=P['static_grip_width']
-    for width in [10,15,20,22,25,30]:
+    report['full_hardware_range_check']=[]
+    for width in range(10,31):
         P['static_grip_width']=width
         trial=build()
         volumes=[]
@@ -181,7 +273,24 @@ def main():
         assert 8.2-1e-6<=center<=19.8+1e-6
         assert max(volumes)<1e-6
         report['jaw_range_check'].append({'grip_mm':width,'spine_intersection_mm3':volumes,'bolt_center_y_mm':center})
+        report['full_hardware_range_check'].append({'grip_mm':width,
+            'interference':validate_hardware(trial,env),'tool_paths':tool_paths(trial,env)})
+        print('validated grip',width,'mm',flush=True)
     P['static_grip_width']=nominal
+    report['continuous_hardware_sweep']=continuous_sweeps(parts,env)
+    report['thread_stack_mm']={
+        'pitch':.5,'minimum_protrusion_two_pitches':1.,
+        'corner':{'bolt_underhead_length':32.,'printed_stack':27.,'washer':.5,'nut':3.,
+                  'protrusion':1.5,'protruding_pitches':3.,'nut_full_engagement':3.},
+        'jaw':{'bolt_underhead_length':14.,'printed_stack':9.,'washer':.5,'nut':3.,
+               'protrusion':1.5,'protruding_pitches':3.,'nut_full_engagement':3.},
+        'tolerance_condition':'PASS only if measured L - printed_stack - washer - nut >= 1.0 mm; nominal margin 0.5 mm; full threaded bolts required',
+        'threads':'cylindrical major-diameter envelope only; no helical thread/contact/friction simulation'}
+    for family in ['corner','jaw']:
+        chain=report['thread_stack_mm'][family]
+        chain['protrusion']=chain['bolt_underhead_length']-chain['printed_stack']-chain['washer']-chain['nut']
+        chain['protruding_pitches']=chain['protrusion']/report['thread_stack_mm']['pitch']
+        assert chain['protruding_pitches']>=2
     report['nominal_device_side_clearance_mm']=.6
     report['jaw_screw_tip_to_m5_mm']=19-17.6
     report['printed_assembly_bounds_mm']=[[-27,-24,0],[27,24,36]]
@@ -192,6 +301,9 @@ def main():
     asm=cq.Assembly()
     for name,shape in parts.items(): asm.add(shape,name=name)
     asm.export(str(OUT/'accessory_assembly.step'))
+    hw_asm=cq.Assembly()
+    for i,(name,shape) in enumerate(hardware().items()): hw_asm.add(shape,name='hardware_'+str(i))
+    hw_asm.export(str(OUT/'hardware_reference.step'))
     render(parts); render(parts,True); grip_diagram()
     print(json.dumps(report,indent=2))
 if __name__=='__main__': main()

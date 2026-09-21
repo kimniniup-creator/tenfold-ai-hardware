@@ -126,9 +126,17 @@
     "jaw_nut_9_1": 0.0,
     "jaw_washer_9_1": 0.0,
     "corner_bolt_-23.7_-16.5": 0.0,
+    "corner_washer_-23.7_-16.5": 0.0,
+    "corner_nut_-23.7_-16.5": 0.0,
     "corner_bolt_-23.7_16.5": 0.0,
+    "corner_washer_-23.7_16.5": 0.0,
+    "corner_nut_-23.7_16.5": 0.0,
     "corner_bolt_23.7_-16.5": 0.0,
-    "corner_bolt_23.7_16.5": 0.0
+    "corner_washer_23.7_-16.5": 0.0,
+    "corner_nut_23.7_-16.5": 0.0,
+    "corner_bolt_23.7_16.5": 0.0,
+    "corner_washer_23.7_16.5": 0.0,
+    "corner_nut_23.7_16.5": 0.0
   },
   "part_pair_intersection_mm3": {
     "spine / jaw_front": 0.0,
@@ -164,12 +172,76 @@
       "bolt_center_y_mm": 9.5
     },
     {
+      "grip_mm": 11,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 10.0
+    },
+    {
+      "grip_mm": 12,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 10.5
+    },
+    {
+      "grip_mm": 13,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 11.0
+    },
+    {
+      "grip_mm": 14,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 11.5
+    },
+    {
       "grip_mm": 15,
       "spine_intersection_mm3": [
         0.0,
         0.0
       ],
       "bolt_center_y_mm": 12.0
+    },
+    {
+      "grip_mm": 16,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 12.5
+    },
+    {
+      "grip_mm": 17,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 13.0
+    },
+    {
+      "grip_mm": 18,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 13.5
+    },
+    {
+      "grip_mm": 19,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 14.0
     },
     {
       "grip_mm": 20,
@@ -180,12 +252,36 @@
       "bolt_center_y_mm": 14.5
     },
     {
+      "grip_mm": 21,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 15.0
+    },
+    {
       "grip_mm": 22,
       "spine_intersection_mm3": [
         0.0,
         0.0
       ],
       "bolt_center_y_mm": 15.5
+    },
+    {
+      "grip_mm": 23,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 16.0
+    },
+    {
+      "grip_mm": 24,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 16.5
     },
     {
       "grip_mm": 25,
@@ -196,6 +292,38 @@
       "bolt_center_y_mm": 17.0
     },
     {
+      "grip_mm": 26,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 17.5
+    },
+    {
+      "grip_mm": 27,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 18.0
+    },
+    {
+      "grip_mm": 28,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 18.5
+    },
+    {
+      "grip_mm": 29,
+      "spine_intersection_mm3": [
+        0.0,
+        0.0
+      ],
+      "bolt_center_y_mm": 19.0
+    },
+    {
       "grip_mm": 30,
       "spine_intersection_mm3": [
         0.0,
@@ -204,6 +332,2520 @@
       "bolt_center_y_mm": 19.5
     }
   ],
+  "full_hardware_range_check": [
+    {
+      "grip_mm": 10,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 11,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 12,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 13,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 14,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 15,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 16,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 17,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 18,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 19,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 20,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 21,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 22,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 23,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 24,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 25,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 26,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 27,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 28,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 29,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    },
+    {
+      "grip_mm": 30,
+      "interference": {
+        "hardware_printed": {
+          "tested_pairs": 120,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_pairs": {
+          "tested_pairs": 276,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        },
+        "hardware_m5": {
+          "tested_pairs": 24,
+          "max_intersection_mm3": 0.0,
+          "failures": []
+        }
+      },
+      "tool_paths": [
+        {
+          "target": "jaw_bolt_-9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_-9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_-9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_-1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_-1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "jaw_bolt_9_1",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "jaw_nut_9_1",
+          "tool": "socket_OD8",
+          "stage": "before M5/retainers",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_-23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_-23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_-16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_-16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_bolt_23.7_16.5",
+          "tool": "driver_radius1.3",
+          "stage": "source absent",
+          "failures": []
+        },
+        {
+          "target": "corner_nut_23.7_16.5",
+          "tool": "socket_OD8",
+          "stage": "source absent",
+          "failures": []
+        }
+      ]
+    }
+  ],
+  "continuous_hardware_sweep": {
+    "grip_range_mm": [
+      10,
+      30
+    ],
+    "method": "continuous conservative capsule sweeps of 4 moving fastener groups",
+    "tested_pairs": 98,
+    "max_intersection_mm3": 0.0,
+    "failures": []
+  },
+  "thread_stack_mm": {
+    "pitch": 0.5,
+    "minimum_protrusion_two_pitches": 1.0,
+    "corner": {
+      "bolt_underhead_length": 32.0,
+      "printed_stack": 27.0,
+      "washer": 0.5,
+      "nut": 3.0,
+      "protrusion": 1.5,
+      "protruding_pitches": 3.0,
+      "nut_full_engagement": 3.0
+    },
+    "jaw": {
+      "bolt_underhead_length": 14.0,
+      "printed_stack": 9.0,
+      "washer": 0.5,
+      "nut": 3.0,
+      "protrusion": 1.5,
+      "protruding_pitches": 3.0,
+      "nut_full_engagement": 3.0
+    },
+    "tolerance_condition": "PASS only if measured L - printed_stack - washer - nut >= 1.0 mm; nominal margin 0.5 mm; full threaded bolts required",
+    "threads": "cylindrical major-diameter envelope only; no helical thread/contact/friction simulation"
+  },
   "nominal_device_side_clearance_mm": 0.6,
   "jaw_screw_tip_to_m5_mm": 1.3999999999999986,
   "printed_assembly_bounds_mm": [
