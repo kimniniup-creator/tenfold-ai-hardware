@@ -1,6 +1,6 @@
 {
   "source_ball_diameter_verified": false,
-  "ball_diameter_assumed_mm": 60.0,
+  "ball_diameter_assumed_mm": 50.0,
   "supported_parameter_range_mm": [
     50,
     80
@@ -21,17 +21,17 @@
       "connected_components": 1,
       "bounds_mm": [
         [
-          -27.0,
+          -22.0,
           -31.0,
           0.0
         ],
         [
-          69.0,
+          64.0,
           31.0,
           20.5
         ]
       ],
-      "volume_mm3": 23351.465745546757
+      "volume_mm3": 17069.45510686778
     },
     "retaining_frame": {
       "watertight": true,
@@ -39,17 +39,17 @@
       "connected_components": 1,
       "bounds_mm": [
         [
-          31.799999237060547,
+          26.799999237060547,
           -30.200000762939453,
           20.5
         ],
         [
-          68.19999694824219,
+          63.20000076293945,
           30.200000762939453,
           23.0
         ]
       ],
-      "volume_mm3": 1395.497814128521
+      "volume_mm3": 1395.4982703674614
     }
   },
   "interference_mm3": {

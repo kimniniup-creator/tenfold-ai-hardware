@@ -9,3 +9,5 @@ evidence: `verification.json`；默认球径 60 mm，允许范围 50–80 mm，�
 next step: 总控按范围验收并决定是否合并。先合法取得实体测球径、接触带和孔口；检查实际 M5 接口及顶框；再打印与握持验证。未完成原球机构集成、全方向保持或电子固件。不要把本附件介绍为已完成可直接适配的鬼工球改模。
 
 恢复：GitHub `kimniniup-creator/tenfold-ai-hardware` 的本分支；提交 SHA 以最终任务回报及 `git rev-parse HEAD` 为准。
+
+审查补充：新增紧固件包络、底部承压凸台、工具路径、完整Z尺寸链、示意握持图和参数端点JSON。T-BALL-01全姿态保持与整体把玩仍阻塞；T-BALL-02/03仅补齐可计算证据，不声称实物通过。
