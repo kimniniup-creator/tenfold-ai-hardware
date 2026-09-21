@@ -13,3 +13,5 @@
 最终产品68dbb10bd414d80be85657f497de9e390434d8c3增量审查通过：仅三模型最终事实同步，与测试一致；G1 PASS记录更新到该SHA。最后只暂存本目录Markdown，检查diff、密钥模式、无二进制/无关数据后提交推送。
 
 原创轮启动：用户改为今晚从零完成可制造试打EDC与APK，不依赖原玩具尺寸。独占worktree切至codex/original-acceptance，基于main 833ee4bd6b49c657e8fa07144695dba3fa074672。新增ORIGINAL_CRITERIA/ORIGINAL_REVIEW区分O1数字制造、O2安装软件、O3真实硬件链路、O4实打体验。已通知产品/测试/软件/三模型任务具体证据要求，保留旧报告历史。
+
+2026-09-22：冻结0daf340协议复审完成；JDK21运行真实CycleState的6条独立stub反例，4项P1可达、2项P2内部防御，均复现。已同步软件owner与主协调；源码修复不等同固件编译/实机通过。脚本及结果位于state-probe，可对修复SHA重跑。

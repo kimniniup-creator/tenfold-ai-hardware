@@ -1,0 +1,7 @@
+SOURCE_REVISION=0daf340988157b66cca29403c9e7492975b4533f
+CS01_NEW_CYCLE_STALE=REPRODUCED | internal createCycle retains prior fields; current UI has no restart-cycle entry
+CS02_DEMO_PROMOTED_TO_REAL=REPRODUCED | UI sequence: demo next day, confirm resume, home switch USB retains demo day/state
+CS03_NEXT_UNCONFIRMED_COMPLETE=REPRODUCED | internal API bypass; home routes NEXT to new-action screen so ordinary button not reachable
+CS04_FAILED_SEAL_CLAIM=REPRODUCED | UI confirms saved despite failed disk write; restart loses note
+CS05_UNBOUND_DEVICE_EVENT=REPRODUCED | MainActivity passes only seq/type, no mode/cycle/command/revision validation
+CS06_REAL_DATE_UNUSED=REPRODUCED | real date has no transition or cycle-end processing

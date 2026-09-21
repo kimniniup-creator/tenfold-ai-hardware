@@ -11,3 +11,5 @@ PM：01a0c5b4-a19c-7810-8c6e-d8a87bb68f70；测试：01a0c5b4-aff1-7102-85c2-bb1
 最新产品68dbb10bd414d80be85657f497de9e390434d8c3事实同步已增量审查，G1 PASS对应此最终SHA；e948b2c为此前完整协议审查记录。
 
 新一轮：codex/original-acceptance，最新范围以ORIGINAL_CRITERIA.md为准，进展ORIGINAL_REVIEW.md。软件任务01a0c5c6-3e14-7e80-b9c0-3e7159c57977。旧原玩具缺尺寸不再是原创阻塞；O1/O2可独立交付，O3/O4需实机/实打证据。只改本目录，不写模型/APP，不合main。
+
+0daf340补充验收：见ORIGINAL_REVIEW及state-probe；O2仍有状态/保存/模式问题，O3未测且协议阻断。后续按修复SHA运行state-probe/run.ps1；若生产接口变化需显式调整stub并保留原结果，不覆盖历史失败证据。

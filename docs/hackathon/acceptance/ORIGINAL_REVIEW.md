@@ -57,3 +57,31 @@
 5. 独立测试指出aeb100c APK缺uses-sdk、target<4阻止现代Android安装；等待修复APK实际安装，签名检查不替代安装证据。
 
 以上是动态工作树观察，不将后续已修代码误判为仍有问题。O2/O3需固定SHA和对应APK/固件证据后重新定级。
+
+### 冻结软件0daf340复审与可执行反例
+
+版本：`0daf340988157b66cca29403c9e7492975b4533f`。协调提供APK SHA256 `882D4C97DAD8BB4106C67EA87F61B601CCC1B642DE8CE3E74D59CF6E07B4809B`，此处尚未独立核验安装与该哈希对应关系。固件编译下载工具链中，不能写编译通过。
+
+确认改进：Android读线程使用局部connection及generation；Android超长帧discard到换行；设备ACK关联周期/指令/revision；固件失败回滚业务字段；Manifest已有min26/target35。上述仅为源码改进，不代表整个缺陷关闭。
+
+仍需修复的协议P1：
+
+- 固件persist在active写成功前递增snapshotVersion，失败回滚业务却不回滚version；重试可覆盖原提交槽，破坏双槽恢复。需故障注入slot/crc/active各写点。
+- hello未验证protocol/device_id，status不匹配就发offer；complete/seal也能绕过握手发队首。须session级身份闸门覆盖全部业务出口。
+- 实体event仅seq/type即改当前卡；缺完整身份关联。固件不消费event_ack或重放离线事件，手机status忽略state/last_seq，断线事件无法补同步。
+- 初次status不匹配→offer→ack后不排出outbox，待发事件停滞。
+- 固件超长帧仍清空后接收尾段，与Android修复不一致。
+- connect并发线程共用成员连接，排队decode与write不带generation；快速重连仍可产生跨session回调/写入。
+
+独立可执行证据：`state-probe/run.ps1`从Git固定SHA提取未修改的真实CycleState，使用JDK21及模拟SharedPreferences内存/磁盘行为运行。`result-0daf340.txt`记录6项复现；这不是Android安装或硬件测试。
+
+| 反例 | 分级与可达性 | 结果 |
+|---|---|---|
+| CS01 新周期残留note/recovery/seq/outbox | P2，内部API；当前UI无重建周期入口 | REPRODUCED |
+| CS02 demo次日→确认恢复→首页切USB | P1，UI可达，演示日和状态转真实 | REPRODUCED |
+| CS03 NEXT未确认仍可completePhone | P2，内部API；首页会路由新卡，不能声称普通完成按钮可达 | REPRODUCED |
+| CS04 commit=false封存后仍称phone_saved | P1，保存失败却成功提示，进程重启丢note | REPRODUCED |
+| CS05 无身份绑定的seq1 complete | P1，MainActivity事件入口只传seq/type | REPRODUCED |
+| CS06 真实日期未驱动next/resume/review | P1，USB模式无次日按钮且无日期转换 | REPRODUCED |
+
+最小可交付修复：模拟与真实存储隔离或显式结束模拟后创建新真实周期；持久化失败必须返回错误并禁止保存成功提示；设备事件完整绑定且支持离线重放；真实日期转换进入恢复/新动作/回顾。O2完整旅程仍NO-GO；安装测试可独立继续。O3保持NOT_TESTED且源码仍有阻断项。
