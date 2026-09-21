@@ -85,3 +85,47 @@
 | CS06 真实日期未驱动next/resume/review | P1，USB模式无次日按钮且无日期转换 | REPRODUCED |
 
 最小可交付修复：模拟与真实存储隔离或显式结束模拟后创建新真实周期；持久化失败必须返回错误并禁止保存成功提示；设备事件完整绑定且支持离线重放；真实日期转换进入恢复/新动作/回顾。O2完整旅程仍NO-GO；安装测试可独立继续。O3保持NOT_TESTED且源码仍有阻断项。
+
+### 6883063修复回归
+
+固定版本`6883063c63b9bea1dc658d5e62fa5ec120ad3e24`，新增StateProbeV2，旧probe与结果保留。命令：`state-probe/run.ps1 -Revision 6883063c63b9bea1dc658d5e62fa5ec120ad3e24 -Probe StateProbeV2`。原CS01–06六项均NOT_REPRODUCED：旧字段清理、显式新真实周期、ACTIVE守卫、失败返回值、事件绑定及次日转换已有针对性修复。
+
+新增CS04B/CS07仍REPRODUCED：commit=false时内存已SEALED/DONE，返回首页可显示未落盘状态；complete重试受DONE guard阻止，重启后完成事实丢失。stub并非把失败误当成功：[Android官方SharedPreferencesImpl](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/app/SharedPreferencesImpl.java)的commit先修改内存，再等待磁盘写入结果。领域状态必须区分已持久化快照与失败待保存内容。
+
+协议源码改进确认：snapshotVersion只在active提交成功后推进，固件超长帧丢弃至换行，关联offer ACK后发送队首，Android读帧与写操作增加generation。未关闭：connect本身仍并发使用共享成员；固件hello仅setup发送，重连握手缺明确定义；实体pending仅单字符串，离线complete(seq1)再seal(seq2)覆盖前者，重连仅seq2而手机last0严格+1拒绝，需FIFO或明确阻止未确认时继续产生事件。
+
+以上已发作者和协调；属于修复回归，不声称APK安装、固件编译、板卡通信通过。
+
+### 8186130修复回归
+
+固定`818613041039f52cc4035bcb4379a95462d6c628`，stub补getAll/clear/Long/Float以匹配生产事务回滚。`result-8186130.txt`八条反例全部NOT_REPRODUCED，原CS04B及CS07关闭（在本故障注入模型范围内）。不改变历史结果。运行命令：`state-probe/run.ps1 -Revision 818613041039f52cc4035bcb4379a95462d6c628 -Probe StateProbeV2`。
+
+源码确认hello_request请求/响应接通，connecting限制重复连接启动，实体事件改为最多8条持久FIFO，同一卡离线complete→seal不再只保留最后事件。FIFO的每项目前仅seq/type，仍有跨卡P1：旧卡未ACK时接收新offer，重放使用当前command/cycle/revision/day重新组包，旧事件可被标记为新卡事实。需要保存完整不可变事件信封并定义跨卡同步，或有pending时拒绝换卡且提供可恢复的同步路径。
+
+另一重连P1：restore把timeTrusted设false，query或重复offer只返回状态/ACK，手机未发送set_time，同卡重启后实体complete持续time_untrusted。需要明确时间恢复握手并验证。两项已发作者与协调。测试结论只覆盖Java状态反例；固件仍是源码复核，不声称编译/板卡验证通过。
+
+独测补充回执（待最终测试提交引用）：0daf340在API35无bypass安装启动，U01手填/U02强杀留卡/U03未完成封存及重启/U07完成后次日新卡通过有限UI路径；U06恢复首页丢第一步、U09状态栏重叠已派修。8186130覆盖安装因签名变化失败，稳定签名修复中。测试的DEX/SDK局部编号与本报告S-A05/06曾重名，不能跨命名空间自动关闭缺陷。PM3d85241视觉审查NO-GO待新截图。
+
+Press a356a870456fc85082aeabbc974698314f6ee273：独测回执22STL按PLA/PETG全部实际切片成功，cad/check退出0且重建一致、23STEP有效，官方M5与21塑件/五金相交0，6个刚性保持姿态碰止挡。此为独测回执，后续以其冻结报告为证；不把PLA单旋降级视为PETG完整按压玩法，也不推断弹性装配可靠。
+
+### accdbcb协议复审
+
+固定`accdbcbad2d3d69efba178e38a08b64f5a110885`：冷启动hello_request→query→匹配status→set_time请求存在，固件校验cycle/command/epoch后恢复timeTrusted，原冷启动死锁在源码层关闭。FIFO项持久完整信封，重放与队首ACK保持原卡身份，原重标新卡问题关闭。未宣称编译/实机通过。
+
+剩余P1：MainActivity的`current || sameCycle` ACK兜底会在acceptDeviceEvent因保存失败/序号缺口而返回false时仍发送persisted:true，固件删除未接收成功的事件。旧revision事件仅ACK、不推进device_seq；oldrev seq1被移除后currentrev seq2无法满足last+1，仍被错误ACK，形成数据丢失。
+
+`result-accdbcb.txt`运行真实CycleState，原8项仍NOT_REPRODUCED，新增ACK01保存失败返回false与ACK02旧revision未推进游标均REPRODUCED。测试中的MainActivity布尔ACK表达式明确为手工复写源码条件，不冒称整个Activity或USB运行。修复要求：旧卡事件先保存接收游标/历史且不修改当前卡；身份匹配、序号合法、持久成功才ACK，不能用sameCycle替代成功。
+
+### 00f437f ACK与U10回归
+
+固定`00f437f0e6c3cf89d6e818d7b17e7861e07affbc`，StateProbeV3运行真实CycleState，结果`result-00f437f.txt`。原8条状态及ACK01/02共10条反例NOT_REPRODUCED；失败事件不ACK，旧revision事件持久历史/游标但不改当前卡，新revision连续seq2可正常完成。MainActivity仅saved才ACK；新动作/恢复确认已调用syncConfirmedCardIfConnected。上一轮ACK P1在此测试范围内关闭。
+
+R17/T19/U10检查：D1未完成与D2完成分开保留、归档后新建并重启summary仍在，测试通过。仍有3条实跑缺陷：回顾缺完成条件/下一步；archive只存裁剪summary并删除原day字段，导致done/next永久丢失；startReal未清day_1..10，演示完成记录出现在真实周期回顾。另源码入口问题：查看旧档仅在showSetup，激活新周期后的首页/设置均无入口，虽磁盘保留但用户无法访问。
+
+已向软件、协调和PM直接反馈最小修复：归档全字段、展示完成条件/下一步、清理演示槽、新周期保留旧档入口。保持范围为已确认R17，不添加统计。上述为Java执行及源码入口检查，不代替模拟器T19。
+
+### a5b99b0候选范围通过
+
+固定`a5b99b00f94bf81b7e922cdc0c0b76b224c386da`；独立Get-FileHash核对APK SHA256 `34BB815E483BBA25D60DEEF145F5050B8219F912558EDF4898E1158F8FA7513D`。StateProbeV4适配显式恢复完成条件及中文状态，15条反例全部NOT_REPRODUCED，见result-a5b99b0.txt。归档保留全day字段、摘要含日期/条件/下一步、真实周期清演示槽、新周期首页保留旧档入口，均直接读源码确认。旧FF1994ED不作本候选证据。
+
+Java状态/ACK/R17数据层范围PASS；O2整体仍待同APK稳定签名覆盖安装、T19实际操作和PM视觉关闭。O3编译/板卡另判。本轮未继续扩展非交付范围。

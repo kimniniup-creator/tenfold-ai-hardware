@@ -1,0 +1,9 @@
+SOURCE_REVISION=818613041039f52cc4035bcb4379a95462d6c628
+CS01_NEW_CYCLE_STALE=NOT_REPRODUCED | old fields cleared
+CS02_DEMO_PROMOTED_TO_REAL=NOT_REPRODUCED | explicit fresh real cycle day one
+CS03_NEXT_UNCONFIRMED_COMPLETE=NOT_REPRODUCED | ACTIVE-only complete guard
+CS04_FAILED_SEAL_CLAIM=NOT_REPRODUCED | method returns failure and MainActivity checks it
+CS04B_FAILED_WRITE_RAM_MUTATION=NOT_REPRODUCED | commit=false still changes Android memory; return-home can display unsaved SEALED
+CS05_UNBOUND_DEVICE_EVENT=NOT_REPRODUCED | simulation and wrong cycle/command rejected; session device check exists in MainActivity
+CS06_REAL_DATE_UNUSED=NOT_REPRODUCED | next real day resumes unfinished card
+CS07_COMPLETE_RETRY_LOST=NOT_REPRODUCED | failed commit sets RAM DONE so retry guard refuses; restart loses completion
