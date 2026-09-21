@@ -448,6 +448,126 @@
     "sha256": "48f97d8220a58908f944c7958acc229a450b2e5bf9384e32e6402a281f441dfd"
   },
   {
+    "path": "apk-b9604d25-ui/01-upgrade-seal-preserved.png",
+    "sha256": "a8a795726c24b81946bb99c1c0cad1129189e986ac52b9614fe6d7990dd87608"
+  },
+  {
+    "path": "apk-b9604d25-ui/01-upgrade-seal-preserved.xml",
+    "sha256": "3c863d9a37dccd94646f2c2a9150d6657c029ad7ec440d02824df45694cdb95b"
+  },
+  {
+    "path": "apk-b9604d25-ui/02-active-day2.png",
+    "sha256": "ee327575092d7a05b1826f799e9177c3888a36ec0be5d33f85c2709195b173ae"
+  },
+  {
+    "path": "apk-b9604d25-ui/02-active-day2.xml",
+    "sha256": "83cc5cf6cd16166ddc323f3b12b8e19fe39c6a6aee71499d7b869871d0672923"
+  },
+  {
+    "path": "apk-b9604d25-ui/03-old-archive-preserved.png",
+    "sha256": "585175a9b8290e2dd30b5de2869e0ddc14e0a7374ec3af3504609693c6bef5a5"
+  },
+  {
+    "path": "apk-b9604d25-ui/03-old-archive-preserved.xml",
+    "sha256": "37d473db40db2bc6284457b2faf06c7c605e9f3a0917fd08ebef77aa2d634cb3"
+  },
+  {
+    "path": "apk-b9604d25-ui/04-day3-unconfirmed.png",
+    "sha256": "450f0561ae371013bce419178fea37ddb10aa2b4b6bea214bbd336309fe83bae"
+  },
+  {
+    "path": "apk-b9604d25-ui/04-day3-unconfirmed.xml",
+    "sha256": "5cb0815503104ee758acc7527b5e49be5a9a33ec0ec39d883d539c3c4109f532"
+  },
+  {
+    "path": "apk-b9604d25-ui/05-day7-resume.png",
+    "sha256": "15f96d46ff06c77b01b462a4dc62248a129146c80f47de67835ce1b953a429f6"
+  },
+  {
+    "path": "apk-b9604d25-ui/05-day7-resume.xml",
+    "sha256": "5579e5e6deb9223a3d0f3aa856be0294728bcdf7334e2403774aa30bdcfd589c"
+  },
+  {
+    "path": "apk-b9604d25-ui/06-day10-active.png",
+    "sha256": "f62e10535acd87a889223fe652e4ea3614da97bf689486a1a3c57426a22c8096"
+  },
+  {
+    "path": "apk-b9604d25-ui/06-day10-active.xml",
+    "sha256": "f543191f34aaab6af76ad39770ce9bd47ffb451c9f3e97d002b3e469c6fab4e1"
+  },
+  {
+    "path": "apk-b9604d25-ui/07-active-review-top.png",
+    "sha256": "ba3763c21090a6e87c027639de45c542ffc16083152ed3e1f0b391c5d779afa7"
+  },
+  {
+    "path": "apk-b9604d25-ui/07-active-review-top.xml",
+    "sha256": "6de1457dcb87621bf531cf220ca1b922f96ebfae6cc368a2664f7b38a66e9cf0"
+  },
+  {
+    "path": "apk-b9604d25-ui/08-active-review-bottom.png",
+    "sha256": "4b270f20b9aa4b8af5824e9632de210ef0d7be2556c32d77c321fa9e3a25b24e"
+  },
+  {
+    "path": "apk-b9604d25-ui/08-active-review-bottom.xml",
+    "sha256": "725312324a0b7dce5ee8276767ec0775b3b1a810304fc77ba73bead2b3bcd026"
+  },
+  {
+    "path": "apk-b9604d25-ui/09-review-cold-restart.png",
+    "sha256": "f110280ba1005940901802cd94c6b84e75b12dcf3a41715a4da8b0b40989c046"
+  },
+  {
+    "path": "apk-b9604d25-ui/09-review-cold-restart.xml",
+    "sha256": "6de1457dcb87621bf531cf220ca1b922f96ebfae6cc368a2664f7b38a66e9cf0"
+  },
+  {
+    "path": "apk-b9604d25-ui/10-new-cycle-setup.png",
+    "sha256": "6b9b5e9d39b0833475e2a9367d4deba061ecbee358e094742292dbc225626aa3"
+  },
+  {
+    "path": "apk-b9604d25-ui/10-new-cycle-setup.xml",
+    "sha256": "7ba40f4f58f4b1c25b2a0f9f67c5dd7c2ee366a971000a506e7a9321913a0d77"
+  },
+  {
+    "path": "apk-b9604d25-ui/11-new-day1-active.png",
+    "sha256": "a5762cc3cbf950e537be400e6e202e35764f7b191574094e97d158ffe6a937a5"
+  },
+  {
+    "path": "apk-b9604d25-ui/11-new-day1-active.xml",
+    "sha256": "e35044e464811c723c744a02f82fc6739a1f9e77a0a96f39b2a86b09b37e3a69"
+  },
+  {
+    "path": "apk-b9604d25-ui/12-new-day2-resume.png",
+    "sha256": "85bbe15e55d739e6c5ab169421fdecfaba26ddc37f76ca6980fb87a38a86bec3"
+  },
+  {
+    "path": "apk-b9604d25-ui/12-new-day2-resume.xml",
+    "sha256": "e82de82c9b46dd212d2919c5da2fccfb82a031f9d3f214f1ade0f89f9faddd2c"
+  },
+  {
+    "path": "apk-b9604d25-ui/13-before-demo-exit.png",
+    "sha256": "3d2b6aff34ce288d756efebbd38735054730187d4e17ae7290f935f73cff525e"
+  },
+  {
+    "path": "apk-b9604d25-ui/13-before-demo-exit.xml",
+    "sha256": "9561d773861f088eb0138a9c48e3b934fc23bc538c12c42a8b9530202e4e9881"
+  },
+  {
+    "path": "apk-b9604d25-ui/14-demo-cleared-real-pending.png",
+    "sha256": "ec0970f96a4daf2b7fdf1483af68666a9dd56d54434d9d5189ed5250f35128f2"
+  },
+  {
+    "path": "apk-b9604d25-ui/14-demo-cleared-real-pending.xml",
+    "sha256": "1e92a10e2c0feded9e60c918a604593fb4c01db927ad54593a929672edfbd449"
+  },
+  {
+    "path": "apk-b9604d25-ui/15-real-pending-restarted.png",
+    "sha256": "1fee82e885da2190a1f281df8bc87cbb327d853a3b776321de4cd84d438729bc"
+  },
+  {
+    "path": "apk-b9604d25-ui/15-real-pending-restarted.xml",
+    "sha256": "80b0bca8516e145d35dd3e8e4db3979da1895ec466a4c48fc56c609f25565518"
+  },
+  {
     "path": "apk-ff1994ed-ui/01-upgrade-setup-archive.png",
     "sha256": "e5c9e14211469f0305d99eb811ac6f6bb4292a55a2ff870dff0639d06ba42778"
   },
