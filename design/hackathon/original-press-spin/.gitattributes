@@ -1,0 +1,3 @@
+*.step -text -diff
+*.stl binary
+*.png binary

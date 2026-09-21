@@ -1,0 +1,467 @@
+{
+  "profile_status": "generic 220x220, not machine-qualified; G-code excluded from delivery",
+  "parts": {
+    "bearing_sleeve": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 30,
+      "extrusion_commands": 9230,
+      "gcode_bytes": 432331,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "188.34"
+        ],
+        "filament used [g]": [
+          "0.56"
+        ],
+        "estimated printing time (normal mode)": [
+          "6m 15s"
+        ]
+      },
+      "seconds": 1.43
+    },
+    "body": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": true,
+      "layer_changes": 467,
+      "extrusion_commands": 50534,
+      "gcode_bytes": 2973324,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "6266.61"
+        ],
+        "filament used [g]": [
+          "18.69"
+        ],
+        "estimated printing time (normal mode)": [
+          "2h 11m 40s"
+        ]
+      },
+      "seconds": 3.87
+    },
+    "cal_axis_holes": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 25,
+      "extrusion_commands": 32570,
+      "gcode_bytes": 1511895,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "1292.22"
+        ],
+        "filament used [g]": [
+          "3.85"
+        ],
+        "estimated printing time (normal mode)": [
+          "25m 21s"
+        ]
+      },
+      "seconds": 1.33
+    },
+    "cal_axis_plug": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 30,
+      "extrusion_commands": 8190,
+      "gcode_bytes": 371101,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "285.68"
+        ],
+        "filament used [g]": [
+          "0.85"
+        ],
+        "estimated printing time (normal mode)": [
+          "8m 33s"
+        ]
+      },
+      "seconds": 0.99
+    },
+    "cal_clip_open": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 7,
+      "extrusion_commands": 756,
+      "gcode_bytes": 55705,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "27.32"
+        ],
+        "filament used [g]": [
+          "0.08"
+        ],
+        "estimated printing time (normal mode)": [
+          "56s"
+        ]
+      },
+      "seconds": 0.83
+    },
+    "cal_m5_frame": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 15,
+      "extrusion_commands": 1198,
+      "gcode_bytes": 82141,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "380.26"
+        ],
+        "filament used [g]": [
+          "1.13"
+        ],
+        "estimated printing time (normal mode)": [
+          "6m 54s"
+        ]
+      },
+      "seconds": 0.8
+    },
+    "cal_snap_pin": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 64,
+      "extrusion_commands": 4440,
+      "gcode_bytes": 237699,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "67.95"
+        ],
+        "filament used [g]": [
+          "0.20"
+        ],
+        "estimated printing time (normal mode)": [
+          "3m 24s"
+        ]
+      },
+      "seconds": 1.24
+    },
+    "cal_snap_sockets": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 40,
+      "extrusion_commands": 31599,
+      "gcode_bytes": 1377781,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "1368.18"
+        ],
+        "filament used [g]": [
+          "4.08"
+        ],
+        "estimated printing time (normal mode)": [
+          "28m 19s"
+        ]
+      },
+      "seconds": 2.97
+    },
+    "drawer_key": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 13,
+      "extrusion_commands": 1365,
+      "gcode_bytes": 86641,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "127.82"
+        ],
+        "filament used [g]": [
+          "0.38"
+        ],
+        "estimated printing time (normal mode)": [
+          "2m 19s"
+        ]
+      },
+      "seconds": 1.3
+    },
+    "m5_tray": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 25,
+      "extrusion_commands": 5686,
+      "gcode_bytes": 293815,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "623.75"
+        ],
+        "filament used [g]": [
+          "1.86"
+        ],
+        "estimated printing time (normal mode)": [
+          "12m 15s"
+        ]
+      },
+      "seconds": 1.03
+    },
+    "metal_rotor_cap": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 6,
+      "extrusion_commands": 3526,
+      "gcode_bytes": 166216,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "97.96"
+        ],
+        "filament used [g]": [
+          "0.29"
+        ],
+        "estimated printing time (normal mode)": [
+          "2m 24s"
+        ]
+      },
+      "seconds": 0.87
+    },
+    "metal_rotor_lower_washer": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 4,
+      "extrusion_commands": 1875,
+      "gcode_bytes": 93311,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "35.90"
+        ],
+        "filament used [g]": [
+          "0.11"
+        ],
+        "estimated printing time (normal mode)": [
+          "1m 11s"
+        ]
+      },
+      "seconds": 0.85
+    },
+    "metal_rotor_sleeve": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 41,
+      "extrusion_commands": 5676,
+      "gcode_bytes": 283088,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "82.65"
+        ],
+        "filament used [g]": [
+          "0.25"
+        ],
+        "estimated printing time (normal mode)": [
+          "3m 50s"
+        ]
+      },
+      "seconds": 1.62
+    },
+    "press_leaf": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 12,
+      "extrusion_commands": 5351,
+      "gcode_bytes": 267178,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "272.75"
+        ],
+        "filament used [g]": [
+          "0.81"
+        ],
+        "estimated printing time (normal mode)": [
+          "7m 2s"
+        ]
+      },
+      "seconds": 1.08
+    },
+    "press_leaf_soft": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 12,
+      "extrusion_commands": 5243,
+      "gcode_bytes": 261991,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "260.96"
+        ],
+        "filament used [g]": [
+          "0.78"
+        ],
+        "estimated printing time (normal mode)": [
+          "7m 4s"
+        ]
+      },
+      "seconds": 1.01
+    },
+    "press_pin_a": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 64,
+      "extrusion_commands": 4440,
+      "gcode_bytes": 237703,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "67.95"
+        ],
+        "filament used [g]": [
+          "0.20"
+        ],
+        "estimated printing time (normal mode)": [
+          "3m 24s"
+        ]
+      },
+      "seconds": 1.32
+    },
+    "press_pin_b": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 64,
+      "extrusion_commands": 4440,
+      "gcode_bytes": 237701,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "67.95"
+        ],
+        "filament used [g]": [
+          "0.20"
+        ],
+        "estimated printing time (normal mode)": [
+          "3m 24s"
+        ]
+      },
+      "seconds": 1.38
+    },
+    "rotor_clip": {
+      "exit_code": 0,
+      "material_profile": "PETG",
+      "support": false,
+      "layer_changes": 7,
+      "extrusion_commands": 780,
+      "gcode_bytes": 56819,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "27.52"
+        ],
+        "filament used [g]": [
+          "0.08"
+        ],
+        "estimated printing time (normal mode)": [
+          "57s"
+        ]
+      },
+      "seconds": 0.81
+    },
+    "rotor_pin": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 70,
+      "extrusion_commands": 14098,
+      "gcode_bytes": 631974,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "318.97"
+        ],
+        "filament used [g]": [
+          "0.95"
+        ],
+        "estimated printing time (normal mode)": [
+          "8m 53s"
+        ]
+      },
+      "seconds": 1.28
+    },
+    "thrust_ring": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 2,
+      "extrusion_commands": 572,
+      "gcode_bytes": 37417,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "13.02"
+        ],
+        "filament used [g]": [
+          "0.04"
+        ],
+        "estimated printing time (normal mode)": [
+          "20s"
+        ]
+      },
+      "seconds": 0.85
+    },
+    "wheel": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 25,
+      "extrusion_commands": 34953,
+      "gcode_bytes": 1490295,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "914.01"
+        ],
+        "filament used [g]": [
+          "2.73"
+        ],
+        "estimated printing time (normal mode)": [
+          "17m 12s"
+        ]
+      },
+      "seconds": 1.54
+    },
+    "wheel_loose": {
+      "exit_code": 0,
+      "material_profile": "PLA",
+      "support": false,
+      "layer_changes": 25,
+      "extrusion_commands": 34979,
+      "gcode_bytes": 1491780,
+      "warnings": [],
+      "metadata": {
+        "filament used [mm]": [
+          "910.58"
+        ],
+        "filament used [g]": [
+          "2.72"
+        ],
+        "estimated printing time (normal mode)": [
+          "16m 32s"
+        ]
+      },
+      "seconds": 1.61
+    }
+  }
+}
