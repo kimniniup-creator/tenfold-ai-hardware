@@ -72,5 +72,5 @@
 - 固件以 PlatformIO Espressif32 6.12.0、M5Unified 0.2.22、M5GFX 0.2.29、ArduinoJson 7.4.3 编译并链接成功：RAM 22,684 B（6.9%），Flash 716,517 B（21.4%）。
 - PlatformIO 无设备上传 dry run 给出精确烧录偏移：bootloader `0x0000`、partitions `0x8000`、boot_app0 `0xe000`、app `0x10000`。
 - R05 增量把完成事实按日独立持久化，同日 revision、封存和重启均不能再次完成；跨日才重新允许。板端 P0 明确限定单周期，不自动接受新 cycle，以免静默丢弃离线事件。
-- 最终固件发布包 `firmware/release/tenfold-firmware-p0-r05.zip` SHA-256 为 `39437628A42939591FCA3B794F3BCD8B2243678929CF1856823326C061748CDB`；二进制按发布资产处理，不纳入 Git。
+- 最终固件发布包 `firmware/release/tenfold-firmware-p0-final.zip` SHA-256 为 `629A330BA42C19D713EAB3F454DF322A5099144627589B28FF294F12D2F9187A`；二进制按发布资产处理，不纳入 Git，包内附精确版本清单与实际许可证原文。
 - 真实 M5StickS3、Android OTG 和云 LLM 未测试，保持明确 `NOT_TESTED`，不可由编译/模拟证据替代。
