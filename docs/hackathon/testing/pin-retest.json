@@ -1,0 +1,223 @@
+{
+  "471703-pin-array-sidecar": {
+    "sha": "58072e0dbfa61e7f32510851f2d33c43b6c4b284",
+    "artifacts": {
+      "adapter_with_M3_hardware.step": {
+        "solids": 22,
+        "valid": true,
+        "volume_mm3": 17496.5369
+      },
+      "corner_cover.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1529.7071
+      },
+      "corner_cover.stl": {
+        "sha256": "dd6a86dacafd01ebc2d7a4195e5c3182508e85970b81a930bceb5e817d2795af",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1529.7036,
+        "bounds_mm": [
+          [
+            -0.0,
+            -0.0,
+            0.0
+          ],
+          [
+            64.0,
+            40.0,
+            2.0
+          ]
+        ]
+      },
+      "independent_adapter_assembly.step": {
+        "solids": 6,
+        "valid": true,
+        "volume_mm3": 16238.3667
+      },
+      "lower_clamp.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 987.5248
+      },
+      "lower_clamp.stl": {
+        "sha256": "0cce23e53bea025a7a43485535f9d484ca1dbae4fc3f47a5e157324e9a2542b7",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 987.5756,
+        "bounds_mm": [
+          [
+            -29.0,
+            -5.0,
+            0.0
+          ],
+          [
+            0.0,
+            5.0,
+            11.6
+          ]
+        ]
+      },
+      "sidecar_base.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 11102.5605
+      },
+      "sidecar_base.stl": {
+        "sha256": "c1a58d5229640c36ed0d08755f2ebab08c62ecbf191c9334d0ef9ea176ca1ce2",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 11101.3479,
+        "bounds_mm": [
+          [
+            -21.0,
+            -0.0,
+            0.0
+          ],
+          [
+            64.0,
+            40.0,
+            18.3
+          ]
+        ]
+      },
+      "upper_clamp.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 815.5248
+      },
+      "upper_clamp.stl": {
+        "sha256": "1078b5c055eaef8c077fb16d66994898e0f90f5b107408ee97ad0b329f17ec1c",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 815.5756,
+        "bounds_mm": [
+          [
+            -29.0,
+            -5.0,
+            0.0
+          ],
+          [
+            0.0,
+            5.0,
+            3.0
+          ]
+        ]
+      }
+    },
+    "regeneration_exit": 0,
+    "regenerated": {
+      "adapter_with_M3_hardware.step": {
+        "solids": 22,
+        "valid": true,
+        "volume_mm3": 17496.5369
+      },
+      "corner_cover.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1529.7071
+      },
+      "corner_cover.stl": {
+        "sha256": "dd6a86dacafd01ebc2d7a4195e5c3182508e85970b81a930bceb5e817d2795af",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1529.7036,
+        "bounds_mm": [
+          [
+            -0.0,
+            -0.0,
+            0.0
+          ],
+          [
+            64.0,
+            40.0,
+            2.0
+          ]
+        ]
+      },
+      "independent_adapter_assembly.step": {
+        "solids": 6,
+        "valid": true,
+        "volume_mm3": 16238.3667
+      },
+      "lower_clamp.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 987.5248
+      },
+      "lower_clamp.stl": {
+        "sha256": "0cce23e53bea025a7a43485535f9d484ca1dbae4fc3f47a5e157324e9a2542b7",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 987.5756,
+        "bounds_mm": [
+          [
+            -29.0,
+            -5.0,
+            0.0
+          ],
+          [
+            0.0,
+            5.0,
+            11.6
+          ]
+        ]
+      },
+      "sidecar_base.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 11102.5605
+      },
+      "sidecar_base.stl": {
+        "sha256": "c1a58d5229640c36ed0d08755f2ebab08c62ecbf191c9334d0ef9ea176ca1ce2",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 11101.3479,
+        "bounds_mm": [
+          [
+            -21.0,
+            -0.0,
+            0.0
+          ],
+          [
+            64.0,
+            40.0,
+            18.3
+          ]
+        ]
+      },
+      "upper_clamp.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 815.5248
+      },
+      "upper_clamp.stl": {
+        "sha256": "1078b5c055eaef8c077fb16d66994898e0f90f5b107408ee97ad0b329f17ec1c",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 815.5756,
+        "bounds_mm": [
+          [
+            -29.0,
+            -5.0,
+            0.0
+          ],
+          [
+            0.0,
+            5.0,
+            3.0
+          ]
+        ]
+      }
+    },
+    "geometry_metrics_reproduced": true
+  }
+}

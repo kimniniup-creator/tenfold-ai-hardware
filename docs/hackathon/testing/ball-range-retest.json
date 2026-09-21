@@ -1,0 +1,40 @@
+{
+  "sha": "8ba49f0d8c56d5c531611860dcf0996722f94a82",
+  "scheme": "2673323-concentric-sphere",
+  "cases": {
+    "50": {
+      "exit": 0,
+      "meshes": {
+        "palm_cradle.stl": {
+          "watertight": true,
+          "components": 1,
+          "volume_mm3": 17069.45510686778
+        },
+        "retaining_frame.stl": {
+          "watertight": true,
+          "components": 1,
+          "volume_mm3": 1395.4982703674614
+        }
+      },
+      "reexecuted_hardware_overlap_mm3": 0.0,
+      "reexecuted_tool_overlap_mm3": 0.0
+    },
+    "80": {
+      "exit": 0,
+      "meshes": {
+        "palm_cradle.stl": {
+          "watertight": true,
+          "components": 1,
+          "volume_mm3": 40743.94480753251
+        },
+        "retaining_frame.stl": {
+          "watertight": true,
+          "components": 1,
+          "volume_mm3": 1395.4978221997408
+        }
+      },
+      "reexecuted_hardware_overlap_mm3": 0.0,
+      "reexecuted_tool_overlap_mm3": 0.0
+    }
+  }
+}

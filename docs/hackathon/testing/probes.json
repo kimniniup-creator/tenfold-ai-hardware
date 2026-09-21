@@ -1,0 +1,27 @@
+{
+  "pin_head_probe": {
+    "sha": "9617a85ecac72aca835b35ad6ff31bf38a961ecf",
+    "pitch_mm": 5,
+    "head_diameter_mm": 6,
+    "head_height_mm": 3,
+    "overlap_mm3": 6.752333419020668
+  },
+  "5671da9560c9cf4d59e8d8b7a0ae00e196fc6e8b": {
+    "scheme": "2710405-press-spin-saddle",
+    "printed_solid_volume_cm3": 14.636,
+    "solid_PETG_mass_g_at_assumed_1p27": 18.59,
+    "mass_is_not_sliced_or_measured": true
+  },
+  "9591aa5f5f97bfa24b1af5b126e911e062610498": {
+    "scheme": "2673323-concentric-sphere",
+    "printed_solid_volume_cm3": 24.419,
+    "solid_PETG_mass_g_at_assumed_1p27": 31.01,
+    "mass_is_not_sliced_or_measured": true
+  },
+  "9617a85ecac72aca835b35ad6ff31bf38a961ecf": {
+    "scheme": "471703-pin-array-sidecar",
+    "printed_solid_volume_cm3": 13.663,
+    "solid_PETG_mass_g_at_assumed_1p27": 17.35,
+    "mass_is_not_sliced_or_measured": true
+  }
+}

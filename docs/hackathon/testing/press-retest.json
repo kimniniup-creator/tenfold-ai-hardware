@@ -1,0 +1,271 @@
+{
+  "2710405-press-spin-saddle": {
+    "sha": "2aaf60b72875c992623210256f05deeea44ea261",
+    "artifacts": {
+      "accessory_assembly.step": {
+        "solids": 5,
+        "valid": true,
+        "volume_mm3": 14634.8989
+      },
+      "hardware_reference.step": {
+        "solids": 24,
+        "valid": true,
+        "volume_mm3": 2729.1015
+      },
+      "jaw_back.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1336.0301
+      },
+      "jaw_back.stl": {
+        "sha256": "3a16477560d1d528fed992a026544e2b241b668e25d8077efce6a36a68799a5f",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1336.2103,
+        "bounds_mm": [
+          [
+            -13.0,
+            -19.0,
+            0.0
+          ],
+          [
+            13.0,
+            -12.0,
+            9.0
+          ]
+        ]
+      },
+      "jaw_front.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1336.0301
+      },
+      "jaw_front.stl": {
+        "sha256": "77549339d49c654700271bd4f483efc641794196d2c510ae5258ae4c8b6a4063",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1336.2103,
+        "bounds_mm": [
+          [
+            -13.0,
+            12.0,
+            0.0
+          ],
+          [
+            13.0,
+            19.0,
+            9.0
+          ]
+        ]
+      },
+      "retainer_left.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 275.6832
+      },
+      "retainer_left.stl": {
+        "sha256": "acef66e5b63bf2272ab1dd42463247afae325c7bdcf0a09634d9122fa9457ced",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 275.7049,
+        "bounds_mm": [
+          [
+            -26.7,
+            -20.0,
+            0.0
+          ],
+          [
+            -20.7,
+            20.0,
+            2.0
+          ]
+        ]
+      },
+      "retainer_right.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 275.6832
+      },
+      "retainer_right.stl": {
+        "sha256": "6deda651541f9e41f0052363557b493b871f330200ae60f17cdb69e51ce55ef4",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 275.7049,
+        "bounds_mm": [
+          [
+            20.7,
+            -20.0,
+            0.0
+          ],
+          [
+            26.7,
+            20.0,
+            2.0
+          ]
+        ]
+      },
+      "spine.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 11411.4723
+      },
+      "spine.stl": {
+        "sha256": "66e95f4894ae343c5457173857be77851516e281833491537ae8ae7adb47e1f1",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 11412.0299,
+        "bounds_mm": [
+          [
+            -27.0,
+            -24.0,
+            0.0
+          ],
+          [
+            27.0,
+            24.0,
+            29.0
+          ]
+        ]
+      }
+    },
+    "regeneration_exit": 0,
+    "regenerated": {
+      "accessory_assembly.step": {
+        "solids": 5,
+        "valid": true,
+        "volume_mm3": 14634.8989
+      },
+      "hardware_reference.step": {
+        "solids": 24,
+        "valid": true,
+        "volume_mm3": 2729.1015
+      },
+      "jaw_back.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1336.0301
+      },
+      "jaw_back.stl": {
+        "sha256": "3a16477560d1d528fed992a026544e2b241b668e25d8077efce6a36a68799a5f",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1336.2103,
+        "bounds_mm": [
+          [
+            -13.0,
+            -19.0,
+            0.0
+          ],
+          [
+            13.0,
+            -12.0,
+            9.0
+          ]
+        ]
+      },
+      "jaw_front.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 1336.0301
+      },
+      "jaw_front.stl": {
+        "sha256": "77549339d49c654700271bd4f483efc641794196d2c510ae5258ae4c8b6a4063",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1336.2103,
+        "bounds_mm": [
+          [
+            -13.0,
+            12.0,
+            0.0
+          ],
+          [
+            13.0,
+            19.0,
+            9.0
+          ]
+        ]
+      },
+      "retainer_left.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 275.6832
+      },
+      "retainer_left.stl": {
+        "sha256": "acef66e5b63bf2272ab1dd42463247afae325c7bdcf0a09634d9122fa9457ced",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 275.7049,
+        "bounds_mm": [
+          [
+            -26.7,
+            -20.0,
+            0.0
+          ],
+          [
+            -20.7,
+            20.0,
+            2.0
+          ]
+        ]
+      },
+      "retainer_right.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 275.6832
+      },
+      "retainer_right.stl": {
+        "sha256": "6deda651541f9e41f0052363557b493b871f330200ae60f17cdb69e51ce55ef4",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 275.7049,
+        "bounds_mm": [
+          [
+            20.7,
+            -20.0,
+            0.0
+          ],
+          [
+            26.7,
+            20.0,
+            2.0
+          ]
+        ]
+      },
+      "spine.step": {
+        "solids": 1,
+        "valid": true,
+        "volume_mm3": 11411.4723
+      },
+      "spine.stl": {
+        "sha256": "66e95f4894ae343c5457173857be77851516e281833491537ae8ae7adb47e1f1",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 11412.0299,
+        "bounds_mm": [
+          [
+            -27.0,
+            -24.0,
+            0.0
+          ],
+          [
+            27.0,
+            24.0,
+            29.0
+          ]
+        ]
+      }
+    },
+    "geometry_metrics_reproduced": true
+  }
+}
