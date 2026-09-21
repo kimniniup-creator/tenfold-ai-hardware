@@ -1,0 +1,87 @@
+{
+  "2673323-concentric-sphere": {
+    "sha": "8ba49f0d8c56d5c531611860dcf0996722f94a82",
+    "artifacts": {
+      "palm_cradle.stl": {
+        "sha256": "b38db2437e59ac6323e1ab00469ae0e7961a6d6e922d20725df53d2dcd0ceeb8",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 23351.4657,
+        "bounds_mm": [
+          [
+            -27.0,
+            -31.0,
+            0.0
+          ],
+          [
+            69.0,
+            31.0,
+            20.5
+          ]
+        ]
+      },
+      "retaining_frame.stl": {
+        "sha256": "6aa6fb00283d6470cc31a7cbb9f3c51ae6ad825adce07555dd4a2d1edff06535",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1395.4978,
+        "bounds_mm": [
+          [
+            31.8,
+            -30.2,
+            20.5
+          ],
+          [
+            68.2,
+            30.2,
+            23.0
+          ]
+        ]
+      }
+    },
+    "regeneration_exit": 0,
+    "regenerated": {
+      "palm_cradle.stl": {
+        "sha256": "b38db2437e59ac6323e1ab00469ae0e7961a6d6e922d20725df53d2dcd0ceeb8",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 23351.4657,
+        "bounds_mm": [
+          [
+            -27.0,
+            -31.0,
+            0.0
+          ],
+          [
+            69.0,
+            31.0,
+            20.5
+          ]
+        ]
+      },
+      "retaining_frame.stl": {
+        "sha256": "6aa6fb00283d6470cc31a7cbb9f3c51ae6ad825adce07555dd4a2d1edff06535",
+        "watertight": true,
+        "winding": true,
+        "components": 1,
+        "volume_mm3": 1395.4978,
+        "bounds_mm": [
+          [
+            31.8,
+            -30.2,
+            20.5
+          ],
+          [
+            68.2,
+            30.2,
+            23.0
+          ]
+        ]
+      }
+    },
+    "geometry_metrics_reproduced": true
+  }
+}
