@@ -17,3 +17,5 @@ PM：01a0c5b4-a19c-7810-8c6e-d8a87bb68f70；测试：01a0c5b4-aff1-7102-85c2-bb1
 最终机械矩阵已锁独测00d5e76；三款O1 PASS、O4 NOT_TESTED，详见ORIGINAL_MODEL_MATRIX。软件锁a5b99b0/34BB，只关闭15条Java状态/ACK/U10数据反例；等待同包独测与PM最终视觉，不接旧包结论。
 
 最终验收完成：O1/O2限定通过，O3/O4未测。总控可集成验收分支最终提交；当前入口ORIGINAL_REVIEW首部、ORIGINAL_MODEL_MATRIX、state-probe/result-6e2bf0e.txt。APK6e2bf0e/B960与固件0e7b044/ZIP394376分开锁；独测c6f044b与PM a8cd787最终回执已审。无需再等待其他验收动作；发布/飞书发送由总控按原授权处理。保留真实LLM/物理手机/M5/实打未测和单周期固件限制。
+
+许可证最终补包：698e344只增许可证/notices/说明，最终唯一固件ZIP为tenfold-firmware-p0-final.zip，SHA256 629A330BA42C19D713EAB3F454DF322A5099144627589B28FF294F12D2F9187A。已核16项及包内app/factory哈希未变，旧r05.zip不再作为发布入口；不改变O1–O4结论。
