@@ -1,0 +1,64 @@
+{
+  "source_ball_diameter_verified": false,
+  "ball_diameter_assumed_mm": 60.0,
+  "supported_parameter_range_mm": [
+    50,
+    80
+  ],
+  "m5_envelope_mm": [
+    48,
+    24,
+    15
+  ],
+  "m5_xy_clearance_per_side_mm": 0.4,
+  "m5_top_gap_mm": 0.5,
+  "ball_seat_nominal_radial_clearance_mm": 0.6,
+  "physical_print_tested": false,
+  "parts": {
+    "palm_cradle": {
+      "watertight": true,
+      "positive_volume": true,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -27.0,
+          -30.200000762939453,
+          0.0
+        ],
+        [
+          68.19999694824219,
+          30.200000762939453,
+          20.5
+        ]
+      ],
+      "volume_mm3": 23023.267021438154
+    },
+    "retaining_frame": {
+      "watertight": true,
+      "positive_volume": true,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          31.799999237060547,
+          -30.200000762939453,
+          20.5
+        ],
+        [
+          68.19999694824219,
+          30.200000762939453,
+          23.0
+        ]
+      ],
+      "volume_mm3": 1395.497814128521
+    }
+  },
+  "interference_mm3": {
+    "palm_cradle": 0.0,
+    "retaining_frame": 0.0,
+    "base_frame": 0.0,
+    "ball_base": 0.0,
+    "ball_frame": 0.0,
+    "ball_m5": 0.0
+  },
+  "rotation_check": "360-degree envelope invariant; original nested layers NOT verified"
+}
