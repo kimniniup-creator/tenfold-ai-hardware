@@ -98,6 +98,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     if(cycle.canComplete())button("这一步已完成",v->completeToday());
     primaryButton("今天到这里",v->showSeal());
     if(cycle.isSimulated()){label("演示工具",11,Color.GRAY);button("演示：进入下一天",v->{if(!cycle.advanceDemoDay()){toast("演示日期保存失败");return;}showHome();});}
+    if(cycle.hasArchive())button("查看旧周期回顾",v->showArchive());
     button("设置与设备",v->showSettings());
   }
 
@@ -160,7 +161,8 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("昨天停在这里",cycle.isSimulated()?"模拟设备 · 演示第 "+cycle.day()+" 天":truthLine());
     TextView stop=label("昨天停在\n"+cycle.stopNote(),15,Color.LTGRAY);card(stop);
     TextView first=label("现在第一步\n"+cycle.recoveryCard(),20,Color.WHITE);card(first);
-    primaryButton("从这里接着做",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}syncConfirmedCardIfConnected();showHome();});
+    EditText done=field("做到这样就够",cycle.text("done"));
+    primaryButton("从这里接着做",v->{if(!cycle.resumeExisting(done.getText().toString())){liveStatus.setText("SAVE FAILED · 请确认完成条件，仍保留恢复页");return;}syncConfirmedCardIfConnected();showHome();});
     button("编辑恢复动作",v->showNewAction());
   }
 
@@ -197,7 +199,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
 
   private void requestProposal(String goal,String stuck,int minutes,EditText action,EditText done,EditText recovery){
     liveStatus.setText("REAL LLM REQUEST · 发送字段：目标、卡点、剩余分钟");
-    new Thread(()->{try{AgentClient.Proposal proposal=agent.propose(goal,stuck,minutes);runOnUiThread(()->{if(action!=null)action.setText(proposal.action);if(done!=null)done.setText(proposal.doneWhen);if(recovery!=null)recovery.setText(proposal.recovery);liveStatus.setText("REAL LLM CANDIDATE · 必须由你确认\n"+proposal.explanation);});}catch(Exception error){runOnUiThread(()->liveStatus.setText("LLM FAILED · 已保留本地内容 · "+error.getMessage()));}},"tenfold-agent").start();
+    new Thread(()->{try{AgentClient.Proposal proposal=agent.propose(goal,stuck,minutes);runOnUiThread(()->{if(action!=null)action.setText(proposal.action);if(done!=null)done.setText(proposal.doneWhen);if(recovery!=null)recovery.setText(proposal.recovery);liveStatus.setText(truthLine()+"\nREAL LLM CANDIDATE · 必须由你确认\n"+proposal.explanation);});}catch(Exception error){runOnUiThread(()->liveStatus.setText(truthLine()+"\nLLM FAILED · 已保留本地内容 · "+error.getMessage()));}},"tenfold-agent").start();
   }
 
   private void connectOrRetry(){
@@ -236,6 +238,6 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
   private void sendOutboxHead(){if(!sessionValidated||!cycle.deviceSaved())return;JSONObject pending=outbox.peek();if(pending!=null)usb.send(pending);}
   private void syncConfirmedCardIfConnected(){if(!sessionValidated)return;if(cycle.markPending())usb.send(DeviceProtocol.offer(prefs));}
   private int clampMinutes(String raw){try{return Math.max(5,Math.min(45,Integer.parseInt(raw)));}catch(Exception ignored){return 12;}}
-  private String progressLine(){StringBuilder line=new StringBuilder("十日进度  ");for(int i=1;i<=10;i++)line.append(i==cycle.day()?"● ":"○ ");return line.toString();}
+  private String progressLine(){StringBuilder line=new StringBuilder("十日记录  ");for(int i=1;i<=10;i++){if(cycle.dayStatus(i).startsWith("COMPLETED"))line.append("● ");else if(i==cycle.day())line.append("[○] ");else line.append("○ ");}return line.append("\n● 已完成  [○] 今天  ○ 未记录").toString();}
   private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
 }
