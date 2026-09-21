@@ -11,11 +11,11 @@ Package `io.tenfold.app`, version `0.1.0-p0` (`versionCode 1`), minSdk 26, targe
 
 ## Build and install
 
-From any working directory:
+From the cloned repository root, with JDK tools on `PATH` and `ANDROID_HOME` pointing at an Android SDK containing platform/build-tools 35:
 
 ```powershell
-& 'D:\tenfold-worktrees\android\scripts\build-apk.ps1'
-E:\Android\Sdk\platform-tools\adb.exe install -r 'D:\tenfold-worktrees\android\android-app\out-release\tenfold-p0.apk'
+& .\scripts\build-apk.ps1
+& (Join-Path $env:ANDROID_HOME 'platform-tools\adb.exe') install -r .\android-app\out-release\tenfold-p0.apk
 ```
 
 The script resolves its repository root from `PSScriptRoot`, only deletes the exact ignored `android-app/out-release` directory, asserts a root `classes.dex`, and signs with `.signing/tenfold-demo.jks`. The signing directory is ignored and the key is generated only once. Stable demo certificate SHA-256:
@@ -48,13 +48,28 @@ The screen uses M5GFX `efontCN_12`, fits UTF-8 text by measured pixel width with
 
 ```powershell
 python -m pip install --user platformio
-python -m platformio run -d D:\tenfold-worktrees\android\firmware
-python -m platformio run -d D:\tenfold-worktrees\android\firmware -t upload --upload-port COMx
+python -m platformio run -d firmware
+python -m platformio run -d firmware -t upload --upload-port COMx
 ```
 
 Enter StickS3 download mode using the official procedure (hold the reset/power control for about two seconds until its green LED indicates download mode), replace `COMx` with the enumerated port, and run the upload command. PlatformIO writes the board-defined bootloader/partition/app offsets; it does not issue a full-chip erase. Do not use `erase_flash` because that would remove NVS state.
 
-After a successful build, reusable artifacts are under `firmware/.pio/build/m5stack-sticks3/`. The exact manual offsets must be taken from the successful PlatformIO upload command for this locked board configuration; do not guess offsets or flash a single app binary at address zero. A merged binary and verified offsets are recorded only after the first successful compile.
+The locked build completed successfully with PlatformIO Espressif32 6.12.0, M5Unified 0.2.22, M5GFX 0.2.29 and ArduinoJson 7.4.3. It used 22,676 bytes RAM (6.9%) and 715,645 bytes program space (21.4%). The release ZIP contains reusable, checksummed binaries; its manifest and flashing helper live under `firmware/release/p0/`.
+
+The exact offsets emitted by the successful PlatformIO upload dry run are:
+
+- `0x0000 bootloader.bin`
+- `0x8000 partitions.bin`
+- `0xe000 boot_app0.bin`
+- `0x10000 firmware.bin`
+
+For routine updates that preserve NVS state:
+
+```powershell
+powershell -File .\firmware\release\p0\flash.ps1 -Port COMx
+```
+
+Use `-Mode Provision` for the four exact PlatformIO segments on a new board. `-Mode Factory` writes `tenfold-p0-factory.bin` at address zero and fills the intervening address space; it is for an empty board only because it **overwrites the NVS gap and erases saved Tenfold state**. Never flash the standalone app binary at address zero.
 
 ## Protocol v1
 
@@ -70,8 +85,8 @@ UTF-8 newline JSON, maximum 4096 bytes. Oversize frames are discarded through th
 
 - [Android USB Host API](https://developer.android.com/develop/connectivity/usb/host) — official Android documentation used for permission, interface claiming and worker-thread transfers.
 - [M5StickS3 official documentation](https://docs.m5stack.com/en/core/StickS3) and [button API](https://docs.m5stack.com/en/arduino/m5sticks3/button) — board/build/button behavior.
-- [M5Unified](https://github.com/m5stack/M5Unified) — MIT License; firmware display/button framework.
-- [ArduinoJson](https://github.com/bblanchon/ArduinoJson) — MIT License; pinned through PlatformIO to `^7.3.1` for strict parsing.
+- [M5Unified](https://github.com/m5stack/M5Unified) 0.2.22 and [M5GFX](https://github.com/m5stack/M5GFX) 0.2.29 — MIT License; firmware board, display, font and button support.
+- [ArduinoJson](https://github.com/bblanchon/ArduinoJson) 7.4.3 — MIT License; exact PlatformIO lock for strict parsing.
 - [usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android) — MIT License; reviewed as the fallback if the current single-board CDC implementation fails real OTG testing. It is not bundled in this dependency-free APK.
 
-No M5StickS3 was connected during implementation. Source and binary compilation evidence do not replace the required real-phone OTG + real-board offer/ACK/offline-key/reconnect test.
+No M5StickS3 was connected during implementation. The firmware was compiled and linked, and a no-device upload dry run verified the offsets, but that evidence does not replace the required real-phone OTG + real-board offer/ACK/offline-key/reconnect test.

@@ -12,4 +12,6 @@ android-app/out-*/
 *.apk
 *.jks
 firmware/.pio/
+firmware/release/**/*.bin
+firmware/release/*.zip
 .signing/
