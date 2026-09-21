@@ -4,12 +4,12 @@
 
 | 排序/方案 | 冻结版本 | O1数字制造状态 | 制造与玩法边界 |
 |---|---|---|---|
-| 1 环轨光滑版 | 7a370bc0a7f229ff0cf9a87dcb91861b34325723 | 最终9STL独测均exit0/无警告/无空层；待测试薄缘关闭回执 | 5功能件/4校准；PLA；先默认径向.50；钢珠弹簧可选；M3实长/不完整牙按BOM，最差有效啮合2.2mm为计算 |
+| 1 环轨光滑版 | 7a370bc0a7f229ff0cf9a87dcb91861b34325723 | PASS；完整build、9STL重建一致/10STEP有效，9STL实切通过；顶层连续多条挤出，O-ORB-01关闭 | 5功能件/4校准；PLA；先默认径向.50；钢珠弹簧可选；M3实长/不完整牙按BOM，最差有效啮合2.2mm为计算 |
 | 2 十粒掌盘 | e76eb52fcb819c522b55f548640e4c211dbc93e8；几何fff7295、排版5526578 | PASS，默认M5/.3径向先校准的数字试打包 | 16功能塑件实例，8螺钉8螺母/EVA；10根重力翻转复位销，无弹簧点击；三板独测均exit0/无警告/无空层 |
-| 3 旋压双舱 | 5ef401391cb6ae7f22d43eb84c3066f7294dbc92 | 新body切片通过，待改变件/混合紧固独测终结 | 完整旋压需PETG按片；优先混合M3，PLA单旋是降级；body需支撑和6mm brim，套筒3mm brim；侧键/Reset/HAT必要时抽出托盘 |
+| 3 旋压双舱 | 5ef401391cb6ae7f22d43eb84c3066f7294dbc92 | PASS；完整cad/check退出0，22STL重建一致/24STEP有效；27实体与官方M5相交0；O-PRESS-02关闭 | 完整旋压需PETG按片；优先混合M3，PLA单旋是降级；body需支撑和6mm brim，套筒3mm brim；侧键/Reset/HAT必要时抽出托盘 |
 
-直接审查证据：各最终README/PRINT_FIRST、原始代码与修订差异、几何验证JSON与装配图；独测JSON包括pin-fff7295-solid-slice、pin-5526578-plates-solid/structure、orbit-7a370bc-slice、press-5ef4013-body。独测配置通用PLA .4喷嘴/.2层高，不是用户机型G-code。后续以测试最终提交锁定报告。
+直接审查证据：各最终README/PRINT_FIRST、原始代码与修订差异、几何验证JSON与装配图；独测JSON包括pin-fff7295-solid-slice、pin-5526578-plates-solid/structure、orbit-7a370bc-slice、press-5ef4013-body。独测配置通用PLA .4喷嘴/.2层高，不是用户机型G-code。独测最终提交00d5e76，入口docs/hackathon/testing/original/MECHANICAL_VERDICT.md；已直接读取该冻结报告。
 
-已关闭针板O-PIN-01：耳外缘1.25mm，新sled哈希be68471b84b3cbf80df236ebb4f39bad536c03a41b3c7c50758c97f89f2dc2d1，100%rectilinear复切通过；三板单件几何不变。环轨DOC01/MFG01已关闭；bossR4.2/圆角.2留.8顶唇、全STL落床和螺纹公差与源码一致。旋压新body背限位移Y±8、锁销平底、校准孔块8mm及hybrid占位已读差异，独测继续验证。
+已关闭针板O-PIN-01：耳外缘1.25mm，新sled哈希be68471b84b3cbf80df236ebb4f39bad536c03a41b3c7c50758c97f89f2dc2d1，100%rectilinear复切通过；三板单件几何不变。环轨DOC01/MFG01已关闭；bossR4.2/圆角.2留.8顶唇、全STL落床和螺纹公差与源码一致。旋压新body背限位移Y±8、锁销平底、校准孔块8mm及hybrid占位已读差异，完整回归及复切已由独测关闭。
 
 全部O4仍NOT_TESTED：实物配合、摩擦/弹性、手感、全姿态保持、实际插头和按键。首打后先不装电子验证运动与保持，再装M5验证USB/键；任何紧涩或螺纹不满足说明即停止修配，不靠强压。
