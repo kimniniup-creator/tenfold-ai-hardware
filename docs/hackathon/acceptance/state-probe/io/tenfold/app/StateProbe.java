@@ -11,10 +11,12 @@ public class StateProbe {
     public boolean getBoolean(String k,boolean d){return (Boolean)ram.getOrDefault(k,d);}
     public Editor edit(){return new Editor(){
       Map<String,Object> pending=new HashMap<>();
+      Set<String> removed=new HashSet<>();
+      public Editor remove(String k){removed.add(k);return this;}
       public Editor putString(String k,String v){pending.put(k,v);return this;}
       public Editor putInt(String k,int v){pending.put(k,v);return this;}
       public Editor putBoolean(String k,boolean v){pending.put(k,v);return this;}
-      public boolean commit(){ram.putAll(pending);if(fail)return false;disk.putAll(pending);return true;}
+      public boolean commit(){removed.forEach(ram::remove);ram.putAll(pending);if(fail)return false;removed.forEach(disk::remove);disk.putAll(pending);return true;}
     };}
     void restart(){ram=new HashMap<>(disk);}
   }

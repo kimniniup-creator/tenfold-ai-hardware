@@ -85,3 +85,13 @@
 | CS06 真实日期未驱动next/resume/review | P1，USB模式无次日按钮且无日期转换 | REPRODUCED |
 
 最小可交付修复：模拟与真实存储隔离或显式结束模拟后创建新真实周期；持久化失败必须返回错误并禁止保存成功提示；设备事件完整绑定且支持离线重放；真实日期转换进入恢复/新动作/回顾。O2完整旅程仍NO-GO；安装测试可独立继续。O3保持NOT_TESTED且源码仍有阻断项。
+
+### 6883063修复回归
+
+固定版本`6883063c63b9bea1dc658d5e62fa5ec120ad3e24`，新增StateProbeV2，旧probe与结果保留。命令：`state-probe/run.ps1 -Revision 6883063c63b9bea1dc658d5e62fa5ec120ad3e24 -Probe StateProbeV2`。原CS01–06六项均NOT_REPRODUCED：旧字段清理、显式新真实周期、ACTIVE守卫、失败返回值、事件绑定及次日转换已有针对性修复。
+
+新增CS04B/CS07仍REPRODUCED：commit=false时内存已SEALED/DONE，返回首页可显示未落盘状态；complete重试受DONE guard阻止，重启后完成事实丢失。stub并非把失败误当成功：[Android官方SharedPreferencesImpl](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/app/SharedPreferencesImpl.java)的commit先修改内存，再等待磁盘写入结果。领域状态必须区分已持久化快照与失败待保存内容。
+
+协议源码改进确认：snapshotVersion只在active提交成功后推进，固件超长帧丢弃至换行，关联offer ACK后发送队首，Android读帧与写操作增加generation。未关闭：connect本身仍并发使用共享成员；固件hello仅setup发送，重连握手缺明确定义；实体pending仅单字符串，离线complete(seq1)再seal(seq2)覆盖前者，重连仅seq2而手机last0严格+1拒绝，需FIFO或明确阻止未确认时继续产生事件。
+
+以上已发作者和协调；属于修复回归，不声称APK安装、固件编译、板卡通信通过。
