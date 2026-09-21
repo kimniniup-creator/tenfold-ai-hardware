@@ -1,0 +1,11 @@
+{
+  "observed_source_head": "f042ce8b13354101e0ba3493e08722626d09f562",
+  "apk_sha256": "da919b205d83e22a912563d5aa11f5be84424f0877463bc92311819441237472",
+  "root_classes_dex": true,
+  "dex_entries": [
+    "classes.dex"
+  ],
+  "status": "PASS_ROOT_DEX_LAYOUT_ONLY",
+  "issue": "S-A05",
+  "scope": "Local candidate changed during implementation. Root DEX rechecked; source HEAD is not proof of build provenance. Frozen final APK installation pending."
+}

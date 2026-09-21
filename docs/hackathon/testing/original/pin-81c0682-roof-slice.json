@@ -1,0 +1,67 @@
+{
+  "sha": "81c0682bb11d53718cc01d15f39467f1a6f6a813",
+  "path": "design/hackathon/original-pin-fidget",
+  "slicer": "PrusaSlicer 2.9.6",
+  "profile_sha256": "bc3dfa464d0c8f325b3fb307355df7614027d04e392654c135dc0cac19ada8be",
+  "supports_enabled": false,
+  "physical_print_tested": false,
+  "parts": {
+    "exports/calibration_roof.stl": {
+      "file_sha256": "aa06be555560384ed4a1d84f66be65950043520e8c16fee59771182733f4a69d",
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "volume_mm3": 614.4000244140625,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          16.0,
+          16.0,
+          2.4
+        ]
+      ],
+      "extents_mm": [
+        16.0,
+        16.0,
+        2.4
+      ],
+      "source_zmin_mm": 0.0,
+      "faces": 12,
+      "normal_ray_chord_sample": {
+        "samples": 512,
+        "hits": 512,
+        "min_mm": 2.4000000953674316,
+        "p05_mm": 2.4000000953674316,
+        "below_0p8mm": 0,
+        "not_global_minimum_wall_proof": true
+      },
+      "slice_exit": 0,
+      "warnings": [],
+      "toolpath": {
+        "declared_layers": 12,
+        "layers_with_extrusion": 12,
+        "empty_declared_layers": [],
+        "extrusion_segments": 1577,
+        "support_segments": 0,
+        "roles": [
+          "Bridge infill",
+          "External perimeter",
+          "Internal infill",
+          "Perimeter",
+          "Solid infill",
+          "Top solid infill"
+        ],
+        "summary": {
+          "filament used [mm]": "245.34",
+          "filament used [cm3]": "0.59",
+          "filament used [g]": "0.73",
+          "estimated printing time (normal mode)": "4m 49s"
+        }
+      }
+    }
+  }
+}
