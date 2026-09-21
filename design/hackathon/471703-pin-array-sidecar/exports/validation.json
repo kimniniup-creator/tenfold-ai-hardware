@@ -82,6 +82,16 @@
   "cover_device_axial_clearance_mm": 0.3,
   "nominal_lateral_clearance_mm": 0.5,
   "source_pin_motion_check": "BLOCKED: source STL and pin travel unavailable",
+  "m5_z_stack_mm": {
+    "rigid_floor_top": 2.5,
+    "eva_total_thickness": 0.5,
+    "eva_bottom": 2.5,
+    "eva_top": 3.0,
+    "device_bottom": 3.0,
+    "device_top": 18.0,
+    "cover_underside": 18.3,
+    "clearance_with_pad": 0.3
+  },
   "clamp_contact": "0.5 mm pad allowance each side for parameterized rectangular rim ONLY",
   "clamp_closure_sweep": {
     "samples": 11,

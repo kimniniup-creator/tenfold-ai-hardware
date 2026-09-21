@@ -32,7 +32,7 @@ def volume(s):
 # Device axes: X=48 long, Y=24 wide, Z=15 thick. 0.5 mm lateral allowance.
 # Device lower corner (8,8,3); nominal front surface Z=18.
 base=box(0,0,0,64,40,2.5).edges('|Z').fillet(3)
-# Four pads: 0.5 mm optional adhesive EVA sits below nominal envelope.
+# 0.5 mm total EVA+adhesive occupies Z=2.5..3.0, already included in device Z=3.
 # Four open corner guides; sides and ends have large uninterrupted access.
 for x in [3,61]:
     for y in [3,37]:
@@ -115,6 +115,9 @@ for (n1,s1,_),(n2,s2,_) in itertools.combinations(assembled+[('M5_envelope',devi
     assert v<1e-5,(n1,n2,v)
 # Clamp parallel closure sweeps only against example static coupon, not original pinboard.
 # 0.5 mm pads per side; board can be installed sideways with screws removed.
+checks['m5_z_stack_mm']={'rigid_floor_top':2.5,'eva_total_thickness':0.5,'eva_bottom':2.5,'eva_top':3.0,'device_bottom':3.0,'device_top':18.0,'cover_underside':18.3,'clearance_with_pad':0.3}
+assert abs((2.5+0.5)-device.val().BoundingBox().zmin)<1e-8
+assert abs((cover.val().BoundingBox().zmin-device.val().BoundingBox().zmax)-0.3)<1e-8
 checks['clamp_contact']='0.5 mm pad allowance each side for parameterized rectangular rim ONLY'
 checks['clamp_closure_sweep']={'samples':11,'travel_mm':0.4,'scope':'independent clamp only; original pinboard absent'}
 for y in [9,31]:
