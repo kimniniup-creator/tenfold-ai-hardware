@@ -131,3 +131,9 @@ R17/T19/U10检查：D1未完成与D2完成分开保留、归档后新建并重�
 Java状态/ACK/R17数据层范围PASS；O2整体仍待同APK稳定签名覆盖安装、T19实际操作和PM视觉关闭。O3编译/板卡另判。本轮未继续扩展非交付范围。
 
 最终机械门O1：三款均在各自README材料/校准/装配条件下PASS（数字试打包）。独立测试提交00d5e76已直接读取MECHANICAL_VERDICT：40种单件STL+3针板排版实际切片证据齐，最终CAD重建/STEP回读一致，O-PIN-01/O-ORB-01/O-PRESS-02全部关闭。唯一首推环轨PLA光滑版；完整矩阵见ORIGINAL_MODEL_MATRIX.md。O4全款NOT_TESTED，不把制造证据写成手感/强度/USB实测。
+
+### R17剩余边界阻断：34BB暂不发布
+
+协调要求补验已确认ACTIVE未封存跨日、实体完成/封存日事实和末日ACTIVE。StateProbeV5对a5b99b00f94bf81b7e922cdc0c0b76b224c386da运行真实CycleState，`result-a5b99b0-r17.txt`共22条：原15条仍NOT_REPRODUCED；新增7条中6条REPRODUCED（演示/真实跨日丢ACTIVE快照、当前设备complete/seal不写日槽、末日ACTIVE进入review/archive丢失）。未确认RESUME漏日不造记录反例NOT_REPRODUCED，作为修复防回归。
+
+PM244c415产品限定通过只覆盖已封存/完成日与一个旧档，不能外推这些边界。O2保持NO-GO等待最小增量修复；34BB不发布。要求仅对已确认ACTIVE/DONE/SEALED快照，RESUME/NEXT空槽不补造；设备事件seq/事实同事务；review/归档包含末日已确认动作。不扩任意多周期历史。已直接通知软件、协调与独测。
