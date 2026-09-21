@@ -33,5 +33,16 @@
   "headless": true,
   "physical_phone_tested": false,
   "usb_board_tested": false,
-  "setup_note": "Official archives installed after sdkmanager network stalls; emulator local package metadata added, avdmanager created AVD. No low-target bypass used."
+  "setup_note": "Official archives installed after sdkmanager network stalls; emulator local package metadata added, avdmanager created AVD. No low-target bypass used.",
+  "guest_timezone": "GMT",
+  "demo_cycle_start_observed": "2026-09-21",
+  "large_font_test": {
+    "resolution": [
+      900,
+      1950
+    ],
+    "density_dpi": 440,
+    "font_scale": 1.3,
+    "restored_default": true
+  }
 }

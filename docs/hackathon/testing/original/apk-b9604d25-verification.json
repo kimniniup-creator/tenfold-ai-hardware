@@ -1,0 +1,27 @@
+{
+  "source_commit": "6e2bf0e32edf5ff4a2f80659dcc9082bfcec6831",
+  "apk_sha256": "b9604d2572cad083f2a72d1d95628985efbdb565e93fa4b9a3bbfb19c76259a8",
+  "certificate_sha256": "eb55b62c374f6a58766625f52b83ba34b17e8a6b8c0d2cb95257781884cb153a",
+  "signature_v2_verified": true,
+  "signature_v3_verified": true,
+  "package": "io.tenfold.app",
+  "version_code": 1,
+  "version_name": "0.1.0-p0",
+  "min_sdk": 26,
+  "target_sdk": 35,
+  "permissions": [
+    "android.permission.INTERNET"
+  ],
+  "install_without_bypass": true,
+  "same_signature_update_succeeded": true,
+  "cold_launch": "Status ok",
+  "crash_buffer_empty": true,
+  "environment": "android-environment.json",
+  "physical_device_tested": false,
+  "usb_hardware_tested": false,
+  "llm_success_tested": false,
+  "screenshots": "apk-b9604d25-ui",
+  "uat_status": "PASS_SCOPED",
+  "scope": "Same-signature update; prior archive and seal retention; confirmed ACTIVE across days and day10 review; cold restart; new cycle; demo cleanup and explicit pending hardware. No physical device/LLM success.",
+  "runtime_assertions_passed": true
+}
