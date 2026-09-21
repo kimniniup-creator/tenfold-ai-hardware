@@ -103,6 +103,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
 
   private void showSetup(){
     page("建立唯一十日承诺。","手填始终可用 · Agent只提议，不自动激活");
+    if(cycle.hasArchive())button("查看上个周期回顾",v->showArchive());
     EditText goal=field("十日想交付什么","");
     EditText stuck=field("今天卡在哪","");
     EditText minutes=field("今晚剩余分钟（5–45）","12"); minutes.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -159,7 +160,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("昨天停在这里",cycle.isSimulated()?"模拟设备 · 演示第 "+cycle.day()+" 天":truthLine());
     TextView stop=label("昨天停在\n"+cycle.stopNote(),15,Color.LTGRAY);card(stop);
     TextView first=label("现在第一步\n"+cycle.recoveryCard(),20,Color.WHITE);card(first);
-    primaryButton("从这里接着做",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}showHome();});
+    primaryButton("从这里接着做",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}syncConfirmedCardIfConnected();showHome();});
     button("编辑恢复动作",v->showNewAction());
   }
 
@@ -167,14 +168,21 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("今天需要一张新卡。",truthLine());
     label("昨天已完成；同一动作不会自动再算一天。",16,Color.WHITE);
     EditText action=field("今天最小一步",""); EditText done=field("新的完成条件","");
-    primaryButton("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}if(!cycle.confirmNewAction(action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 新动作没有激活");return;}showHome();});
+    primaryButton("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}if(!cycle.confirmNewAction(action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 新动作没有激活");return;}syncConfirmedCardIfConnected();showHome();});
   }
 
   private void showReview(){
     page("十日周期到这里。",truthLine());
-    label("完成了什么\n"+(cycle.completed()?cycle.text("action"):"没有把未完成改写成完成"),16,Color.WHITE);
-    label("留下的入口\n"+cycle.recoveryCard(),16,lime);
+    TextView summary=label(cycle.reviewSummary(),14,Color.WHITE);card(summary);
     label("P0 不会自动进入第 11 天。",14,Color.LTGRAY);
+    primaryButton("结束本周期",v->{if(!cycle.archive()){liveStatus.setText("ARCHIVE FAILED · 周期仍保持激活");return;}showArchive();});
+    button("结束并开始新周期",v->{if(!cycle.archive()){liveStatus.setText("ARCHIVE FAILED · 周期仍保持激活");return;}showSetup();});
+  }
+
+  private void showArchive(){
+    page("上个周期回顾","只读归档 · 不会被新周期覆盖");
+    TextView archive=label(cycle.archivedSummary(),14,Color.WHITE);card(archive);
+    button("返回",v->{if(cycle.hasCycle())showHome();else showSetup();});
   }
 
   private void showSettings(){
@@ -219,13 +227,14 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
       int seq=frame.optInt("seq",-1);boolean matches=sessionDeviceId.equals(frame.optString("device_id"))&&frame.optString("cycle_id").equals(cycle.text("cycle_id"))&&frame.optString("command_id").equals(cycle.commandId())&&frame.optInt("revision",-1)==prefs.getInt("revision",1);
       if(matches&&outbox.acknowledge(seq)){if(liveStatus!=null)liveStatus.setText("DEVICE EVENT SAVED · seq "+seq);sendOutboxHead();}
     }else if("event".equals(type)){
-      int seq=frame.optInt("seq",-1);boolean sameCycle=frame.optString("cycle_id").equals(cycle.text("cycle_id"));boolean current=sessionDeviceId.equals(frame.optString("device_id"))&&cycle.acceptDeviceEvent(frame.optString("device_id"),frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1),seq,frame.optString("event_type"));if(current||sameCycle)usb.send(DeviceProtocol.eventAck(frame,seq));showHome();
+      int seq=frame.optInt("seq",-1);boolean saved=sessionDeviceId.equals(frame.optString("device_id"))&&cycle.acceptDeviceEvent(frame.optString("device_id"),frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1),seq,frame.optString("event_type"));if(saved)usb.send(DeviceProtocol.eventAck(frame,seq));showHome();
     }else if("status".equals(type)){
       boolean matched=sessionDeviceId.equals(frame.optString("device_id"))&&frame.optInt("protocol",-1)==1&&frame.optBoolean("persisted",false)&&cycle.acceptDeviceAck(frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1));
       if(!matched)usb.send(DeviceProtocol.offer(prefs));else{usb.send(DeviceProtocol.setTime(prefs));sendOutboxHead();}showHome();
     }
   }
   private void sendOutboxHead(){if(!sessionValidated||!cycle.deviceSaved())return;JSONObject pending=outbox.peek();if(pending!=null)usb.send(pending);}
+  private void syncConfirmedCardIfConnected(){if(!sessionValidated)return;if(cycle.markPending())usb.send(DeviceProtocol.offer(prefs));}
   private int clampMinutes(String raw){try{return Math.max(5,Math.min(45,Integer.parseInt(raw)));}catch(Exception ignored){return 12;}}
   private String progressLine(){StringBuilder line=new StringBuilder("十日进度  ");for(int i=1;i<=10;i++)line.append(i==cycle.day()?"● ":"○ ");return line.toString();}
   private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
