@@ -2,11 +2,13 @@
 
 Tenfold 是一枚把长期项目压缩成十日承诺的 AI EDC。AI 负责收集、去重和减法，机械盘负责把“回来、完成、停下”变成可触摸的动作。
 
-> 当前黑客松状态：M5StickS3 + 3D 打印机械 EDC 探索。新版 PRD 可执行性已通过独立审查；三版机械附件仍是条件原型，整机装配、用户价值和现场 Demo 尚未通过验证。
+> 当前黑客松状态：从零设计三版完整机械 EDC，并实现 Android APK 与 M5StickS3 通信。原玩具适配附件是前轮实验，不再是本轮交付目标；当前正在进行原创整机数字制造检查与软件安装验证，尚未实物打印。
 
 ## 黑客松实施入口（2026-09-22）
 
 - [当前 PRD](docs/hackathon/product/HACKATHON_PRD.md)：硬件价值、替代方案、实现范围及验证方法。
+- [产品裁决与市场依据](docs/hackathon/product/PRODUCT_DECISION.md)：日常主路径是“今天到这里，明天接得上”，以封存与恢复承接十日承诺。
+- [当前实施约束](RULES.md)：原创完整 EDC、打印装配包、可安装 APK 与真实验证边界。
 - [用户链路与交互协议](docs/hackathon/product/USER_JOURNEY.md)：输入、状态、确认、反馈、离线及恢复规则。
 - [演示与评委问答](docs/hackathon/product/DEMO_AND_QA.md)、[需求验收矩阵](docs/hackathon/product/ACCEPTANCE_MATRIX.md)。
 - [独立验收结论](docs/hackathon/acceptance/REVIEW.md)、[未决项](docs/hackathon/acceptance/BLOCKERS.md)。
