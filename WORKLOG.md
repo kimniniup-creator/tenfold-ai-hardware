@@ -80,4 +80,6 @@
 - 独测最终 c6f044b、产品最终 a8cd787、验收最终 f78d5da 已合并。三款 O1 数字制造 PASS；APK B960 的 O2 本地模拟运行 PASS_SCOPED；O3 实板与 O4 实打仍 NOT_TESTED。
 - 固件 0e7b044 修正按日完成事实保护，698e344 补齐真实依赖许可文本；最终固件 ZIP 629A330B…D2F9187A，app 二进制 FB0EB0D7…236EC09 不变。
 - 最终五项附件通过 scripts/package_delivery.py 从固定 Git 版本和精确哈希生成，公开校验清单保存在 docs/hackathon/release-manifest.json。
-- APK 已通过 offerlai 实际发送给 Kim，消息回读确认附件名称及 bot 身份；待同批 Release 发布和首打 ZIP/说明发送后记录最后回执。
+- 2026-09-22 06:19，GitHub `v0.1.0-hackathon` 已发布为预发布版本，五项附件服务端 SHA 与本地完全一致；重新下载公开 APK 后哈希仍为 B960。
+- APK、首打 Orbit ZIP 和完整交付说明均已通过 offerlai 实际发送给 Kim，三条消息回读确认附件名称、正文与 bot 身份。私人会话信息只保留本地，不进入公开仓库。
+- 全部已授权数字产物交付完成。实物打印、真实手机/M5联调及云 LLM 请求仍须现场验证，未以任何方式标为通过。

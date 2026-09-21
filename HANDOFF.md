@@ -7,7 +7,8 @@
 - Three original printable EDCs are integrated. First print is Orbit-10 PLA smooth ring, calibration pieces before the five functional parts. Pin and press/spin are documented alternatives.
 - Independent manufacturing verdict: `docs/hackathon/testing/original/MECHANICAL_VERDICT.md`. Final APK runtime verdict: `docs/hackathon/testing/original/APK_FINAL.md`. Independent acceptance: `docs/hackathon/acceptance/ORIGINAL_REVIEW.md`.
 - O1 digital manufacturing passes; O2 local simulated Android paths pass. O3 real hardware and O4 physical printing remain untested. Source-state regression passed all 22 cases.
-- Final APK B960 was sent to Kim by the offerlai bot and read back as the expected file attachment. Delivery receipts stay local; private chat identifiers are not published.
+- Release `v0.1.0-hackathon` is published. All five asset hashes match the delivery manifest, and the published APK was downloaded and rehashed successfully.
+- Final APK B960, the recommended Orbit ZIP and the complete delivery instructions were sent to Kim by the offerlai bot. All three messages were read back and verified. Delivery receipts stay local; private chat identifiers are not published.
 
 ## Frozen Android candidate
 
