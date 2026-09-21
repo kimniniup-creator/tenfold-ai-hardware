@@ -70,6 +70,16 @@ if apk:
     (output / name).write_bytes(data)
     artifacts.append({"file": name, "sha256": digest(data), "bytes": len(data)})
 
+for asset in manifest.get("additional_artifacts", []):
+    name = asset["name"]
+    if Path(name).name != name or name in {item["file"] for item in artifacts}:
+        raise ValueError("Additional artifact needs a unique plain filename")
+    data = Path(asset["path"]).read_bytes()
+    if digest(data).lower() != asset["sha256"].lower():
+        raise RuntimeError(f"Artifact differs from the reviewed hash: {name}")
+    (output / name).write_bytes(data)
+    artifacts.append({"file": name, "sha256": digest(data), "bytes": len(data)})
+
 (output / "SHA256SUMS.txt").write_text("".join(f"{item['sha256']}  {item['file']}\n" for item in artifacts), encoding="utf-8")
 (output / "delivery-manifest.json").write_text(json.dumps({"source_commit": revision, "artifacts": artifacts}, indent=2), encoding="utf-8")
 print(json.dumps({"output": str(output), "source_commit": revision, "artifacts": artifacts}, indent=2))
