@@ -8,6 +8,7 @@ dist/
 .env.*
 android-app/build/
 android-app/out/
+android-app/out-*/
 *.apk
 *.jks
 firmware/.pio/
