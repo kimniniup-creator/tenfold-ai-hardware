@@ -1,0 +1,27 @@
+{
+  "corner_cover.step": {
+    "solids": 1,
+    "valid": true,
+    "positive_volume": true
+  },
+  "independent_adapter_assembly.step": {
+    "solids": 6,
+    "valid": true,
+    "positive_volume": true
+  },
+  "lower_clamp.step": {
+    "solids": 1,
+    "valid": true,
+    "positive_volume": true
+  },
+  "sidecar_base.step": {
+    "solids": 1,
+    "valid": true,
+    "positive_volume": true
+  },
+  "upper_clamp.step": {
+    "solids": 1,
+    "valid": true,
+    "positive_volume": true
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "PROTOTYPE_NOT_SOURCE_FITTED",
+  "source_geometry_available": false,
+  "parameters": {
+    "frame_thickness_UNMEASURED": 8,
+    "static_land_UNMEASURED": 6
+  },
+  "device_envelope_mm": [
+    48,
+    24,
+    15
+  ],
+  "parts": {
+    "sidecar_base": {
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        74.0,
+        40.0,
+        18.3
+      ],
+      "volume_mm3": 9847.35
+    },
+    "corner_cover": {
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        64.0,
+        40.0,
+        2.0
+      ],
+      "volume_mm3": 1529.7
+    },
+    "lower_clamp": {
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        18.0,
+        10.0,
+        11.6
+      ],
+      "volume_mm3": 657.58
+    },
+    "upper_clamp": {
+      "watertight": true,
+      "winding_consistent": true,
+      "components": 1,
+      "bounds_mm": [
+        18.0,
+        10.0,
+        3.0
+      ],
+      "volume_mm3": 485.58
+    }
+  },
+  "intersections_mm3": {
+    "base / cover": 0,
+    "base / lower0": 0,
+    "base / upper0": 0,
+    "base / lower1": 0,
+    "base / upper1": 0,
+    "base / M5_envelope": 0,
+    "cover / lower0": 0,
+    "cover / upper0": 0,
+    "cover / lower1": 0,
+    "cover / upper1": 0,
+    "cover / M5_envelope": 0,
+    "lower0 / upper0": 0,
+    "lower0 / lower1": 0,
+    "lower0 / upper1": 0,
+    "lower0 / M5_envelope": 0,
+    "upper0 / lower1": 0,
+    "upper0 / upper1": 0,
+    "upper0 / M5_envelope": 0,
+    "lower1 / upper1": 0,
+    "lower1 / M5_envelope": 0,
+    "upper1 / M5_envelope": 0
+  },
+  "cover_device_axial_clearance_mm": 0.3,
+  "nominal_lateral_clearance_mm": 0.5,
+  "source_pin_motion_check": "BLOCKED: source STL and pin travel unavailable",
+  "clamp_contact": "0.5 mm pad allowance each side for parameterized rectangular rim ONLY",
+  "clamp_closure_sweep": {
+    "samples": 11,
+    "travel_mm": 0.4,
+    "scope": "independent clamp only; original pinboard absent"
+  },
+  "assembly_insertion": "Cover removed: M5 lowers vertically; clamps assembled with bolts removed"
+}
