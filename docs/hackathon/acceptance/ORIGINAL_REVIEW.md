@@ -24,11 +24,11 @@ O1完整排序及BOM条件见[ORIGINAL_MODEL_MATRIX.md](ORIGINAL_MODEL_MATRIX.md
 
 最终固件源码`0e7b04485c09e7d4f987af0036a5fa5175a86326`，Android源码及B960不变。已直接审R05 diff：completed_day进入snapshot/restore，手机与实体完成检查本日已完成，封存不清此事实，失败回滚completedDay；新offer不直接设置timeTrusted，须时间握手。该完成日保护源码复核通过；未做C++状态故障注入或实板测试。
 
-作者实际PlatformIO重编成功，WORKLOG记录RAM22684B/Flash716517B；版本锁未变。本验收独立核对最终资产：
+作者实际PlatformIO重编成功，WORKLOG记录RAM22684B/Flash716517B；版本锁未变。许可证补包提交698e344ca109dba7d34c35f4b8f183ef980d483e，代码与bin不变。唯一发布包为final.zip，共16项，含第三方notices及7份许可证；已直接核对ZIP内部app/factory哈希一致，此项为包装检查而非法律合规审计。本验收独立核对最终资产：
 
 | 资产 | SHA256 |
 |---|---|
-| tenfold-firmware-p0-r05.zip | 39437628A42939591FCA3B794F3BCD8B2243678929CF1856823326C061748CDB |
+| tenfold-firmware-p0-final.zip | 629A330BA42C19D713EAB3F454DF322A5099144627589B28FF294F12D2F9187A |
 | firmware.bin | FB0EB0D71AF40097542D4DFC2E7E33245928E1E5FC80E89567F1DE132236EC09 |
 | tenfold-p0-factory.bin | D89B76676EE6DB86D0BC433CC4F70C540C4651D5EE566A7507A4AE9938387789 |
 
