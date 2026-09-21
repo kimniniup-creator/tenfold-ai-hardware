@@ -91,4 +91,6 @@ UTF-8 newline JSON, maximum 4096 bytes. Oversize frames are discarded through th
 - [ArduinoJson](https://github.com/bblanchon/ArduinoJson) 7.4.3 — MIT License; exact PlatformIO lock for strict parsing.
 - [usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android) — MIT License; reviewed as the fallback if the current single-board CDC implementation fails real OTG testing. It is not bundled in this dependency-free APK.
 
+The firmware release ZIP includes `THIRD_PARTY_NOTICES.md` and the actual license texts copied from the exact installed M5Unified, M5GFX, ArduinoJson and Arduino-ESP32 packages, together with the upstream ESP-IDF 4.4.7 license.
+
 No M5StickS3 was connected during implementation. The firmware was compiled and linked, and a no-device upload dry run verified the offsets, but that evidence does not replace the required real-phone OTG + real-board offer/ACK/offline-key/reconnect test.
