@@ -1,0 +1,25 @@
+{
+  "bolt_centres_x_mm": [
+    -17,
+    -6
+  ],
+  "centre_pitch_mm": 11,
+  "bolt_underhead_length_mm": 20,
+  "limits_mm": {
+    "head_diameter": 6,
+    "head_height": 3,
+    "washer_od": 7,
+    "washer_id": 3.2,
+    "washer_thickness": 0.5,
+    "nut_circumscribed_diameter": 6.4,
+    "nut_height": 2.4,
+    "tool_od": 9,
+    "tool_clear_bore": 6.6,
+    "tool_axial_approach": 30
+  },
+  "hardware_pair_checks": 120,
+  "hardware_printed_checks": 112,
+  "tool_checks": 1196,
+  "closure_checks": 1980,
+  "scope": "M3 clamp hardware only; source board absent; socket nut engagement and hex-key engagement inside bolt head intentionally excluded"
+}

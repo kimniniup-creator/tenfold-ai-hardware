@@ -16,11 +16,11 @@
       "winding_consistent": true,
       "components": 1,
       "bounds_mm": [
-        74.0,
+        85.0,
         40.0,
         18.3
       ],
-      "volume_mm3": 9847.35
+      "volume_mm3": 11101.35
     },
     "corner_cover": {
       "watertight": true,
@@ -38,22 +38,22 @@
       "winding_consistent": true,
       "components": 1,
       "bounds_mm": [
-        18.0,
+        29.0,
         10.0,
         11.6
       ],
-      "volume_mm3": 657.58
+      "volume_mm3": 987.58
     },
     "upper_clamp": {
       "watertight": true,
       "winding_consistent": true,
       "components": 1,
       "bounds_mm": [
-        18.0,
+        29.0,
         10.0,
         3.0
       ],
-      "volume_mm3": 485.58
+      "volume_mm3": 815.58
     }
   },
   "intersections_mm3": {

@@ -46,9 +46,9 @@ for y in [5.5,32.5]:
     for x in [8,52]:
         base=base.union(box(x,y,2.5,4,2,14.8))
 # Mounting flange extends away from the M5 envelope; two clamp screws per station.
-base=base.union(box(-10,1,0,12,38,3))
+base=base.union(box(-21,1,0,23,38,3))
 for y in [9,31]:
-    for x in [-7,-2]:
+    for x in [-17,-6]:
         base=base.cut(hole(x,y,-1,1.7,5))
 
 # Cover supported by corner columns; oversized central opening + only corner tabs.
@@ -66,18 +66,18 @@ for x in [3,61]:
     for y in [3,37]:
         cover=cover.cut(hole(x,y,18,1.45,4))
 
-# Removable clamp lower shoe, two M3 bolts through flange (x=-7,-2).
-# Edge stop at x=-12; frame extends toward negative X, NEVER toward M5.
+# Removable clamp lower shoe, two M3 bolts through flange (x=-17,-6).
+# Edge stop at x=-23; frame extends toward negative X, NEVER toward M5.
 # Sole contacts only LAND mm of static outer rim. Pad=0.5 each side.
-clamp_x=-12-LAND
-lower=box(clamp_x,-5,0,12+LAND,10,3)
-# Vertical edge stop, establishes board edge at X=-12.
-lower=lower.union(box(-12,-5,3,2,10,T+.6))
-for x in [-7,-2]:
+clamp_x=-23-LAND
+lower=box(clamp_x,-5,0,23+LAND,10,3)
+# Vertical edge stop, establishes board edge at X=-23.
+lower=lower.union(box(-23,-5,3,2,10,T+.6))
+for x in [-17,-6]:
     lower=lower.cut(hole(x,0,-1,1.7,6))
 # Upper shoe bridge closes over flange with M3 through bolts/nuts.
-upper=box(clamp_x,-5,T+4,12+LAND,10,3)
-for x in [-7,-2]:
+upper=box(clamp_x,-5,T+4,23+LAND,10,3)
+for x in [-17,-6]:
     upper=upper.cut(hole(x,0,T+3,1.7,5))
 # Static example rim coupon: NOT an original-model proxy and NOT exported.
 frame_coupon=box(clamp_x,-5,3.5,LAND,10,T)
@@ -128,11 +128,64 @@ for y in [9,31]:
 checks['assembly_insertion']='Cover removed: M5 lowers vertically; clamps assembled with bolts removed'
 (OUT/'validation.json').write_text(json.dumps(checks,indent=2),encoding='utf8')
 
+# M3 hardware envelopes, conservative procurement limits (not vendor CAD).
+def ring(x,y,z,outer,inner,h):
+    return hole(x,y,z,outer,h).cut(hole(x,y,z-.1,inner,h+.2))
+bolt_length=next(v for v in [16,20,25,30] if v>=T+11.4)
+hardware=[]
+for i,y in enumerate([9,31]):
+    for j,x in enumerate([-17,-6]):
+        tag=f'{i}_{j}'
+        hardware += [
+            (tag+'_bolt',hole(x,y,-6.8,3,3).union(hole(x,y,-3.8,1.5,bolt_length)),'#89939d'),
+            (tag+'_bottom_washer',ring(x,y,-3.8,3.5,1.6,.5),'#b7c1ca'),
+            (tag+'_top_washer',ring(x,y,T+3.7,3.5,1.6,.5),'#b7c1ca'),
+            (tag+'_nut',ring(x,y,T+4.2,3.2,1.6,2.4),'#89939d')]
+hwcheck={'bolt_centres_x_mm':[-17,-6],'centre_pitch_mm':11,'bolt_underhead_length_mm':bolt_length,
+    'limits_mm':{'head_diameter':6,'head_height':3,'washer_od':7,'washer_id':3.2,'washer_thickness':.5,'nut_circumscribed_diameter':6.4,'nut_height':2.4,'tool_od':9,'tool_clear_bore':6.6,'tool_axial_approach':30},
+    'hardware_pair_checks':0,'hardware_printed_checks':0,'tool_checks':0,'closure_checks':0,
+    'scope':'M3 clamp hardware only; source board absent; socket nut engagement and hex-key engagement inside bolt head intentionally excluded'}
+for (n1,s1,_),(n2,s2,_) in itertools.combinations(hardware,2):
+    assert volume(s1.intersect(s2))<1e-5,(n1,n2)
+    hwcheck['hardware_pair_checks']+=1
+for n1,s1,_ in hardware:
+    for n2,s2,_ in assembled+[('M5',device,'')]:
+        assert volume(s1.intersect(s2))<1e-5,(n1,n2)
+        hwcheck['hardware_printed_checks']+=1
+# Socket approach is an axial swept annulus; no sideways open-ended wrench assumed.
+for y in [9,31]:
+    for x in [-17,-6]:
+        socket=ring(x,y,T+4.2,4.5,3.3,32.4)
+        driver=hole(x,y,-36.8,1.3,30) # straight 2.5 mm hex key envelope below bolt head
+        for n,s,_ in assembled+hardware+[('M5',device,'')]:
+            for tool in [socket,driver]:
+                assert volume(tool.intersect(s))<1e-5,('tool',x,y,n)
+                hwcheck['tool_checks']+=1
+# Tightening moves upper shoe, top washer and nut together; bolt remains fixed.
+for i,y in enumerate([9,31]):
+    for d in np.linspace(0,.4,11):
+        moving=[(f'upper{i}',upper.translate((0,y,clamp_offset-float(d))), '')]
+        moving += [(n,s.translate((0,0,-float(d))),c) for n,s,c in hardware if n.startswith(str(i)+'_') and ('top_washer' in n or n.endswith('_nut'))]
+        fixed=[(n,s,c) for n,s,c in assembled+hardware+[('M5',device,'')] if n!=f'upper{i}' and not (n.startswith(str(i)+'_') and ('top_washer' in n or n.endswith('_nut')))]
+        for n1,s1,_ in moving:
+            for n2,s2,_ in fixed:
+                assert volume(s1.intersect(s2))<1e-5,('closure',d,n1,n2)
+                hwcheck['closure_checks']+=1
+        for x in [-17,-6]:
+            socket=ring(x,y,T+4.2-float(d),4.5,3.3,32.4)
+            for n,s,_ in moving+fixed:
+                assert volume(socket.intersect(s))<1e-5,('tightening_tool',d,x,y,n)
+                hwcheck['tool_checks']+=1
+(OUT/'hardware_validation.json').write_text(json.dumps(hwcheck,indent=2),encoding='utf-8')
+hardware_assembly=cq.Assembly()
+for n,s,c in assembled+hardware:hardware_assembly.add(s,name=n)
+hardware_assembly.save(str(OUT/'adapter_with_M3_hardware.step'))
+
 # Engineering previews from actual CAD tessellation, no AI imagery or fake pin array.
 def render(filename,explode=False):
     fig=plt.figure(figsize=(12,8),facecolor='#f5f6f1'); ax=fig.add_subplot(111,projection='3d')
     ax.set_facecolor('#f5f6f1')
-    objects=assembled+[('M5 envelope',device,'#ee9a41')]
+    objects=assembled+(hardware if not explode else [])+[('M5 envelope',device,'#ee9a41')]
     alltris=[]; allcolors=[]
     for name,s,col in objects:
         dz=0
@@ -148,8 +201,8 @@ def render(filename,explode=False):
         shade=.65+.35*np.maximum(normals@np.array([.2,-.4,.89]),0)
         alltris.extend(tris);allcolors.extend(shade[:,None]*np.array(to_rgb(col)))
     ax.add_collection3d(Poly3DCollection(alltris,facecolor=allcolors,edgecolor='none',zsort='average'))
-    ax.set_xlim(-25,70);ax.set_ylim(-5,45);ax.set_zlim(-18,58 if explode else 28)
-    ax.set_box_aspect((95,50,76 if explode else 46));ax.view_init(elev=28,azim=-58)
+    ax.set_xlim(-36,70);ax.set_ylim(-5,45);ax.set_zlim(-18,58 if explode else 28)
+    ax.set_box_aspect((106,50,76 if explode else 46));ax.view_init(elev=28,azim=-58)
     ax.set_xlabel('X / mm');ax.set_ylabel('Y / mm');ax.set_zlabel('Z / mm')
     ax.set_title('TENFOLD / PIN-ARRAY SIDECAR\n'+('Exploded CAD assembly' if explode else 'CAD assembly — M5 nominal envelope'),loc='left',fontsize=16)
     fig.text(.08,.055,'GREEN: cover / GREY: independent adapter / ORANGE: M5 envelope\nOriginal pinboard NOT shown: download requires login; clamp dimensions are unmeasured examples.',fontsize=10)
@@ -160,6 +213,6 @@ for f in OUT.glob('*.step'):
     solids=cq.importers.importStep(str(f)).solids().vals()
     roundtrip[f.name]={'solids':len(solids),'valid':all(s.isValid() for s in solids),'positive_volume':all(s.Volume()>0 for s in solids)}
     assert roundtrip[f.name]['valid'] and roundtrip[f.name]['positive_volume']
-    assert len(solids)==(6 if 'assembly' in f.name else 1)
+    assert len(solids)==(22 if 'hardware' in f.name else 6 if 'assembly' in f.name else 1)
 (OUT/'step_roundtrip.json').write_text(json.dumps(roundtrip,indent=2))
 print(json.dumps(checks,indent=2))

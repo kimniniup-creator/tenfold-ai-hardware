@@ -1,4 +1,9 @@
 {
+  "adapter_with_M3_hardware.step": {
+    "solids": 22,
+    "valid": true,
+    "positive_volume": true
+  },
   "corner_cover.step": {
     "solids": 1,
     "valid": true,

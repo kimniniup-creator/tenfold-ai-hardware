@@ -30,6 +30,8 @@ https://makerworld.com.cn/models/471703
 ## 验收后
 总控统一验收/cherry-pick本分支，保留后台worktree直至整合和源文件补测完成。不要清理其他任务目录。
 
-已执行验证：四件STL闭合且各一连通体，21组装配相交体积为0，夹爪11步闭合检查通过，STEP回读有效。默认独立配件整体包络约82×40×23.6 mm（不含原针板、螺钉突出与电缆）；此尺寸不是整机最终外形。实际装配/爆炸图已查看。待总控验收及原文件补测，不能合并后把其状态改成“已完成针板适配”。
+已执行验证：四件STL闭合且各一连通体，21组装配相交体积为0，夹爪11步闭合检查通过，STEP回读有效。默认独立配件整体包络约93×40×27.1 mm（含M3包络，不含原针板、M2.5螺钉头与电缆）；此尺寸不是整机最终外形。实际装配/爆炸图已查看。待总控验收及原文件补测，不能合并后把其状态改成“已完成针板适配”。
 
 2026-09-22 coordinator audit: confirmed EVA already accounted for. Rigid floor Z=2.5, EVA Z=2.5..3, device Z=3..18, cover underside Z=18.3; net clearance 0.3 mm. Added explicit stack documentation and numeric assertions. Geometry unchanged; this does not resolve original pinboard fit or physical-print validation.
+
+T-PIN-01: M3孔距从5改11 mm，孔位X=-17/-6，框边界接口移至X=-23；打印基座/上下夹具必须成套替换。新增硬件包络STEP/验证、精确BOM/工具限制。T-PIN-02: grip_test.py及grip-test.png、README六步握持/体量筛查已补。原针板全机仍NO-GO，源接口仍BLOCKED。
