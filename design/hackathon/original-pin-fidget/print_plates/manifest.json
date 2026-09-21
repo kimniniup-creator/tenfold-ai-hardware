@@ -1,0 +1,257 @@
+{
+  "01_calibration": {
+    "instances": 6,
+    "bounds_mm": [
+      76.8,
+      40.0,
+      7.6
+    ],
+    "watertight": true,
+    "disjoint_xy_aabb": true,
+    "infill_percent": 100,
+    "items": [
+      {
+        "file": "calibration_guide.stl",
+        "translation_mm": [
+          0,
+          0,
+          0
+        ],
+        "source_sha256": "656c30fd9133d7d5d626a155e2def51bddcb72fcea2e73fa22ee475a77a2be70"
+      },
+      {
+        "file": "calibration_chamber.stl",
+        "translation_mm": [
+          0,
+          24,
+          0
+        ],
+        "source_sha256": "33179987c17006652459a5d8f5e9a303c2c74196a5e40ec574bde19bd62e348b"
+      },
+      {
+        "file": "calibration_roof.stl",
+        "translation_mm": [
+          22,
+          24,
+          0
+        ],
+        "source_sha256": "aa06be555560384ed4a1d84f66be65950043520e8c16fee59771182733f4a69d"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          44,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          56,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          68,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      }
+    ]
+  },
+  "02_structure": {
+    "instances": 3,
+    "bounds_mm": [
+      146.0,
+      90.0,
+      19.4
+    ],
+    "watertight": true,
+    "disjoint_xy_aabb": true,
+    "infill_percent": 25,
+    "items": [
+      {
+        "file": "01_guide_plate.stl",
+        "translation_mm": [
+          0,
+          0,
+          0
+        ],
+        "source_sha256": "a1ea54a15b353e097a0de5452f61ca1945d3e050c72cd57f2c0bb35b7865eef3"
+      },
+      {
+        "file": "02_pin_spacer.stl",
+        "translation_mm": [
+          76,
+          0,
+          0
+        ],
+        "source_sha256": "faa5c7ee76bd8ee9431f1fccc1a8a40aafd9c3739e24262ee7e967e14f9c3fde"
+      },
+      {
+        "file": "03_structural_frame.stl",
+        "translation_mm": [
+          0,
+          48,
+          0
+        ],
+        "source_sha256": "c8546a265f48c40c15339e07ce6119ecac1a0bb3edc6cc794a8bdaa7b1cdba12"
+      }
+    ]
+  },
+  "03_details": {
+    "instances": 15,
+    "bounds_mm": [
+      120.8,
+      72.3,
+      8.2
+    ],
+    "watertight": true,
+    "disjoint_xy_aabb": true,
+    "infill_percent": 100,
+    "items": [
+      {
+        "file": "04_m5_sled.stl",
+        "translation_mm": [
+          0,
+          0,
+          0
+        ],
+        "source_sha256": "be68471b84b3cbf80df236ebb4f39bad536c03a41b3c7c50758c97f89f2dc2d1"
+      },
+      {
+        "file": "05_retaining_rail.stl",
+        "translation_mm": [
+          0,
+          44,
+          0
+        ],
+        "source_sha256": "19a3f89f2f9e46bfbc0187fab9993b0f96b043dc07237fe3fe17dadd01ba9cf8"
+      },
+      {
+        "file": "05_retaining_rail.stl",
+        "translation_mm": [
+          0,
+          61,
+          0
+        ],
+        "source_sha256": "19a3f89f2f9e46bfbc0187fab9993b0f96b043dc07237fe3fe17dadd01ba9cf8"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          76,
+          0,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          88,
+          0,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          100,
+          0,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          112,
+          0,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          76,
+          12,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          88,
+          12,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          100,
+          12,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          112,
+          12,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          76,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          88,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          100,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      },
+      {
+        "file": "06_pin.stl",
+        "translation_mm": [
+          112,
+          24,
+          0
+        ],
+        "source_sha256": "afc99751d1dfd83433add657f88536cf2ceb34820b3640623690ff4a38f40c67"
+      }
+    ]
+  }
+}

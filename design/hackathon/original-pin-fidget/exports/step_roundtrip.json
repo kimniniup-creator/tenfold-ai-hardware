@@ -1,0 +1,46 @@
+{
+  "01_guide_plate.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "02_pin_spacer.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "03_structural_frame.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "04_m5_sled.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "05_retaining_rail.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "06_pin.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "assembly_hardware.step": {
+    "solids": 32,
+    "valid": true
+  },
+  "assembly_printed.step": {
+    "solids": 16,
+    "valid": true
+  },
+  "calibration_chamber.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "calibration_guide.step": {
+    "solids": 1,
+    "valid": true
+  },
+  "calibration_roof.step": {
+    "solids": 1,
+    "valid": true
+  }
+}
