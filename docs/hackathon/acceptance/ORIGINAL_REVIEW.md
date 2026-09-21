@@ -115,3 +115,11 @@ Press a356a870456fc85082aeabbc974698314f6ee273：独测回执22STL按PLA/PETG全
 剩余P1：MainActivity的`current || sameCycle` ACK兜底会在acceptDeviceEvent因保存失败/序号缺口而返回false时仍发送persisted:true，固件删除未接收成功的事件。旧revision事件仅ACK、不推进device_seq；oldrev seq1被移除后currentrev seq2无法满足last+1，仍被错误ACK，形成数据丢失。
 
 `result-accdbcb.txt`运行真实CycleState，原8项仍NOT_REPRODUCED，新增ACK01保存失败返回false与ACK02旧revision未推进游标均REPRODUCED。测试中的MainActivity布尔ACK表达式明确为手工复写源码条件，不冒称整个Activity或USB运行。修复要求：旧卡事件先保存接收游标/历史且不修改当前卡；身份匹配、序号合法、持久成功才ACK，不能用sameCycle替代成功。
+
+### 00f437f ACK与U10回归
+
+固定`00f437f0e6c3cf89d6e818d7b17e7861e07affbc`，StateProbeV3运行真实CycleState，结果`result-00f437f.txt`。原8条状态及ACK01/02共10条反例NOT_REPRODUCED；失败事件不ACK，旧revision事件持久历史/游标但不改当前卡，新revision连续seq2可正常完成。MainActivity仅saved才ACK；新动作/恢复确认已调用syncConfirmedCardIfConnected。上一轮ACK P1在此测试范围内关闭。
+
+R17/T19/U10检查：D1未完成与D2完成分开保留、归档后新建并重启summary仍在，测试通过。仍有3条实跑缺陷：回顾缺完成条件/下一步；archive只存裁剪summary并删除原day字段，导致done/next永久丢失；startReal未清day_1..10，演示完成记录出现在真实周期回顾。另源码入口问题：查看旧档仅在showSetup，激活新周期后的首页/设置均无入口，虽磁盘保留但用户无法访问。
+
+已向软件、协调和PM直接反馈最小修复：归档全字段、展示完成条件/下一步、清理演示槽、新周期保留旧档入口。保持范围为已确认R17，不添加统计。上述为Java执行及源码入口检查，不代替模拟器T19。

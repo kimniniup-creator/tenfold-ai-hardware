@@ -1,0 +1,16 @@
+SOURCE_REVISION=00f437f0e6c3cf89d6e818d7b17e7861e07affbc
+CS01_NEW_CYCLE_STALE=NOT_REPRODUCED | old fields cleared
+CS02_DEMO_PROMOTED_TO_REAL=NOT_REPRODUCED | explicit fresh real cycle day one
+CS03_NEXT_UNCONFIRMED_COMPLETE=NOT_REPRODUCED | ACTIVE-only complete guard
+CS04_FAILED_SEAL_CLAIM=NOT_REPRODUCED | method returns failure and MainActivity checks it
+CS04B_FAILED_WRITE_RAM_MUTATION=NOT_REPRODUCED | commit=false still changes Android memory; return-home can display unsaved SEALED
+CS05_UNBOUND_DEVICE_EVENT=NOT_REPRODUCED | simulation and wrong cycle/command rejected; session device check exists in MainActivity
+CS06_REAL_DATE_UNUSED=NOT_REPRODUCED | next real day resumes unfinished card
+CS07_COMPLETE_RETRY_LOST=NOT_REPRODUCED | failed commit sets RAM DONE so retry guard refuses; restart loses completion
+ACK01_FAILED_EVENT=NOT_REPRODUCED | MainActivity now ACKs only saved; failed event remains unacknowledged
+ACK02_OLD_REV_CURSOR=NOT_REPRODUCED | old event persists cursor without changing card; new seq2 completes current card
+U10_DAILY_FACTS=NOT_REPRODUCED | D1 unfinished and D2 completed remain separate
+U10_REVIEW_DETAILS_MISSING=REPRODUCED | completion condition and next step omitted from review
+U10_ARCHIVE_SURVIVAL=NOT_REPRODUCED | archive survives new cycle and restart
+U10_ARCHIVE_DETAILS_LOST=REPRODUCED | archive stores summary only and clears raw daily fields
+U10_DEMO_HISTORY_IN_REAL=REPRODUCED | startReal resets identity but retains demo day records
