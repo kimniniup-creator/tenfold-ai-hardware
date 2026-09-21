@@ -23,6 +23,8 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
   private ProtocolOutbox outbox;
   private LinearLayout body;
   private TextView liveStatus;
+  private boolean sessionValidated;
+  private String sessionDeviceId="";
   private final int ink=Color.rgb(9,11,10), panel=Color.rgb(22,27,23), lime=Color.rgb(183,255,77);
 
   @Override public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
 
   private void showHome(){
     if(!cycle.hasCycle()){showSetup();return;}
+    if(!cycle.refreshRealDate()){toast("日期状态保存失败；未推进周期");}
     if(CycleState.PHASE_RESUME.equals(cycle.phase())){showResume();return;}
     if(CycleState.PHASE_NEXT.equals(cycle.phase())){showNewAction();return;}
     if(CycleState.PHASE_REVIEW.equals(cycle.phase())){showReview();return;}
@@ -73,8 +76,8 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     if(CycleState.PHASE_SEALED.equals(cycle.phase()))label("SEALED · "+cycle.recoveryCard(),14,lime);
     if(cycle.canComplete())button("确认：今天完成",v->completeToday());
     button("今天到这里",v->showSeal());
-    if(cycle.isSimulated())button("DEMO TIME：进入下一天",v->{cycle.advanceDemoDay();showHome();});
-    button(cycle.isSimulated()?"切换到真实 USB 设备":"重发同一张卡 / 查询 ACK",v->connectOrRetry());
+    if(cycle.isSimulated())button("DEMO TIME：进入下一天",v->{if(!cycle.advanceDemoDay()){toast("演示日期保存失败");return;}showHome();});
+    button(cycle.isSimulated()?"退出演示并新建真实 USB 周期":"重发同一张卡 / 查询 ACK",v->connectOrRetry());
     button("Agent 与隐私设置",v->showSettings());
   }
 
@@ -92,13 +95,13 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     });
     button("确认并保存这张今日卡",v->{
       if(goal.length()==0||action.length()==0||done.length()==0){toast("十日结果、今日动作和完成条件必须确认");return;}
-      cycle.createCycle(goal.getText().toString(),stuck.getText().toString(),action.getText().toString(),done.getText().toString());
+      if(!cycle.createCycle(goal.getText().toString(),stuck.getText().toString(),action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 草稿仍在页面，没有激活周期");return;}
       showHome();
     });
   }
 
   private void completeToday(){
-    cycle.completePhone(); toast("完成事实已先保存到手机");
+    if(!cycle.completePhone()){toast("保存失败；没有把今天标成完成");return;} toast("完成事实已先保存到手机");
     if(!cycle.isSimulated()){outbox.enqueue("complete");sendOutboxHead();}
     showHome();
   }
@@ -108,9 +111,9 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     label(cycle.completed()?"完成事实会保留。":"未完成也能封存；不会补写成完成。",16,Color.WHITE);
     EditText note=field("停在哪（可选一句）",cycle.text("stop_note").isEmpty()?cycle.text("stuck"):cycle.text("stop_note"));
     EditText recovery=field("明天第一步",cycle.recoveryCard());
-    if(agent.configured())button("先保存停点，再让 Agent 提议",v->{cycle.seal(note.getText().toString(),recovery.getText().toString());liveStatus.setText("PHONE SAVED · 正在请求真实 LLM 候选");requestProposal(cycle.text("goal"),note.getText().toString(),12,null,null,recovery);});
+    if(agent.configured())button("先保存停点，再让 Agent 提议",v->{if(!cycle.seal(note.getText().toString(),recovery.getText().toString())){liveStatus.setText("SAVE FAILED · 未发起 LLM 请求");return;}liveStatus.setText("PHONE SAVED · 正在请求真实 LLM 候选");requestProposal(cycle.text("goal"),note.getText().toString(),12,null,null,recovery);});
     button("确认并封存",v->{
-      cycle.seal(note.getText().toString(),recovery.getText().toString());
+      if(!cycle.seal(note.getText().toString(),recovery.getText().toString())){liveStatus.setText("SAVE FAILED · 封存事实没有落盘");return;}
       if(!cycle.isSimulated()){outbox.enqueue("seal");sendOutboxHead();}
       toast("封存已保存；网络或硬件失败不会丢失这句话");showHome();
     });
@@ -121,7 +124,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("昨天停在这里。",truthLine()+" · DEMO DAY "+cycle.day());
     label("STOP NOTE\n"+cycle.stopNote(),17,Color.WHITE);
     label("FIRST STEP\n"+cycle.recoveryCard(),19,lime);
-    button("确认接回这一步",v->{cycle.resumeExisting();showHome();});
+    button("确认接回这一步",v->{if(!cycle.resumeExisting()){liveStatus.setText("SAVE FAILED · 仍保留恢复页");return;}showHome();});
     button("编辑恢复动作",v->showNewAction());
   }
 
@@ -129,7 +132,7 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
     page("今天需要一张新卡。",truthLine());
     label("昨天已完成；同一动作不会自动再算一天。",16,Color.WHITE);
     EditText action=field("今天最小一步",""); EditText done=field("新的完成条件","");
-    button("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}cycle.confirmNewAction(action.getText().toString(),done.getText().toString());showHome();});
+    button("确认新动作",v->{if(action.length()==0||done.length()==0){toast("请确认动作与完成条件");return;}if(!cycle.confirmNewAction(action.getText().toString(),done.getText().toString())){liveStatus.setText("SAVE FAILED · 新动作没有激活");return;}showHome();});
   }
 
   private void showReview(){
@@ -154,31 +157,38 @@ public final class MainActivity extends Activity implements UsbTransport.Listene
   }
 
   private void connectOrRetry(){
-    cycle.chooseMode(CycleState.MODE_USB); cycle.markPending(cycle.commandId()); usb.requestOrConnect();
+    if(cycle.isSimulated()&&!cycle.startRealFromConfirmedCard()){toast("无法建立真实周期；演示数据未改变");return;}
+    if(!cycle.markPending()){toast("无法保存待确认状态");return;} usb.requestOrConnect();
     showHome();
   }
 
   @Override public void onUsbState(String state){
+    if("USB_CONNECTED_WAITING_HELLO".equals(state)||"USB_DETACHED".equals(state)||"USB_DISCONNECTED".equals(state)){sessionValidated=false;sessionDeviceId="";}
     if(liveStatus!=null)liveStatus.setText(state+"\n"+truthLine());
   }
   @Override public void onUsbError(String code){if(liveStatus!=null)liveStatus.setText("USB ERROR · "+code+"\n手机事实仍保留");}
   @Override public void onFrame(JSONObject frame){
     String type=frame.optString("type");
+    if("hello".equals(type)){
+      String device=frame.optString("device_id");sessionValidated=frame.optInt("protocol",-1)==1&&device.startsWith("m5sticks3-");sessionDeviceId=sessionValidated?device:"";
+      if(sessionValidated)usb.send(DeviceProtocol.query(prefs));else onUsbError("UNTRUSTED_HELLO");return;
+    }
+    if(!sessionValidated)return;
     if("ack".equals(type)&&frame.optBoolean("persisted",false)){
-      boolean accepted=frame.optInt("protocol",-1)==1&&cycle.acceptDeviceAck(frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1));
+      boolean accepted=frame.optInt("protocol",-1)==1&&sessionDeviceId.equals(frame.optString("device_id"))&&cycle.acceptDeviceAck(frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1));
       if(liveStatus!=null)liveStatus.setText(accepted?"USB DEVICE · matching persisted ACK":"USB DEVICE · stale/mismatched ACK ignored");
+      if(accepted)sendOutboxHead();
     }else if("event_ack".equals(type)&&frame.optBoolean("persisted",false)){
-      int seq=frame.optInt("seq",-1);boolean matches=frame.optString("cycle_id").equals(cycle.text("cycle_id"))&&frame.optString("command_id").equals(cycle.commandId())&&frame.optInt("revision",-1)==prefs.getInt("revision",1);
+      int seq=frame.optInt("seq",-1);boolean matches=sessionDeviceId.equals(frame.optString("device_id"))&&frame.optString("cycle_id").equals(cycle.text("cycle_id"))&&frame.optString("command_id").equals(cycle.commandId())&&frame.optInt("revision",-1)==prefs.getInt("revision",1);
       if(matches&&outbox.acknowledge(seq)){if(liveStatus!=null)liveStatus.setText("DEVICE EVENT SAVED · seq "+seq);sendOutboxHead();}
     }else if("event".equals(type)){
-      int seq=frame.optInt("seq",-1);if(cycle.acceptDeviceEvent(seq,frame.optString("event_type")))usb.send(DeviceProtocol.eventAck(seq));showHome();
-    }else if("hello".equals(type)){usb.send(DeviceProtocol.query(prefs));}
-    else if("status".equals(type)){
-      boolean matched=frame.optBoolean("persisted",false)&&cycle.acceptDeviceAck(frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1));
+      int seq=frame.optInt("seq",-1);if(sessionDeviceId.equals(frame.optString("device_id"))&&cycle.acceptDeviceEvent(frame.optString("device_id"),frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1),seq,frame.optString("event_type")))usb.send(DeviceProtocol.eventAck(prefs,seq));showHome();
+    }else if("status".equals(type)){
+      boolean matched=sessionDeviceId.equals(frame.optString("device_id"))&&frame.optInt("protocol",-1)==1&&frame.optBoolean("persisted",false)&&cycle.acceptDeviceAck(frame.optString("command_id"),frame.optString("cycle_id"),frame.optInt("revision",-1));
       if(!matched)usb.send(DeviceProtocol.offer(prefs));else sendOutboxHead();showHome();
     }
   }
-  private void sendOutboxHead(){JSONObject pending=outbox.peek();if(pending!=null)usb.send(pending);}
+  private void sendOutboxHead(){if(!sessionValidated||!cycle.deviceSaved())return;JSONObject pending=outbox.peek();if(pending!=null)usb.send(pending);}
   private int clampMinutes(String raw){try{return Math.max(5,Math.min(45,Integer.parseInt(raw)));}catch(Exception ignored){return 12;}}
   private void toast(String message){Toast.makeText(this,message,Toast.LENGTH_LONG).show();}
 }
