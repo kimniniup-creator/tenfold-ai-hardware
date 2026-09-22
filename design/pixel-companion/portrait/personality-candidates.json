@@ -1,0 +1,20 @@
+{
+  "status": "design_candidate_not_integrated",
+  "selection": "random_once_per_life_then_persist",
+  "adaptation": "slow_habit_changes_only_not_reroll_on_each_press",
+  "death_mode": "restart_new_life_user_selected",
+  "affects_survival_difficulty": false,
+  "agent_can_set_death": false,
+  "personas": [
+    {"id":"curious","label":"好奇","opening":"这次读什么？","greeting":"我也想看看。","preferred_state":"Mark"},
+    {"id":"reserved","label":"慢热","opening":"我先坐这里。","greeting":"嗯，我在。","preferred_state":"Idle"},
+    {"id":"lively","label":"活泼","opening":"出发，带上我！","greeting":"接住啦！","preferred_state":"Happy"},
+    {"id":"steady","label":"认真","opening":"这一页，一起看。","greeting":"陪你慢慢看。","preferred_state":"Idle"}
+  ],
+  "notes": [
+    "Mark偏好不能伪造标记成功，仅真实标记成功时使用",
+    "不基于用户点击推断其心理或人格",
+    "饱腹、清理和死亡阈值由本地规则管理，数值尚未确定",
+    "不修改当前五句Agent白名单，集成必须双端同步"
+  ]
+}
