@@ -44,3 +44,7 @@
 - 协调授权评估匹配bootloader精确区修复（前置：构建与分区参数核验、目标区备份/hash、回滚路径）。不得擦除NVS/整板或改分区。兼容性仅推断，是否修复须真实读回与重启证据。
 - 修复实证：匹配当前Arduino构建的bootloader后立即读回340字节成功；协调任务独立读取reading-matched-boot2.ndjson，loaded=true、boot_session=1、current_session=2、readback_ok=true、135×240、board26。仅bootloader精确区及app写入，未擦NVS或改分区。软件报告f1a90cf资产已一并接入。
 - 这证明非零会话存档跨重启恢复，不等于已验证真实点击/成长记录持久化；当前真人互动仍为0，后者须用户按键后再核。
+- 最终软件交付：源代码 a04f3e5fab7df357e9fa5604a70b90d7688a2f73；文档 3421a98037f467ec799e074ef8f97e7b0538b5b5，codex/pixel-firmware 已远端核验。运行 app SHA A6A46C122711407B13DF93C7C6BCEC70D3E21278D0097FF014FBEF2E4A7931C6。
+- 非零互动持久化通过：boot3 lifetime10，boot4 presses_total0/lifetime10、reading_session4、boot_session3、loaded340/readback真；reading-nonzero-restart.ndjson 和 reading-reopen-check.ndjson。无按键注入。COM10已释放、设备运行。
+- 未验：B标记与长按切模式、A长按时序、真实掉电、100次成长目视、竖屏肉眼显示、Agent实按链路。一次25秒串口无回应在受控重启后恢复，根因未知，不标已修。用户实板反馈待返回。
+- 已将综合SHA、边界与证据交产品owner，阅读临时首版已烧录；后续养成规则另行迭代。
