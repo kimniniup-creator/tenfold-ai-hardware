@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "locale": "zh-CN",
+  "max_text_codepoints": 12,
+  "policy": {
+    "unknown_phrase_id": "neutral",
+    "free_text_allowed": false,
+    "quiet_mode_blocks_agent_phrases": true,
+    "quiet_mode_blocks_agent_actions": true,
+    "rest_phrase_trigger": "local_B_enter_quiet_only",
+    "automatic_cooldown_ms_min": 60000,
+    "phrase_does_not_change_quiet_mode": true,
+    "action_values_match": "pet_assets::State"
+  },
+  "phrases": [
+    {"phrase_id": "neutral", "text": "我在这里。", "action": "Idle", "source": "agent_or_local"},
+    {"phrase_id": "ack", "text": "收到这一小下。", "action": "Blink", "source": "agent_or_local"},
+    {"phrase_id": "slow", "text": "慢慢玩也可以。", "action": "Idle", "source": "agent_or_local"},
+    {"phrase_id": "play", "text": "陪你玩一会儿。", "action": "Happy", "source": "agent_or_local"},
+    {"phrase_id": "together", "text": "就这样待一会儿。", "action": "Idle", "source": "agent_or_local"},
+    {"phrase_id": "light", "text": "小芽晃了一下。", "action": "Happy", "source": "agent_or_local"},
+    {"phrase_id": "pause", "text": "随时可以停一停。", "action": "Idle", "source": "agent_or_local"},
+    {"phrase_id": "rest", "text": "安静陪着你。", "action": "Rest", "source": "local_B_enter_quiet_only"}
+  ]
+}
