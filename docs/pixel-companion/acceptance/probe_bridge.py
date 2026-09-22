@@ -1,5 +1,6 @@
 """Read-only import of a fixed Git bridge snapshot; no serial or network access."""
 import argparse
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -9,9 +10,10 @@ from unittest.mock import patch
 parser=argparse.ArgumentParser()
 parser.add_argument('--repo',required=True)
 parser.add_argument('--revision',required=True)
+parser.add_argument('--working-tree',action='store_true')
 args=parser.parse_args()
 sha=subprocess.check_output(['git','-C',args.repo,'rev-parse',args.revision],text=True).strip()
-source=subprocess.check_output(['git','-C',args.repo,'show',sha+':bridge/companion.py'])
+source=(Path(args.repo)/'bridge/companion.py').read_bytes() if args.working_tree else subprocess.check_output(['git','-C',args.repo,'show',sha+':bridge/companion.py'])
 runtime=Path(__file__).parent/'runtime'
 runtime.mkdir(exist_ok=True)
 module_path=runtime/'companion.py'
@@ -63,4 +65,4 @@ case('punitive_phrase_rejected',lambda:rejected('你太懒了，快来陪我。'
 case('emotional_inference_rejected',lambda:rejected('你现在很难过。'))
 case('no_key_honest_local',fallback_no_key)
 case('timeout_honest_local',fallback_timeout)
-print(json.dumps({'revision':sha,'scope':'host import, synthetic frames and mocked failures; no serial/network','results':results},ensure_ascii=False,indent=2))
+print(json.dumps({'revision':sha,'working_tree_snapshot':args.working_tree,'source_sha256':hashlib.sha256(source).hexdigest(),'scope':'host import, synthetic frames and mocked failures; no serial/network','results':results},ensure_ascii=False,indent=2))
