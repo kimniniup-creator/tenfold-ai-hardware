@@ -5,6 +5,8 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+import sys
+import time
 from unittest.mock import patch
 
 parser=argparse.ArgumentParser()
@@ -55,7 +57,20 @@ def fallback_no_key():
         return module.respond({})['source']=='local'
 def fallback_timeout():
     with patch.dict(module.os.environ,{'PET_API_URL':'https://example.invalid','PET_API_KEY':'synthetic','PET_MODEL':'test'},clear=True),patch.object(module.urllib.request,'urlopen',side_effect=TimeoutError):
-        return module.respond({})['source']=='local'
+        return getattr(module,'_request',module.respond)({})['source']=='local'
+
+deadline_evidence={}
+def hard_deadline():
+    real_run=subprocess.run
+    def stalled_child(command,**kwargs):
+        deadline_evidence['configured_timeout_seconds']=kwargs.get('timeout')
+        return real_run([sys.executable,'-c','import time; time.sleep(30)'],**kwargs)
+    started=time.monotonic()
+    with patch.dict(module.os.environ,{'PET_API_URL':'https://example.invalid','PET_API_KEY':'synthetic','PET_MODEL':'test'},clear=True),patch.object(module.subprocess,'run',side_effect=stalled_child):
+        reply=module.respond({})
+    elapsed=time.monotonic()-started
+    deadline_evidence.update(elapsed_seconds=round(elapsed,3),source=reply['source'],method='actual OS child sleeping 30s substituted at subprocess boundary; run timeout kills and waits; no network')
+    return deadline_evidence['configured_timeout_seconds']==8 and 7.5<=elapsed<12 and reply['source']=='local'
 
 case('malformed_hello_epoch_never_crashes',invalid_epoch)
 case('cooldown_60_seconds',cooldown)
@@ -65,4 +80,6 @@ case('punitive_phrase_rejected',lambda:rejected('你太懒了，快来陪我。'
 case('emotional_inference_rejected',lambda:rejected('你现在很难过。'))
 case('no_key_honest_local',fallback_no_key)
 case('timeout_honest_local',fallback_timeout)
-print(json.dumps({'revision':sha,'working_tree_snapshot':args.working_tree,'source_sha256':hashlib.sha256(source).hexdigest(),'scope':'host import, synthetic frames and mocked failures; no serial/network','results':results},ensure_ascii=False,indent=2))
+if hasattr(module,'_request'):
+    case('hard_deadline_stalled_child',hard_deadline)
+print(json.dumps({'revision':sha,'working_tree_snapshot':args.working_tree,'source_sha256':hashlib.sha256(source).hexdigest(),'scope':'host import, synthetic frames, mocked network failures and real stalled OS child; no serial/network','results':results,'deadline_evidence':deadline_evidence},ensure_ascii=False,indent=2))

@@ -1,0 +1,50 @@
+{
+  "revision": "500d9bd5e0263fcbc4bd14079a2400a469ebca1a",
+  "working_tree_snapshot": false,
+  "source_sha256": "b16ea1807ae60b2d6e5aa0daa205969a14a335e7dd25b8041ceca9b9df838588",
+  "scope": "host import, synthetic frames, mocked network failures and real stalled OS child; no serial/network",
+  "results": [
+    {
+      "case": "malformed_hello_epoch_never_crashes",
+      "pass": true
+    },
+    {
+      "case": "cooldown_60_seconds",
+      "pass": true
+    },
+    {
+      "case": "duplicate_window_rejected",
+      "pass": true
+    },
+    {
+      "case": "quiet_rejects_old_epoch",
+      "pass": true
+    },
+    {
+      "case": "punitive_phrase_rejected",
+      "pass": true
+    },
+    {
+      "case": "emotional_inference_rejected",
+      "pass": true
+    },
+    {
+      "case": "no_key_honest_local",
+      "pass": true
+    },
+    {
+      "case": "timeout_honest_local",
+      "pass": true
+    },
+    {
+      "case": "hard_deadline_stalled_child",
+      "pass": true
+    }
+  ],
+  "deadline_evidence": {
+    "configured_timeout_seconds": 8,
+    "elapsed_seconds": 8.027,
+    "source": "local",
+    "method": "actual OS child sleeping 30s substituted at subprocess boundary; run timeout kills and waits; no network"
+  }
+}
