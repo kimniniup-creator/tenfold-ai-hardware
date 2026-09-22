@@ -69,8 +69,8 @@
     "健身",
     "学习"
   ],
-  "growth_meaning": "累计互动产生的外观变化，不代表阅读进度、能力或健康状态",
-  "growth_threshold": "由产品/软件定值；美术不读取或累计次数",
+  "growth_meaning": "新需求为用户确认读完论文推动成长；点击用于照料，不直接等同阅读成果",
+  "growth_threshold": "待产品/软件实现并定值；当前资产不包含成长逻辑",
   "character": "Tachikoma fan art; not an original character",
   "preview": "design render; not a hardware screenshot"
 }

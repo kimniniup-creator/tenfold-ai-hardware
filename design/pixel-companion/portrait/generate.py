@@ -18,6 +18,31 @@ def sprite(stage, state, tick):
     shift=2 if state=='press' else (-2 if state=='rebound' else 0)
     shift+=-tick if state in ('idle','happy') else 0
     y=11+shift
+    if not big:
+        # Hatchling form: compact single pod and two short wheel-feet.
+        # Deliberately different silhouette, not a scaled adult tank.
+        cy=15+shift
+        d.polygon([(13,cy-5),(19,cy-5),(22,cy-2),(22,cy+4),(19,cy+7),(12,cy+7),(9,cy+4),(9,cy-1)],fill=1)
+        d.line((11,cy+5,20,cy+5),fill=0)
+        if state in ('rest','press') and tick==0:
+            d.line((13,cy,18,cy),fill=0,width=2)
+        else:
+            d.rectangle((13,cy-2,18,cy+3),fill=0)
+            d.rectangle((14,cy-1,17,cy+2),fill=1)
+            d.point((15+(tick if state=='idle' else 0),cy),fill=0)
+        d.rectangle((11,cy+7,13,cy+9),fill=1)
+        d.rectangle((18,cy+7,20,cy+9),fill=1)
+        if state=='happy':
+            d.line([(9,cy+2),(6,cy),(6,cy-3)],fill=1)
+            d.point((5+tick*2,cy-4),fill=1)
+        if state=='mark':
+            d.rectangle((2,4,6,11),fill=1)
+            d.polygon([(3,11),(4,9),(5,11)],fill=0)
+            if tick: d.line([(7,5),(8,6),(10,4)],fill=1)
+        if state=='rest' and tick: d.point((24,9),fill=1)
+        if state=='rebound' and tick: d.line((13,29,19,29),fill=1)
+        if state=='press' and tick: d.point((7,27),fill=1)
+        return im
     # Rear cockpit and antenna: stepped curved shell, offset right.
     if big:
         d.polygon([(17,y-6),(23,y-6),(26,y-3),(26,y+5),(17,y+5)],fill=1)
@@ -152,8 +177,8 @@ inline uint8_t pixel(uint8_t frame,uint8_t x,uint8_t y) {
     metadata={'screen':[135,240],'sprite':[32,32],'scale':2,'sprite_origin':[35,74],
       'stages':STAGES,'states':STATES,'frames':names,'palette':['#000000','#ffffff'],
       'wire_protocol_changed':False,'local_ui_copy':TEXT,'mode_candidates':['阅读','工作','健身','学习'],
-      'growth_meaning':'累计互动产生的外观变化，不代表阅读进度、能力或健康状态',
-      'growth_threshold':'由产品/软件定值；美术不读取或累计次数',
+      'growth_meaning':'新需求为用户确认读完论文推动成长；点击用于照料，不直接等同阅读成果',
+      'growth_threshold':'待产品/软件实现并定值；当前资产不包含成长逻辑',
       'character':'Tachikoma fan art; not an original character',
       'preview':'design render; not a hardware screenshot'}
     (BASE/'manifest.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

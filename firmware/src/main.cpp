@@ -19,7 +19,16 @@ const char* modeNames[]={"阅读","工作","运动","学习"};
 uint32_t sessionMarks=0;
 uint32_t sessionStarted=0,lastSaved=0,readingChanged=0,markFeedback=0;
 bool readingDirty=false,storageOk=true,displayReady=false;
-void saveReading(){storageOk=prefs.putBytes("reading",&reading,sizeof(reading))==sizeof(reading);readingDirty=!storageOk;lastSaved=millis();}
+bool storageOpened=false,storageLoaded=false,storageFault=false;
+size_t storageBootLength=0,storageBootRead=0;
+uint32_t storageBootVersion=0,storageBootSession=0;
+void saveReading(){
+ if(storageFault)return; // Do not repeatedly program a partition that failed readback.
+ storageOk=storageOpened&&prefs.putBytes("reading",&reading,sizeof(reading))==sizeof(reading);
+ ReadingState check;
+ storageOk=storageOk&&prefs.getBytes("reading",&check,sizeof(check))==sizeof(check)&&memcmp(&reading,&check,sizeof(reading))==0;
+ storageFault=!storageOk;readingDirty=!storageOk;lastSaved=millis();
+}
 M5Canvas canvas(&M5.Display);
 String session, rx, pending;
 bool quiet=false, discard=false, dirty=false, waiting=false, hasPrompt=false;
@@ -35,6 +44,7 @@ void flush(){if(!Serial){pending="";return;}int room=Serial.availableForWrite();
 bool validText(const String& t){return t=="我在。"||t=="我在，陪你待会儿。"||t=="嗯，接住了。"||t=="慢慢来就好。"||t=="安静待着，也很好。";}
 void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.is<JsonObject>())return;
  String type=d["type"]|"";if(type=="hello_request"){hello();return;}
+ if(type=="storage_query"){JsonDocument out;out["type"]="storage_status";out["opened"]=storageOpened;out["loaded"]=storageLoaded;out["boot_length"]=storageBootLength;out["expected_length"]=sizeof(reading);out["boot_read"]=storageBootRead;out["boot_version"]=storageBootVersion;out["boot_session"]=storageBootSession;out["current_session"]=reading.session;out["readback_ok"]=storageOk;out["current_length"]=prefs.getBytesLength("reading");send(out);return;}
  if(type=="reading_query"){JsonDocument out;out["type"]="reading_status";out["protocol"]=2;out["reading_session"]=reading.session;out["mode"]=reading.mode;out["interactions_lifetime"]=reading.interactions;out["marks_total"]=reading.markCount;out["storage_ok"]=storageOk;auto marks=out["marks"].to<JsonArray>();uint32_t first=reading.markCount>8?reading.markCount-8:0;for(uint32_t n=first;n<reading.markCount;n++){auto& m=reading.marks[n%16];auto row=marks.add<JsonArray>();row.add(m.session);row.add(m.elapsed);row.add(m.mode);row.add(m.ordinal);row.add(m.interaction);}send(out);return;}
  if(type!="reply"||quiet||!waiting||millis()-requested>REPLY_TTL)return;
  if(d["session"].as<String>()!=session||!d["epoch"].is<uint32_t>()||d["epoch"].as<uint32_t>()!=epoch||!d["window"].is<uint32_t>()||d["window"].as<uint32_t>()!=windowId)return;
@@ -66,7 +76,16 @@ void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillSc
  String text=!storageOk?"保存失败，请重试":(markFeedback&&now-markFeedback<1800?"记下这一处":(quiet?"安静待着，也很好。":"我在，陪你待会儿。"));String first=fit(text,119);canvas.setCursor(8,176);canvas.print(first);canvas.setCursor(8,190);canvas.print(fit(text.substring(first.length()),119));canvas.setCursor(8,211);canvas.print("A 互动  B 标记");canvas.setCursor(8,225);canvas.print("长按 B 切换模式");canvas.pushSprite(0,0);
 }
 }
-void setup(){displayReady=beginStickS3();M5.Display.setRotation(0);M5.Display.setBrightness(100);canvas.createSprite(135,240);Serial.begin(115200);Serial.setTxTimeoutMs(0);prefs.begin("pixelpet",false);if(prefs.getBytesLength("reading")==sizeof(reading)){ReadingState saved;if(prefs.getBytes("reading",&saved,sizeof(saved))==sizeof(saved)&&saved.version==1&&saved.mode<4)reading=saved;}if(reading.session<UINT32_MAX)reading.session++;quiet=reading.quiet;saveReading();session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=sessionStarted=millis();hello();}
+void setup(){displayReady=beginStickS3();M5.Display.setRotation(0);M5.Display.setBrightness(100);canvas.createSprite(135,240);Serial.begin(115200);Serial.setTxTimeoutMs(0);
+ storageOpened=prefs.begin("pixelpet",false);
+ storageBootLength=prefs.getBytesLength("reading");
+ if(storageBootLength==sizeof(reading)){
+  ReadingState saved;storageBootRead=prefs.getBytes("reading",&saved,sizeof(saved));
+  storageBootVersion=saved.version;storageBootSession=saved.session;
+  storageLoaded=storageBootRead==sizeof(saved)&&saved.version==1&&saved.mode<4;
+  if(storageLoaded)reading=saved;
+ }
+ if(reading.session<UINT32_MAX)reading.session++;quiet=reading.quiet;saveReading();session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=sessionStarted=millis();hello();}
 void loop(){uint32_t now=millis();M5.update();
  bool a=M5.BtnA.isPressed(),b=M5.BtnB.isPressed();bool aEdge=a&&!input.a;auto event=input.update(reading,a,b,now,now-sessionStarted);
  if(aEdge){pressStart=now;animStart=now;replyState=pet_assets::State::Happy;if(count>0)interval+=min(now-lastPress,WINDOW);lastPress=now;if(count<10000)count++;if(total<UINT32_MAX)total++;message="嗯，接住了。";source="LOCAL";readingDirty=true;readingChanged=now;}
