@@ -28,3 +28,19 @@
 已直接读取产品提交7a1eff5的docs/hackathon/product/PIXEL_COMPANION_PRD.md，P01–P10范围接受。P06自动提示至少60秒冷却；B短按安静状态拥有本地优先级，过期回复不得覆盖；P03 session/window序号去重；P07至少idle/blink/press/happy/rest。窗口/阈值待软件协议定值，不自创产品参数。P09不逐次写闪存，升级与旧固件备份由唯一软件owner执行。COM9租约归软件，本验收不连接。
 
 旧android工作树仍有multi-commitment在途文件，不能当pixel候选审；已向软件请求实际pixel工作树/文件入口。下一步以冻结SHA审代码与可复现反例，不等待美术完成才启动源码审查。
+
+## 首候选46543f9预审
+
+固定bridge源码46543f964e72a62909b01ef3427f576852c39892，真实函数只读导入，8项测试见bridge-46543f9.json；未连接串口或网络。60秒冷却、重复窗口、quiet旧epoch、无key本地与模拟Timeout回退5项通过。
+
+| ID | 层/状态 | 反例与最小修正 |
+|---|---|---|
+| PC01 | 固件源码/P1待修 | render先quiet再A，安静下A始终Rest；本地按压反馈应优先于quiet空闲态 |
+| PC02 | 固件源码/P1待修 | 9s按下11s松：10s窗口press1/held0，20s窗口press0/held2000；跨窗按住需切段累计，长按计数仍一次 |
+| PC03 | 固件源码/P1待修 | pending非空时send静默return，summarize仍清计数/置waiting/消耗冷却；需成功入队后推进或明确有界drop/合并，不能无限队列 |
+| PC04 | bridge实跑/P1待修 | hello epoch={}后rhythm抛TypeError，main未捕获；hello严格类型范围 |
+| PC05 | bridge实跑/P1待修 | validate_reply接受责备“你太懒了，快来陪我。”及情绪推断“你现在很难过。”；用受控文案或短句ID，不以关键词过滤证明无推断 |
+| PC06 | 固件源码/P2待修 | 合法72字节中文可超224px，被fit静默截断；按实际字体宽度限制或明确换行 |
+| PC07 | bridge源码/P1待核 | urlopen8秒I/O超时不等于总时限，future无独立截止，慢速流可长期占唯一worker；需有界总截止/过期回退，不增加无限线程 |
+
+固件草稿反例已发软件和PM，PM接受PC01–03并强调有界策略。bridge结果已直接发双方；当前没有整体验收通过结论。软件真实路径D:/tenfold-worktrees/pixel-firmware，替代此前等待路径的记录。
