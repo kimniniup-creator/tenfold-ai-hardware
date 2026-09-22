@@ -22,3 +22,9 @@
 ## 分工与版本
 
 验收唯一写入目录：docs/pixel-companion/acceptance；独立分支codex/pixel-companion-acceptance。软件与素材仅只读审查，反例直接发作者并抄协调。旧十日环验收结论不自动继承至本产品。
+
+## PRD对齐
+
+已直接读取产品提交7a1eff5的docs/hackathon/product/PIXEL_COMPANION_PRD.md，P01–P10范围接受。P06自动提示至少60秒冷却；B短按安静状态拥有本地优先级，过期回复不得覆盖；P03 session/window序号去重；P07至少idle/blink/press/happy/rest。窗口/阈值待软件协议定值，不自创产品参数。P09不逐次写闪存，升级与旧固件备份由唯一软件owner执行。COM9租约归软件，本验收不连接。
+
+旧android工作树仍有multi-commitment在途文件，不能当pixel候选审；已向软件请求实际pixel工作树/文件入口。下一步以冻结SHA审代码与可复现反例，不等待美术完成才启动源码审查。
