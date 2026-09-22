@@ -1,0 +1,13 @@
+# 小游戏交接
+
+状态：设计完成；软件未实现、未烧录、实板按键/读屏/体验未验证。
+
+直属owner：01a0c813-871a-7ff2-948a-490ec30face7。既有唯一固件owner：01a0c5c6-3e14-7e80-b9c0-3e7159c57977；本任务未占COM10、未改固件、未派新工程。
+
+权威规格为本目录DESIGN.md，15帧静态分镜见storyboard.png；PNG不是可玩原型或设备照片。生成脚本复用原宠物PNG，未重画角色。只接入文档与示意，不直接覆盖main。
+
+建议先接任务成长契约，再依次实施：共用输入域与菜单→跳绳→羽毛球→回声→书签→修桥。二阶真实机制与任务成长分账矩阵均在规格中。唯一新增入口是主页双键重叠长按；先于原输入模块仲裁。需实机验证同时按键是否舒适，不可把原B长按换模式悄悄替换掉。
+
+已验证：本地脚本生成15张135×240图、文字右边界断言通过；目视检查拼版布局；规格逐项自查包括两必选游戏、局长、输入/容错、退出、资产、状态边界、解锁与验收。未进行玩法可用性验证；时间参数与胜负门槛仍是建议。
+
+恢复：分支codex/pet-minigame-design，后台worktree D:\worktrees\tenfold-pet-minigame-design，基线9b055f0，origin https://github.com/kimniniup-creator/tenfold-ai-hardware（现有PUBLIC，不改可见性）。owner审核后可cherry-pick本设计提交；整合并确认远端可恢复后再清理worktree，本任务不删其他checkout。
