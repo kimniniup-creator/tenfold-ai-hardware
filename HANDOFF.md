@@ -2,6 +2,16 @@
 
 ## Current: portrait reading prototype, matched boot chain (2026-09-22)
 
+Latest app-only update source eaef7c0: SHA256
+81182568C419208C2E93F5537583915A7492E7E0EE984C691BA791CA8BE5ED5F,
+715248bytes. Matched bootloader unchanged. Fault text asks restart. Reading Agent
+entry/rendering NOT integrated, candidate alwaysfalse (real6-press rhythm
+verified), no automatic requests. After app update session5 retained lifetime25
+and mark1;135x240/board26/storage_ok/selftest true. Live inputs reached48, not
+restart-tested at48. COM10 released after capture; no further reset during user
+input. Intermittent no-reply after reopening still unresolved. See READing docs
+for exact evidence. A6A46C hash below is historical repair app.
+
 Current branch codex/pixel-firmware in D:/tenfold-worktrees/pixel-firmware.
 Exclusive device port COM10. Board is running, not left in ROM. 135x240,
 board26/display_ready, art f1a90cf. Do not use historical COM9 instructions below.

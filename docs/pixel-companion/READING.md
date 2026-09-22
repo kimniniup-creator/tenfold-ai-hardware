@@ -48,6 +48,24 @@ separate evidence layers.
 
 ## 2026-09-22 persistence repair
 
+Latest focused app-only update: source eaef7c0, app715248 bytes, SHA256
+`81182568C419208C2E93F5537583915A7492E7E0EE984C691BA791CA8BE5ED5F`.
+Matched bootloader below was NOT rewritten. Save fault text now says
+“保存失败，请重启”. Seven bridge regression tests pass, including telemetry
+candidate=false with0/3/10/10000 presses. Actual board telemetry with6 presses
+also reports candidate=false. Startup after app update retained lifetime25 and
+marks_total1 with current presses0, session5, storage_ok/state_selftest true,
+135x240/board26/display_ready true. During live input lifetime reached48; that
+latest in-memory count is not claimed as restart-tested. Local evidence:
+`.delivery/reading-telemetry-only.ndjson`. No test input was injected.
+The mark-count1 surviving update is storage evidence, not a complete physical
+B short/long-press timing or visual feedback test. A subsequent serial reopen
+again produced no replies during a5-second window; no further restart was made
+while live input was active. Intermittent serial communication remains open.
+
+The A6A46C image described below is the prior persistence-repair build, not the
+latest application image.
+
 The original UIFlow bootloader identified itself as IDF 5.4.2-dirty; this app
 uses Arduino 2.0.17 / IDF 4.4.7. With that mixed boot chain, Preferences returned
 the full write length but immediate readback returned NOT_FOUND. Raw NVS

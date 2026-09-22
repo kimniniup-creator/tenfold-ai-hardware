@@ -5,6 +5,7 @@
 - 保存失败锁止期间的屏幕提示改为“保存失败，请重启”，不暗示再次标记能解锁。
 - 阅读竖屏尚无Agent显示/入口，rhythm只保留遥测，candidate恒false且不arm请求；不冒充Agent已经上屏。文案独立任务继续。
 - 新增无candidate门控回归：0/3/10/10000次均不触发模型；7项bridge测试通过。仅app更新，已验证匹配bootloader不再写入。
+- eaef7c0编译后仅app写入并hash校验；新app81182568…E5ED5F，715248bytes。实板session5/135x240/board26启动已保留lifetime25、mark1；本轮真实6次按键rhythm candidate=false，随后连续互动到48，不再重启干扰用户。日志.delivery/reading-telemetry-only.ndjson。关开串口一次5秒无回包，间歇通信仍未定位。
 
 ## 2026-09-22｜阅读保存反例与匹配启动链修复
 
