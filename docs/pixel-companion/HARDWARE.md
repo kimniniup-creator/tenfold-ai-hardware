@@ -1,5 +1,34 @@
 # Hardware attempt evidence — 2026-09-22 15:32 CST
 
+## Later successful flash (supersedes earlier no-write status)
+
+After a further owner-confirmed physical reset, USB re-enumerated as COM10,
+303A:1001. ROM identified ESP32-S3-PICO-1 rev0.2, 8MB flash and 8MB PSRAM.
+Full 8,388,608-byte backup is LOCAL ONLY at
+`.delivery/sticks3-original-20260922.bin`, SHA256
+`C37CF04CDF69814A1B7104CAF22B0FAA68BEE65E0B6FD5EC648E46B4207ACF89`.
+esptool verify_flash compared all 8MB with device and reported digest matched.
+
+Original table: nvs 0x9000/0x6000, phy_init 0xf000/0x1000, factory
+0x10000/0x531000, sys 0x541000/0x100000, vfs 0x641000/0x1be000.
+Only factory application at 0x10000 was replaced, 717456 bytes. App SHA256
+`DCB0DCE7BF0C0AE5B41C88EE8947DF067F3AC27D63E4B5F5E614A075D2CDA079`.
+Write completed in 4.9s, device hash verified. Erased sectors only 0x10000–0xbffff;
+no full erase, no bootloader/partition/NVS/sys/vfs write.
+
+RTS reset left ROM reachable; watchdog reset re-enumerated and application hello
+then succeeded: protocol2, build pixel-0.1, ESP32-S3, width240 height135, board26
+(confirmed M5GFX enum board_M5StickS3). Raw local evidence:
+`.delivery/pixel-after-watchdog.ndjson`. Physical A counts changed, but owner
+input correlation and screen appearance are still pending; not yet full QA.
+Ongoing read-only 90s capture: `.delivery/pixel-physical-1.ndjson`.
+
+Recovery: after verified ROM connection, original full backup can be restored at
+0x0 using esptool write_flash (no erase_flash needed), only at owner's direction.
+Do not upload the backup; it may contain previous private configuration.
+
+## Earlier failed attempts
+
 Observed after owner reported the light was on:
 
 - Present USB composite device and COM9: VID 303A, PID 832B, Windows PnP status OK.
