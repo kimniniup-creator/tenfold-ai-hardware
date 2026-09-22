@@ -47,6 +47,8 @@ def _request(summary):
         with urllib.request.urlopen(request, timeout=8) as response:
             raw=b""
             while len(raw)<=16384:
+                if response.isclosed():
+                    break
                 remaining=deadline-time.monotonic()
                 if remaining<=0:
                     raise TimeoutError("total deadline")
