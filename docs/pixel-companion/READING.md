@@ -75,10 +75,19 @@ local and ignored, not in this repository.
   verified save status; it never injects user interactions or markers.
 - Art owner revision f1a90cf is integrated unchanged; asset parity tests pass.
 
-Hardware controls, nonzero *physical interaction/marker* persistence, physical
-power-off recovery, actual portrait appearance and real-button Agent end-to-end
-remain NOT_TESTED. Session1→2 proves a nonzero saved field survives a controlled
-restart; it does not prove those other scenarios.
+Further real-device evidence: third boot reported10 physical input events (no
+injection). Following controlled restart, session4 reported presses_total0 and
+interactions_lifetime10, loaded340 bytes, boot_session3, readback_ok=true. A second
+serial open returned the same state. Logs: `.delivery/reading-matched-boot3.ndjson`,
+`.delivery/reading-nonzero-restart.ndjson`, `.delivery/reading-reopen-check.ndjson`.
+Thus nonzero device-input count persistence passes controlled restart. User
+gesture attribution, held-button timing, B marker/mode controls, grown-stage
+appearance, physical power-off recovery, portrait visual QA and real-button Agent
+end-to-end remain NOT_TESTED. Mark count stayed0.
+
+One interval after boot3 produced no serial replies despite COM10 remaining
+present. Controlled restart recovered replies; count10 was retained. Root cause
+of that communication gap remains unknown, not declared fixed by reboot.
 
 Includes proven StickS3 boot hotfix: correct only M5GFX/AUTODETECT cache to the
 physically verified board26, 150ms PMIC settle, actual display-size check. The
