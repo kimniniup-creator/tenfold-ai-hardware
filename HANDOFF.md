@@ -18,8 +18,12 @@ command or partition-table change. Recovery backups and logs remain .delivery,
 not Git; exact hashes/bounds and remaining untested cases are in
 docs/pixel-companion/READING.md. Current app SHA A6A46C122711407B13DF93C7C6BCEC70D3E21278D0097FF014FBEF2E4A7931C6.
 Storage failures now latch off retries. bridge/check_storage.py is read-only.
-Third boot received10 device interactions without test injection; actual user
-gesture correlation, nonzero count reboot, markers and real screen QA pending.
+Third boot received10 device interactions without test injection; fourth boot
+retained lifetime10 with current presses0 and valid340-byte readback. Reopening
+serial also returned that same state. Nonzero count controlled-restart PASS.
+Gesture timing, markers, mode controls, physical power loss and screen QA pending.
+One serial silence interval after boot3 recovered after controlled reset; root
+cause unknown. Do not label that intermittent communication issue fixed.
 Agent copy is a separate user-facing task; it must not flash or open this port.
 Older direction and release notes below are historical.
 

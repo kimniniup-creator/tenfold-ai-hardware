@@ -29,6 +29,7 @@
 - 当前app SHA A6A46C122711407B13DF93C7C6BCEC70D3E21278D0097FF014FBEF2E4A7931C6；f1a90cf资产原样集成。6项bridge测试、24帧资产校验和编译通过。
 - 原始闪存/NVS/串口证据仅保留忽略目录.delivery。细节与恢复哈希见docs/pixel-companion/READING.md；真人按键、屏幕和实体断电不能用编译或session保存替代。
 - 第三次启动现场收到10次设备互动（未注入），尚待现场动作关联及重启非零计数验证。Agent文案按Kim要求拆为独立用户任务，禁止该任务占COM10或烧板。
+- 后续受控重启已验证session4、presses_total0、lifetime10，340字节loaded/readback均真；再次打开串口同样读回，非零设备输入计数保存PASS。期间一次约25秒只读请求无回应，重启恢复，原因仍未知；B标记/长按模式/实体掉电/屏幕目视/Agent实按端到端未验。
 
 ## 2026-09-22｜竖屏阅读原型与黑屏热修
 
