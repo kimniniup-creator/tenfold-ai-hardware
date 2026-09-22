@@ -1,5 +1,21 @@
 # Tenfold P0 handoff
 
+## Pet-only reset and quiet home (latest user interruption)
+
+User requested immediate pet reset, tiny top-right counters, retained bottom key hints,
+and removal of generic companion copy. Implemented in reading-schema1 firmware.
+Hold A+B 3 seconds, release both, A confirms / B cancels. USB reset requires explicit
+boolean confirmation; bridge/reset_pet.py never auto-retries destructive requests.
+Real device reset ACK true, zero interactions/markers and young stage read back;
+controlled restart retained zeros with valid 340-byte storage. App-only flash at
+0x10000, no bootloader/partition/NVS erase. App SHA256
+8AE6BCFBE3DB2E4F4018202FEEB4F0EA7BE7F2589797327600B2BFE12961FB32.
+19 host tests pass (17 existing + 2 reset); 40-frame asset verifier passes.
+Physical screen appearance and A+B confirmation gesture NOT yet human-verified.
+UI_RULES.md is authoritative; asset preview PNGs are not this new home layout.
+Task-growth schema2 integration remains pending and must preserve this reset/UI behavior.
+COM10 released. Raw evidence stays ignored under .delivery/*pet-reset-20260922.jsonl.
+
 ## Latest: USB reconnect repair before task-growth migration
 
 Reproduced backpressure/reopen stall fixed and tested twice without reset.

@@ -124,3 +124,7 @@
 - 2026-09-22 06:19，GitHub `v0.1.0-hackathon` 已发布为预发布版本，五项附件服务端 SHA 与本地完全一致；重新下载公开 APK 后哈希仍为 B960。
 - APK、首打 Orbit ZIP 和完整交付说明均已通过 offerlai 实际发送给 Kim，三条消息回读确认附件名称、正文与 bot 身份。私人会话信息只保留本地，不进入公开仓库。
 - 全部已授权数字产物交付完成。实物打印、真实手机/M5联调及云 LLM 请求仍须现场验证，未以任何方式标为通过。
+# Pet-only reset / home hierarchy follow-up
+
+Implemented explicit pet-only reset, 3-second A+B confirmation menu and tiny top-right counters; removed persistent companion sentence and retained bottom instructions. Documented recurring copy/layout correction in docs/pixel-companion/UI_RULES.md. App-only flash succeeded with hash verification; watchdog USB re-enumeration raised the known host exception, then fresh device replies confirmed reset and reboot persistence (zero counts, young, valid storage). Build + 19 host tests + asset verifier pass. Physical screen and reset gesture remain unverified. Pending task-growth changes were preserved, not claimed complete.
+

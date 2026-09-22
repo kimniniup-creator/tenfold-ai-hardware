@@ -19,6 +19,8 @@ const char* modeNames[]={"阅读","工作","运动","学习"};
 uint32_t sessionMarks=0;
 uint32_t sessionStarted=0,lastSaved=0,readingChanged=0,markFeedback=0;
 bool readingDirty=false,storageOk=true,displayReady=false;
+bool resetMenu=false,resetChord=false;
+uint32_t resetHeldAt=0;
 bool storageOpened=false,storageLoaded=false,storageFault=false;
 size_t storageBootLength=0,storageBootRead=0;
 uint32_t storageBootVersion=0,storageBootSession=0;
@@ -37,7 +39,14 @@ bool quiet=false, discard=false, dirty=false, waiting=false, hasPrompt=false;
 uint32_t epoch=0, windowId=0, count=0, total=0, held=0, interval=0;
 uint32_t windowStart=0, lastPress=0, pressStart=0, lastPrompt=0, requested=0;
 uint32_t animStart=0, lastFrame=0, changed=0, messageAt=0;
-String message="我在这里。", source="LOCAL";
+String message="", source="LOCAL";
+bool resetPet(){
+ if(!storageOpened||storageFault)return false;
+ ReadingState previous=reading;reading=ReadingState{};reading.session=1;saveReading();
+ if(!storageOk){reading=previous;return false;}
+ sessionMarks=0;total=count=held=interval=0;quiet=false;markFeedback=0;
+ sessionStarted=windowStart=millis();waiting=false;message="";epoch++;return true;
+}
 pet_assets::State replyState=pet_assets::State::Happy;
 // One bounded outgoing frame; never wait for a disconnected host.
 bool send(JsonDocument& doc){if(!pending.isEmpty())return false;if(!requestId.isEmpty())doc["request_id"]=requestId;if(doc["type"].as<String>()=="hello"){doc["display_ready"]=displayReady;doc["mode"]=reading.mode;doc["asset"]="portrait-mono-24";}pending="\n";serializeJson(doc,pending);pending+='\n';if(pending.length()>768){pending="";return false;}pendingAt=millis();return true;}
@@ -58,6 +67,7 @@ bool validText(const String& t){return t=="我在。"||t=="我在，陪你待会
 void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.is<JsonObject>())return;
  requestId=d["request_id"]|"";if(requestId.length()>32)requestId="";
  String type=d["type"]|"";if(type=="hello_request"){hello();return;}
+ if(type=="pet_reset"){if(!d["confirm"].is<bool>()||!d["confirm"].as<bool>())return;JsonDocument out;out["type"]="pet_reset_ack";out["ok"]=resetPet();send(out);return;}
  if(type=="transport_query"){JsonDocument out;out["type"]="transport_status";out["uptime_ms"]=millis();out["loops"]=loopTicks;out["max_loop_gap_ms"]=maxLoopGap;out["rx_bytes"]=rxBytes;out["tx_bytes"]=txBytes;out["short_writes"]=shortWrites;out["pending_bytes"]=pending.length();out["expired_frames"]=expiredFrames;send(out);return;}
  if(type=="storage_query"){JsonDocument out;out["type"]="storage_status";out["opened"]=storageOpened;out["loaded"]=storageLoaded;out["boot_length"]=storageBootLength;out["expected_length"]=sizeof(reading);out["boot_read"]=storageBootRead;out["boot_version"]=storageBootVersion;out["boot_session"]=storageBootSession;out["current_session"]=reading.session;out["readback_ok"]=storageOk;out["current_length"]=prefs.getBytesLength("reading");send(out);return;}
  if(type=="reading_query"){JsonDocument out;out["type"]="reading_status";out["protocol"]=2;out["reading_session"]=reading.session;out["mode"]=reading.mode;out["interactions_lifetime"]=reading.interactions;out["marks_total"]=reading.markCount;out["storage_ok"]=storageOk;auto marks=out["marks"].to<JsonArray>();uint32_t first=reading.markCount>8?reading.markCount-8:0;for(uint32_t n=first;n<reading.markCount;n++){auto& m=reading.marks[n%16];auto row=marks.add<JsonArray>();row.add(m.session);row.add(m.elapsed);row.add(m.mode);row.add(m.ordinal);row.add(m.interaction);}send(out);return;}
@@ -77,7 +87,10 @@ void summarize(uint32_t now){if(now-windowStart<WINDOW)return;if(waiting&&now-re
 }
 String fit(const String& t,int width){String s;for(size_t i=0;i<t.length();){uint8_t c=t[i];size_t n=c<128?1:((c&224)==192?2:((c&240)==224?3:4));if(i+n>t.length())break;String v=s+t.substring(i,i+n);if(canvas.textWidth(v)>width)break;s=v;i+=n;}return s;}
 void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillScreen(TFT_BLACK);
- canvas.setFont(&fonts::efontCN_12);canvas.setTextColor(TFT_WHITE);canvas.setCursor(8,10);canvas.print(reading.mode==0?"一起读一会儿":"陪你待会儿");canvas.setCursor(8,29);canvas.print(modeNames[reading.mode]);canvas.print(" · 陪伴");
+ canvas.setFont(&fonts::efontCN_12);canvas.setTextColor(TFT_WHITE);
+ if(resetMenu){canvas.setCursor(8,65);canvas.print("重新养一只？");canvas.setCursor(8,91);canvas.print("清空互动和标记");canvas.setCursor(8,117);canvas.print("不会重置 M5");canvas.setCursor(8,179);canvas.print("A 确认  B 取消");canvas.pushSprite(0,0);return;}
+ canvas.setCursor(8,10);canvas.print(modeNames[reading.mode]);
+ canvas.setFont(&fonts::Font0);canvas.setTextDatum(top_right);canvas.drawString(String(reading.interactions)+" / "+String(sessionMarks),127,12);canvas.setTextDatum(top_left);canvas.setFont(&fonts::efontCN_12);
 #ifdef PORTRAIT_ASSET
  auto state=M5.BtnA.isPressed()?pet_portrait::State::Press:(now-animStart<700?pet_portrait::State::Rebound:(markFeedback&&now-markFeedback<1800?pet_portrait::State::Mark:(quiet?pet_portrait::State::Rest:pet_portrait::State::Idle)));
  auto frame=pet_portrait::frameIndex(reading.interactions>=100?pet_portrait::Stage::Grown:pet_portrait::Stage::Young,state,now-animStart);
@@ -87,9 +100,7 @@ void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillSc
  auto frame=pet_assets::frameIndex(state,now-animStart);
  for(int y=0;y<32;y++)for(int x=0;x<32;x++){auto p=pet_assets::pixel(frame,x,y);if(p)canvas.fillRect(35+x*2,61+y*2,2,2,pet_assets::kPalette[p]);}
 #endif
- canvas.setCursor(8,143);canvas.printf("相伴 %lu 次",(unsigned long)reading.interactions);
- canvas.setCursor(8,156);canvas.printf("本次标记 %lu",(unsigned long)sessionMarks);
- String text=!storageOk?"保存失败，请重启":(markFeedback&&now-markFeedback<1800?"记下这一处":(quiet?"安静待着，也很好。":"我在，陪你待会儿。"));String first=fit(text,119);canvas.setCursor(8,176);canvas.print(first);canvas.setCursor(8,190);canvas.print(fit(text.substring(first.length()),119));canvas.setCursor(8,211);canvas.print("A 互动  B 标记");canvas.setCursor(8,225);canvas.print("长按 B 切换模式");canvas.pushSprite(0,0);
+ String text=!storageOk?"保存失败，请重启":(markFeedback&&now-markFeedback<1800?"记下这一处":"");String first=fit(text,119);canvas.setCursor(8,176);canvas.print(first);canvas.setCursor(8,190);canvas.print(fit(text.substring(first.length()),119));canvas.setCursor(8,211);canvas.print("A 互动  B 标记");canvas.setCursor(8,225);canvas.print("长按 B 切换模式");canvas.pushSprite(0,0);
 }
 }
 void setup(){displayReady=beginStickS3();M5.Display.setRotation(0);M5.Display.setBrightness(100);canvas.createSprite(135,240);Serial.begin(115200);Serial.setTxTimeoutMs(1);
@@ -103,7 +114,11 @@ void setup(){displayReady=beginStickS3();M5.Display.setRotation(0);M5.Display.se
  }
  if(reading.session<UINT32_MAX)reading.session++;quiet=reading.quiet;saveReading();session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=sessionStarted=millis();hello();}
 void loop(){uint32_t now=millis();if(lastLoop)maxLoopGap=max(maxLoopGap,now-lastLoop);lastLoop=now;loopTicks++;M5.update();
- bool a=M5.BtnA.isPressed(),b=M5.BtnB.isPressed();bool aEdge=a&&!input.a;auto event=input.update(reading,a,b,now,now-sessionStarted);
+ bool a=M5.BtnA.isPressed(),b=M5.BtnB.isPressed();
+ if(resetMenu){if(!resetChord){if(a&&!input.a){resetPet();resetMenu=false;resetChord=true;}else if(b&&!input.b){resetMenu=false;resetChord=true;}}if(!a&&!b)resetChord=false;input.a=a;input.b=b;render(now);flush();delay(1);return;}
+ if(a&&b){if(!resetChord){resetHeldAt=now;resetChord=true;}if(now-resetHeldAt>=3000)resetMenu=true;input.a=a;input.b=b;render(now);flush();delay(1);return;}
+ if(resetChord){input.a=a;input.b=b;if(!a&&!b)resetChord=false;render(now);flush();delay(1);return;}
+ bool aEdge=a&&!input.a;auto event=input.update(reading,a,b,now,now-sessionStarted);
  if(aEdge){pressStart=now;animStart=now;replyState=pet_assets::State::Happy;if(count>0)interval+=min(now-lastPress,WINDOW);lastPress=now;if(count<10000)count++;if(total<UINT32_MAX)total++;message="嗯，接住了。";source="LOCAL";readingDirty=true;readingChanged=now;}
  if(M5.BtnA.isPressed()||M5.BtnA.wasReleased()){held+=now-pressStart;pressStart=now;}
  if(event==ReadingState::Mode){quiet=reading.quiet;epoch++;waiting=false;pending="";saveReading();message="我在这里。";source="LOCAL";hello();}
