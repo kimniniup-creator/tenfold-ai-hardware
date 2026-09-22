@@ -11,6 +11,16 @@ from unittest.mock import patch
 import companion as c
 
 class CompanionTests(unittest.TestCase):
+    def test_firmware_transport_is_bounded_and_keeps_short_write_tail(self):
+        source=(Path(__file__).parents[1]/'firmware/src/main.cpp').read_text(encoding='utf-8')
+        transport=source[source.index('bool send('):source.index('bool validText(')]
+        self.assertNotIn('!Serial',transport)
+        self.assertIn('Serial.setTxTimeoutMs(1)',source)
+        self.assertIn('millis()-pendingAt>=250',transport)
+        self.assertIn('Serial.flush();pending="";expiredFrames++',transport)
+        self.assertIn('pending.remove(0,written)',transport)
+        self.assertNotIn('pending.remove(0,n)',transport)
+
     def test_reading_telemetry_never_requests_agent(self):
         # Guard the temporary firmware policy as well as the bridge behavior.
         source=(Path(__file__).parents[1]/'firmware/src/main.cpp').read_text(encoding='utf-8')

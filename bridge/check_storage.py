@@ -3,6 +3,7 @@ import argparse
 import json
 import time
 import serial
+from serial_frames import JsonLines
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--port', required=True)
@@ -20,6 +21,7 @@ with open(args.output, 'x', encoding='utf-8') as output:
     try:
         end, next_request, index = time.monotonic()+args.seconds, 0, 0
         seen = set()
+        frames = JsonLines()
         requests = ('hello_request', 'storage_query', 'reading_query')
         while time.monotonic() < end:
             now = time.monotonic()
@@ -28,17 +30,14 @@ with open(args.output, 'x', encoding='utf-8') as output:
                 index += 1
                 next_request = now+.5
             raw = port.read_until(b'\n', 1024)
-            try:
-                value = json.loads(raw)
-            except (ValueError, UnicodeError):
-                continue
-            if value.get('type') not in ('hello', 'storage_status', 'reading_status'):
-                continue
-            line = json.dumps(value, ensure_ascii=False)
-            output.write(line+'\n')
-            output.flush()
-            if line not in seen:
-                print(line, flush=True)
-                seen.add(line)
+            for value in frames.feed(raw):
+                if value.get('type') not in ('hello', 'storage_status', 'reading_status'):
+                    continue
+                line = json.dumps(value, ensure_ascii=False)
+                output.write(line+'\n')
+                output.flush()
+                if line not in seen:
+                    print(line, flush=True)
+                    seen.add(line)
     finally:
         port.close()

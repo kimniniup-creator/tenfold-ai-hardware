@@ -5,6 +5,18 @@
 Host implementation integrated and verified: 6 direct regression tests, independent scoped host checks, full PlatformIO build, deterministic art assets. Final entry is README.md and docs/pixel-companion/SOFTWARE.md. No board flash or physical button/screen pass yet. Resume software task after Kim reports green LED/download mode; capture original flash locally before writing. Do not launch bridge and capture_device simultaneously.
 
 Kim replaced the active product scope on 2026-09-22: native M5 buttons for playful interaction, rhythm summaries as Agent context, original retro pixel companion on the M5 screen, no new enclosure. See docs/hackathon/product/PIXEL_COMPANION_PRD.md. Product task 01a0c5b4-a19c-7810-8c6e-d8a87bb68f70 coordinates integration in D:/tenfold-worktrees/pixel-integration. Software owns the sole COM9 lease for identification, backup and new firmware flashing; testing must wait for explicit release. The historical delivery below remains recoverable but is not the current requirements baseline.
+## Latest: USB reconnect repair before task-growth migration
+
+Reproduced backpressure/reopen stall fixed and tested twice without reset.
+See docs/pixel-companion/TRANSPORT.md for root-cause boundary, tests and evidence.
+App09E04A4FC38973040FF2F95B46A32685D8BD785192460565992AEE122CE10B11,
+716256bytes; bootloader unchanged. Device session7,lifetime188,marks4,135x240.
+Eleven host tests pass. COM10 exclusive ownership remains this task.
+Next authorized implementation: read main commit7f260d2 contract
+docs/hackathon/product/TASK_GROWTH_CONTRACT.md; integrate art6d5981e unchanged.
+Growth is task-node completion ONLY; old100-click growth below is superseded,
+not a current accepted product rule.
+
 ## Current: portrait reading prototype, matched boot chain (2026-09-22)
 
 Latest app-only update source eaef7c0: SHA256

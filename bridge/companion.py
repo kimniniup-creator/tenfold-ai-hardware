@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+from serial_frames import open_device
 
 ACTIONS = {"blink", "happy", "rest"}
 PHRASES = {"我在。", "我在，陪你待会儿。", "嗯，接住了。", "慢慢来就好。", "安静待着，也很好。"}
@@ -115,7 +116,7 @@ def run_once(gate):
     discarding = False
     print("Bridge ready; configured=" + str(all(os.getenv(k) for k in ("PET_API_URL","PET_API_KEY","PET_MODEL"))), flush=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
-        with serial.Serial(args.port, 115200, timeout=0.05, write_timeout=0.1) as port:
+        with open_device(args.port, timeout=0.05, write_timeout=0.1) as port:
             port.write(b'{"type":"hello_request"}\n')
             while True:
                 for byte in port.read(512):
