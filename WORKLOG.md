@@ -1,5 +1,13 @@
 # Tenfold 十日环｜工作记录
 
+## 2026-09-22｜像素陪伴整合验证
+
+- 独立美术、固件、USB桥接及验收记录已集成；PRD限定五句已审文案与动作，按压不解释为情绪诊断。
+- 整合工作树 PlatformIO 完整编译成功：RAM 22892 bytes，Flash 717085 bytes；固件 SHA256 0544E8E88BEBDB44DA2C39AD8D507F25DF6B1D3A4C00FB04A8F870EB4B276DEB（构建路径不同可使二进制hash不同）。
+- 原创10帧确定性、调色板、屏幕尺寸校验通过；桥接6项测试通过，含真实Content-Length EOF与8秒网络停顿子进程终止。独立最终复测另见testing/acceptance记录。
+- 实板仍未写入：USB已枚举，但ROM握手超时；已向Kim请求保持USB连接并按官方步骤进入下载模式。等待动作后软件唯一串口owner继续完整备份、烧录、物理按键与屏幕验收。Lucas CLI本机不可用，正常动作请求已发出。
+- 不把编译/真实合成摘要模型请求冒充板端到端成功。
+
 ## 2026-09-22｜M5像素陪伴重新开工
 
 - Kim授权PRD、固件、必要软件、美术与实板全套开发；取消本轮外壳。PRD为docs/hackathon/product/PIXEL_COMPANION_PRD.md。
