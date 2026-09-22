@@ -159,3 +159,7 @@
 ## reading-0.2收尾增量整合
 
 已合eaef7c0/04e0fb1等价增量，亲读reading-telemetry-only：新启动5保留lifetime25、marks1、当前press0，随后实际计数增加。整合7项bridge测试PASS，PlatformIO编译PASS RAM23276/Flash714889，自动candidate关闭；保存提示准确指向重启。串口再次打开偶发无回应仍未解决，已由当前协调owner续派唯一软件owner诊断，产品不抢串口。
+
+## 任务成长纠正与单一实现契约
+
+按当前协调owner转达的Kim明确纠正，定义任务节点幂等确认→原子存档ACK→3节点演示门槛→二阶最近标记回看；点击仅照料。保留旧数据迁移但不折算任务，B短标记/长模式保留，A长解锁回看。Agent建议后置，无第二工程派单。
