@@ -31,3 +31,16 @@
 7. 互动成长能否带来依恋、是否干扰阅读仍须实际用户测试。不能把连续点击、设备在线时长或宠物成长解释为专注改善。
 
 协调状态：美术及固件已接受任务，等待新资产提交、集成与实板证据。本协调任务不接管串口。
+
+## 后续协调证据
+
+- 美术 bc1f45f 已交付：24 帧、两阶段、135×240 预览；协调任务独立运行 verify.py 通过并目视两阶段预览。已交固件接入。
+- 软件报告启动误识别造成黑屏；独立热修复 1f6ac1047a3f860095063411081b596b220e4ffb 经真实 app 烧录与三次重启，均 board26/240×135/display_ready=true。新阅读稿必须带入修复。
+- Kim 在美术任务进一步要求成年体差异、喂食/清理/进化、读完论文成长。bc1f45f 及 100 次互动成长仅临时链路原型，非最终美术/养成验收。新玩法仍由其对应任务完善，不能由点击次数推出阅读完成或合理舒压频次。
+- 临时竖屏固件 0312a6beeb728803119b42bfdf9d77fd8c1de0bc 已仅 app 烧录。协调任务读取 reading-first-boot.ndjson，确认 build reading-0.2、135×240、board26、portrait-mono-24、state_selftest=true。此版本仍使用 bc1f45f 资产。
+- 重启证据出现反例：随机启动 session 已变化，reading_session 却仍为 1；storage_ok=true 不能证明持久化。软件 owner 正修复，不能将首启动通过写成养成保存通过。
+- 异步请 Kim 试实体按键与观察画面；reading-physical-1.ndjson 当前没有真实互动事件，按键和肉眼显示仍未验收。
+- 诊断进一步证明：Preferences 写返回成功后立即读回 NOT_FOUND，存储 opened=true 但 boot_length=0；已加写后校验避免误报。软件保留原8MB及前后NVS备份，禁止无限重试写。
+- 协调授权评估匹配bootloader精确区修复（前置：构建与分区参数核验、目标区备份/hash、回滚路径）。不得擦除NVS/整板或改分区。兼容性仅推断，是否修复须真实读回与重启证据。
+- 修复实证：匹配当前Arduino构建的bootloader后立即读回340字节成功；协调任务独立读取reading-matched-boot2.ndjson，loaded=true、boot_session=1、current_session=2、readback_ok=true、135×240、board26。仅bootloader精确区及app写入，未擦NVS或改分区。软件报告f1a90cf资产已一并接入。
+- 这证明非零会话存档跨重启恢复，不等于已验证真实点击/成长记录持久化；当前真人互动仍为0，后者须用户按键后再核。
