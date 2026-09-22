@@ -3,10 +3,12 @@
 #include <M5Unified.h>
 #include <Preferences.h>
 #include "pet_assets.h"
+#include "sticks3_boot.h"
 
 namespace {
 constexpr uint32_t WINDOW=10000, COOLDOWN=60000, REPLY_TTL=15000;
 Preferences prefs;
+bool displayReady=false;
 M5Canvas canvas(&M5.Display);
 String session, rx, pending;
 bool quiet=false, discard=false, dirty=false, waiting=false, hasPrompt=false;
@@ -16,7 +18,7 @@ uint32_t animStart=0, lastFrame=0, changed=0, messageAt=0;
 String message="我在这里。", source="LOCAL";
 pet_assets::State replyState=pet_assets::State::Happy;
 // One bounded outgoing frame; never wait for a disconnected host.
-bool send(JsonDocument& doc){if(!pending.isEmpty()||!Serial)return false;serializeJson(doc,pending);pending+='\n';if(pending.length()>768){pending="";return false;}return true;}
+bool send(JsonDocument& doc){if(!pending.isEmpty()||!Serial)return false;if(doc["type"].as<String>()=="hello"){doc["build"]="pixel-0.1-displayfix";doc["display_ready"]=displayReady;}serializeJson(doc,pending);pending+='\n';if(pending.length()>768){pending="";return false;}return true;}
 void hello(){JsonDocument d;d["type"]="hello";d["protocol"]=2;d["build"]="pixel-0.1";d["chip"]=ESP.getChipModel();d["session"]=session;d["epoch"]=epoch;d["quiet"]=quiet;d["presses_total"]=total;d["width"]=M5.Display.width();d["height"]=M5.Display.height();d["board"]=(int)M5.getBoard();send(d);}
 void flush(){if(!Serial){pending="";return;}int room=Serial.availableForWrite();if(room<=0||pending.isEmpty())return;size_t n=min((size_t)room,pending.length());Serial.write((const uint8_t*)pending.c_str(),n);pending.remove(0,n);}
 bool validText(const String& t){return t=="我在。"||t=="我在，陪你待会儿。"||t=="嗯，接住了。"||t=="慢慢来就好。"||t=="安静待着，也很好。";}
@@ -44,7 +46,7 @@ void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillSc
  String text=quiet?"安静待着，也很好。":message;String first=fit(text,224);canvas.setCursor(8,90);canvas.setTextColor(0xFFFF);canvas.print(first);canvas.setCursor(8,104);canvas.print(fit(text.substring(first.length()),224));canvas.setCursor(8,121);canvas.setTextColor(0x8C71);canvas.print(quiet?"A 轻碰  ·  B 回到陪伴":"A 轻碰  ·  B 安静");canvas.pushSprite(0,0);
 }
 }
-void setup(){auto c=M5.config();M5.begin(c);M5.Display.setRotation(1);M5.Display.setBrightness(100);canvas.createSprite(240,135);Serial.begin(115200);Serial.setTxTimeoutMs(0);prefs.begin("pixelpet",false);quiet=prefs.getBool("quiet",false);session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=millis();hello();}
+void setup(){displayReady=beginStickS3();M5.Display.setRotation(1);M5.Display.setBrightness(100);canvas.createSprite(240,135);Serial.begin(115200);Serial.setTxTimeoutMs(0);prefs.begin("pixelpet",false);quiet=prefs.getBool("quiet",false);session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=millis();hello();}
 void loop(){uint32_t now=millis();M5.update();
  if(M5.BtnA.wasPressed()){pressStart=now;animStart=now;replyState=pet_assets::State::Happy;if(count>0)interval+=min(now-lastPress,WINDOW);lastPress=now;if(count<10000)count++;if(total<UINT32_MAX)total++;message="嗯，接住了。";source="LOCAL";}
  if(M5.BtnA.isPressed()||M5.BtnA.wasReleased()){held+=now-pressStart;pressStart=now;}
