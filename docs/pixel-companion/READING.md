@@ -1,5 +1,12 @@
 # Reading bookmark prototype 0.2
 
+Latest transport repair and live reconnect evidence: [TRANSPORT.md](TRANSPORT.md).
+The prior intermittent reconnect issue below is historical: its reproduced
+backpressure/reopen case is now passing without board resets. Product decision
+has superseded click-count growth: next build must implement
+`docs/hackathon/product/TASK_GROWTH_CONTRACT.md`; the old100-click demo below is
+not the accepted growth mechanism.
+
 135×240 portrait. Temporary monochrome fan-art assets from the art owner,
 24 frames / Young and Grown; NOT a final character or completed care system.
 No feeding, cleaning, paper completion or reading-position integration yet.

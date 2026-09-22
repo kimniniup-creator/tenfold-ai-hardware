@@ -1,5 +1,17 @@
 # Tenfold P0 handoff
 
+## Latest: USB reconnect repair before task-growth migration
+
+Reproduced backpressure/reopen stall fixed and tested twice without reset.
+See docs/pixel-companion/TRANSPORT.md for root-cause boundary, tests and evidence.
+App09E04A4FC38973040FF2F95B46A32685D8BD785192460565992AEE122CE10B11,
+716256bytes; bootloader unchanged. Device session7,lifetime188,marks4,135x240.
+Eleven host tests pass. COM10 exclusive ownership remains this task.
+Next authorized implementation: read main commit7f260d2 contract
+docs/hackathon/product/TASK_GROWTH_CONTRACT.md; integrate art6d5981e unchanged.
+Growth is task-node completion ONLY; old100-click growth below is superseded,
+not a current accepted product rule.
+
 ## Current: portrait reading prototype, matched boot chain (2026-09-22)
 
 Latest app-only update source eaef7c0: SHA256

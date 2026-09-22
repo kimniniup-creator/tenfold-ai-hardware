@@ -4,6 +4,7 @@ import json
 import time
 from pathlib import Path
 import serial
+from serial_frames import JsonLines
 
 def main():
     parser=argparse.ArgumentParser()
@@ -17,17 +18,16 @@ def main():
     port.dtr=False;port.rts=False
     port.open()
     with output.open("x",encoding="utf-8") as log, port:
+        frames=JsonLines()
         deadline=time.monotonic()+min(max(args.seconds,1),600)
         next_query=0
         while time.monotonic()<deadline:
             if time.monotonic()>=next_query:
                 port.write(b'{"type":"hello_request"}\n');next_query=time.monotonic()+1
             line=port.read_until(b'\n',1024)
-            if not line:continue
-            try:item=json.loads(line)
-            except (ValueError,UnicodeError):continue
-            record={"host_monotonic":round(time.monotonic(),3),"device":item}
-            wire=json.dumps(record,ensure_ascii=False)
-            print(wire,flush=True);log.write(wire+"\n");log.flush()
+            for item in frames.feed(line):
+                record={"host_monotonic":round(time.monotonic(),3),"device":item}
+                wire=json.dumps(record,ensure_ascii=False)
+                print(wire,flush=True);log.write(wire+"\n");log.flush()
 
 if __name__=="__main__":main()
