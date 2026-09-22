@@ -60,3 +60,11 @@ PC07仍未关闭：read1+剩余socket timeout限制响应体读取，但urlopen�
 PC07关闭（主机层）：respond把整个_request放进单个OS子进程，subprocess.run(timeout=8)在超时后终止并回收；唯一executor worker不创建无限请求。独立探针在subprocess边界替换为真实sleep(30)子进程，保留生产调用参数与超时处理，8.027秒返回source=local。另以mock urlopen验证_request异常回退。没有访问网络、串口，也没有把该试验描述为真实DNS或慢HTTP服务测试；它证明外层进程截止独立于内部卡住的阶段。进程创建与调度有开销，不承诺严格8.000秒。
 
 作者SOFTWARE.md记录DeepSeek合成摘要调用产生白名单action/text，属于作者提供的真实提供商证据，并非本验收亲自调用或真实按键链路。PC01/02/03/06源码修订保持待实机验证；COM9仍归软件owner，烧录和屏幕证据NOT_TESTED，不重复请求用户进入下载模式。
+
+## 最终主机复验 aae670e（B03）
+
+固定软件aae670e1ff77b008c179d8c9b24a25117b5be778（修复9186fa2），bridge SHA256 a6d3cccf4b1e9aa9f50db3fb1b450de0c25dad369d3e978430576dcef76d9825。B03为正常Content-Length耗尽后HTTPResponse关闭fp，下一循环访问fp.raw导致合法Agent响应误回退。修复在访问socket前检测isclosed并结束读取。
+
+独立验收从Git提取冻结源码与test_companion.py到本工作树忽略runtime目录运行：python -m unittest discover -s docs/pixel-companion/acceptance/runtime -v，6/6通过，耗时8.602秒。test_real_http_content_length_eof使用真实本地HTTPServer/HTTPResponse和Content-Length，合法JSON返回source=agent；test_real_stalled_tls_process_deadline使用真实本地TCP连接停顿TLS，生产respond返回local且7–10秒断言通过。仅回环网络、合成凭证，无外部提供商或串口。
+
+原有独立9项回归亦9/9通过，bridge-aae670e.json，停顿进程8.027秒回退。B03关闭。结论仅主机层通过；实板仍未烧录验证，PC01/02/03/06真实按键、显示、USB闭环仍NOT_TESTED。全量编译及美术verify由PM报告通过，不能替代实机验收。
