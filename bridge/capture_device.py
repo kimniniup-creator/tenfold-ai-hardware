@@ -12,7 +12,11 @@ def main():
     parser.add_argument("--out",default=".delivery/pixel-physical.ndjson")
     args=parser.parse_args()
     output=Path(args.out);output.parent.mkdir(parents=True,exist_ok=True)
-    with output.open("x",encoding="utf-8") as log, serial.Serial(args.port,115200,timeout=.1,write_timeout=.2) as port:
+    port=serial.Serial()
+    port.port=args.port;port.baudrate=115200;port.timeout=.1;port.write_timeout=.2
+    port.dtr=False;port.rts=False
+    port.open()
+    with output.open("x",encoding="utf-8") as log, port:
         deadline=time.monotonic()+min(max(args.seconds,1),600)
         next_query=0
         while time.monotonic()<deadline:
