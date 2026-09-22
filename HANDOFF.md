@@ -4,6 +4,16 @@
 
 Kim replaced the active product scope on 2026-09-22: native M5 buttons for playful interaction, rhythm summaries as Agent context, original retro pixel companion on the M5 screen, no new enclosure. See docs/hackathon/product/PIXEL_COMPANION_PRD.md. Product task 01a0c5b4-a19c-7810-8c6e-d8a87bb68f70 coordinates integration in D:/tenfold-worktrees/pixel-integration. Software owns the sole COM9 lease for identification, backup and new firmware flashing; testing must wait for explicit release. The historical delivery below remains recoverable but is not the current requirements baseline.
 
+## Active direction: pixel companion (2026-09-22)
+
+Worktree D:/tenfold-worktrees/pixel-firmware, branch codex/pixel-firmware.
+Firmware main + bridge/companion.py are software-owned; pet_assets.h art-owned.
+Product coordinates integration and exclusive COM9 lease. No flash write yet;
+manual download mode requested after two handshake timeouts. Back up before write.
+Current protocol and evidence: docs/pixel-companion/SOFTWARE.md. Old P0 below is
+historical, not the current product. Android multi-commitment draft is retained
+untouched in D:/tenfold-worktrees/android and is not part of this new release.
+
 ## Final delivery entry
 
 - Authoritative workspace: `D:\十日环`, branch `main`, repository `kimniniup-creator/tenfold-ai-hardware`.

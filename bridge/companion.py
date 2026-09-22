@@ -3,6 +3,8 @@ import argparse
 import concurrent.futures
 import json
 import os
+import subprocess
+import sys
 import time
 import urllib.request
 
@@ -25,7 +27,7 @@ def validate_reply(value):
         raise ValueError("unsupported inference")
     return dict(value, source="agent")
 
-def respond(summary):
+def _request(summary):
     endpoint = os.getenv("PET_API_URL", "")
     key = os.getenv("PET_API_KEY", "")
     model = os.getenv("PET_MODEL", "")
@@ -100,12 +102,11 @@ class Gate:
         self.last_call = now
         return True
 
-def main(gate=None):
+def run_once(gate):
     import serial
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", required=True)
     args = parser.parse_args()
-    gate = gate or Gate()
     future = None
     context = None
     buffer = bytearray()
@@ -143,12 +144,12 @@ def main(gate=None):
                         print("reply source="+reply["source"],flush=True)
                     future=None
 
-if __name__ == "__main__":
+def main():
     import serial
     gate=Gate()
     while True:
         try:
-            main(gate)
+            run_once(gate)
         except (serial.SerialException, OSError):
             # Keep cooldown/dedup state across reconnect; discard in-flight replies.
             gate.quiet=True
@@ -156,3 +157,23 @@ if __name__ == "__main__":
             time.sleep(1)
         except KeyboardInterrupt:
             break
+
+def respond(summary):
+    if not all(os.getenv(k) for k in ("PET_API_URL","PET_API_KEY","PET_MODEL")):
+        return dict(FALLBACK)
+    try:
+        # OS child enforces wall-clock deadline including DNS, headers and body.
+        # subprocess.run kills and reaps timed-out children. At most one exists.
+        result=subprocess.run([sys.executable,os.path.abspath(__file__),"--request"],input=json.dumps(summary),capture_output=True,text=True,timeout=8,check=True)
+        value=json.loads(result.stdout)
+        if value.get("source")=="agent":
+            return validate_reply({"action":value.get("action"),"text":value.get("text")})
+    except Exception:
+        pass
+    return dict(FALLBACK)
+
+if __name__ == "__main__":
+    if sys.argv[1:]==["--request"]:
+        print(json.dumps(_request(json.loads(sys.stdin.read(2048))),ensure_ascii=True))
+    else:
+        main()
