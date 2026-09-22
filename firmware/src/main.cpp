@@ -54,9 +54,10 @@ void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.i
  waiting=false;message=text;source=origin=="agent"?"AGENT":"LOCAL";messageAt=millis();animStart=millis();replyState=action=="rest"?pet_assets::State::Rest:(action=="blink"?pet_assets::State::Blink:pet_assets::State::Happy);
 }
 void summarize(uint32_t now){if(now-windowStart<WINDOW)return;if(waiting&&now-requested<=REPLY_TTL)return;waiting=false;
- ++windowId;bool candidate=!quiet&&count>=3&&(!hasPrompt||now-lastPrompt>=COOLDOWN);
+ // Portrait reading has no visible Agent entry yet: telemetry only, no requests.
+ ++windowId;constexpr bool candidate=false;
  JsonDocument d;d["type"]="rhythm";d["protocol"]=2;d["session"]=session;d["epoch"]=epoch;d["window"]=windowId;d["duration_ms"]=now-windowStart;d["presses"]=count;d["held_ms"]=held;d["mean_interval_ms"]=count>1?interval/(count-1):0;d["quiet"]=quiet;d["candidate"]=candidate;
- bool queued=send(d);if(candidate&&queued){waiting=true;requested=now;lastPrompt=now;hasPrompt=true;}
+ send(d);
  count=held=interval=0;windowStart=now;
 }
 String fit(const String& t,int width){String s;for(size_t i=0;i<t.length();){uint8_t c=t[i];size_t n=c<128?1:((c&224)==192?2:((c&240)==224?3:4));if(i+n>t.length())break;String v=s+t.substring(i,i+n);if(canvas.textWidth(v)>width)break;s=v;i+=n;}return s;}
@@ -73,7 +74,7 @@ void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillSc
 #endif
  canvas.setCursor(8,143);canvas.printf("相伴 %lu 次",(unsigned long)reading.interactions);
  canvas.setCursor(8,156);canvas.printf("本次标记 %lu",(unsigned long)sessionMarks);
- String text=!storageOk?"保存失败，请重试":(markFeedback&&now-markFeedback<1800?"记下这一处":(quiet?"安静待着，也很好。":"我在，陪你待会儿。"));String first=fit(text,119);canvas.setCursor(8,176);canvas.print(first);canvas.setCursor(8,190);canvas.print(fit(text.substring(first.length()),119));canvas.setCursor(8,211);canvas.print("A 互动  B 标记");canvas.setCursor(8,225);canvas.print("长按 B 切换模式");canvas.pushSprite(0,0);
+ String text=!storageOk?"保存失败，请重启":(markFeedback&&now-markFeedback<1800?"记下这一处":(quiet?"安静待着，也很好。":"我在，陪你待会儿。"));String first=fit(text,119);canvas.setCursor(8,176);canvas.print(first);canvas.setCursor(8,190);canvas.print(fit(text.substring(first.length()),119));canvas.setCursor(8,211);canvas.print("A 互动  B 标记");canvas.setCursor(8,225);canvas.print("长按 B 切换模式");canvas.pushSprite(0,0);
 }
 }
 void setup(){displayReady=beginStickS3();M5.Display.setRotation(0);M5.Display.setBrightness(100);canvas.createSprite(135,240);Serial.begin(115200);Serial.setTxTimeoutMs(0);

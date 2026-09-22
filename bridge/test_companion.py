@@ -6,10 +6,26 @@ import time
 import unittest
 import http.server
 import urllib.request
+from pathlib import Path
 from unittest.mock import patch
 import companion as c
 
 class CompanionTests(unittest.TestCase):
+    def test_reading_telemetry_never_requests_agent(self):
+        # Guard the temporary firmware policy as well as the bridge behavior.
+        source=(Path(__file__).parents[1]/'firmware/src/main.cpp').read_text(encoding='utf-8')
+        self.assertIn('constexpr bool candidate=false;',source)
+        self.assertNotIn('waiting=true',source)
+        self.assertIn('保存失败，请重启',source)
+        self.assertNotIn('保存失败，请重试',source)
+        gate=c.Gate()
+        gate.accept(dict(type='hello',protocol=2,session='reading',epoch=0,quiet=False),0)
+        for window,presses in enumerate((0,3,10,10000),1):
+            row=dict(type='rhythm',protocol=2,session='reading',epoch=0,quiet=False,
+                     window=window,presses=presses,duration_ms=10000,held_ms=0,
+                     mean_interval_ms=100,candidate=False)
+            self.assertFalse(gate.accept(row,window*60))
+
     def test_phrases(self):
         for phrase in c.PHRASES:
             self.assertEqual(c.validate_reply(dict(action="blink",text=phrase))["source"],"agent")

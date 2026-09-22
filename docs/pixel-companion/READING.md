@@ -35,6 +35,11 @@ There is no loss, punishment or absence decay.
 Protocol2 kept. hello adds reading_session/interactions_lifetime/marks_total,
 mode/growth_stage/storage_ok/state_selftest/display_ready/asset. Existing strict
 Agent phrase whitelist and timeout remain; model cannot mutate bookmark state.
+The portrait reading prototype has NO visible Agent entry or Agent response
+rendering yet. Rhythm telemetry remains, but candidate is always false and no
+automatic request is armed, even after3+ interactions. The optional bridge must
+not call the model for these frames. Agent copy is being edited separately;
+this build must not be described as showing Agent responses on the reading UI.
 readingSelfTest executes pure state-machine cases on target: edge/hold, B699ms
 mark vs700ms mode, uint32 rollover and marker attribution. It is not physical
 button evidence. Hardware input/screen and nonzero-count restart still require
