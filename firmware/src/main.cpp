@@ -16,10 +16,10 @@ uint32_t animStart=0, lastFrame=0, changed=0, messageAt=0;
 String message="我在这里。", source="LOCAL";
 pet_assets::State replyState=pet_assets::State::Happy;
 // One bounded outgoing frame; never wait for a disconnected host.
-void send(JsonDocument& doc){if(!pending.isEmpty())return;serializeJson(doc,pending);pending+='\n';if(pending.length()>768)pending="";}
+bool send(JsonDocument& doc){if(!pending.isEmpty()||!Serial)return false;serializeJson(doc,pending);pending+='\n';if(pending.length()>768){pending="";return false;}return true;}
 void hello(){JsonDocument d;d["type"]="hello";d["protocol"]=2;d["build"]="pixel-0.1";d["chip"]=ESP.getChipModel();d["session"]=session;d["epoch"]=epoch;d["quiet"]=quiet;d["presses_total"]=total;d["width"]=M5.Display.width();d["height"]=M5.Display.height();d["board"]=(int)M5.getBoard();send(d);}
 void flush(){if(!Serial){pending="";return;}int room=Serial.availableForWrite();if(room<=0||pending.isEmpty())return;size_t n=min((size_t)room,pending.length());Serial.write((const uint8_t*)pending.c_str(),n);pending.remove(0,n);}
-bool validText(const String& t){if(t.isEmpty()||t.length()>72)return false;for(size_t i=0;i<t.length();i++)if((uint8_t)t[i]<32)return false;return true;}
+bool validText(const String& t){return t=="我在。"||t=="我在，陪你待会儿。"||t=="嗯，接住了。"||t=="慢慢来就好。"||t=="安静待着，也很好。";}
 void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.is<JsonObject>())return;
  String type=d["type"]|"";if(type=="hello_request"){hello();return;}
  if(type!="reply"||quiet||!waiting||millis()-requested>REPLY_TTL)return;
@@ -32,22 +32,22 @@ void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.i
 void summarize(uint32_t now){if(now-windowStart<WINDOW)return;if(waiting&&now-requested<=REPLY_TTL)return;waiting=false;
  ++windowId;bool candidate=!quiet&&count>=3&&(!hasPrompt||now-lastPrompt>=COOLDOWN);
  JsonDocument d;d["type"]="rhythm";d["protocol"]=2;d["session"]=session;d["epoch"]=epoch;d["window"]=windowId;d["duration_ms"]=now-windowStart;d["presses"]=count;d["held_ms"]=held;d["mean_interval_ms"]=count>1?interval/(count-1):0;d["quiet"]=quiet;d["candidate"]=candidate;
- send(d);if(candidate){waiting=true;requested=now;lastPrompt=now;hasPrompt=true;}
+ bool queued=send(d);if(candidate&&queued){waiting=true;requested=now;lastPrompt=now;hasPrompt=true;}
  count=held=interval=0;windowStart=now;
 }
 String fit(const String& t,int width){String s;for(size_t i=0;i<t.length();){uint8_t c=t[i];size_t n=c<128?1:((c&224)==192?2:((c&240)==224?3:4));if(i+n>t.length())break;String v=s+t.substring(i,i+n);if(canvas.textWidth(v)>width)break;s=v;i+=n;}return s;}
 void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillScreen(0x10E3);
  canvas.setFont(&fonts::efontCN_12);canvas.setTextColor(0xCDB3);canvas.setCursor(9,6);canvas.print(quiet?"安静陪伴":"陪你待一会儿");canvas.setCursor(185,6);canvas.print(source=="AGENT"?"Agent":"本地");
- auto state=quiet?pet_assets::State::Rest:(M5.BtnA.isPressed()?pet_assets::State::Press:(now-animStart<700?replyState:((now%4800)<180?pet_assets::State::Blink:pet_assets::State::Idle)));
+ auto state=M5.BtnA.isPressed()?pet_assets::State::Press:(now-animStart<700?replyState:(quiet?pet_assets::State::Rest:((now%4800)<180?pet_assets::State::Blink:pet_assets::State::Idle)));
  auto frame=pet_assets::frameIndex(state,now-animStart);
  for(int y=0;y<32;y++)for(int x=0;x<32;x++){auto p=pet_assets::pixel(frame,x,y);if(p)canvas.fillRect(88+x*2,24+y*2,2,2,pet_assets::kPalette[p]);}
- canvas.setCursor(8,94);canvas.setTextColor(0xFFFF);canvas.print(fit(quiet?"安静待着，也很好。":message,224));canvas.setCursor(8,119);canvas.setTextColor(0x8C71);canvas.print(quiet?"A 轻碰  ·  B 回到陪伴":"A 轻碰  ·  B 安静");canvas.pushSprite(0,0);
+ String text=quiet?"安静待着，也很好。":message;String first=fit(text,224);canvas.setCursor(8,90);canvas.setTextColor(0xFFFF);canvas.print(first);canvas.setCursor(8,104);canvas.print(fit(text.substring(first.length()),224));canvas.setCursor(8,121);canvas.setTextColor(0x8C71);canvas.print(quiet?"A 轻碰  ·  B 回到陪伴":"A 轻碰  ·  B 安静");canvas.pushSprite(0,0);
 }
 }
 void setup(){auto c=M5.config();M5.begin(c);M5.Display.setRotation(1);M5.Display.setBrightness(100);canvas.createSprite(240,135);Serial.begin(115200);Serial.setTxTimeoutMs(0);prefs.begin("pixelpet",false);quiet=prefs.getBool("quiet",false);session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=millis();hello();}
 void loop(){uint32_t now=millis();M5.update();
  if(M5.BtnA.wasPressed()){pressStart=now;animStart=now;replyState=pet_assets::State::Happy;if(count>0)interval+=min(now-lastPress,WINDOW);lastPress=now;if(count<10000)count++;if(total<UINT32_MAX)total++;message="嗯，接住了。";source="LOCAL";}
- if(M5.BtnA.wasReleased())held+=min(now-pressStart,WINDOW);
+ if(M5.BtnA.isPressed()||M5.BtnA.wasReleased()){held+=now-pressStart;pressStart=now;}
  if(M5.BtnB.wasPressed()){quiet=!quiet;epoch++;waiting=false;pending="";dirty=true;changed=now;message="我在这里。";source="LOCAL";hello();}
  if(dirty&&now-changed>=2000){prefs.putBool("quiet",quiet);dirty=false;}
  for(int budget=0;budget<128&&Serial.available();budget++){char c=Serial.read();if(c=='\n'){if(!discard&&!rx.isEmpty())receive(rx);rx="";discard=false;}else if(c!='\r'&&!discard){if(rx.length()>=512){rx="";discard=true;}else rx+=c;}}

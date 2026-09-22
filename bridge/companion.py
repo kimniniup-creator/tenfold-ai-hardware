@@ -7,6 +7,7 @@ import time
 import urllib.request
 
 ACTIONS = {"blink", "happy", "rest"}
+PHRASES = {"我在。", "我在，陪你待会儿。", "嗯，接住了。", "慢慢来就好。", "安静待着，也很好。"}
 FALLBACK = {"action": "happy", "text": "我在，陪你待会儿。", "source": "local"}
 
 def validate_reply(value):
@@ -17,6 +18,8 @@ def validate_reply(value):
         raise ValueError("reply type")
     if not text or len(text.encode("utf-8")) > 72 or any(ord(c) < 32 for c in text):
         raise ValueError("reply length")
+    if text not in PHRASES:
+        raise ValueError("unapproved phrase")
     # No diagnostic or punitive claims, including common equivalents.
     if any(w in text.lower() for w in ("焦虑", "抑郁", "诊断", "检测到", "不够努力", "anxiety", "depress", "diagnos")):
         raise ValueError("unsupported inference")
@@ -31,12 +34,25 @@ def respond(summary):
     if not endpoint.startswith("https://"):
         return dict(FALLBACK)
     payload = {"model": model, "messages": [
-        {"role": "system", "content": '你是温柔克制的像素伙伴。按键只是互动，不推断情绪、健康或人格，不责备不催促。只输出JSON {"action":"blink|happy|rest","text":"一句最多20个中文字的陪伴"}。'},
-        {"role": "user", "content": json.dumps(summary, ensure_ascii=False)}], "max_tokens": 120}
+        {"role": "system", "content": '你是温柔克制的像素伙伴。按键只是互动，不推断情绪、健康或人格，不责备不催促。只输出JSON，action从blink,happy,rest选择；text必须原样选自：'+json.dumps(sorted(PHRASES),ensure_ascii=False)},
+        {"role": "user", "content": json.dumps(summary, ensure_ascii=False)}], "max_tokens": 120,
+        "response_format": {"type": "json_object"}}
+    if os.getenv("PET_DISABLE_THINKING") == "1":
+        payload["thinking"] = {"type": "disabled"}
     request = urllib.request.Request(endpoint, data=json.dumps(payload).encode(), headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
     try:
+        deadline=time.monotonic()+8
         with urllib.request.urlopen(request, timeout=8) as response:
-            raw = response.read(16385)
+            raw=b""
+            while len(raw)<=16384:
+                remaining=deadline-time.monotonic()
+                if remaining<=0:
+                    raise TimeoutError("total deadline")
+                response.fp.raw._sock.settimeout(remaining)
+                chunk=response.read1(min(4096,16385-len(raw)))
+                if not chunk:
+                    break
+                raw+=chunk
         if len(raw) > 16384:
             raise ValueError("response too large")
         content = json.loads(raw)["choices"][0]["message"]["content"]
@@ -58,6 +74,8 @@ class Gate:
             return False
         if item.get("type") == "hello" and item.get("protocol") == 2:
             if not isinstance(item.get("session"), str) or len(item["session"]) > 80:
+                return False
+            if type(item.get("epoch")) is not int or not 0 <= item["epoch"] <= 4294967295 or type(item.get("quiet")) is not bool:
                 return False
             if item["session"] != self.session:
                 self.last_window = -1
@@ -82,12 +100,12 @@ class Gate:
         self.last_call = now
         return True
 
-def main():
+def main(gate=None):
     import serial
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", required=True)
     args = parser.parse_args()
-    gate = Gate()
+    gate = gate or Gate()
     future = None
     context = None
     buffer = bytearray()
@@ -126,4 +144,15 @@ def main():
                     future=None
 
 if __name__ == "__main__":
-    main()
+    import serial
+    gate=Gate()
+    while True:
+        try:
+            main(gate)
+        except (serial.SerialException, OSError):
+            # Keep cooldown/dedup state across reconnect; discard in-flight replies.
+            gate.quiet=True
+            print("USB disconnected; retrying",flush=True)
+            time.sleep(1)
+        except KeyboardInterrupt:
+            break
