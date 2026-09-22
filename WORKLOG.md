@@ -22,6 +22,14 @@
 - 软件复用01a0c5c6-3e14-7e80-b9c0-3e7159c57977；测试复用01a0c5b4-aff1-7102-85c2-bb1a66b8368f；验收复用01a0c5b4-bd94-7110-94a8-5b2c9e190508；新美术01a0c7df-f2a2-7ef3-aca8-dc4f8c8bb26b。
 - COM9发现USB VID303A:832B候选，唯一串口/烧录租约给软件。备份原flash再更新，不无故全擦。实板型号、烧录和物理按键证据待软件回传。
 - 美术32x32索引帧及RGB565调色板，横屏240x135；实际屏幕再核。Agent桥接先USB，密钥仅主机环境配置；无网设备独立可玩。
+## 2026-09-22｜阅读保存反例与匹配启动链修复
+
+- 首版发现会话重启仍1；新增storage_query揭示putBytes返回成功但立即读回NOT_FOUND，非schema长度错误。已加入逐次读回比对、失败锁止，禁止无限重写故障NVS。
+- 原UIFlow启动程序IDF5.4.2-dirty搭配当前Arduino2/IDF4应用；精确备份启动区并核对分区边界后，仅改匹配bootloader和app，不发NVS擦除、不改分区。匹配后读回340字节，三次启动session1→2→3成功。底层兼容失效机理尚未证明。
+- 当前app SHA A6A46C122711407B13DF93C7C6BCEC70D3E21278D0097FF014FBEF2E4A7931C6；f1a90cf资产原样集成。6项bridge测试、24帧资产校验和编译通过。
+- 原始闪存/NVS/串口证据仅保留忽略目录.delivery。细节与恢复哈希见docs/pixel-companion/READING.md；真人按键、屏幕和实体断电不能用编译或session保存替代。
+- 第三次启动现场收到10次设备互动（未注入），尚待现场动作关联及重启非零计数验证。Agent文案按Kim要求拆为独立用户任务，禁止该任务占COM10或烧板。
+
 ## 2026-09-22｜竖屏阅读原型与黑屏热修
 
 - 现场pixel0.1黑屏读取到board155/0x0；独立pixel-display-fix分支1f6ac10已修复板型缓存并仅app烧录，3次受控重启board26/240x135/display_ready=true，仍区分目视确认。

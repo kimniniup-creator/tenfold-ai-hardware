@@ -1,10 +1,27 @@
 # Tenfold P0 handoff
 
-## Current work: pixel companion
+## Historical integration: pixel companion
 
 Host implementation integrated and verified: 6 direct regression tests, independent scoped host checks, full PlatformIO build, deterministic art assets. Final entry is README.md and docs/pixel-companion/SOFTWARE.md. No board flash or physical button/screen pass yet. Resume software task after Kim reports green LED/download mode; capture original flash locally before writing. Do not launch bridge and capture_device simultaneously.
 
 Kim replaced the active product scope on 2026-09-22: native M5 buttons for playful interaction, rhythm summaries as Agent context, original retro pixel companion on the M5 screen, no new enclosure. See docs/hackathon/product/PIXEL_COMPANION_PRD.md. Product task 01a0c5b4-a19c-7810-8c6e-d8a87bb68f70 coordinates integration in D:/tenfold-worktrees/pixel-integration. Software owns the sole COM9 lease for identification, backup and new firmware flashing; testing must wait for explicit release. The historical delivery below remains recoverable but is not the current requirements baseline.
+## Current: portrait reading prototype, matched boot chain (2026-09-22)
+
+Current branch codex/pixel-firmware in D:/tenfold-worktrees/pixel-firmware.
+Exclusive device port COM10. Board is running, not left in ROM. 135x240,
+board26/display_ready, art f1a90cf. Do not use historical COM9 instructions below.
+Reading persistence required matching the old Arduino/IDF4 app with its own
+bootloader instead of the original UIFlow IDF5.4.2 bootloader. Before repair,
+putBytes reported success while immediate readback failed. After scoped boot+app
+write, session1→2→3 persisted with exact340-byte schema readback. No NVS erase
+command or partition-table change. Recovery backups and logs remain .delivery,
+not Git; exact hashes/bounds and remaining untested cases are in
+docs/pixel-companion/READING.md. Current app SHA A6A46C122711407B13DF93C7C6BCEC70D3E21278D0097FF014FBEF2E4A7931C6.
+Storage failures now latch off retries. bridge/check_storage.py is read-only.
+Third boot received10 device interactions without test injection; actual user
+gesture correlation, nonzero count reboot, markers and real screen QA pending.
+Agent copy is a separate user-facing task; it must not flash or open this port.
+Older direction and release notes below are historical.
 
 ## Active direction: pixel companion (2026-09-22)
 
