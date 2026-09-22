@@ -174,3 +174,7 @@
 ## 串口修复阶段独立核对
 
 已集成0b33c8d等价3d814fc，产品亲读两轮reconnect-bounded本地日志：同boot、每轮5重开+压力后恢复/重开均有fresh hello/storage/transport，lifetime188/marks4，max loopgap21ms。各恢复阶段4个旧碎帧后重同步；第二轮首开另1碎帧，不称无损传输。未占COM10，任务成长由原owner继续。
+
+## 小游戏设计整合
+
+已合c081c61/3983b04等价提交，核对RULES一二阶同映射及40帧5120bytes交付基线说明，亲看15分镜并重跑生成器输出完全一致。只设计文档/PNG/生成器，不改固件，不占COM10，不中断任务成长实现。
