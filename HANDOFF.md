@@ -2,6 +2,8 @@
 
 ## Current work: pixel companion
 
+Host implementation integrated and verified: 6 direct regression tests, independent scoped host checks, full PlatformIO build, deterministic art assets. Final entry is README.md and docs/pixel-companion/SOFTWARE.md. No board flash or physical button/screen pass yet. Resume software task after Kim reports green LED/download mode; capture original flash locally before writing. Do not launch bridge and capture_device simultaneously.
+
 Kim replaced the active product scope on 2026-09-22: native M5 buttons for playful interaction, rhythm summaries as Agent context, original retro pixel companion on the M5 screen, no new enclosure. See docs/hackathon/product/PIXEL_COMPANION_PRD.md. Product task 01a0c5b4-a19c-7810-8c6e-d8a87bb68f70 coordinates integration in D:/tenfold-worktrees/pixel-integration. Software owns the sole COM9 lease for identification, backup and new firmware flashing; testing must wait for explicit release. The historical delivery below remains recoverable but is not the current requirements baseline.
 
 ## Active direction: pixel companion (2026-09-22)
@@ -14,7 +16,7 @@ Current protocol and evidence: docs/pixel-companion/SOFTWARE.md. Old P0 below is
 historical, not the current product. Android multi-commitment draft is retained
 untouched in D:/tenfold-worktrees/android and is not part of this new release.
 
-## Final delivery entry
+## Historical delivery entry
 
 - Authoritative workspace: `D:\十日环`, branch `main`, repository `kimniniup-creator/tenfold-ai-hardware`.
 - User guide: `docs/hackathon/DELIVERY.md`; release assets: `v0.1.0-hackathon`; frozen hashes: `docs/hackathon/release-manifest.json`.
