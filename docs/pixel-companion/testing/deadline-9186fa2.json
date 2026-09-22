@@ -1,0 +1,22 @@
+{
+  "source_sha256": "a6d3cccf4b1e9aa9f50db3fb1b450de0c25dad369d3e978430576dcef76d9825",
+  "layer": "actual loopback HTTP read1/socket; HTTPS adapted at transport boundary; no live provider",
+  "results": [
+    {
+      "path": "/fast",
+      "elapsed_seconds": 0.281,
+      "source": "agent",
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "path": "/slow",
+      "elapsed_seconds": 8.203,
+      "source": "local",
+      "errors": [
+        "TimeoutError: timed out"
+      ],
+      "status": "PASS"
+    }
+  ]
+}

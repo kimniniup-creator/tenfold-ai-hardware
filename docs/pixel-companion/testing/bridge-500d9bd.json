@@ -1,0 +1,70 @@
+{
+  "source_sha256": "b16ea1807ae60b2d6e5aa0daa205969a14a335e7dd25b8041ceca9b9df838588",
+  "layer": "HOST actual candidate imported; synthetic HTTP and serial boundaries; no live model or device",
+  "results": [
+    {
+      "id": "G01_cooldown_60s_boundary",
+      "status": "PASS"
+    },
+    {
+      "id": "G02_duplicate_and_out_of_order",
+      "status": "PASS"
+    },
+    {
+      "id": "G03_quiet_and_old_epoch",
+      "status": "PASS"
+    },
+    {
+      "id": "G04_new_session_retains_cooldown",
+      "status": "PASS"
+    },
+    {
+      "id": "G05_numeric_schema",
+      "status": "PASS"
+    },
+    {
+      "id": "G06_malformed_hello_no_crash",
+      "status": "PASS"
+    },
+    {
+      "id": "V01_valid_reply",
+      "status": "PASS"
+    },
+    {
+      "id": "V02_reject_bad_reply",
+      "status": "PASS"
+    },
+    {
+      "id": "R01_no_credentials_local_no_network",
+      "status": "PASS"
+    },
+    {
+      "id": "R02_timeout_fallback",
+      "status": "PASS"
+    },
+    {
+      "id": "R03_http_failure_fallback",
+      "status": "PASS"
+    },
+    {
+      "id": "R04_malformed_json_fallback",
+      "status": "PASS"
+    },
+    {
+      "id": "R05_oversized_response_fallback",
+      "status": "PASS"
+    },
+    {
+      "id": "R06_valid_synthetic_provider",
+      "status": "PASS"
+    },
+    {
+      "id": "M01_late_reply_quiet_suppressed",
+      "status": "PASS"
+    },
+    {
+      "id": "M02_serial_disconnect_reconnect",
+      "status": "PASS"
+    }
+  ]
+}
