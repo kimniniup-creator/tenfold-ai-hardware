@@ -2,7 +2,7 @@
 
 ## 最新实施：竖屏阅读宠物书签
 
-见[首版PRD](docs/hackathon/product/READING_PET_PRD.md)。用户已选择阅读场景、宠物互动成长和标记；正在实施，旧横屏测试不代表新版完成。以下注意力候选与原型保留为历史背景。
+见[首版PRD](docs/hackathon/product/READING_PET_PRD.md)。用户已选择阅读场景、宠物互动成长和标记；reading-0.2已烧入实板，竖屏状态及非零互动跨重启保存有串口证据；实际屏幕观感和完整按键链路待验。见[运行与证据](docs/pixel-companion/READING.md)。以下注意力候选与原型保留为历史背景。
 
 ## 当前方向：注意力与专注（机制待定）
 
