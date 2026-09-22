@@ -1,0 +1,76 @@
+{
+  "screen": [
+    135,
+    240
+  ],
+  "sprite": [
+    32,
+    32
+  ],
+  "scale": 2,
+  "sprite_origin": [
+    35,
+    74
+  ],
+  "stages": [
+    "young",
+    "grown"
+  ],
+  "states": [
+    "idle",
+    "press",
+    "rebound",
+    "happy",
+    "rest",
+    "mark"
+  ],
+  "frames": [
+    "young_idle_0",
+    "young_idle_1",
+    "young_press_0",
+    "young_press_1",
+    "young_rebound_0",
+    "young_rebound_1",
+    "young_happy_0",
+    "young_happy_1",
+    "young_rest_0",
+    "young_rest_1",
+    "young_mark_0",
+    "young_mark_1",
+    "grown_idle_0",
+    "grown_idle_1",
+    "grown_press_0",
+    "grown_press_1",
+    "grown_rebound_0",
+    "grown_rebound_1",
+    "grown_happy_0",
+    "grown_happy_1",
+    "grown_rest_0",
+    "grown_rest_1",
+    "grown_mark_0",
+    "grown_mark_1"
+  ],
+  "palette": [
+    "#000000",
+    "#ffffff"
+  ],
+  "wire_protocol_changed": false,
+  "local_ui_copy": {
+    "idle": "陪你读会儿",
+    "press": "陪你读会儿",
+    "rebound": "陪你读会儿",
+    "happy": "陪你读会儿",
+    "rest": "安静陪着你",
+    "mark": "记下这一处"
+  },
+  "mode_candidates": [
+    "阅读",
+    "工作",
+    "健身",
+    "学习"
+  ],
+  "growth_meaning": "累计互动产生的外观变化，不代表阅读进度、能力或健康状态",
+  "growth_threshold": "由产品/软件定值；美术不读取或累计次数",
+  "character": "Tachikoma fan art; not an original character",
+  "preview": "design render; not a hardware screenshot"
+}
