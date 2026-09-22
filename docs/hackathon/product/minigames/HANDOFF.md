@@ -11,3 +11,5 @@
 已验证：本地脚本生成15张135×240图、文字右边界断言通过；目视检查拼版布局；规格逐项自查包括两必选游戏、局长、输入/容错、退出、资产、状态边界、解锁与验收。未进行玩法可用性验证；时间参数与胜负门槛仍是建议。
 
 恢复：分支codex/pet-minigame-design，后台worktree D:\worktrees\tenfold-pet-minigame-design，基线9b055f0，origin https://github.com/kimniniup-creator/tenfold-ai-hardware（现有PUBLIC，不改可见性）。owner审核后可cherry-pick本设计提交；整合并确认远端可恢复后再清理worktree，本任务不删其他checkout。
+
+2026-09-22 owner复核修订：RULES统一所有阶段A切换选项/B短确认/B长取消，单一基础选项也沿用同映射；已核对6d5981e与8cb50c2的README和头文件，将24帧3072字节标为历史，当前资产为40帧5120字节，追加帧须经frameIndex选择。双键入口仍待实板舒适性验证。本轮仅改规格与交接记录，不改固件或分镜。
