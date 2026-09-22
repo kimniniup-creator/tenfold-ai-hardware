@@ -2,6 +2,8 @@
 
 ## 2026-09-22｜像素陪伴新方向
 
+- 15:32 用户经产品任务回复“亮了，推进”后重新检查：COM9仍303A:832B，Windows USB Composite/Ports均OK；default与no_reset握手仍Write timeout，没有chip回应，未备份也未写flash。已停止无效重试，产品统一确认是否绿灯闪烁，保持实板未验边界。
+
 - 独立 codex/pixel-firmware 分支；保留旧 android-demo 未提交多承诺稿，不覆盖旧发布。
 - 接入原创5状态10帧、本机A互动/B安静、USB节奏摘要与严格短句Agent桥接。
 - 编译通过；主机独测0e64612 16/16通过，验收8项通过；随后加强全链路网络8秒子进程截止，待复测。
