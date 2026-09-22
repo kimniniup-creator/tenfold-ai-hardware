@@ -9,8 +9,43 @@ BASE = Path(__file__).resolve().parent
 ROOT = BASE.parents[2]
 STAGES = ['young', 'grown']
 STATES = ['idle', 'press', 'rebound', 'happy', 'rest', 'mark']
+CARE_STATES = ['feed', 'full', 'dirty', 'clean']
 TEXT = {'idle':'陪你读会儿','press':'陪你读会儿','rebound':'陪你读会儿',
         'happy':'陪你读会儿','rest':'安静陪着你','mark':'记下这一处'}
+TEXT.update(feed='开饭啦',full='吃饱啦',dirty='该清理一下啦',clean='干净啦')
+
+def care_sprite(stage,state,tick):
+    im=sprite(stage,'idle',0).copy(); d=ImageDraw.Draw(im)
+    if state=='feed':
+        x=3+tick*5; y=14
+        d.rectangle((x,y,x+3,y+3),fill=1)
+        d.point((x+1,y+1),fill=0)
+        d.line((x-1,y+5,x+4,y+5),fill=1)
+        if tick: d.point((9,19),fill=1)
+    elif state=='full':
+        # Closed hatch plus a clear full-bowl icon; no extra food accepted.
+        d.line((12,15,18,15),fill=0,width=2)
+        d.line((1,8+tick,6,8+tick),fill=1)
+        d.line((2,9+tick,5,9+tick),fill=1)
+        d.rectangle((2,6+tick,5,7+tick),fill=1)
+        d.line((24,4,26,6),fill=1); d.line((26,4,24,6),fill=1)
+    elif state in ('dirty','clean'):
+        if state=='dirty' or tick==0:
+            # Small three-tier poop beside the wheel, separate from body.
+            d.rectangle((0,29,6,30),fill=1)
+            d.rectangle((1,27,5,28),fill=1); d.rectangle((2,25,4,26),fill=1)
+            if state=='dirty' and tick: d.point((0,26),fill=1)
+        if state=='clean':
+            if tick==0:
+                d.line((7,23,3,28),fill=1); d.line((1,29,4,31),fill=1)
+            else:
+                d.line((1,27,5,27),fill=1); d.line((3,25,3,29),fill=1)
+                d.point((7,23),fill=1)
+    return im
+
+def frame_specs():
+    return ([(s,a,t) for s in STAGES for a in STATES for t in range(2)] +
+            [(s,a,t) for s in STAGES for a in CARE_STATES for t in range(2)])
 
 def sprite(stage, state, tick):
     im=Image.new('1',(32,32),0); d=ImageDraw.Draw(im)
@@ -127,10 +162,11 @@ def screen(stage,state,im):
     return s
 
 def main():
-    frames=[sprite(stage,state,tick) for stage in STAGES for state in STATES for tick in range(2)]
-    names=[f'{stage}_{state}_{tick}' for stage in STAGES for state in STATES for tick in range(2)]
+    specs=frame_specs()
+    frames=[(care_sprite if state in CARE_STATES else sprite)(stage,state,tick) for stage,state,tick in specs]
+    names=[f'{stage}_{state}_{tick}' for stage,state,tick in specs]
     for name,im in zip(names,frames): im.save(BASE/(name+'.png'))
-    sheet=Image.new('RGB',(768,640),'black'); d=ImageDraw.Draw(sheet)
+    sheet=Image.new('RGB',(768,1120),'black'); d=ImageDraw.Draw(sheet)
     for i,(name,im) in enumerate(zip(names,frames)):
         x=(i%6)*128; y=(i//6)*160
         sheet.paste(im.resize((128,128),Image.Resampling.NEAREST),(x,y))
@@ -142,12 +178,29 @@ def main():
             s=screen(stage,state,frames[a*12+b*2]); s.save(BASE/f'{stage}_{state}-screen.png')
             board.paste(s.resize((270,480),Image.Resampling.NEAREST),((b%3)*270,(b//3)*480))
         board.save(BASE/f'{stage}-portrait-preview.png')
+    careboard=Image.new('1',(1080,960),0)
+    for a,stage in enumerate(STAGES):
+        for b,state in enumerate(CARE_STATES):
+            s=screen(stage,state,frames[24+a*8+b*2+1])
+            s.save(BASE/f'{stage}_{state}-screen.png')
+            careboard.paste(s.resize((270,480),Image.Resampling.NEAREST),(b*270,a*480))
+    careboard.save(BASE/'care-preview.png')
+    icons=[[0x18,0x24,0x24,0x7e,0x7e,0x66,0x7e,0x00],
+           [0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0x00]]
+    iconboard=Image.new('1',(128,64),0)
+    for n,values in enumerate(icons):
+        im=Image.new('1',(8,8),0)
+        for y,v in enumerate(values):
+            for x in range(8): im.putpixel((x,y),bool(v&(1<<(7-x))))
+        im.save(BASE/('unlock-icon.png' if n else 'lock-icon.png'))
+        iconboard.paste(im.resize((64,64),Image.Resampling.NEAREST),(n*64,0))
+    iconboard.save(BASE/'icons-preview.png')
     parts=['// Generated offline by design/pixel-companion/portrait/generate.py\n#pragma once\n#include <stdint.h>\nnamespace pet_portrait {\n',
-      'enum class Stage : uint8_t { Young, Grown };\nenum class State : uint8_t { Idle, Press, Rebound, Happy, Rest, Mark };\n',
-      'static constexpr uint8_t kWidth=32, kHeight=32, kFrameCount=24;\n',
+      'enum class Stage : uint8_t { Young, Grown };\nenum class State : uint8_t { Idle, Press, Rebound, Happy, Rest, Mark, Feed, Full, Dirty, Clean };\n',
+      'static constexpr uint8_t kWidth=32, kHeight=32, kFrameCount=40;\n',
       'static constexpr uint16_t kScreenWidth=135, kScreenHeight=240;\n',
       'static constexpr uint16_t kPalette[2]={0x0000,0xffff};\n',
-      '// Each row: four bytes, MSB is leftmost pixel; 0 black, 1 white.\nstatic constexpr uint8_t kFrames[24][128]={\n']
+      '// Each row: four bytes, MSB is leftmost pixel; 0 black, 1 white.\nstatic constexpr uint8_t kFrames[40][128]={\n']
     for name,im in zip(names,frames):
         parts.append('  { // '+name+'\n'); values=packed(im)
         for row in range(8): parts.append('    '+','.join('0x%02x'%v for v in values[row*16:(row+1)*16])+',\n')
@@ -155,7 +208,7 @@ def main():
     parts.append('''};
 inline uint8_t frameIndex(Stage stage, State state, uint32_t elapsedMs) {
   const uint8_t s=static_cast<uint8_t>(stage), a=static_cast<uint8_t>(state);
-  if(s>1 || a>5) return 0;
+  if(s>1 || a>9) return 0;
   uint8_t tick=0;
   switch(state) {
     case State::Idle: tick=(elapsedMs/850U)%2U; break;
@@ -164,24 +217,38 @@ inline uint8_t frameIndex(Stage stage, State state, uint32_t elapsedMs) {
     case State::Rebound: tick=elapsedMs>=100U; break;
     case State::Happy: tick=(elapsedMs/160U)%2U; break;
     case State::Mark: tick=elapsedMs>=160U; break;
+    case State::Feed: tick=elapsedMs>=180U; break;
+    case State::Full: tick=(elapsedMs/220U)%2U; break;
+    case State::Dirty: tick=(elapsedMs/1000U)%2U; break;
+    case State::Clean: tick=elapsedMs>=220U; break;
   }
-  return s*12U+a*2U+tick;
+  return a<6 ? s*12U+a*2U+tick : 24U+s*8U+(a-6U)*2U+tick;
 }
 inline uint8_t pixel(uint8_t frame,uint8_t x,uint8_t y) {
   if(frame>=kFrameCount || x>=kWidth || y>=kHeight) return 0;
   return (kFrames[frame][y*4U+x/8U]>>(7U-x%8U))&1U;
 }
+// Generic stage-function lock indicators; do not imply a specific capability.
+enum class Icon : uint8_t { Locked, Unlocked };
+static constexpr uint8_t kIcons[2][8]={
+  {0x18,0x24,0x24,0x7e,0x7e,0x66,0x7e,0},
+  {0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0}
+};
+inline uint8_t iconPixel(Icon icon,uint8_t x,uint8_t y) {
+  const uint8_t i=static_cast<uint8_t>(icon);
+  return (i<2 && x<8 && y<8) ? ((kIcons[i][y]>>(7U-x))&1U) : 0;
+}
 } // namespace pet_portrait
 ''')
     (ROOT/'firmware/include/pet_portrait_assets.h').write_text(''.join(parts),encoding='utf-8')
     metadata={'screen':[135,240],'sprite':[32,32],'scale':2,'sprite_origin':[35,74],
-      'stages':STAGES,'states':STATES,'frames':names,'palette':['#000000','#ffffff'],
+      'stages':STAGES,'states':STATES+CARE_STATES,'frames':names,'palette':['#000000','#ffffff'],
       'wire_protocol_changed':False,'local_ui_copy':TEXT,'mode_candidates':['阅读','工作','健身','学习'],
-      'growth_meaning':'新需求为用户确认读完论文推动成长；点击用于照料，不直接等同阅读成果',
+      'growth_meaning':'完成任务节点才成长；点击主要用于喂食和清理，不直接等同任务完成',
       'growth_threshold':'待产品/软件实现并定值；当前资产不包含成长逻辑',
       'character':'Tachikoma fan art; not an original character',
       'preview':'design render; not a hardware screenshot'}
     (BASE/'manifest.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print('Generated 24 1-bit frames (3072 bytes), 12 portrait screens and two preview boards.')
+    print('Generated 40 1-bit frames (5120 bytes), 20 portrait screens and lock/unlock icons; legacy frame IDs unchanged.')
 
 if __name__=='__main__': main()

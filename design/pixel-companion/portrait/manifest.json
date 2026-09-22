@@ -22,7 +22,11 @@
     "rebound",
     "happy",
     "rest",
-    "mark"
+    "mark",
+    "feed",
+    "full",
+    "dirty",
+    "clean"
   ],
   "frames": [
     "young_idle_0",
@@ -48,7 +52,23 @@
     "grown_rest_0",
     "grown_rest_1",
     "grown_mark_0",
-    "grown_mark_1"
+    "grown_mark_1",
+    "young_feed_0",
+    "young_feed_1",
+    "young_full_0",
+    "young_full_1",
+    "young_dirty_0",
+    "young_dirty_1",
+    "young_clean_0",
+    "young_clean_1",
+    "grown_feed_0",
+    "grown_feed_1",
+    "grown_full_0",
+    "grown_full_1",
+    "grown_dirty_0",
+    "grown_dirty_1",
+    "grown_clean_0",
+    "grown_clean_1"
   ],
   "palette": [
     "#000000",
@@ -61,7 +81,11 @@
     "rebound": "陪你读会儿",
     "happy": "陪你读会儿",
     "rest": "安静陪着你",
-    "mark": "记下这一处"
+    "mark": "记下这一处",
+    "feed": "开饭啦",
+    "full": "吃饱啦",
+    "dirty": "该清理一下啦",
+    "clean": "干净啦"
   },
   "mode_candidates": [
     "阅读",
@@ -69,7 +93,7 @@
     "健身",
     "学习"
   ],
-  "growth_meaning": "新需求为用户确认读完论文推动成长；点击用于照料，不直接等同阅读成果",
+  "growth_meaning": "完成任务节点才成长；点击主要用于喂食和清理，不直接等同任务完成",
   "growth_threshold": "待产品/软件实现并定值；当前资产不包含成长逻辑",
   "character": "Tachikoma fan art; not an original character",
   "preview": "design render; not a hardware screenshot"

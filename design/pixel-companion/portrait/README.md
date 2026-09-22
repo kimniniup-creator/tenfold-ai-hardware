@@ -4,9 +4,15 @@
 
 ## 交付与接口
 
-- `firmware/include/pet_portrait_assets.h`：新独立接口，不覆盖旧 `pet_assets.h`。`namespace pet_portrait`；`Stage {Young,Grown}`；`State {Idle,Press,Rebound,Happy,Rest,Mark}`。
-- `frameIndex(Stage, State, uint32_t elapsedMs)` 返回0–23；非法枚举回第0帧。`pixel(frame,x,y)` 返回0黑/1白，越界返回0。无透明，背景黑色。
-- `kFrames[24][128]` 是逐行1bit位图，每行4字节，每字节最高位在左。共3072字节；`kPalette[2]` 是逻辑RGB565黑/白。不要当作1024字节索引帧或直接RGB565数组。
+照料扩展版：原24帧及枚举值保持不变，末尾追加 `Feed, Full, Dirty, Clean`（值6–9）；当前 `kFrameCount=40`、`kFrames[40][128]`共5120字节。新增帧顺序为幼体4动作×2帧，再成年4动作×2帧，使用 `frameIndex`，不要自行计算统一阶段跨度。`Icon {Locked, Unlocked}`、`iconPixel(icon,x,y)`提供8×8黑白图标，仅表示功能锁定/解锁，不预设二阶能力。`care-preview.png`展示两阶段四动作；`icons-preview.png`展示通用功能锁图标。
+
+Feed在180ms后食物接近舱口，建议360ms后回Idle；Full每220ms轻移满碗并拒食，建议440ms后回Idle；Dirty每1000ms切帧，实际待清理标志由软件保存；Clean在220ms后扫除为闪光，建议440ms后退出。只有本地喂食/清理成功才改数值；动画本身不增加饱腹或成长。全部新动画只负责显示，不决定死亡数值、任务进度或按键映射。
+
+最新产品要求：完成任务节点才成长，点击主要用于喂食/清理；第二阶段必须新增实际功能。二阶具体能力等待唯一产品契约，当前仅交锁图标，未声称功能实现。现有整屏底栏是旧按键示意，新固件应按最终交互契约替换，不照搬旧“轻按互动”。
+
+- `firmware/include/pet_portrait_assets.h`：新独立接口，不覆盖旧 `pet_assets.h`。`namespace pet_portrait`；`Stage {Young,Grown}`；`State {Idle,Press,Rebound,Happy,Rest,Mark,Feed,Full,Dirty,Clean}`。
+- `frameIndex(Stage, State, uint32_t elapsedMs)` 返回0–39；非法枚举回第0帧。`pixel(frame,x,y)` 返回0黑/1白，越界返回0。无透明，背景黑色。
+- `kFrames[40][128]` 是逐行1bit位图，每行4字节，每字节最高位在左。共5120字节；`kPalette[2]` 是逻辑RGB565黑/白。不要当作1024字节索引帧或直接RGB565数组。
 - 32×32源帧，屏幕135×240，2倍绘制64×64，左上角(35,74)。每次重绘完整黑白64×64区域，防止动作残影。建议缓冲后推屏。
 - `manifest.json` 包含阶段、状态、位置、文案和资产顺序。PNG均为1bit；两个 `*-portrait-preview.png` 为2倍整屏预览，不是实板截图。
 
@@ -44,4 +50,4 @@ frameIndex只选帧，不累计互动、不决定成长门槛、不管理按键/
 
 Python 3 + Pillow：`python design/pixel-companion/portrait/generate.py`；`python design/pixel-companion/portrait/verify.py`。Windows默认读取宋体；其他系统用 `PET_PREVIEW_FONT` 指向支持中文的字体。字体只用于预览，未随仓库分发；实机字体由固件选择。
 
-脚本验证1bit帧、24帧区别、头文件位图与PNG逐像素一致、135×240整屏尺寸、文字不越界、输出可重复。ESP32S3编译器检查头文件C++11语法。美术已目视检查两阶段预览；实际板卡方向、按键映射、字形与刷新延迟待固件任务验证，本任务不占串口、不烧录。
+脚本验证1bit帧、40帧区别、头文件位图与PNG逐像素一致、135×240整屏尺寸、文字不越界、输出可重复。ESP32S3编译器检查头文件C++11语法。美术已目视检查两阶段及照料预览；实际板卡方向、按键映射、字形与刷新延迟待固件任务验证，本任务不占串口、不烧录。
