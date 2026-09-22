@@ -1,0 +1,16 @@
+{
+  "source_commit": "500d9bd5e0263fcbc4bd14079a2400a469ebca1a",
+  "same_firmware_as": "9186fa23873d58b3a6bf2b5fe43002681d97f184",
+  "firmware_diff_empty": true,
+  "command": "C:/Python314/python.exe -m platformio run -d .local/pixel-audit/500d9bd/firmware",
+  "exit_code": 0,
+  "elapsed_seconds_reported": 120.0,
+  "ram_bytes": 22892,
+  "flash_bytes": 717085,
+  "binary_sha256": "9fed0d909ba81bf517151121bfef375ae4127a4e3585fe2081e1689e2ac3e9b4",
+  "binary_bytes": 717456,
+  "build_log_sha256": "4e861658b52f330fac6d668d918751a7e748d00774cd27e7f3b8c29ce9245349",
+  "binary_retained_local_only": true,
+  "flashed": false,
+  "note": "Independent checkout build. Binary hash differs from author build; source and size match, binary reproducibility not claimed."
+}

@@ -1,0 +1,24 @@
+{
+  "source_sha256": "45cefb8521e54fc17e482b2674a9bbe18b6a23f1be85a0cacb572e086a769fa2",
+  "layer": "actual loopback HTTP read1/socket; HTTPS adapted at transport boundary; no live provider",
+  "results": [
+    {
+      "path": "/fast",
+      "elapsed_seconds": 0.188,
+      "source": "local",
+      "errors": [
+        "AttributeError: 'NoneType' object has no attribute 'raw'"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "path": "/slow",
+      "elapsed_seconds": 8.14,
+      "source": "local",
+      "errors": [
+        "TimeoutError: timed out"
+      ],
+      "status": "PASS"
+    }
+  ]
+}

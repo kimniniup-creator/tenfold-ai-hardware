@@ -1,0 +1,12 @@
+{
+  "source_sha256": "b16ea1807ae60b2d6e5aa0daa205969a14a335e7dd25b8041ceca9b9df838588",
+  "layer": "actual respond parent + real OS stalled child, child request implementation substituted; no live network",
+  "elapsed_seconds": 8.031,
+  "configured_timeout": [
+    8
+  ],
+  "children": 1,
+  "all_children_killed_and_reaped": true,
+  "source": "local",
+  "status": "PASS"
+}
