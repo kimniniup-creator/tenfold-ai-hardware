@@ -2,48 +2,54 @@
 #include <ArduinoJson.h>
 #include <M5Unified.h>
 #include <Preferences.h>
+#include "pet_assets.h"
 
 namespace {
-constexpr size_t kMaxFrame=4096;
-constexpr uint32_t kUnlockMs=1000;
-constexpr uint32_t kConfirmMs=1500;
-Preferences store;
-String serialLine;
-String commandId,cycleId,actionText,doneText,nextText,state="UNPAIRED";
-String pendingDeviceEvents="[]",deviceId;
-uint32_t revision=0,dayIndex=1,deviceSeq=0,lastHostSeq=0,snapshotVersion=0,completedDay=0;
-bool timeTrusted=false,operationOpen=false,chooseSeal=false,awaitRelease=false;
-uint32_t bothSince=0,confirmSince=0,operationOpenedAt=0;
-
-uint32_t checksum(const String& text){uint32_t hash=2166136261u;for(size_t i=0;i<text.length();++i){hash^=(uint8_t)text[i];hash*=16777619u;}return hash;}
-void sendJson(JsonDocument& doc){serializeJson(doc,Serial);Serial.write('\n');}
-void error(const char* code){JsonDocument doc;doc["type"]="error";doc["code"]=code;sendJson(doc);}
-
-String fitUtf8(const String& source,int width){String result;for(size_t i=0;i<source.length();){uint8_t c=source[i];size_t count=(c<0x80)?1:((c&0xE0)==0xC0?2:((c&0xF0)==0xE0?3:4));if(i+count>source.length())break;String candidate=result+source.substring(i,i+count);if(M5.Display.textWidth(candidate)>width)break;result=candidate;i+=count;}return result;}
-void render(){M5.Display.clear(TFT_BLACK);M5.Display.setTextColor(TFT_GREEN,TFT_BLACK);M5.Display.setFont(&fonts::efontCN_12);M5.Display.setCursor(4,4);M5.Display.printf("TENFOLD  %lu/10\n",(unsigned long)dayIndex);M5.Display.setTextColor(TFT_WHITE,TFT_BLACK);M5.Display.println(fitUtf8(actionText,M5.Display.width()-8));M5.Display.setTextColor(TFT_LIGHTGREY,TFT_BLACK);M5.Display.println(state);if(!timeTrusted)M5.Display.println("TIME? 仅查看/封存");if(operationOpen)M5.Display.println(chooseSeal?"B长按: 封存":"B长按: 完成");}
-
-String snapshot(uint32_t version){JsonDocument doc;doc["v"]=version;doc["command_id"]=commandId;doc["cycle_id"]=cycleId;doc["revision"]=revision;doc["day_index"]=dayIndex;doc["device_seq"]=deviceSeq;doc["last_host_seq"]=lastHostSeq;doc["completed_day"]=completedDay;doc["pending_device_events"]=pendingDeviceEvents;doc["action"]=actionText;doc["done"]=doneText;doc["next"]=nextText;doc["state"]=state;String json;serializeJson(doc,json);return json;}
-bool persist(){uint32_t nextVersion=snapshotVersion+1;String json=snapshot(nextVersion);uint32_t sum=checksum(json);const char* slot=(snapshotVersion%2==0)?"slot_b":"slot_a";const char* crc=(snapshotVersion%2==0)?"crc_b":"crc_a";size_t written=store.putString(slot,json);size_t crcWritten=store.putUInt(crc,sum);if(written!=json.length()||crcWritten!=sizeof(uint32_t)||store.getString(slot,"")!=json||store.getUInt(crc,0)!=sum)return false;if(store.putUInt("active",nextVersion)!=sizeof(uint32_t)||store.getUInt("active",0)!=nextVersion)return false;snapshotVersion=nextVersion;return true;}
-bool restoreSlot(const char* slot,const char* crc){String json=store.getString(slot,"");if(json.isEmpty()||checksum(json)!=store.getUInt(crc,0))return false;JsonDocument doc;if(deserializeJson(doc,json))return false;snapshotVersion=doc["v"]|0;commandId=doc["command_id"]|"";cycleId=doc["cycle_id"]|"";revision=doc["revision"]|0;dayIndex=doc["day_index"]|1;deviceSeq=doc["device_seq"]|0;lastHostSeq=doc["last_host_seq"]|0;pendingDeviceEvents=doc["pending_device_events"]|"[]";actionText=doc["action"]|"";doneText=doc["done"]|"";nextText=doc["next"]|"";state=doc["state"]|"UNPAIRED";completedDay=doc["completed_day"]|(state=="DONE"?dayIndex:0);return true;}
-void restore(){uint32_t active=store.getUInt("active",0);bool ok=(active%2==0)?restoreSlot("slot_a","crc_a"):restoreSlot("slot_b","crc_b");if(!ok)ok=(active%2==0)?restoreSlot("slot_b","crc_b"):restoreSlot("slot_a","crc_a");if(!ok)state="UNPAIRED";timeTrusted=false;}
-
-bool onlyKeys(JsonObject object,const char* const* allowed,size_t count){for(JsonPair pair:object){bool found=false;for(size_t i=0;i<count;i++)if(strcmp(pair.key().c_str(),allowed[i])==0){found=true;break;}if(!found)return false;}return true;}
-bool requiredString(JsonObject obj,const char* key,size_t max){return obj[key].is<const char*>()&&strlen(obj[key])>0&&strlen(obj[key])<=max;}
-void offerAck(){JsonDocument ack;ack["type"]="ack";ack["protocol"]=1;ack["device_id"]=deviceId;ack["command_id"]=commandId;ack["cycle_id"]=cycleId;ack["revision"]=revision;ack["persisted"]=true;ack["state"]=state;ack["last_seq"]=deviceSeq;sendJson(ack);}
-void handleOffer(JsonObject obj){static const char* keys[]={"type","protocol","command_id","cycle_id","revision","day_index","cycle_start_date","local_date","tz","action_short","done_when_short","stop_at","next_step_short"};if(!onlyKeys(obj,keys,13)||obj["protocol"].as<int>()!=1||!requiredString(obj,"command_id",72)||!requiredString(obj,"cycle_id",72)||!requiredString(obj,"action_short",240)||!requiredString(obj,"done_when_short",240)){error("invalid_offer");return;}String incoming=obj["command_id"].as<String>(),incomingCycle=obj["cycle_id"].as<String>();uint32_t incomingRevision=obj["revision"]|0,incomingDay=obj["day_index"]|0;if(incoming==commandId&&incomingRevision==revision&&incomingCycle==cycleId){offerAck();return;}if(!cycleId.isEmpty()&&incomingCycle!=cycleId){error("cycle_conflict");return;}if(incomingRevision<revision){error("stale_revision");return;}
-  String oldCommand=commandId,oldCycle=cycleId,oldAction=actionText,oldDone=doneText,oldNext=nextText,oldState=state;uint32_t oldRevision=revision,oldDay=dayIndex;
-  commandId=incoming;cycleId=incomingCycle;revision=incomingRevision;dayIndex=constrain(incomingDay,1u,10u);actionText=obj["action_short"].as<String>();doneText=obj["done_when_short"].as<String>();nextText=obj["next_step_short"]|"";state="READY";
-  if(!persist()){commandId=oldCommand;cycleId=oldCycle;actionText=oldAction;doneText=oldDone;nextText=oldNext;state=oldState;revision=oldRevision;dayIndex=oldDay;error("persist_failed");return;}
-  timeTrusted=false;render();offerAck();}
-void sendHostEventAck(uint32_t seq){JsonDocument ack;ack["type"]="event_ack";ack["device_id"]=deviceId;ack["command_id"]=commandId;ack["cycle_id"]=cycleId;ack["revision"]=revision;ack["seq"]=seq;ack["persisted"]=true;ack["state"]=state;sendJson(ack);}
-void handleHostEvent(JsonObject obj){static const char* keys[]={"type","protocol","command_id","cycle_id","revision","day_index","seq","event_type"};if(!onlyKeys(obj,keys,8)||obj["protocol"].as<int>()!=1||obj["cycle_id"].as<String>()!=cycleId||obj["command_id"].as<String>()!=commandId||(uint32_t)(obj["revision"]|0)!=revision){error("invalid_event");return;}uint32_t seq=obj["seq"]|0;String event=obj["event_type"]|"";if(seq<=lastHostSeq){sendHostEventAck(seq);return;}if(seq!=lastHostSeq+1||(event!="complete"&&event!="seal")){error("event_sequence");return;}bool doneToday=completedDay==dayIndex;if(event=="complete"&&(!timeTrusted||doneToday||state=="SEALED")){error(!timeTrusted?"time_untrusted":(doneToday?"already_done":"already_sealed"));return;}if(event=="seal"&&state=="SEALED"){error("already_sealed");return;}String oldState=state;uint32_t oldSeq=lastHostSeq,oldCompletedDay=completedDay;if(event=="complete"){state="DONE";completedDay=dayIndex;}else state="SEALED";lastHostSeq=seq;if(!persist()){state=oldState;lastHostSeq=oldSeq;completedDay=oldCompletedDay;error("persist_failed");return;}render();sendHostEventAck(seq);}
-void sendPendingDeviceEvents(){JsonDocument queue;if(deserializeJson(queue,pendingDeviceEvents)||!queue.is<JsonArray>())return;for(JsonObject item:queue.as<JsonArray>()){JsonDocument doc;doc["type"]="event";doc["protocol"]=1;doc["device_id"]=deviceId;doc["seq"]=item["seq"];doc["command_id"]=item["command_id"];doc["cycle_id"]=item["cycle_id"];doc["revision"]=item["revision"];doc["day_index"]=item["day_index"];doc["event_type"]=item["type"];doc["status"]=item["status"];doc["pending_sync"]=true;sendJson(doc);}}
-void handleFrame(const String& wire){JsonDocument doc;DeserializationError parse=deserializeJson(doc,wire);if(parse||!doc.is<JsonObject>()){error("invalid_json");return;}JsonObject obj=doc.as<JsonObject>();String type=obj["type"]|"";if(type=="offer")handleOffer(obj);else if(type=="event")handleHostEvent(obj);else if(type=="event_ack"){JsonDocument queue;if(deserializeJson(queue,pendingDeviceEvents)||!queue.is<JsonArray>()||queue.as<JsonArray>().size()==0){error("event_ack_sequence");return;}JsonObject first=queue.as<JsonArray>()[0];if(obj["cycle_id"].as<String>()!=first["cycle_id"].as<String>()||obj["command_id"].as<String>()!=first["command_id"].as<String>()||(uint32_t)(obj["revision"]|0)!=(uint32_t)(first["revision"]|0)||(uint32_t)(obj["seq"]|0)!=(uint32_t)(first["seq"]|0)){error("invalid_event_ack");return;}String old=pendingDeviceEvents;JsonDocument remaining;JsonArray next=remaining.to<JsonArray>();for(size_t i=1;i<queue.as<JsonArray>().size();i++)next.add(queue.as<JsonArray>()[i]);serializeJson(remaining,pendingDeviceEvents);if(!persist()){pendingDeviceEvents=old;error("persist_failed");return;}sendPendingDeviceEvents();}else if(type=="query"){JsonDocument status;status["type"]="status";status["protocol"]=1;status["device_id"]=deviceId;status["command_id"]=commandId;status["cycle_id"]=cycleId;status["revision"]=revision;status["persisted"]=!cycleId.isEmpty();status["state"]=state;status["last_seq"]=deviceSeq;sendJson(status);sendPendingDeviceEvents();}else if(type=="set_time"){bool valid=obj["protocol"].as<int>()==1&&obj["source"].as<String>()=="host_confirmed"&&obj["cycle_id"].as<String>()==cycleId&&obj["command_id"].as<String>()==commandId&&(uint64_t)(obj["utc_epoch"]|0)>1700000000ULL;timeTrusted=valid;if(!valid)error("time_source");else{JsonDocument ack;ack["type"]="time_ack";ack["command_id"]=commandId;ack["cycle_id"]=cycleId;ack["trusted"]=true;sendJson(ack);render();}}else error("unknown_type");}
-
-void recordPhysical(const char* event){bool isComplete=strcmp(event,"complete")==0,doneToday=completedDay==dayIndex;if(isComplete&&(!timeTrusted||doneToday||state=="SEALED")){error(!timeTrusted?"time_untrusted":(doneToday?"already_done":"already_sealed"));return;}if(!isComplete&&state=="SEALED"){error("already_sealed");return;}JsonDocument queue;if(deserializeJson(queue,pendingDeviceEvents)||!queue.is<JsonArray>())queue.to<JsonArray>();if(queue.as<JsonArray>().size()>=8){error("event_queue_full");return;}String oldState=state,oldPending=pendingDeviceEvents;uint32_t oldSeq=deviceSeq,oldCompletedDay=completedDay;state=isComplete?"DONE":"SEALED";if(isComplete)completedDay=dayIndex;deviceSeq++;JsonObject item=queue.as<JsonArray>().add<JsonObject>();item["seq"]=deviceSeq;item["type"]=event;item["command_id"]=commandId;item["cycle_id"]=cycleId;item["revision"]=revision;item["day_index"]=dayIndex;item["status"]=state;serializeJson(queue,pendingDeviceEvents);if(!persist()){state=oldState;pendingDeviceEvents=oldPending;deviceSeq=oldSeq;completedDay=oldCompletedDay;error("persist_failed");return;}render();sendPendingDeviceEvents();}
-void updateButtons(){bool a=M5.BtnA.isPressed(),b=M5.BtnB.isPressed();uint32_t now=millis();if(!operationOpen){if(a&&b){if(!bothSince)bothSince=now;if(now-bothSince>=kUnlockMs){operationOpen=true;operationOpenedAt=now;awaitRelease=true;chooseSeal=false;bothSince=0;render();}}else bothSince=0;return;}if(now-operationOpenedAt>15000){operationOpen=false;awaitRelease=false;confirmSince=0;render();return;}if(awaitRelease){if(!a&&!b)awaitRelease=false;return;}if(M5.BtnA.wasClicked()){chooseSeal=!chooseSeal;render();}if(b){if(!confirmSince)confirmSince=now;if(now-confirmSince>=kConfirmMs){recordPhysical(chooseSeal?"seal":"complete");operationOpen=false;confirmSince=0;}}else confirmSince=0;}
-void handleFrameWithHandshake(const String& wire){JsonDocument doc;if(!deserializeJson(doc,wire)&&doc["type"].as<String>()=="hello_request"){JsonDocument hello;hello["type"]="hello";hello["protocol"]=1;hello["device_id"]=deviceId;hello["last_seq"]=deviceSeq;sendJson(hello);return;}handleFrame(wire);}
+constexpr uint32_t WINDOW=10000, COOLDOWN=60000, REPLY_TTL=15000;
+Preferences prefs;
+M5Canvas canvas(&M5.Display);
+String session, rx, pending;
+bool quiet=false, discard=false, dirty=false, waiting=false, hasPrompt=false;
+uint32_t epoch=0, windowId=0, count=0, total=0, held=0, interval=0;
+uint32_t windowStart=0, lastPress=0, pressStart=0, lastPrompt=0, requested=0;
+uint32_t animStart=0, lastFrame=0, changed=0, messageAt=0;
+String message="我在这里。", source="LOCAL";
+pet_assets::State replyState=pet_assets::State::Happy;
+// One bounded outgoing frame; never wait for a disconnected host.
+void send(JsonDocument& doc){if(!pending.isEmpty())return;serializeJson(doc,pending);pending+='\n';if(pending.length()>768)pending="";}
+void hello(){JsonDocument d;d["type"]="hello";d["protocol"]=2;d["build"]="pixel-0.1";d["chip"]=ESP.getChipModel();d["session"]=session;d["epoch"]=epoch;d["quiet"]=quiet;d["presses_total"]=total;d["width"]=M5.Display.width();d["height"]=M5.Display.height();d["board"]=(int)M5.getBoard();send(d);}
+void flush(){if(!Serial){pending="";return;}int room=Serial.availableForWrite();if(room<=0||pending.isEmpty())return;size_t n=min((size_t)room,pending.length());Serial.write((const uint8_t*)pending.c_str(),n);pending.remove(0,n);}
+bool validText(const String& t){if(t.isEmpty()||t.length()>72)return false;for(size_t i=0;i<t.length();i++)if((uint8_t)t[i]<32)return false;return true;}
+void receive(const String& line){JsonDocument d;if(deserializeJson(d,line)||!d.is<JsonObject>())return;
+ String type=d["type"]|"";if(type=="hello_request"){hello();return;}
+ if(type!="reply"||quiet||!waiting||millis()-requested>REPLY_TTL)return;
+ if(d["session"].as<String>()!=session||!d["epoch"].is<uint32_t>()||d["epoch"].as<uint32_t>()!=epoch||!d["window"].is<uint32_t>()||d["window"].as<uint32_t>()!=windowId)return;
+ String action=d["action"]|"",text=d["text"]|"",origin=d["source"]|"";
+ if((action!="blink"&&action!="happy"&&action!="rest")||!validText(text)||(origin!="local"&&origin!="agent"))return;
+ for(JsonPair p:d.as<JsonObject>()){String k=p.key().c_str();if(k!="type"&&k!="session"&&k!="epoch"&&k!="window"&&k!="action"&&k!="text"&&k!="source")return;}
+ waiting=false;message=text;source=origin=="agent"?"AGENT":"LOCAL";messageAt=millis();animStart=millis();replyState=action=="rest"?pet_assets::State::Rest:(action=="blink"?pet_assets::State::Blink:pet_assets::State::Happy);
 }
-
-void setup(){auto config=M5.config();M5.begin(config);Serial.begin(115200);store.begin("tenfold",false);uint64_t mac=ESP.getEfuseMac();deviceId="m5sticks3-"+String((uint32_t)(mac>>32),HEX)+String((uint32_t)mac,HEX);restore();render();JsonDocument hello;hello["type"]="hello";hello["protocol"]=1;hello["device_id"]=deviceId;hello["last_seq"]=deviceSeq;sendJson(hello);}
-void loop(){static bool discardFrame=false;M5.update();updateButtons();while(Serial.available()){char c=(char)Serial.read();if(c=='\n'){if(!discardFrame&&!serialLine.isEmpty())handleFrameWithHandshake(serialLine);serialLine="";discardFrame=false;}else if(c!='\r'&&!discardFrame){if(serialLine.length()>=kMaxFrame){serialLine="";discardFrame=true;error("too_large");}else serialLine+=c;}}delay(5);}
+void summarize(uint32_t now){if(now-windowStart<WINDOW)return;if(waiting&&now-requested<=REPLY_TTL)return;waiting=false;
+ ++windowId;bool candidate=!quiet&&count>=3&&(!hasPrompt||now-lastPrompt>=COOLDOWN);
+ JsonDocument d;d["type"]="rhythm";d["protocol"]=2;d["session"]=session;d["epoch"]=epoch;d["window"]=windowId;d["duration_ms"]=now-windowStart;d["presses"]=count;d["held_ms"]=held;d["mean_interval_ms"]=count>1?interval/(count-1):0;d["quiet"]=quiet;d["candidate"]=candidate;
+ send(d);if(candidate){waiting=true;requested=now;lastPrompt=now;hasPrompt=true;}
+ count=held=interval=0;windowStart=now;
+}
+String fit(const String& t,int width){String s;for(size_t i=0;i<t.length();){uint8_t c=t[i];size_t n=c<128?1:((c&224)==192?2:((c&240)==224?3:4));if(i+n>t.length())break;String v=s+t.substring(i,i+n);if(canvas.textWidth(v)>width)break;s=v;i+=n;}return s;}
+void render(uint32_t now){if(now-lastFrame<40)return;lastFrame=now;canvas.fillScreen(0x10E3);
+ canvas.setFont(&fonts::efontCN_12);canvas.setTextColor(0xCDB3);canvas.setCursor(9,6);canvas.print(quiet?"安静陪伴":"陪你待一会儿");canvas.setCursor(185,6);canvas.print(source=="AGENT"?"Agent":"本地");
+ auto state=quiet?pet_assets::State::Rest:(M5.BtnA.isPressed()?pet_assets::State::Press:(now-animStart<700?replyState:((now%4800)<180?pet_assets::State::Blink:pet_assets::State::Idle)));
+ auto frame=pet_assets::frameIndex(state,now-animStart);
+ for(int y=0;y<32;y++)for(int x=0;x<32;x++){auto p=pet_assets::pixel(frame,x,y);if(p)canvas.fillRect(88+x*2,24+y*2,2,2,pet_assets::kPalette[p]);}
+ canvas.setCursor(8,94);canvas.setTextColor(0xFFFF);canvas.print(fit(quiet?"安静待着，也很好。":message,224));canvas.setCursor(8,119);canvas.setTextColor(0x8C71);canvas.print(quiet?"A 轻碰  ·  B 回到陪伴":"A 轻碰  ·  B 安静");canvas.pushSprite(0,0);
+}
+}
+void setup(){auto c=M5.config();M5.begin(c);M5.Display.setRotation(1);M5.Display.setBrightness(100);canvas.createSprite(240,135);Serial.begin(115200);Serial.setTxTimeoutMs(0);prefs.begin("pixelpet",false);quiet=prefs.getBool("quiet",false);session=String((uint32_t)ESP.getEfuseMac(),HEX)+"-"+String(esp_random(),HEX);windowStart=millis();hello();}
+void loop(){uint32_t now=millis();M5.update();
+ if(M5.BtnA.wasPressed()){pressStart=now;animStart=now;replyState=pet_assets::State::Happy;if(count>0)interval+=min(now-lastPress,WINDOW);lastPress=now;if(count<10000)count++;if(total<UINT32_MAX)total++;message="嗯，接住了。";source="LOCAL";}
+ if(M5.BtnA.wasReleased())held+=min(now-pressStart,WINDOW);
+ if(M5.BtnB.wasPressed()){quiet=!quiet;epoch++;waiting=false;pending="";dirty=true;changed=now;message="我在这里。";source="LOCAL";hello();}
+ if(dirty&&now-changed>=2000){prefs.putBool("quiet",quiet);dirty=false;}
+ for(int budget=0;budget<128&&Serial.available();budget++){char c=Serial.read();if(c=='\n'){if(!discard&&!rx.isEmpty())receive(rx);rx="";discard=false;}else if(c!='\r'&&!discard){if(rx.length()>=512){rx="";discard=true;}else rx+=c;}}
+ summarize(now);flush();render(now);delay(1);
+}
