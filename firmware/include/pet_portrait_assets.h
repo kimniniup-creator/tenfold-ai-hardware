@@ -433,13 +433,14 @@ inline uint8_t pixel(uint8_t frame,uint8_t x,uint8_t y) {
   return (kFrames[frame][y*4U+x/8U]>>(7U-x%8U))&1U;
 }
 // Generic stage-function lock indicators; do not imply a specific capability.
-enum class Icon : uint8_t { Locked, Unlocked };
-static constexpr uint8_t kIcons[2][8]={
+enum class Icon : uint8_t { Locked, Unlocked, RecentMarks };
+static constexpr uint8_t kIcons[3][8]={
   {0x18,0x24,0x24,0x7e,0x7e,0x66,0x7e,0},
-  {0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0}
+  {0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0},
+  {0x7c,0x44,0x54,0x44,0x54,0x44,0x54,0x6c}
 };
 inline uint8_t iconPixel(Icon icon,uint8_t x,uint8_t y) {
   const uint8_t i=static_cast<uint8_t>(icon);
-  return (i<2 && x<8 && y<8) ? ((kIcons[i][y]>>(7U-x))&1U) : 0;
+  return (i<3 && x<8 && y<8) ? ((kIcons[i][y]>>(7U-x))&1U) : 0;
 }
 } // namespace pet_portrait

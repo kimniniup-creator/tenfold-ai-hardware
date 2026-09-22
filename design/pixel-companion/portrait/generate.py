@@ -156,9 +156,9 @@ def screen(stage,state,im):
     center(TEXT[state],158)
     # Two business buttons only. Exact long-press owner belongs to firmware.
     d.line((9,209,125,209),fill=1)
-    d.text((5,211),'轻按互动',font=f,fill=1)
+    d.text((5,211),'轻按照料',font=f,fill=1)
     d.text((78,211),'侧键标记',font=f,fill=1)
-    center('长按换模式',225)
+    center('长侧键换模式',225)
     return s
 
 def main():
@@ -186,13 +186,15 @@ def main():
             careboard.paste(s.resize((270,480),Image.Resampling.NEAREST),(b*270,a*480))
     careboard.save(BASE/'care-preview.png')
     icons=[[0x18,0x24,0x24,0x7e,0x7e,0x66,0x7e,0x00],
-           [0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0x00]]
-    iconboard=Image.new('1',(128,64),0)
+           [0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0x00],
+           [0x7c,0x44,0x54,0x44,0x54,0x44,0x54,0x6c]]
+    iconnames=['lock-icon.png','unlock-icon.png','recent-marks-icon.png']
+    iconboard=Image.new('1',(192,64),0)
     for n,values in enumerate(icons):
         im=Image.new('1',(8,8),0)
         for y,v in enumerate(values):
             for x in range(8): im.putpixel((x,y),bool(v&(1<<(7-x))))
-        im.save(BASE/('unlock-icon.png' if n else 'lock-icon.png'))
+        im.save(BASE/iconnames[n])
         iconboard.paste(im.resize((64,64),Image.Resampling.NEAREST),(n*64,0))
     iconboard.save(BASE/'icons-preview.png')
     parts=['// Generated offline by design/pixel-companion/portrait/generate.py\n#pragma once\n#include <stdint.h>\nnamespace pet_portrait {\n',
@@ -229,14 +231,15 @@ inline uint8_t pixel(uint8_t frame,uint8_t x,uint8_t y) {
   return (kFrames[frame][y*4U+x/8U]>>(7U-x%8U))&1U;
 }
 // Generic stage-function lock indicators; do not imply a specific capability.
-enum class Icon : uint8_t { Locked, Unlocked };
-static constexpr uint8_t kIcons[2][8]={
+enum class Icon : uint8_t { Locked, Unlocked, RecentMarks };
+static constexpr uint8_t kIcons[3][8]={
   {0x18,0x24,0x24,0x7e,0x7e,0x66,0x7e,0},
-  {0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0}
+  {0x0c,0x12,0x10,0x7e,0x7e,0x66,0x7e,0},
+  {0x7c,0x44,0x54,0x44,0x54,0x44,0x54,0x6c}
 };
 inline uint8_t iconPixel(Icon icon,uint8_t x,uint8_t y) {
   const uint8_t i=static_cast<uint8_t>(icon);
-  return (i<2 && x<8 && y<8) ? ((kIcons[i][y]>>(7U-x))&1U) : 0;
+  return (i<3 && x<8 && y<8) ? ((kIcons[i][y]>>(7U-x))&1U) : 0;
 }
 } // namespace pet_portrait
 ''')

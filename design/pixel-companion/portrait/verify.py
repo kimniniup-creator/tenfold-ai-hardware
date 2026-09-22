@@ -29,10 +29,10 @@ assert len(set(frames))==40
 for path in base.glob('*-screen.png'):
     im=Image.open(path); assert im.size==(135,240) and im.mode=='1'
 f=g.font(); d=ImageDraw.Draw(Image.new('1',(135,240)))
-for text,x,y in [('轻按互动',5,211),('侧键标记',78,211),('长按换模式',37,225)]:
+for text,x,y in [('轻按照料',5,211),('侧键标记',78,211),('长侧键换模式',31,225)]:
     box=d.textbbox((x,y),text,font=f)
     assert box[0]>=0 and box[2]<=135 and box[1]>=0 and box[3]<=240,box
 assert max(len(t) for t in g.TEXT.values())<=12
-for name in ['lock-icon.png','unlock-icon.png']:
+for name in ['lock-icon.png','unlock-icon.png','recent-marks-icon.png']:
     assert Image.open(base/name).size==(8,8)
 print('PASS: 40 distinct 1-bit frames; C++/PNG pixel parity; portrait geometry; footer bounds; icons; deterministic generation.')

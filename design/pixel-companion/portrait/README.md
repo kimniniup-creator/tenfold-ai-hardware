@@ -4,11 +4,13 @@
 
 ## 交付与接口
 
-照料扩展版：原24帧及枚举值保持不变，末尾追加 `Feed, Full, Dirty, Clean`（值6–9）；当前 `kFrameCount=40`、`kFrames[40][128]`共5120字节。新增帧顺序为幼体4动作×2帧，再成年4动作×2帧，使用 `frameIndex`，不要自行计算统一阶段跨度。`Icon {Locked, Unlocked}`、`iconPixel(icon,x,y)`提供8×8黑白图标，仅表示功能锁定/解锁，不预设二阶能力。`care-preview.png`展示两阶段四动作；`icons-preview.png`展示通用功能锁图标。
+产品契约7f260d2已定：二阶解锁设备最近16条标记回看（不是书本页码），新增 `Icon::RecentMarks`（值2），8×8书签记录图标；Locked/Unlocked值0/1不变。A短按照料、A长按进入二阶回看，B短按标记、B长按切模式，700ms分界由软件执行。预览底部已改“轻按照料 / 侧键标记 / 长侧键换模式”；回看入口提示由固件按阶段显示。演示3个明确完成任务节点才成长，不是3次点击；本资产不管理门槛或回看内容。契约文件为 `docs/hackathon/product/TASK_GROWTH_CONTRACT.md`。
+
+照料扩展版：原24帧及枚举值保持不变，末尾追加 `Feed, Full, Dirty, Clean`（值6–9）；当前 `kFrameCount=40`、`kFrames[40][128]`共5120字节。新增帧顺序为幼体4动作×2帧，再成年4动作×2帧，使用 `frameIndex`，不要自行计算统一阶段跨度。`Icon {Locked, Unlocked, RecentMarks}`、`iconPixel(icon,x,y)`提供8×8黑白图标。`care-preview.png`展示两阶段四动作；`icons-preview.png`展示锁定、解锁、最近标记图标。
 
 Feed在180ms后食物接近舱口，建议360ms后回Idle；Full每220ms轻移满碗并拒食，建议440ms后回Idle；Dirty每1000ms切帧，实际待清理标志由软件保存；Clean在220ms后扫除为闪光，建议440ms后退出。只有本地喂食/清理成功才改数值；动画本身不增加饱腹或成长。全部新动画只负责显示，不决定死亡数值、任务进度或按键映射。
 
-最新产品要求：完成任务节点才成长，点击主要用于喂食/清理；第二阶段必须新增实际功能。二阶具体能力等待唯一产品契约，当前仅交锁图标，未声称功能实现。现有整屏底栏是旧按键示意，新固件应按最终交互契约替换，不照搬旧“轻按互动”。
+完成任务节点才成长，点击主要用于喂食/清理；第二阶段新增最近标记回看。美术只交显示资产，功能由软件实现及验收。
 
 - `firmware/include/pet_portrait_assets.h`：新独立接口，不覆盖旧 `pet_assets.h`。`namespace pet_portrait`；`Stage {Young,Grown}`；`State {Idle,Press,Rebound,Happy,Rest,Mark,Feed,Full,Dirty,Clean}`。
 - `frameIndex(Stage, State, uint32_t elapsedMs)` 返回0–39；非法枚举回第0帧。`pixel(frame,x,y)` 返回0黑/1白，越界返回0。无透明，背景黑色。
@@ -42,7 +44,7 @@ void drawPortraitPet(Display& display, pet_portrait::Stage stage,
 
 frameIndex只选帧，不累计互动、不决定成长门槛、不管理按键/持久化/quiet。软件负责状态退出和优先级：有效轻按即刻压扁，松开回弹；按住不能重复计数。长按换模式与短按业务需互斥，不在未达阈值前执行标记。具体哪个业务键承担长按由硬件实现确认；reset/power/download不作第三业务键。
 
-底部两行：`轻按互动`、`侧键标记` / `长按换模式`。顶栏为阅读与本地/Agent来源。首版只跑阅读；工作/健身/学习是模式候选，不在预览冒充已实现入口。
+底部两行：`轻按照料`、`侧键标记` / `长侧键换模式`。顶栏为阅读与本地/Agent来源。首版只跑阅读；工作/健身/学习是模式候选，不在预览冒充已实现入口。
 
 默认与连续点击保持一句“陪你读会儿”，只动角色。安静显示“安静陪着你”；会话打点成功可短暂显示“记下这一处”。这些是本地UI文案，不修改旧版Agent五句白名单或协议。当前只做会话打点，没有纸书页码或电子书位置，不能提示已保存书本位置或下次从这里继续。
 
