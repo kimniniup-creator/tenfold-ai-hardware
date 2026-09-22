@@ -1,5 +1,13 @@
 # Tenfold 十日环｜工作记录
 
+## 2026-09-22｜M5像素陪伴重新开工
+
+- Kim授权PRD、固件、必要软件、美术与实板全套开发；取消本轮外壳。PRD为docs/hackathon/product/PIXEL_COMPANION_PRD.md。
+- 产品任务接协调，旧总控退出写入。背景整合worktree D:/tenfold-worktrees/pixel-integration，分支codex/pixel-companion。
+- 软件复用01a0c5c6-3e14-7e80-b9c0-3e7159c57977；测试复用01a0c5b4-aff1-7102-85c2-bb1a66b8368f；验收复用01a0c5b4-bd94-7110-94a8-5b2c9e190508；新美术01a0c7df-f2a2-7ef3-aca8-dc4f8c8bb26b。
+- COM9发现USB VID303A:832B候选，唯一串口/烧录租约给软件。备份原flash再更新，不无故全擦。实板型号、烧录和物理按键证据待软件回传。
+- 美术32x32索引帧及RGB565调色板，横屏240x135；实际屏幕再核。Agent桥接先USB，密钥仅主机环境配置；无网设备独立可玩。
+
 ## 2026-09-22｜原创整机与 APK 夜间交付
 
 - 用户明确替换此前“原玩具适配附件”范围：从零原创三版机械 EDC，M5StickS3 为首个板型，明天试打；不再等待原玩具尺寸。
