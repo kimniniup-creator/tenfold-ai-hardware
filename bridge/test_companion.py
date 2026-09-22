@@ -4,6 +4,8 @@ import socket
 import threading
 import time
 import unittest
+import http.server
+import urllib.request
 from unittest.mock import patch
 import companion as c
 
@@ -34,6 +36,24 @@ class CompanionTests(unittest.TestCase):
     def test_no_key(self):
         with patch.dict(os.environ,{},clear=True):
             self.assertEqual(c.respond({})["source"],"local")
+
+    def test_real_http_content_length_eof(self):
+        body=json.dumps({"choices":[{"message":{"content":json.dumps({"action":"blink","text":"我在。"})}}]}).encode()
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                self.rfile.read(int(self.headers.get("Content-Length",0)))
+                self.send_response(200);self.send_header("Content-Length",str(len(body)));self.end_headers();self.wfile.write(body)
+            def log_message(self,*args):pass
+        server=http.server.HTTPServer(("127.0.0.1",0),Handler)
+        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+        opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        def transport(request,timeout):
+            return opener.open(urllib.request.Request(f"http://127.0.0.1:{server.server_port}/",data=request.data),timeout=timeout)
+        try:
+            with patch.dict(os.environ,{"PET_API_URL":"https://fixture.invalid/","PET_API_KEY":"synthetic-only","PET_MODEL":"fixture"}),patch.object(c.urllib.request,"urlopen",transport):
+                self.assertEqual(c._request({})["source"],"agent")
+        finally:
+            server.shutdown();server.server_close();thread.join(2)
 
     def test_real_stalled_tls_process_deadline(self):
         # Local socket accepts but never completes TLS. No external service.
