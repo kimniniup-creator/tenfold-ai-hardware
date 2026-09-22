@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-09-22T14:51:05.373592+08:00",
+  "method": "read-only Windows PNP/CIM enumeration",
+  "candidate_port": "COM9",
+  "usb_vid": "303A",
+  "usb_pid": "832B",
+  "interface": "00",
+  "friendly_name": "USB serial device",
+  "board_identity": "UNCONFIRMED",
+  "other_ports": "COM3-COM8 Bluetooth serial, not selected",
+  "serial_opened": false,
+  "flashed": false,
+  "lease": "NOT_GRANTED",
+  "instance_unique_suffix_retained": false
+}
