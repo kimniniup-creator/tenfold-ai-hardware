@@ -155,3 +155,7 @@
 ## reading-0.2整合审查
 
 已按提交顺序合入软件3421a98及美术f1a90cf等价资产，无重复整体覆盖。产品亲读reading-nonzero-restart/reopen本地日志：session4/lifetime10/本次0、340bytes/readback true；portrait资源24帧确定性校验通过。保留物理B/长按/断电/目视未测与25秒串口静默未解。发现保存故障文案及不可见自动Agent请求问题，已交当前协调owner处理。
+
+## reading-0.2收尾增量整合
+
+已合eaef7c0/04e0fb1等价增量，亲读reading-telemetry-only：新启动5保留lifetime25、marks1、当前press0，随后实际计数增加。整合7项bridge测试PASS，PlatformIO编译PASS RAM23276/Flash714889，自动candidate关闭；保存提示准确指向重启。串口再次打开偶发无回应仍未解决，已由当前协调owner续派唯一软件owner诊断，产品不抢串口。
