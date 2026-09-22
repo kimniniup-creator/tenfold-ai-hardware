@@ -1,5 +1,15 @@
 # Tenfold P0 handoff
 
+## Active direction: pixel companion (2026-09-22)
+
+Worktree D:/tenfold-worktrees/pixel-firmware, branch codex/pixel-firmware.
+Firmware main + bridge/companion.py are software-owned; pet_assets.h art-owned.
+Product coordinates integration and exclusive COM9 lease. No flash write yet;
+manual download mode requested after two handshake timeouts. Back up before write.
+Current protocol and evidence: docs/pixel-companion/SOFTWARE.md. Old P0 below is
+historical, not the current product. Android multi-commitment draft is retained
+untouched in D:/tenfold-worktrees/android and is not part of this new release.
+
 ## Final delivery entry
 
 - Authoritative workspace: `D:\十日环`, branch `main`, repository `kimniniup-creator/tenfold-ai-hardware`.
