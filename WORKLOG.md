@@ -1,5 +1,11 @@
 # Tenfold 十日环｜工作记录
 
+## 2026-09-22｜竖屏阅读原型与黑屏热修
+
+- 现场pixel0.1黑屏读取到board155/0x0；独立pixel-display-fix分支1f6ac10已修复板型缓存并仅app烧录，3次受控重启board26/240x135/display_ready=true，仍区分目视确认。
+- 阅读版正在接新24帧黑白资产（6aad542），A真实互动、B短标记/长模式、批量NVS；100次成长仅demo，不扩喂食/清理/论文完成。
+- readingSelfTest为状态机测试，真实按键和屏幕须另验。详细接口docs/pixel-companion/READING.md。
+
 ## 2026-09-22｜像素陪伴新方向
 
 - 15:32 用户经产品任务回复“亮了，推进”后重新检查：COM9仍303A:832B，Windows USB Composite/Ports均OK；default与no_reset握手仍Write timeout，没有chip回应，未备份也未写flash。已停止无效重试，产品统一确认是否绿灯闪烁，保持实板未验边界。
