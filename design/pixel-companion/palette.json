@@ -1,0 +1,26 @@
+{
+  "colors": [
+    "#000000",
+    "#493c38",
+    "#ffd391",
+    "#eaa16c",
+    "#fff0ca",
+    "#ef9383",
+    "#93ad89",
+    "#d9dcc0"
+  ],
+  "transparent": 0,
+  "format": "RGB565, logical values; no byte swapping",
+  "frames": [
+    "idle_0",
+    "idle_1",
+    "blink_0",
+    "blink_1",
+    "press_0",
+    "press_1",
+    "happy_0",
+    "happy_1",
+    "rest_0",
+    "rest_1"
+  ]
+}
