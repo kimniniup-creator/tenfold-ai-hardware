@@ -16,6 +16,7 @@
 - DeepSeek真实合成摘要请求通过source=agent，非实板输入；密钥仅环境变量。
 - COM9握手两种重置均超时，未改写flash。等产品协调手动下载模式，随后备份再烧录。
 - 详细协议与边界见 docs/pixel-companion/SOFTWARE.md。
+- 19824c6 新增5项真实函数测试全部通过，真实本地TLS卡住反例8.048秒完成fallback；真实provider脱敏证据见docs/pixel-companion/provider-evidence.json。固件SHA256 DCB0DCE7BF0C0AE5B41C88EE8947DF067F3AC27D63E4B5F5E614A075D2CDA079。
 
 ## 2026-09-22｜原创整机与 APK 夜间交付
 
